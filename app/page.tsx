@@ -14,7 +14,7 @@ const STATS = [
   { end: 4,   suffix: "",  label: "Destinations" },
   { end: 12,  suffix: "",  label: "Max group size" },
   { end: 100, suffix: "%", label: "LGBTQ+ led" },
-  { end: 15,  suffix: "+", label: "Years of expertise" },
+  { end: 6,   suffix: "+",  label: "Years of expertise" },
 ]
 
 const DESTINATIONS = [
@@ -134,23 +134,22 @@ function HeroSection() {
               { text: "Be You.", italic: true, orange: true },
               { text: "Belong Together.", italic: false },
             ].map(({ text, italic, orange }, i) => (
-              <div key={i} className="overflow-hidden">
-                <motion.span
-                  initial={{ y: "110%" }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.35 + i * 0.18,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className={`block leading-[0.9] ${italic ? "italic" : ""} ${
-                    orange ? "text-sunset-orange" : "text-white"
-                  }`}
-                  style={{ fontSize: "clamp(2.8rem, 7.5vw, 6.5rem)" }}
-                >
-                  {text}
-                </motion.span>
-              </div>
+              <motion.span
+                key={i}
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1,
+                  delay: 0.35 + i * 0.18,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={`block leading-[0.9] ${italic ? "italic" : ""} ${
+                  orange ? "text-sunset-orange" : "text-white"
+                }`}
+                style={{ fontSize: "clamp(2.8rem, 7.5vw, 6.5rem)" }}
+              >
+                {text}
+              </motion.span>
             ))}
           </h1>
 
@@ -204,47 +203,6 @@ function HeroSection() {
 
 // ─── Stats ─────────────────────────────────────────────────────────────────────
 
-function StatItem({
-  end,
-  suffix,
-  label,
-  start,
-}: {
-  end: number
-  suffix: string
-  label: string
-  start: boolean
-}) {
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    if (!start) return
-    let raf: number
-    const t0 = performance.now()
-    const dur = 1600
-    const run = (now: number) => {
-      const p = Math.min((now - t0) / dur, 1)
-      const eased = 1 - (1 - p) ** 3
-      setCount(Math.round(eased * end))
-      if (p < 1) raf = requestAnimationFrame(run)
-    }
-    raf = requestAnimationFrame(run)
-    return () => cancelAnimationFrame(raf)
-  }, [start, end])
-
-  return (
-    <div className="text-center py-8 px-4">
-      <p className="font-serif text-4xl lg:text-5xl text-white mb-2">
-        {count}
-        {suffix}
-      </p>
-      <p className="font-sans text-[10px] text-white/35 uppercase tracking-[0.2em]">
-        {label}
-      </p>
-    </div>
-  )
-}
-
 function StatsBar() {
   const ref = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
@@ -260,12 +218,55 @@ function StatsBar() {
     return () => obs.disconnect()
   }, [])
 
+  const editorialStats = [
+    {
+      label: "Destinations",
+      statement: "Four curated Southeast Asian experiences.",
+    },
+    {
+      label: "Group Size",
+      statement: "Intimate journeys with maximum 12 travelers.",
+    },
+    {
+      label: "Leadership",
+      statement: "100% LGBTQ+ led with authentic local guides.",
+    },
+  ]
+
   return (
-    <section ref={ref} className="bg-navy border-b border-white/[0.07]">
+    <section ref={ref} className="bg-navy py-16 lg:py-24 border-b border-white/[0.07]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.07]">
-          {STATS.map((s, i) => (
-            <StatItem key={i} {...s} start={inView} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative">
+          {editorialStats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="flex flex-col"
+            >
+              <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4 font-semibold">
+                {stat.label}
+              </p>
+              <p className="font-serif italic text-2xl lg:text-3xl text-white leading-tight">
+                {stat.statement}
+              </p>
+            </motion.div>
+          ))}
+
+          {/* Desktop dividers */}
+          <div className="hidden md:block absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 bottom-0 left-1/3 w-px bg-white/[0.07]" />
+            <div className="absolute top-0 bottom-0 left-2/3 w-px bg-white/[0.07]" />
+          </div>
+        </div>
+
+        {/* Mobile dividers */}
+        <div className="md:hidden space-y-0 mt-0">
+          {editorialStats.map((stat, i) => (
+            i > 0 && (
+              <div key={i} className="h-px bg-white/[0.07] my-8" />
+            )
           ))}
         </div>
       </div>
@@ -364,13 +365,6 @@ function DestinationsSection() {
               Four destinations,{" "}
               <span className="italic text-sunset-orange relative inline-block">
                 endless memories
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
-                  className="absolute -bottom-1 left-0 right-0 h-[3px] bg-sunset-orange/35 origin-left block"
-                />
               </span>
             </motion.h2>
           </div>
