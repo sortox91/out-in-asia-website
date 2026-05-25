@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { FoundersPreview } from "@/components/founders-preview"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -201,7 +202,7 @@ function HeroSection() {
   )
 }
 
-// ─── Stats ─────────────────────────────────────────────────────────────────────
+// ─── Stats ──────────────────���──────────────────────────────────────────────────
 
 function StatsBar() {
   const ref = useRef<HTMLDivElement>(null)
@@ -212,60 +213,71 @@ function StatsBar() {
       ([e]) => {
         if (e.isIntersecting) setInView(true)
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     )
     if (ref.current) obs.observe(ref.current)
     return () => obs.disconnect()
   }, [])
 
-  const editorialStats = [
+  const premiumStats = [
     {
-      label: "Destinations",
-      statement: "Four curated Southeast Asian experiences.",
+      label: "Safety First",
+      statement: "Every destination, every hotel, every guide vetted for your peace of mind.",
     },
     {
-      label: "Group Size",
-      statement: "Intimate journeys with maximum 12 travelers.",
+      label: "Expert Guides",
+      statement: "Local LGBTQ+ leaders who know hidden gems and authentic cultural experiences.",
     },
     {
-      label: "Leadership",
-      statement: "100% LGBTQ+ led with authentic local guides.",
+      label: "Curated Luxury",
+      statement: "Handpicked boutique accommodations and one-of-a-kind experiences at every step.",
     },
   ]
 
   return (
-    <section ref={ref} className="bg-navy py-16 lg:py-24 border-b border-white/[0.07]">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      ref={ref}
+      className="relative py-24 lg:py-32 overflow-hidden"
+      style={{
+        backgroundImage: "url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 600\"><defs><linearGradient id=\"grad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" style=\"stop-color:%23001f3f;stop-opacity:0.95\" /><stop offset=\"100%\" style=\"stop-color:%230e1f38;stop-opacity:0.98\" /></linearGradient></defs><rect fill=\"url(%23grad)\" width=\"1200\" height=\"600\"/></svg>')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay for depth */}
+      <div className="absolute inset-0 bg-navy/40 pointer-events-none" />
+
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative">
-          {editorialStats.map((stat, i) => (
+          {premiumStats.map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="flex flex-col"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ delay: i * 0.12, duration: 0.7 }}
+              className="flex flex-col backdrop-blur-sm bg-white/[0.03] p-6 lg:p-8 rounded-lg border border-white/[0.05] hover:border-ocean-teal/30 transition-colors duration-300"
             >
               <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4 font-semibold">
                 {stat.label}
               </p>
-              <p className="font-serif italic text-2xl lg:text-3xl text-white leading-tight">
+              <p className="font-serif italic text-xl lg:text-2xl text-[#FAF6EF] leading-tight">
                 {stat.statement}
               </p>
             </motion.div>
           ))}
 
-          {/* Desktop dividers */}
+          {/* Desktop vertical dividers */}
           <div className="hidden md:block absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 bottom-0 left-1/3 w-px bg-white/[0.07]" />
-            <div className="absolute top-0 bottom-0 left-2/3 w-px bg-white/[0.07]" />
+            <div className="absolute top-1/4 bottom-1/4 left-1/3 w-px bg-white/[0.1]" />
+            <div className="absolute top-1/4 bottom-1/4 left-2/3 w-px bg-white/[0.1]" />
           </div>
         </div>
 
-        {/* Mobile dividers */}
+        {/* Mobile horizontal dividers */}
         <div className="md:hidden space-y-0 mt-0">
-          {editorialStats.map((stat, i) => (
+          {premiumStats.map((stat, i) => (
             i > 0 && (
-              <div key={i} className="h-px bg-white/[0.07] my-8" />
+              <div key={i} className="h-px bg-white/[0.1] my-8" />
             )
           ))}
         </div>
@@ -603,6 +615,7 @@ export default function HomePage() {
       <HeroSection />
       <StatsBar />
       <DestinationsSection />
+      <FoundersPreview />
       <ValuesSection />
       <TestimonialsSection />
       <CTASection />

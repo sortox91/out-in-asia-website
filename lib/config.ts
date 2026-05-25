@@ -9,6 +9,7 @@ export const siteConfig = {
       name: "Filippo Rossi",
       role: "Co-Founder & Guide",
       bio: "With a passion for authentic travel and deep connections, Filippo brings years of experience crafting unforgettable journeys across Asia.",
+      shortBio: "Italian-born travel curator with an unshakeable belief that the best journeys happen when you can be authentically yourself.",
       // TODO: add real photos to /public/founders/
       image: "/founders/filippo.jpg",
       initials: "FR",
@@ -17,6 +18,7 @@ export const siteConfig = {
       name: "Szilard Utakon",
       role: "Co-Founder & Guide",
       bio: "A Hungarian with an outsider-turned-insider perspective on Southeast Asia, Szilard ensures every trip is filled with hidden gems and genuine cultural experiences.",
+      shortBio: "Hungarian adventurer who fell in love with Southeast Asia and turned that passion into crafting transformative experiences for like-minded travelers.",
       // TODO: add real photos to /public/founders/
       image: "/founders/szilard.png",
       initials: "SU",

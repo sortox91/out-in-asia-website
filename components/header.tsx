@@ -24,13 +24,17 @@ export function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "bg-[#FAF6EF] shadow-sm" : "bg-transparent"}`}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <nav className="flex items-center justify-between h-20">
-          <Link href="/">
+          <Link href="/" className="relative z-50">
             <Image
               src={isScrolled ? "/logo-text-navy-bg.svg" : "/logo-text-light-bg.svg"}
               alt="Out in Asia"
               width={180}
               height={48}
-              className="h-12 w-auto"
+              className="h-12 w-auto transition-opacity duration-500"
+              style={{
+                opacity: 1,
+                visibility: "visible",
+              }}
               priority
             />
           </Link>
