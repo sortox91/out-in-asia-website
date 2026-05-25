@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
@@ -10,12 +10,6 @@ import { Footer } from "@/components/footer"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const STATS = [
-  { end: 4,   suffix: "",  label: "Destinations" },
-  { end: 12,  suffix: "",  label: "Max group size" },
-  { end: 100, suffix: "%", label: "LGBTQ+ led" },
-  { end: 15,  suffix: "+", label: "Years of expertise" },
-]
 
 const DESTINATIONS = [
   {
@@ -202,70 +196,48 @@ function HeroSection() {
   )
 }
 
-// ─── Stats ─────────────────────────────────────────────────────────────────────
+// ─── Premium Stats ─────────────────────────────────────────────────────────────
 
-function StatItem({
-  end,
-  suffix,
-  label,
-  start,
-}: {
-  end: number
-  suffix: string
-  label: string
-  start: boolean
-}) {
-  const [count, setCount] = useState(0)
+const PILLARS = [
+  {
+    label: "SAFETY FIRST",
+    statement: "Every destination handpicked for LGBTQ+ comfort",
+  },
+  {
+    label: "EXPERT GUIDES",
+    statement: "Led by gay travellers who know Asia deeply",
+  },
+  {
+    label: "CURATED LUXURY",
+    statement: "4 & 5-star stays, private transfers, no compromises",
+  },
+]
 
-  useEffect(() => {
-    if (!start) return
-    let raf: number
-    const t0 = performance.now()
-    const dur = 1600
-    const run = (now: number) => {
-      const p = Math.min((now - t0) / dur, 1)
-      const eased = 1 - (1 - p) ** 3
-      setCount(Math.round(eased * end))
-      if (p < 1) raf = requestAnimationFrame(run)
-    }
-    raf = requestAnimationFrame(run)
-    return () => cancelAnimationFrame(raf)
-  }, [start, end])
-
+function PremiumStatsSection() {
   return (
-    <div className="text-center py-8 px-4">
-      <p className="font-serif text-4xl lg:text-5xl text-white mb-2">
-        {count}
-        {suffix}
-      </p>
-      <p className="font-sans text-[10px] text-white/35 uppercase tracking-[0.2em]">
-        {label}
-      </p>
-    </div>
-  )
-}
-
-function StatsBar() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [inView, setInView] = useState(false)
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setInView(true)
-      },
-      { threshold: 0.4 }
-    )
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
-
-  return (
-    <section ref={ref} className="bg-navy border-b border-white/[0.07]">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/[0.07]">
-          {STATS.map((s, i) => (
-            <StatItem key={i} {...s} start={inView} />
+    <section
+      className="relative overflow-hidden"
+      style={{
+        backgroundImage: "url(/ai-landscapes/vietnam-1.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.82)" }} />
+      <div className="relative py-[100px] mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[rgba(250,246,239,0.2)]">
+          {PILLARS.map(({ label, statement }) => (
+            <div key={label} className="px-8 py-10 md:py-0 text-center">
+              <p
+                className="font-sans text-xs uppercase mb-5"
+                style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}
+              >
+                {label}
+              </p>
+              <p className="font-serif text-2xl italic" style={{ color: "#FAF6EF" }}>
+                {statement}
+              </p>
+            </div>
           ))}
         </div>
       </div>
@@ -443,6 +415,126 @@ function ValuesSection() {
   )
 }
 
+// ─── Founders ──────────────────────────────────────────────────────────────────
+
+function FoundersSection() {
+  return (
+    <section
+      className="relative overflow-hidden"
+      style={{
+        backgroundImage: "url(/founders/together.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "600px",
+      }}
+    >
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.75)" }} />
+
+      <div className="relative mx-auto max-w-[900px] px-6 lg:px-8 py-24 flex flex-col items-center text-center">
+        {/* Label */}
+        <p
+          className="font-sans text-xs uppercase mb-8"
+          style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}
+        >
+          MEET YOUR GUIDES
+        </p>
+
+        {/* Headline */}
+        <h2
+          className="font-serif font-bold leading-tight mb-8"
+          style={{ color: "#FAF6EF", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
+        >
+          Two gay travellers. One shared obsession with Asia.
+        </h2>
+
+        {/* Paragraph */}
+        <p
+          className="font-sans text-base leading-relaxed mb-16 max-w-[600px]"
+          style={{ color: "rgba(250,246,239,0.8)" }}
+        >
+          We met in an unusual way — we discovered we had a boyfriend in common. Instead of rivals,
+          we became best friends, then business partners. Today we design journeys for gay travellers
+          who want to experience Asia the way we do: authentically, safely, and unforgettably.
+        </p>
+
+        {/* Founder cards */}
+        <div className="flex flex-col sm:flex-row gap-12 sm:gap-20 mb-14">
+          {/* Filippo */}
+          <div className="flex flex-col items-center">
+            <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
+              <Image
+                src="/founders/filippo.jpg"
+                alt="Filippo Rossi"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <p className="font-serif text-lg mb-2" style={{ color: "#FAF6EF" }}>
+              Filippo Rossi
+            </p>
+            <a
+              href="https://instagram.com/fillorossi.91"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-sm transition-colors"
+              style={{ color: "#1F8A8F" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EA5A2A")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#1F8A8F")}
+            >
+              @fillorossi.91
+            </a>
+          </div>
+
+          {/* Szilard */}
+          <div className="flex flex-col items-center">
+            <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
+              <Image
+                src="/founders/szilard.jpg"
+                alt="Szilárd Utakon"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <p className="font-serif text-lg mb-2" style={{ color: "#FAF6EF" }}>
+              Szilárd Utakon
+            </p>
+            <a
+              href="https://instagram.com/szilard_utakon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-sm transition-colors"
+              style={{ color: "#1F8A8F" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EA5A2A")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#1F8A8F")}
+            >
+              @szilard_utakon
+            </a>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <Link
+          href="/about"
+          className="font-sans font-semibold px-8 py-4 rounded-full border-2 transition-all"
+          style={{ borderColor: "#FAF6EF", color: "#FAF6EF" }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLElement
+            el.style.backgroundColor = "#FAF6EF"
+            el.style.color = "#0E1F38"
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLElement
+            el.style.backgroundColor = "transparent"
+            el.style.color = "#FAF6EF"
+          }}
+        >
+          Read Our Full Story →
+        </Link>
+      </div>
+    </section>
+  )
+}
+
 // ─── Testimonials ──────────────────────────────────────────────────────────────
 
 function TestimonialsSection() {
@@ -607,9 +699,10 @@ export default function HomePage() {
     <main className="overflow-x-hidden">
       <Header />
       <HeroSection />
-      <StatsBar />
+      <PremiumStatsSection />
       <DestinationsSection />
       <ValuesSection />
+      <FoundersSection />
       <TestimonialsSection />
       <CTASection />
       <Footer />

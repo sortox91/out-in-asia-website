@@ -26,11 +26,11 @@ export function Header() {
         <nav className="flex items-center justify-between h-20">
           <Link href="/">
             <Image
-              src={isScrolled ? "/logo-text-navy-bg.svg" : "/logo-text-light-bg.svg"}
+              src={isScrolled ? "/logo-text-light-bg.svg" : "/logo-text-navy-bg.svg"}
               alt="Out in Asia"
-              width={180}
+              width={160}
               height={48}
-              className="h-12 w-auto"
+              className="h-12 w-auto opacity-100"
               priority
             />
           </Link>
