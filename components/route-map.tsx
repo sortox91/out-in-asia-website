@@ -1,297 +1,249 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const VIETNAM_PATH =
-  "M 8,28 C 40,10 80,4 105,4 L 150,45 L 135,65 L 115,80 " +
-  "L 95,100 L 90,128 L 108,158 L 120,170 L 132,178 L 145,188 " +
-  "L 158,205 L 168,222 L 175,252 L 182,280 L 178,302 L 172,320 " +
-  "L 152,336 L 132,350 L 115,342 L 95,362 L 72,400 L 60,392 " +
-  "L 48,358 L 48,328 L 48,305 L 40,280 L 38,255 L 38,230 " +
-  "L 45,212 L 62,200 L 65,188 L 60,175 L 68,162 L 48,148 " +
-  "L 40,130 L 32,115 L 22,102 L 20,88 L 10,76 L 22,64 " +
-  "L 24,52 L 22,38 L 8,28 Z"
-
-interface Stop {
-  key: string
-  svgX: number
-  svgY: number
-  step: number
-  title: string
-  subtitle: string
-  details: string[]
-}
-
-const STOPS: Stop[] = [
+const STOPS = [
   {
-    key: "hanoi",
-    svgX: 96,
-    svgY: 67,
-    step: 1,
-    title: "Hanoi",
+    id: 1,
+    image: "/maps/map-1-hanoi.png",
+    city: "Hanoi",
     subtitle: "Days 1 & 2 · Vietnam's Capital",
-    details: [
-      "Airport transfer & hotel check-in",
+    highlights: [
+      "Airport transfer & boutique hotel check-in",
       "Ngoc Son Temple on Hoan Kiem Lake",
       "Iconic egg coffee experience",
-      "Guided street food tour",
+      "Guided street food tour from 16:00",
       "Optional: Hanoi's vibrant gay bars",
     ],
   },
   {
-    key: "sapa",
-    svgX: 46,
-    svgY: 31,
-    step: 2,
-    title: "Sapa",
+    id: 2,
+    image: "/maps/map-2-sapa.png",
+    city: "Sapa",
     subtitle: "Days 3–5 · Mountain Escape",
-    details: [
+    highlights: [
       "5–6h scenic minivan from Hanoi",
-      "Guided trek: bamboo forests & rice terraces",
-      "Local village encounters",
-      "Cable Car Fansipan — Vietnam's highest peak",
+      "Guided trek through rice terraces & villages",
+      "Overnight in 5-star mountain hotel",
+      "Cable Car to Fansipan — Vietnam's highest peak",
       "Traditional Sapa Hot Pot dinner",
     ],
   },
   {
-    key: "ninhbinh",
-    svgX: 99,
-    svgY: 88,
-    step: 3,
-    title: "Ninh Binh",
+    id: 3,
+    image: "/maps/map-3-ninhbinh.png",
+    city: "Ninh Binh",
     subtitle: "Days 6–8 · Ha Long Bay on Land",
-    details: [
+    highlights: [
       "6–7h minivan from Sapa",
-      "Morning climb to Dragon Mountain viewpoint",
-      "Scenic boat trip through rivers & caves",
-      "Hidden cycling tour: Thung Nang Lake & Bich Dong Pagoda",
+      "Dragon Mountain sunrise viewpoint",
+      "Scenic boat trip through caves & cliffs",
+      "Cycling tour: Thung Nang Lake & Bich Dong Pagoda",
     ],
   },
   {
-    key: "halong",
-    svgX: 130,
-    svgY: 70,
-    step: 4,
-    title: "Ha Long Bay",
+    id: 4,
+    image: "/maps/map-4-halongbay.png",
+    city: "Ha Long Bay",
     subtitle: "Days 9–10 · Luxury Yacht Cruise",
-    details: [
-      "3h drive from Ninh Binh",
-      "Board luxury yacht with private balcony cabins",
+    highlights: [
+      "3h drive + private boat transfer to yacht",
       "Kayaking through limestone islands",
-      "Cat Ba Island excursion & Three Peaches Beach",
-      "Sunset drinks & full board dining",
+      "Cat Ba Island & Three Peaches Beach",
+      "Full board dining + sunset cocktails on deck",
     ],
   },
   {
-    key: "hanoi-return",
-    svgX: 114,
-    svgY: 82,
-    step: 5,
-    title: "Return to Hanoi",
+    id: 5,
+    image: "/maps/map-5-return.png",
+    city: "Return to Hanoi",
     subtitle: "Days 11–12 · Farewell",
-    details: [
+    highlights: [
       "Final morning on the yacht",
       "Train Street visit at 18:00",
       "Farewell dinner with the group",
-      "Private airport transfer on Day 12",
+      "Private airport transfer Day 12",
     ],
   },
 ]
 
-const ROUTE_POINTS = STOPS.map((s) => `${s.svgX},${s.svgY}`).join(" ")
-
 export function RouteMap() {
-  const [activeKey, setActiveKey] = useState<string>("hanoi")
-  const activeStop = STOPS.find((s) => s.key === activeKey) ?? STOPS[0]
+  const [current, setCurrent] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  const total = STOPS.length
+  const stop = STOPS[current]
+
+  const goTo = (index: number) => {
+    setVisible(false)
+    setTimeout(() => {
+      setCurrent((index + total) % total)
+      setVisible(true)
+    }, 180)
+  }
+
+  const prev = () => goTo(current - 1)
+  const next = () => goTo(current + 1)
+
+  // Preload adjacent images
+  useEffect(() => {
+    const preload = (src: string) => {
+      const img = new window.Image()
+      img.src = src
+    }
+    preload(STOPS[(current + 1) % total].image)
+    preload(STOPS[(current - 1 + total) % total].image)
+  }, [current, total])
 
   return (
-    <div className="w-full rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-sm">
-      <div className="flex flex-col md:flex-row md:min-h-[560px]">
+    <section className="py-20 bg-[#FAF6EF] border-t border-[#E8DDD0]/50">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
-        {/* ── LEFT: SVG map 45% ── */}
-        <div className="w-full md:w-[45%] bg-[#EDE5D8] flex items-center justify-center p-6 md:p-10">
-          <div className="h-[300px] md:h-[520px] flex items-center justify-center">
-            <svg
-              viewBox="-12 -12 224 444"
-              className="h-full w-auto drop-shadow-sm"
-              aria-label="North Vietnam route map"
-            >
-              {/* Country silhouette */}
-              <path
-                d={VIETNAM_PATH}
-                fill="#F5EDDF"
-                stroke="#C4B5A0"
-                strokeWidth="1.2"
-                strokeLinejoin="round"
-              />
-
-              {/* Animated dashed route line */}
-              <polyline
-                points={ROUTE_POINTS}
-                fill="none"
-                stroke="#1F8A8F"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeOpacity="0.75"
-                strokeDasharray="8 5"
-              >
-                <animate
-                  attributeName="stroke-dashoffset"
-                  from="0"
-                  to="-130"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </polyline>
-
-              {/* Stop dots */}
-              {STOPS.map((stop) => {
-                const isActive = activeKey === stop.key
-                return (
-                  <g
-                    key={stop.key}
-                    transform={`translate(${stop.svgX},${stop.svgY})`}
-                    className="cursor-pointer"
-                    onMouseEnter={() => setActiveKey(stop.key)}
-                    onClick={() => setActiveKey(stop.key)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={stop.title}
-                    onKeyDown={(e) => e.key === "Enter" && setActiveKey(stop.key)}
-                  >
-                    {/* Active pulse ring — orange */}
-                    {isActive && (
-                      <circle r="8" fill="none" stroke="#EA5A2A" strokeWidth="1.5">
-                        <animate
-                          attributeName="r"
-                          values="8;24"
-                          dur="1.5s"
-                          repeatCount="indefinite"
-                        />
-                        <animate
-                          attributeName="opacity"
-                          values="0.9;0"
-                          dur="1.5s"
-                          repeatCount="indefinite"
-                        />
-                      </circle>
-                    )}
-
-                    {/* Inactive pulse ring — teal */}
-                    {!isActive && (
-                      <circle r="5" fill="none" stroke="#1F8A8F" strokeWidth="1" strokeOpacity="0.5">
-                        <animate
-                          attributeName="r"
-                          values="5;14"
-                          dur="2.5s"
-                          repeatCount="indefinite"
-                        />
-                        <animate
-                          attributeName="opacity"
-                          values="0.5;0"
-                          dur="2.5s"
-                          repeatCount="indefinite"
-                        />
-                      </circle>
-                    )}
-
-                    {/* Main dot */}
-                    <circle r={isActive ? 7 : 5} fill={isActive ? "#EA5A2A" : "#1F8A8F"} />
-                    <circle r="2" fill="white" fillOpacity="0.55" />
-
-                    {/* Step number above dot */}
-                    <text
-                      y={-12}
-                      textAnchor="middle"
-                      style={{
-                        fontSize: 7,
-                        fontWeight: 700,
-                        fill: isActive ? "#EA5A2A" : "#1F8A8F",
-                        fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                        userSelect: "none",
-                      }}
-                    >
-                      {String(stop.step).padStart(2, "0")}
-                    </text>
-                  </g>
-                )
-              })}
-            </svg>
-          </div>
+        {/* Section header */}
+        <div className="text-center mb-12">
+          <p
+            className="font-sans text-xs uppercase mb-4"
+            style={{ color: "#1F8A8F", letterSpacing: "0.25em" }}
+          >
+            Your Journey
+          </p>
+          <h2 className="font-serif text-4xl font-bold text-navy">
+            Route <span className="italic text-sunset-orange">Overview</span>
+          </h2>
         </div>
 
-        {/* ── RIGHT: Content panel 55% ── */}
-        <div className="w-full md:w-[55%] bg-[#FAF6EF] flex flex-col justify-center px-8 py-10 md:px-14 md:py-14">
+        {/* Split-screen card */}
+        <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-md md:min-h-[560px]">
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeKey}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.28, ease: "easeOut" }}
-            >
-              {/* Stop label */}
-              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-ocean-teal mb-4">
-                Stop {String(activeStop.step).padStart(2, "0")} of {STOPS.length}
-              </p>
-
-              {/* Title */}
-              <h3
-                className="font-serif font-bold text-navy leading-none mb-3"
-                style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
+          {/* ── LEFT: Map image carousel ── */}
+          <div className="relative w-full md:w-1/2 h-[320px] md:h-auto overflow-hidden bg-[#EDE5D8]">
+            {/* Images — crossfade via opacity */}
+            {STOPS.map((s, i) => (
+              <div
+                key={s.id}
+                className="absolute inset-0 transition-opacity duration-[400ms]"
+                style={{ opacity: i === current ? 1 : 0, pointerEvents: i === current ? "auto" : "none" }}
               >
-                {activeStop.title}
-              </h3>
+                <Image
+                  src={s.image}
+                  alt={`Map of ${s.city}`}
+                  fill
+                  className="object-cover"
+                  priority={i === 0}
+                />
+              </div>
+            ))}
 
-              {/* Subtitle */}
-              <p className="font-sans text-[11px] tracking-[0.22em] uppercase text-ocean-teal mb-8">
-                {activeStop.subtitle}
-              </p>
+            {/* Prev arrow */}
+            <button
+              onClick={prev}
+              aria-label="Previous stop"
+              className="absolute bottom-6 left-6 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-85"
+              style={{ backgroundColor: "#EA5A2A" }}
+            >
+              <ChevronLeft className="h-5 w-5 text-white" />
+            </button>
 
-              {/* Detail bullets */}
-              <ul className="space-y-3.5">
-                {activeStop.details.map((detail, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 font-sans text-sm leading-snug"
-                    style={{ color: "#B89870" }}
-                  >
-                    <span className="flex-shrink-0 w-1 h-1 rounded-full bg-sunset-orange mt-[7px]" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation dots */}
-          <div className="flex items-center gap-2.5 mt-12">
-            {STOPS.map((stop) => {
-              const isActive = activeKey === stop.key
-              return (
+            {/* Indicator dots — centered bottom */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+              {STOPS.map((_, i) => (
                 <button
-                  key={stop.key}
-                  onClick={() => setActiveKey(stop.key)}
-                  aria-label={`View ${stop.title}`}
+                  key={i}
+                  onClick={() => goTo(i)}
+                  aria-label={`Go to stop ${i + 1}`}
                   className="focus:outline-none"
                 >
                   <span
-                    className="block h-2 rounded-full transition-all duration-300"
+                    className="block w-2 h-2 rounded-full transition-all duration-200"
                     style={{
-                      width: isActive ? "28px" : "8px",
-                      backgroundColor: isActive ? "#EA5A2A" : "#C4B5A0",
+                      backgroundColor: i === current ? "#EA5A2A" : "transparent",
+                      border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
                     }}
                   />
                 </button>
-              )
-            })}
+              ))}
+            </div>
+
+            {/* Next arrow */}
+            <button
+              onClick={next}
+              aria-label="Next stop"
+              className="absolute bottom-6 right-6 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-85"
+              style={{ backgroundColor: "#EA5A2A" }}
+            >
+              <ChevronRight className="h-5 w-5 text-white" />
+            </button>
+          </div>
+
+          {/* ── RIGHT: Content panel ── */}
+          <div
+            className="w-full md:w-1/2 flex items-center"
+            style={{ backgroundColor: "#FAF6EF" }}
+          >
+            <div
+              className="w-full transition-all duration-300"
+              style={{
+                padding: "clamp(2rem, 5vw, 3rem)",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(8px)",
+              }}
+            >
+              {/* Stop number badge */}
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center font-serif text-xl font-bold"
+                style={{ backgroundColor: "#0E1F38", color: "#FAF6EF" }}
+              >
+                {String(stop.id).padStart(2, "0")}
+              </div>
+
+              {/* City name */}
+              <h3
+                className="font-serif font-bold mt-4 leading-tight"
+                style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "#0E1F38" }}
+              >
+                {stop.city}
+              </h3>
+
+              {/* Subtitle */}
+              <p
+                className="font-sans text-sm mt-2"
+                style={{
+                  color: "#1F8A8F",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                {stop.subtitle}
+              </p>
+
+              {/* Divider */}
+              <div
+                className="mt-6 mb-6"
+                style={{ width: "60px", height: "1px", backgroundColor: "#B89870" }}
+              />
+
+              {/* Highlights */}
+              <ul className="space-y-2">
+                {stop.highlights.map((item, i) => (
+                  <li
+                    key={i}
+                    className="font-sans text-sm flex items-start gap-2.5"
+                    style={{ color: "#5a4a3a", lineHeight: 1.8 }}
+                  >
+                    <span className="flex-shrink-0 font-bold" style={{ color: "#EA5A2A" }}>
+                      •
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
         </div>
       </div>
-    </div>
+    </section>
   )
 }
