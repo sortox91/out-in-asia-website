@@ -148,8 +148,8 @@ export function RouteMap() {
           <div style={{
             position: "relative",
             width: isDesktop ? "50%" : "100%",
-            minHeight: isDesktop ? "500px" : "350px",
-            backgroundColor: "#FFFFFF",
+            aspectRatio: "1",
+            backgroundColor: "#FAF6EF",
             overflow: "hidden",
             flexShrink: 0,
           }}>
