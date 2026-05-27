@@ -17,7 +17,7 @@ export default function AboutPage() {
     <>
       <Header />
       <PageTransition>
-        <main className="pt-20">
+        <main>
           {/* Hero */}
           <section className="relative py-32 bg-navy overflow-hidden">
             <Image

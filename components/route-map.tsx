@@ -107,7 +107,7 @@ export function RouteMap() {
   }, [current, total])
 
   return (
-    <section style={{ padding: "80px 0", backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
+    <section style={{ padding: "80px 0", backgroundColor: "#F9F8F6", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem" }}>
 
         {/* Section header */}
@@ -149,7 +149,7 @@ export function RouteMap() {
             position: "relative",
             width: isDesktop ? "50%" : "100%",
             aspectRatio: "1",
-            backgroundColor: "#FAF6EF",
+            backgroundColor: "#F9F8F6",
             overflow: "hidden",
             flexShrink: 0,
           }}>
@@ -264,7 +264,7 @@ export function RouteMap() {
           <div style={{
             width: isDesktop ? "50%" : "100%",
             minHeight: isDesktop ? "500px" : "auto",
-            backgroundColor: "#FAF6EF",
+            backgroundColor: "#F9F8F6",
             display: "flex",
             alignItems: "center",
             flexShrink: 0,

@@ -46,23 +46,6 @@ const DESTINATIONS = [
   },
 ]
 
-const VALUES = [
-  {
-    number: "01",
-    title: "Small Groups",
-    desc: "Intimate journeys with 6–12 like-minded travelers for genuine, lasting connection.",
-  },
-  {
-    number: "02",
-    title: "Curated Luxury",
-    desc: "Handpicked boutique hotels and one-of-a-kind experiences at every single stop.",
-  },
-  {
-    number: "03",
-    title: "Safe Spaces",
-    desc: "LGBTQ+ friendly throughout — every hotel, every guide, every single moment.",
-  },
-]
 
 const TESTIMONIALS = [
   {
@@ -373,48 +356,6 @@ function DestinationsSection() {
   )
 }
 
-// ─── Values ────────────────────────────────────────────────────────────────────
-
-function ValuesSection() {
-  return (
-    <section className="py-24 lg:py-32 bg-navy overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-16"
-        >
-          Why Travel With Us
-        </motion.p>
-
-        <div className="divide-y divide-white/[0.07]">
-          {VALUES.map((v, i) => (
-            <motion.div
-              key={v.number}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="py-10 lg:py-14 flex items-start gap-8 lg:gap-16"
-            >
-              <span className="font-serif text-5xl lg:text-8xl text-ocean-teal font-bold leading-none flex-shrink-0 mt-1 select-none">
-                {v.number}
-              </span>
-              <div className="flex-1 flex flex-col lg:flex-row lg:items-center lg:gap-16 pt-2">
-                <h3 className="font-serif text-2xl lg:text-4xl text-white mb-3 lg:mb-0 lg:w-72 flex-shrink-0">
-                  {v.title}
-                </h3>
-                <p className="font-sans text-white/40 leading-relaxed">{v.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ─── Founders ──────────────────────────────────────────────────────────────────
 
 function FoundersSection() {
@@ -701,7 +642,6 @@ export default function HomePage() {
       <HeroSection />
       <PremiumStatsSection />
       <DestinationsSection />
-      <ValuesSection />
       <FoundersSection />
       <TestimonialsSection />
       <CTASection />
