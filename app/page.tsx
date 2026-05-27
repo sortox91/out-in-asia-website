@@ -105,13 +105,13 @@ function HeroSection() {
             Luxury LGBTQ+ Travel · Southeast Asia
           </motion.p>
 
-          <h1 className="font-serif">
+          <h1 className="font-serif" style={{ paddingBottom: "0.2em" }}>
             {[
               { text: "Travel Gay.", italic: false },
               { text: "Be You.", italic: true, orange: true },
               { text: "Belong Together.", italic: false },
             ].map(({ text, italic, orange }, i) => (
-              <div key={i} className="overflow-hidden">
+              <div key={i}>
                 <motion.span
                   initial={{ y: "110%" }}
                   animate={{ y: 0 }}
@@ -120,7 +120,7 @@ function HeroSection() {
                     delay: 0.35 + i * 0.18,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={`block leading-[0.9] ${italic ? "italic" : ""} ${
+                  className={`block leading-[1.3] ${italic ? "italic" : ""} ${
                     orange ? "text-sunset-orange" : "text-white"
                   }`}
                   style={{ fontSize: "clamp(2.8rem, 7.5vw, 6.5rem)" }}
@@ -317,15 +317,8 @@ function DestinationsSection() {
               className="font-serif text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
             >
               Four destinations,{" "}
-              <span className="italic text-sunset-orange relative inline-block">
+              <span className="italic text-sunset-orange">
                 endless memories
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
-                  className="absolute -bottom-1 left-0 right-0 h-[3px] bg-sunset-orange/35 origin-left block"
-                />
               </span>
             </motion.h2>
           </div>
@@ -393,9 +386,13 @@ function FoundersSection() {
           className="font-sans text-base leading-relaxed mb-16 max-w-[600px]"
           style={{ color: "rgba(250,246,239,0.8)" }}
         >
-          We met in an unusual way — we discovered we had a boyfriend in common. Instead of rivals,
-          we became best friends, then business partners. Today we design journeys for gay travellers
-          who want to experience Asia the way we do: authentically, safely, and unforgettably.
+          We met in an unusual way: we discovered we had a boyfriend in common.
+          Instead of rivals, we became best friends, then business partners.
+          Between us, we have over 6 years of living across Southeast Asia.
+          Filippo navigating Bali&apos;s backroads by motorbike, Szilard embedded
+          in local communities since 2018. We are gay, we know this region deeply,
+          and we design journeys for travellers who want to experience Asia
+          the way we do: authentically, safely, and unforgettably.
         </p>
 
         {/* Founder cards */}
