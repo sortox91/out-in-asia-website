@@ -75,8 +75,16 @@ const STOPS = [
 export function RouteMap() {
   const [current, setCurrent] = useState(0)
   const [visible, setVisible] = useState(true)
+  const [isDesktop, setIsDesktop] = useState(true)
   const total = STOPS.length
   const stop = STOPS[current]
+
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768)
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
+  }, [])
 
   const goTo = (index: number) => {
     setVisible(false)
@@ -99,33 +107,61 @@ export function RouteMap() {
   }, [current, total])
 
   return (
-    <section className="py-20 bg-[#FAF6EF] border-t border-[#E8DDD0]/50">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section style={{ padding: "80px 0", backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
+      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem" }}>
 
         {/* Section header */}
-        <div className="text-center mb-12">
-          <p
-            className="font-sans text-xs uppercase mb-4"
-            style={{ color: "#1F8A8F", letterSpacing: "0.25em" }}
-          >
+        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <p style={{
+            fontFamily: "var(--font-manrope), Manrope, sans-serif",
+            fontSize: "0.75rem",
+            textTransform: "uppercase",
+            letterSpacing: "0.25em",
+            color: "#1F8A8F",
+            marginBottom: "1rem",
+          }}>
             Your Journey
           </p>
-          <h2 className="font-serif text-4xl font-bold text-navy">
-            Route <span className="italic text-sunset-orange">Overview</span>
+          <h2 style={{
+            fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+            fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+            fontWeight: 700,
+            color: "#0E1F38",
+          }}>
+            Route{" "}
+            <span style={{ fontStyle: "italic", color: "#EA5A2A" }}>Overview</span>
           </h2>
         </div>
 
         {/* Split-screen card */}
-        <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-md md:min-h-[600px]">
+        <div style={{
+          display: "flex",
+          flexDirection: isDesktop ? "row" : "column",
+          borderRadius: "1rem",
+          overflow: "hidden",
+          border: "1px solid #E8DDD0",
+          boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+          minHeight: isDesktop ? "600px" : "auto",
+        }}>
 
           {/* ── LEFT: Map image carousel ── */}
-          <div className="relative w-full md:w-1/2 h-[320px] md:h-auto overflow-hidden bg-[#FAF6EF]">
+          <div style={{
+            position: "relative",
+            width: isDesktop ? "50%" : "100%",
+            minHeight: isDesktop ? "500px" : "350px",
+            backgroundColor: "#FFFFFF",
+            overflow: "hidden",
+            flexShrink: 0,
+          }}>
+            {/* Crossfade images */}
             {STOPS.map((s, i) => (
               <div
                 key={s.id}
-                className="absolute inset-0 transition-opacity duration-[400ms]"
                 style={{
+                  position: "absolute",
+                  inset: 0,
                   opacity: i === current ? 1 : 0,
+                  transition: "opacity 400ms",
                   pointerEvents: i === current ? "auto" : "none",
                 }}
               >
@@ -133,8 +169,7 @@ export function RouteMap() {
                   src={s.image}
                   alt={`Map of ${s.city}`}
                   fill
-                  className="object-cover"
-                  style={{ mixBlendMode: "multiply" }}
+                  className="object-contain"
                   priority={i === 0}
                 />
               </div>
@@ -144,29 +179,56 @@ export function RouteMap() {
             <button
               onClick={prev}
               aria-label="Previous stop"
-              className="absolute bottom-6 left-6 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-85"
-              style={{ backgroundColor: "#EA5A2A" }}
+              style={{
+                position: "absolute",
+                bottom: 24,
+                left: 24,
+                zIndex: 10,
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                backgroundColor: "#EA5A2A",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                opacity: 1,
+                transition: "opacity 200ms",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              <ChevronLeft className="h-5 w-5 text-white" />
+              <ChevronLeft style={{ width: 20, height: 20, color: "white" }} />
             </button>
 
-            {/* Indicator dots */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+            {/* Indicator dots — centered, above arrows */}
+            <div style={{
+              position: "absolute",
+              bottom: 64,
+              left: 0,
+              right: 0,
+              zIndex: 10,
+              display: "flex",
+              justifyContent: "center",
+              gap: 8,
+            }}>
               {STOPS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goTo(i)}
                   aria-label={`Go to stop ${i + 1}`}
-                  className="focus:outline-none"
-                >
-                  <span
-                    className="block w-2 h-2 rounded-full transition-all duration-200"
-                    style={{
-                      backgroundColor: i === current ? "#EA5A2A" : "transparent",
-                      border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
-                    }}
-                  />
-                </button>
+                  style={{
+                    width: 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
+                    backgroundColor: i === current ? "#EA5A2A" : "transparent",
+                    cursor: "pointer",
+                    padding: 0,
+                    transition: "all 200ms",
+                  }}
+                />
               ))}
             </div>
 
@@ -174,64 +236,107 @@ export function RouteMap() {
             <button
               onClick={next}
               aria-label="Next stop"
-              className="absolute bottom-6 right-6 z-10 w-12 h-12 rounded-full flex items-center justify-center transition-opacity duration-200 hover:opacity-85"
-              style={{ backgroundColor: "#EA5A2A" }}
+              style={{
+                position: "absolute",
+                bottom: 24,
+                right: 24,
+                zIndex: 10,
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                backgroundColor: "#EA5A2A",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                opacity: 1,
+                transition: "opacity 200ms",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              <ChevronRight className="h-5 w-5 text-white" />
+              <ChevronRight style={{ width: 20, height: 20, color: "white" }} />
             </button>
           </div>
 
           {/* ── RIGHT: Content panel ── */}
-          <div className="w-full md:w-1/2 flex items-center" style={{ backgroundColor: "#FAF6EF" }}>
-            <div
-              className="w-full transition-all duration-300"
-              style={{
-                padding: "clamp(2rem, 5vw, 3rem)",
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(8px)",
-              }}
-            >
+          <div style={{
+            width: isDesktop ? "50%" : "100%",
+            minHeight: isDesktop ? "500px" : "auto",
+            backgroundColor: "#FAF6EF",
+            display: "flex",
+            alignItems: "center",
+            flexShrink: 0,
+          }}>
+            <div style={{
+              width: "100%",
+              padding: "clamp(2rem, 5vw, 3rem)",
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(8px)",
+              transition: "opacity 300ms, transform 300ms",
+            }}>
               {/* Stop number badge */}
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center font-serif text-xl font-bold"
-                style={{ backgroundColor: "#0E1F38", color: "#FAF6EF" }}
-              >
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: "50%",
+                backgroundColor: "#0E1F38",
+                color: "#FAF6EF",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                fontSize: "1.25rem",
+                fontWeight: 700,
+              }}>
                 {String(stop.id).padStart(2, "0")}
               </div>
 
               {/* City name */}
-              <h3
-                className="font-serif font-bold mt-4 leading-tight"
-                style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "#0E1F38" }}
-              >
+              <h3 style={{
+                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+                fontWeight: 700,
+                color: "#0E1F38",
+                marginTop: 16,
+                lineHeight: 1.2,
+              }}>
                 {stop.city}
               </h3>
 
               {/* Subtitle */}
-              <p
-                className="font-sans text-sm mt-2 uppercase tracking-widest"
-                style={{ color: "#1F8A8F" }}
-              >
+              <p style={{
+                fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                fontSize: "0.8rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                color: "#1F8A8F",
+                marginTop: 8,
+              }}>
                 {stop.subtitle}
               </p>
 
               {/* Divider */}
-              <div
-                className="my-6"
-                style={{ width: "64px", height: "1px", backgroundColor: "#B89870" }}
-              />
+              <div style={{ width: 64, height: 1, backgroundColor: "#B89870", margin: "24px 0" }} />
 
               {/* Highlights */}
-              <ul className="space-y-2">
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {stop.highlights.map((item, i) => (
                   <li
                     key={i}
-                    className="font-sans text-sm flex items-start gap-2.5"
-                    style={{ color: "#5a4a3a", lineHeight: 1.8 }}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: 10,
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                      fontSize: "0.875rem",
+                      color: "#5a4a3a",
+                      lineHeight: 1.8,
+                      marginBottom: 4,
+                    }}
                   >
-                    <span className="flex-shrink-0 font-bold" style={{ color: "#EA5A2A" }}>
-                      •
-                    </span>
+                    <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
                     {item}
                   </li>
                 ))}
