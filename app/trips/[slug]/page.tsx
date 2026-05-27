@@ -7,7 +7,6 @@ import { Footer } from "@/components/footer";
 import { RouteMap } from "@/components/route-map";
 import { TripHeroParallax } from "@/components/trip-hero-parallax";
 import { TripPricingBlock } from "@/components/trip-pricing-block";
-import { TripTimeline } from "@/components/trip-timeline";
 import { siteConfig } from "@/lib/config";
 
 // ─── Extended trip data ───────────────────────────────────────────────────────
@@ -214,7 +213,8 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         )}
 
         {/* ── Route map ── */}
-        {(slug === "north-vietnam" || tripRoutes[slug]) && (
+        {slug === "north-vietnam" && <RouteMap />}
+        {slug !== "north-vietnam" && tripRoutes[slug] && (
           <section className="py-16 bg-[#FAF6EF] border-t border-[#E8DDD0]/50">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
@@ -225,26 +225,19 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                   Route <span className="italic text-sunset-orange">Overview</span>
                 </h2>
               </div>
-              {slug === "north-vietnam" ? (
-                <RouteMap />
-              ) : (
-                <div className="relative flex items-start justify-between px-6 overflow-x-auto">
-                  <div className="absolute left-6 right-6 top-[40px] h-px bg-ocean-teal/30" />
-                  {tripRoutes[slug]?.map((stop, i) => (
-                    <div key={i} className="relative z-10 flex flex-col items-center flex-shrink-0 px-2">
-                      <span className="font-sans text-[10px] uppercase tracking-wider text-[#7A6A58] mb-2">Day {stop.day}</span>
-                      <div className="w-3.5 h-3.5 rounded-full bg-sunset-orange ring-2 ring-white shadow-sm" />
-                      <span className="font-sans text-xs font-semibold text-navy mt-3 text-center max-w-[72px] leading-tight">{stop.city}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
+              <div className="relative flex items-start justify-between px-6 overflow-x-auto">
+                <div className="absolute left-6 right-6 top-[40px] h-px bg-ocean-teal/30" />
+                {tripRoutes[slug]?.map((stop, i) => (
+                  <div key={i} className="relative z-10 flex flex-col items-center flex-shrink-0 px-2">
+                    <span className="font-sans text-[10px] uppercase tracking-wider text-[#7A6A58] mb-2">Day {stop.day}</span>
+                    <div className="w-3.5 h-3.5 rounded-full bg-sunset-orange ring-2 ring-white shadow-sm" />
+                    <span className="font-sans text-xs font-semibold text-navy mt-3 text-center max-w-[72px] leading-tight">{stop.city}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}
-
-        {/* ── Animated itinerary timeline ── */}
-        <TripTimeline itinerary={details.itinerary} />
 
         {/* ── North Vietnam pricing block ── */}
         {slug === "north-vietnam" && <TripPricingBlock />}

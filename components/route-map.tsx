@@ -9,20 +9,21 @@ const STOPS = [
     id: 1,
     image: "/maps/map-1-hanoi.png",
     city: "Hanoi",
-    subtitle: "Days 1 & 2 · Vietnam's Capital",
+    subtitle: "Days 1–3 · Vietnam's Capital",
     highlights: [
       "Airport transfer & boutique hotel check-in",
       "Ngoc Son Temple on Hoan Kiem Lake",
       "Iconic egg coffee experience",
       "Guided street food tour from 16:00",
       "Optional: Hanoi's vibrant gay bars",
+      "Full city discovery on Day 2",
     ],
   },
   {
     id: 2,
     image: "/maps/map-2-sapa.png",
     city: "Sapa",
-    subtitle: "Days 3–5 · Mountain Escape",
+    subtitle: "Days 4–6 · Mountain Escape",
     highlights: [
       "5–6h scenic minivan from Hanoi",
       "Guided trek through rice terraces & villages",
@@ -33,38 +34,40 @@ const STOPS = [
   },
   {
     id: 3,
-    image: "/maps/map-3-ninhbinh.png",
-    city: "Ninh Binh",
-    subtitle: "Days 6–8 · Ha Long Bay on Land",
+    image: "/maps/map-3-tamcoc.png",
+    city: "Tam Coc",
+    subtitle: "Days 7–9 · Ha Long Bay on Land",
     highlights: [
-      "6–7h minivan from Sapa",
+      "Scenic minivan direct from Sapa",
       "Dragon Mountain sunrise viewpoint",
       "Scenic boat trip through caves & cliffs",
       "Cycling tour: Thung Nang Lake & Bich Dong Pagoda",
+      "Boutique eco-resort with pool",
     ],
   },
   {
     id: 4,
     image: "/maps/map-4-halongbay.png",
     city: "Ha Long Bay",
-    subtitle: "Days 9–10 · Luxury Yacht Cruise",
+    subtitle: "Days 10–11 · Luxury Yacht Cruise",
     highlights: [
       "3h drive + private boat transfer to yacht",
       "Kayaking through limestone islands",
       "Cat Ba Island & Three Peaches Beach",
       "Full board dining + sunset cocktails on deck",
+      "Private balcony cabin on luxury yacht",
     ],
   },
   {
     id: 5,
     image: "/maps/map-5-return.png",
     city: "Return to Hanoi",
-    subtitle: "Days 11–12 · Farewell",
+    subtitle: "Day 12 · Farewell",
     highlights: [
-      "Final morning on the yacht",
-      "Train Street visit at 18:00",
-      "Farewell dinner with the group",
-      "Private airport transfer Day 12",
+      "Final morning free in Hanoi",
+      "Train Street visit",
+      "Farewell lunch with the group",
+      "Private airport transfer",
     ],
   },
 ]
@@ -72,7 +75,6 @@ const STOPS = [
 export function RouteMap() {
   const [current, setCurrent] = useState(0)
   const [visible, setVisible] = useState(true)
-
   const total = STOPS.length
   const stop = STOPS[current]
 
@@ -87,7 +89,6 @@ export function RouteMap() {
   const prev = () => goTo(current - 1)
   const next = () => goTo(current + 1)
 
-  // Preload adjacent images
   useEffect(() => {
     const preload = (src: string) => {
       const img = new window.Image()
@@ -115,22 +116,25 @@ export function RouteMap() {
         </div>
 
         {/* Split-screen card */}
-        <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-md md:min-h-[560px]">
+        <div className="flex flex-col md:flex-row rounded-2xl overflow-hidden border border-[#E8DDD0] shadow-md md:min-h-[600px]">
 
           {/* ── LEFT: Map image carousel ── */}
-          <div className="relative w-full md:w-1/2 h-[320px] md:h-auto overflow-hidden bg-[#EDE5D8]">
-            {/* Images — crossfade via opacity */}
+          <div className="relative w-full md:w-1/2 h-[320px] md:h-auto overflow-hidden bg-[#FAF6EF]">
             {STOPS.map((s, i) => (
               <div
                 key={s.id}
                 className="absolute inset-0 transition-opacity duration-[400ms]"
-                style={{ opacity: i === current ? 1 : 0, pointerEvents: i === current ? "auto" : "none" }}
+                style={{
+                  opacity: i === current ? 1 : 0,
+                  pointerEvents: i === current ? "auto" : "none",
+                }}
               >
                 <Image
                   src={s.image}
                   alt={`Map of ${s.city}`}
                   fill
                   className="object-cover"
+                  style={{ mixBlendMode: "multiply" }}
                   priority={i === 0}
                 />
               </div>
@@ -146,7 +150,7 @@ export function RouteMap() {
               <ChevronLeft className="h-5 w-5 text-white" />
             </button>
 
-            {/* Indicator dots — centered bottom */}
+            {/* Indicator dots */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
               {STOPS.map((_, i) => (
                 <button
@@ -178,10 +182,7 @@ export function RouteMap() {
           </div>
 
           {/* ── RIGHT: Content panel ── */}
-          <div
-            className="w-full md:w-1/2 flex items-center"
-            style={{ backgroundColor: "#FAF6EF" }}
-          >
+          <div className="w-full md:w-1/2 flex items-center" style={{ backgroundColor: "#FAF6EF" }}>
             <div
               className="w-full transition-all duration-300"
               style={{
@@ -208,20 +209,16 @@ export function RouteMap() {
 
               {/* Subtitle */}
               <p
-                className="font-sans text-sm mt-2"
-                style={{
-                  color: "#1F8A8F",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                }}
+                className="font-sans text-sm mt-2 uppercase tracking-widest"
+                style={{ color: "#1F8A8F" }}
               >
                 {stop.subtitle}
               </p>
 
               {/* Divider */}
               <div
-                className="mt-6 mb-6"
-                style={{ width: "60px", height: "1px", backgroundColor: "#B89870" }}
+                className="my-6"
+                style={{ width: "64px", height: "1px", backgroundColor: "#B89870" }}
               />
 
               {/* Highlights */}
