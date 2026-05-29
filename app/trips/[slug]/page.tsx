@@ -179,39 +179,6 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
           </div>
         </section>
 
-        {/* ── Photo gallery ── */}
-        {gallery && (
-          <section className="py-20 bg-[#FAF6EF]">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-12">
-                <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-3 text-xs">
-                  Journey Highlights
-                </p>
-                <h2 className="font-serif text-3xl font-bold text-navy">
-                  A <span className="italic text-sunset-orange">Glimpse</span> of What Awaits
-                </h2>
-              </div>
-
-              {/* Mobile: single image */}
-              <div className="block sm:hidden relative h-[300px] rounded-2xl overflow-hidden">
-                <Image src={gallery.large} alt={trip.title} fill className="object-cover" />
-              </div>
-              {/* Desktop: mosaic */}
-              <div className="hidden sm:grid grid-cols-3 grid-rows-2 gap-4 h-[480px]">
-                <div className="col-span-2 row-span-2 relative rounded-2xl overflow-hidden">
-                  <Image src={gallery.large} alt={trip.title} fill className="object-cover" />
-                </div>
-                <div className="relative rounded-2xl overflow-hidden">
-                  <Image src={gallery.small1} alt={trip.title} fill className="object-cover" />
-                </div>
-                <div className="relative rounded-2xl overflow-hidden">
-                  <Image src={gallery.small2} alt={`${trip.title} highlights`} fill className="object-cover" />
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* ── Route map ── */}
         {slug === "north-vietnam" && <RouteMap />}
         {slug !== "north-vietnam" && tripRoutes[slug] && (
