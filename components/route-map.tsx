@@ -18,6 +18,8 @@ const STOPS = [
       "Optional: Hanoi's vibrant gay bars",
       "Full city discovery on Day 2",
     ],
+    galleryImages: ["/gallery/landscape-1.png", "/gallery/group-1.png", "/gallery/landscape-2.png", "/gallery/landscape-3.png"],
+    galleryCaptions: ["Hanoi Old Quarter", "Travelling Together", "Hoan Kiem Lake", "Street Food Tour"],
   },
   {
     id: 2,
@@ -31,6 +33,8 @@ const STOPS = [
       "Cable Car to Fansipan — Vietnam's highest peak",
       "Traditional Sapa Hot Pot dinner",
     ],
+    galleryImages: ["/gallery/landscape-4.png", "/gallery/landscape-5.png", "/gallery/group-2.png", "/gallery/landscape-6.png"],
+    galleryCaptions: ["Rice Terraces", "Mountain Views", "Group Trek", "Fansipan Peak"],
   },
   {
     id: 3,
@@ -44,6 +48,8 @@ const STOPS = [
       "Cycling tour: Thung Nang Lake & Bich Dong Pagoda",
       "Boutique eco-resort with pool",
     ],
+    galleryImages: ["/gallery/landscape-7.png", "/gallery/group-3.png", "/gallery/landscape-8.png", "/gallery/landscape-1.png"],
+    galleryCaptions: ["Limestone Cliffs", "Boat Trip Together", "River Scenery", "Tam Coc Valley"],
   },
   {
     id: 4,
@@ -57,6 +63,8 @@ const STOPS = [
       "Full board dining + sunset cocktails on deck",
       "Private balcony cabin on luxury yacht",
     ],
+    galleryImages: ["/gallery/landscape-2.png", "/gallery/landscape-3.png", "/gallery/group-4.png", "/gallery/landscape-4.png"],
+    galleryCaptions: ["Ha Long Bay", "Limestone Islands", "Luxury Yacht", "Kayaking"],
   },
   {
     id: 5,
@@ -69,6 +77,8 @@ const STOPS = [
       "Farewell lunch with the group",
       "Private airport transfer",
     ],
+    galleryImages: ["/gallery/group-5.png", "/gallery/landscape-5.png", "/gallery/landscape-6.png", "/gallery/landscape-7.png"],
+    galleryCaptions: ["Farewell Dinner", "Last Morning", "Train Street", "Until Next Time"],
   },
 ]
 
@@ -76,6 +86,8 @@ export function RouteMap() {
   const [current, setCurrent] = useState(0)
   const [visible, setVisible] = useState(true)
   const [isDesktop, setIsDesktop] = useState(true)
+  const [galleryIndex, setGalleryIndex] = useState(0)
+  const [galleryVisible, setGalleryVisible] = useState(true)
   const total = STOPS.length
   const stop = STOPS[current]
 
@@ -90,12 +102,29 @@ export function RouteMap() {
     setVisible(false)
     setTimeout(() => {
       setCurrent((index + total) % total)
+      setGalleryIndex(0)
       setVisible(true)
     }, 180)
   }
 
   const prev = () => goTo(current - 1)
   const next = () => goTo(current + 1)
+
+  const galleryPrev = () => {
+    setGalleryVisible(false)
+    setTimeout(() => {
+      setGalleryIndex((i) => (i - 1 + stop.galleryImages.length) % stop.galleryImages.length)
+      setGalleryVisible(true)
+    }, 180)
+  }
+
+  const galleryNext = () => {
+    setGalleryVisible(false)
+    setTimeout(() => {
+      setGalleryIndex((i) => (i + 1) % stop.galleryImages.length)
+      setGalleryVisible(true)
+    }, 180)
+  }
 
   useEffect(() => {
     const preload = (src: string) => {
@@ -133,215 +162,352 @@ export function RouteMap() {
           </h2>
         </div>
 
-        {/* Split-screen card */}
+        {/* Card */}
         <div style={{
-          display: "flex",
-          flexDirection: isDesktop ? "row" : "column",
           borderRadius: "1rem",
           overflow: "hidden",
           border: "1px solid #E8DDD0",
           boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
-          minHeight: isDesktop ? "600px" : "auto",
         }}>
 
-          {/* ── LEFT: Map image carousel ── */}
+          {/* ── TOP: Split map + content ── */}
           <div style={{
-            position: "relative",
-            width: isDesktop ? "50%" : "100%",
-            aspectRatio: "1",
-            backgroundColor: "#F9F8F6",
-            overflow: "hidden",
-            flexShrink: 0,
+            display: "flex",
+            flexDirection: isDesktop ? "row" : "column",
+            height: isDesktop ? "450px" : "auto",
           }}>
-            {/* Crossfade images */}
-            {STOPS.map((s, i) => (
-              <div
-                key={s.id}
+
+            {/* LEFT: Map image carousel */}
+            <div style={{
+              position: "relative",
+              width: isDesktop ? "50%" : "100%",
+              height: isDesktop ? "100%" : "300px",
+              backgroundColor: "#F9F8F6",
+              overflow: "hidden",
+              flexShrink: 0,
+            }}>
+              {STOPS.map((s, i) => (
+                <div
+                  key={s.id}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    opacity: i === current ? 1 : 0,
+                    transition: "opacity 400ms",
+                    pointerEvents: i === current ? "auto" : "none",
+                  }}
+                >
+                  <Image
+                    src={s.image}
+                    alt={`Map of ${s.city}`}
+                    fill
+                    className="object-contain"
+                    priority={i === 0}
+                  />
+                </div>
+              ))}
+
+              {/* Prev arrow */}
+              <button
+                onClick={prev}
+                aria-label="Previous stop"
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  opacity: i === current ? 1 : 0,
-                  transition: "opacity 400ms",
-                  pointerEvents: i === current ? "auto" : "none",
+                  bottom: 24,
+                  left: 24,
+                  zIndex: 10,
+                  width: 48,
+                  height: 48,
+                  borderRadius: "50%",
+                  backgroundColor: "#EA5A2A",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "opacity 200ms",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
               >
-                <Image
-                  src={s.image}
-                  alt={`Map of ${s.city}`}
-                  fill
-                  className="object-contain"
-                  priority={i === 0}
-                />
-              </div>
-            ))}
+                <ChevronLeft style={{ width: 20, height: 20, color: "white" }} />
+              </button>
 
-            {/* Prev arrow */}
-            <button
-              onClick={prev}
-              aria-label="Previous stop"
-              style={{
+              {/* Dots */}
+              <div style={{
                 position: "absolute",
-                bottom: 24,
-                left: 24,
+                bottom: 64,
+                left: 0,
+                right: 0,
                 zIndex: 10,
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                backgroundColor: "#EA5A2A",
-                border: "none",
-                cursor: "pointer",
                 display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
-                opacity: 1,
-                transition: "opacity 200ms",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              <ChevronLeft style={{ width: 20, height: 20, color: "white" }} />
-            </button>
+                gap: 8,
+              }}>
+                {STOPS.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    aria-label={`Go to stop ${i + 1}`}
+                    style={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: "50%",
+                      border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
+                      backgroundColor: i === current ? "#EA5A2A" : "transparent",
+                      cursor: "pointer",
+                      padding: 0,
+                      transition: "all 200ms",
+                    }}
+                  />
+                ))}
+              </div>
 
-            {/* Indicator dots — centered, above arrows */}
-            <div style={{
-              position: "absolute",
-              bottom: 64,
-              left: 0,
-              right: 0,
-              zIndex: 10,
-              display: "flex",
-              justifyContent: "center",
-              gap: 8,
-            }}>
-              {STOPS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => goTo(i)}
-                  aria-label={`Go to stop ${i + 1}`}
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: "50%",
-                    border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
-                    backgroundColor: i === current ? "#EA5A2A" : "transparent",
-                    cursor: "pointer",
-                    padding: 0,
-                    transition: "all 200ms",
-                  }}
-                />
-              ))}
+              {/* Next arrow */}
+              <button
+                onClick={next}
+                aria-label="Next stop"
+                style={{
+                  position: "absolute",
+                  bottom: 24,
+                  right: 24,
+                  zIndex: 10,
+                  width: 48,
+                  height: 48,
+                  borderRadius: "50%",
+                  backgroundColor: "#EA5A2A",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "opacity 200ms",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                <ChevronRight style={{ width: 20, height: 20, color: "white" }} />
+              </button>
             </div>
 
-            {/* Next arrow */}
-            <button
-              onClick={next}
-              aria-label="Next stop"
-              style={{
-                position: "absolute",
-                bottom: 24,
-                right: 24,
-                zIndex: 10,
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                backgroundColor: "#EA5A2A",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                opacity: 1,
-                transition: "opacity 200ms",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              <ChevronRight style={{ width: 20, height: 20, color: "white" }} />
-            </button>
+            {/* RIGHT: Content panel */}
+            <div style={{
+              width: isDesktop ? "50%" : "100%",
+              height: isDesktop ? "100%" : "auto",
+              backgroundColor: "#F9F8F6",
+              display: "flex",
+              alignItems: "center",
+              flexShrink: 0,
+              overflowY: "auto",
+            }}>
+              <div style={{
+                width: "100%",
+                padding: "clamp(1.5rem, 4vw, 2.5rem)",
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(8px)",
+                transition: "opacity 300ms, transform 300ms",
+              }}>
+                {/* Stop number badge */}
+                <div style={{
+                  width: 44,
+                  height: 44,
+                  borderRadius: "50%",
+                  backgroundColor: "#0E1F38",
+                  color: "#FAF6EF",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                  fontSize: "1.1rem",
+                  fontWeight: 700,
+                }}>
+                  {String(stop.id).padStart(2, "0")}
+                </div>
+
+                {/* City name */}
+                <h3 style={{
+                  fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                  fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
+                  fontWeight: 700,
+                  color: "#0E1F38",
+                  marginTop: 12,
+                  lineHeight: 1.2,
+                }}>
+                  {stop.city}
+                </h3>
+
+                {/* Subtitle */}
+                <p style={{
+                  fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                  fontSize: "0.75rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  color: "#1F8A8F",
+                  marginTop: 6,
+                }}>
+                  {stop.subtitle}
+                </p>
+
+                {/* Divider */}
+                <div style={{ width: 48, height: 1, backgroundColor: "#B89870", margin: "16px 0" }} />
+
+                {/* Highlights */}
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                  {stop.highlights.map((item, i) => (
+                    <li
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: 8,
+                        fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                        fontSize: "0.82rem",
+                        color: "#5a4a3a",
+                        lineHeight: 1.7,
+                        marginBottom: 2,
+                      }}
+                    >
+                      <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
 
-          {/* ── RIGHT: Content panel ── */}
-          <div style={{
-            width: isDesktop ? "50%" : "100%",
-            minHeight: isDesktop ? "500px" : "auto",
-            backgroundColor: "#F9F8F6",
-            display: "flex",
-            alignItems: "center",
-            flexShrink: 0,
-          }}>
-            <div style={{
-              width: "100%",
-              padding: "clamp(2rem, 5vw, 3rem)",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(8px)",
-              transition: "opacity 300ms, transform 300ms",
+          {/* ── DIVIDER ── */}
+          <div style={{ height: 1, backgroundColor: "#B89870", margin: "0 24px" }} />
+
+          {/* ── BOTTOM: Single-image gallery ── */}
+          <div style={{ backgroundColor: "#F9F8F6", padding: "24px" }}>
+            {/* Gallery label */}
+            <p style={{
+              fontFamily: "var(--font-manrope), Manrope, sans-serif",
+              fontSize: "0.68rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.2em",
+              color: "#1F8A8F",
+              marginBottom: "14px",
             }}>
-              {/* Stop number badge */}
+              DISCOVER {stop.city.toUpperCase()}
+            </p>
+
+            {/* Image container */}
+            <div style={{ position: "relative", height: isDesktop ? 400 : 240, borderRadius: "0.75rem", overflow: "hidden" }}>
               <div style={{
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                backgroundColor: "#0E1F38",
-                color: "#FAF6EF",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                fontSize: "1.25rem",
-                fontWeight: 700,
+                position: "absolute",
+                inset: 0,
+                opacity: galleryVisible ? 1 : 0,
+                transition: "opacity 300ms",
               }}>
-                {String(stop.id).padStart(2, "0")}
+                <Image
+                  src={stop.galleryImages[galleryIndex]}
+                  alt={stop.galleryCaptions[galleryIndex]}
+                  fill
+                  className="object-cover"
+                />
               </div>
 
-              {/* City name */}
-              <h3 style={{
-                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-                fontWeight: 700,
-                color: "#0E1F38",
-                marginTop: 16,
-                lineHeight: 1.2,
+              {/* Left arrow */}
+              <button
+                onClick={galleryPrev}
+                aria-label="Previous photo"
+                style={{
+                  position: "absolute",
+                  left: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  zIndex: 10,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  backgroundColor: "#EA5A2A",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "opacity 200ms",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                <ChevronLeft style={{ width: 18, height: 18, color: "white" }} />
+              </button>
+
+              {/* Right arrow */}
+              <button
+                onClick={galleryNext}
+                aria-label="Next photo"
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  zIndex: 10,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  backgroundColor: "#EA5A2A",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "opacity 200ms",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                <ChevronRight style={{ width: 18, height: 18, color: "white" }} />
+              </button>
+
+              {/* Dot indicators */}
+              <div style={{
+                position: "absolute",
+                bottom: 12,
+                left: 0,
+                right: 0,
+                zIndex: 10,
+                display: "flex",
+                justifyContent: "center",
+                gap: 6,
               }}>
-                {stop.city}
-              </h3>
-
-              {/* Subtitle */}
-              <p style={{
-                fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.8rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "#1F8A8F",
-                marginTop: 8,
-              }}>
-                {stop.subtitle}
-              </p>
-
-              {/* Divider */}
-              <div style={{ width: 64, height: 1, backgroundColor: "#B89870", margin: "24px 0" }} />
-
-              {/* Highlights */}
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {stop.highlights.map((item, i) => (
-                  <li
+                {stop.galleryImages.map((_, i) => (
+                  <button
                     key={i}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: 10,
-                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                      fontSize: "0.875rem",
-                      color: "#5a4a3a",
-                      lineHeight: 1.8,
-                      marginBottom: 4,
+                    onClick={() => {
+                      setGalleryVisible(false)
+                      setTimeout(() => { setGalleryIndex(i); setGalleryVisible(true) }, 180)
                     }}
-                  >
-                    <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
-                    {item}
-                  </li>
+                    aria-label={`Photo ${i + 1}`}
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: "50%",
+                      border: "none",
+                      backgroundColor: i === galleryIndex ? "white" : "rgba(255,255,255,0.5)",
+                      cursor: "pointer",
+                      padding: 0,
+                      transition: "background-color 200ms",
+                    }}
+                  />
                 ))}
-              </ul>
+              </div>
             </div>
+
+            {/* Caption */}
+            <p style={{
+              fontFamily: "var(--font-manrope), Manrope, sans-serif",
+              fontSize: "0.78rem",
+              color: "#B89870",
+              marginTop: "10px",
+              opacity: galleryVisible ? 1 : 0,
+              transition: "opacity 300ms",
+            }}>
+              {stop.city} · {stop.galleryCaptions[galleryIndex]}
+            </p>
           </div>
 
         </div>
