@@ -18,8 +18,8 @@ const STOPS = [
       "Optional: Hanoi's vibrant gay bars",
       "Full city discovery on Day 2",
     ],
-    galleryImages: ["/gallery/landscape-1.png", "/gallery/group-1.png", "/gallery/landscape-2.png", "/gallery/landscape-3.png"],
-    galleryCaptions: ["Hanoi Old Quarter", "Travelling Together", "Hoan Kiem Lake", "Street Food Tour"],
+    galleryImages: ["https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?w=800", "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800", "https://images.unsplash.com/photo-1509099863731-ef4bff19e808?w=800", "/gallery/group-1.png"],
+    galleryCaptions: ["Hoan Kiem Lake", "Old Quarter", "Temple of Literature", "Your Travel Group"],
   },
   {
     id: 2,
@@ -33,8 +33,8 @@ const STOPS = [
       "Cable Car to Fansipan — Vietnam's highest peak",
       "Traditional Sapa Hot Pot dinner",
     ],
-    galleryImages: ["/gallery/landscape-4.png", "/gallery/landscape-5.png", "/gallery/group-2.png", "/gallery/landscape-6.png"],
-    galleryCaptions: ["Rice Terraces", "Mountain Views", "Group Trek", "Fansipan Peak"],
+    galleryImages: ["https://images.unsplash.com/photo-1528127269322-539801943592?w=800", "https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=800", "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800", "/gallery/group-2.png"],
+    galleryCaptions: ["Rice Terraces", "Mountain Mist", "Fansipan Peak", "Trekking Together"],
   },
   {
     id: 3,
@@ -48,8 +48,8 @@ const STOPS = [
       "Cycling tour: Thung Nang Lake & Bich Dong Pagoda",
       "Boutique eco-resort with pool",
     ],
-    galleryImages: ["/gallery/landscape-7.png", "/gallery/group-3.png", "/gallery/landscape-8.png", "/gallery/landscape-1.png"],
-    galleryCaptions: ["Limestone Cliffs", "Boat Trip Together", "River Scenery", "Tam Coc Valley"],
+    galleryImages: ["https://images.unsplash.com/photo-1540611025311-01df3cef54b5?w=800", "https://images.unsplash.com/photo-1573914622840-98cc0e1ddfbe?w=800", "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800", "/gallery/group-3.png"],
+    galleryCaptions: ["Tam Coc Boat Trip", "Limestone Cliffs", "Dragon Mountain", "Cycling Together"],
   },
   {
     id: 4,
@@ -63,8 +63,8 @@ const STOPS = [
       "Full board dining + sunset cocktails on deck",
       "Private balcony cabin on luxury yacht",
     ],
-    galleryImages: ["/gallery/landscape-2.png", "/gallery/landscape-3.png", "/gallery/group-4.png", "/gallery/landscape-4.png"],
-    galleryCaptions: ["Ha Long Bay", "Limestone Islands", "Luxury Yacht", "Kayaking"],
+    galleryImages: ["https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800", "https://images.unsplash.com/photo-1573553262792-82d2fc5d9cf0?w=800", "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800", "/gallery/group-4.png"],
+    galleryCaptions: ["Ha Long Bay", "Limestone Islands", "Luxury Yacht", "Sunset Cruise Together"],
   },
   {
     id: 5,
@@ -77,8 +77,8 @@ const STOPS = [
       "Farewell lunch with the group",
       "Private airport transfer",
     ],
-    galleryImages: ["/gallery/group-5.png", "/gallery/landscape-5.png", "/gallery/landscape-6.png", "/gallery/landscape-7.png"],
-    galleryCaptions: ["Farewell Dinner", "Last Morning", "Train Street", "Until Next Time"],
+    galleryImages: ["https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800", "https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?w=800", "https://images.unsplash.com/photo-1509099863731-ef4bff19e808?w=800", "/gallery/group-5.png"],
+    galleryCaptions: ["Last Evening in Hanoi", "Hoan Kiem at Night", "Train Street", "Farewell Dinner"],
   },
 ]
 

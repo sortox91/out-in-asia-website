@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { RouteMap } from "@/components/route-map";
 import { TripHeroParallax } from "@/components/trip-hero-parallax";
 import { TripPricingBlock } from "@/components/trip-pricing-block";
+import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
 
 // ─── Extended trip data ───────────────────────────────────────────────────────
@@ -61,14 +62,24 @@ const tripDetails: Record<
       { day: 12, title: "Departure",                  description: "Breakfast, free morning, hotel checkout 12:00, private airport transfer." },
     ],
     included: [
-      "11 nights accommodation (boutique & eco-lodge)",
-      "Overnight Ha Long Bay cruise",
-      "Train journey Hanoi ↔ Sapa",
-      "Daily breakfast, selected meals",
-      "All activities, entrance fees & guides",
-      "Private transportation throughout",
+      "Private airport transfer on arrival and departure",
+      "6 nights with breakfast in premium 4-star hotels",
+      "3 nights with breakfast in a premium 5-star hotel",
+      "2 nights on a 5-star exclusive yacht with full board",
+      "3 additional lunches",
+      "3 additional dinners",
+      "Premium air-conditioned minivan throughout the trip",
+      "Organisation fees, taxes and local charges",
+      "English-language travel information",
+      "Welcome gift package",
+      "Group guidance and assistance during the stay",
     ],
-    notIncluded: ["International flights", "Visa fees", "Travel insurance", "Personal expenses"],
+    notIncluded: [
+      "International flights",
+      "Travel insurance",
+      "Personal expenses",
+      "Additional meals not listed in the programme",
+    ],
     groupSize: "6-10 travelers",
     nextDates: ["2 April – 13 April 2027", "3 September – 14 September 2027"],
   },
@@ -181,6 +192,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
 
         {/* ── Route map ── */}
         {slug === "north-vietnam" && <RouteMap />}
+        {slug === "north-vietnam" && <TripComfortSection />}
         {slug !== "north-vietnam" && tripRoutes[slug] && (
           <section className="py-16 bg-[#FAF6EF] border-t border-[#E8DDD0]/50">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
