@@ -2,19 +2,19 @@ import Image from "next/image"
 
 const CARDS = [
   {
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600",
+    image: "/accommodation/hanoi-1.jpg",
     title: "Premium 4-Star Hotels",
     description: "Elegant hotels in the heart of Hanoi and Tam Coc, with rice field views and city convenience.",
     tag: "6 nights · Breakfast included",
   },
   {
-    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600",
+    image: "/accommodation/sapa-1.jpg",
     title: "5-Star Mountain Resort",
     description: "Surrounded by clouds and mountains in Sapa. A luxurious retreat after a day of trekking.",
     tag: "3 nights · Breakfast included",
   },
   {
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600",
+    image: "/accommodation/halong-1.jpg",
     title: "Luxury Yacht Cruise",
     description: "Private balcony cabins aboard a 5-star yacht. Full board, curated experiences and sunset cocktails on deck.",
     tag: "2 nights · Full board",
