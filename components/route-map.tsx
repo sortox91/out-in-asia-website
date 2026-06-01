@@ -20,7 +20,7 @@ const STOPS = [
     ],
     galleryImages: ["/gallery/hanoi/hoan-kiem.jpg", "/gallery/hanoi/old-quarter.jpg", "/gallery/hanoi/group.png", "/gallery/hanoi/egg-coffee.jpg"],
     galleryCaptions: ["Hoan Kiem Lake", "Old Quarter at Night", "Coffee on Train Street", "Iconic Egg Coffee"],
-    galleryPositions: ["center", "center", "center", "center"],
+    objectPosition: "center center",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const STOPS = [
     ],
     galleryImages: ["/gallery/sapa/rice-terraces.jpg", "/gallery/sapa/cable-car.jpg", "/gallery/sapa/village.jpg", "/gallery/sapa/group.png"],
     galleryCaptions: ["Golden Rice Terraces", "Fansipan Cable Car", "Traditional Village", "Trekking Together"],
-    galleryPositions: ["center", "center", "center", "center"],
+    objectPosition: "center 40%",
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ const STOPS = [
     ],
     galleryImages: ["/gallery/tamcoc/dragon-mountain.jpg", "/gallery/tamcoc/boats.jpg", "/gallery/tamcoc/cycling-group.png", "/gallery/tamcoc/group-cycling.jpg"],
     galleryCaptions: ["Dragon Mountain View", "Tam Coc Boat Trip", "Cycling the Rice Fields", "Together on Two Wheels"],
-    galleryPositions: ["center bottom", "center", "center", "center"],
+    objectPosition: "center 60%",
   },
   {
     id: 4,
@@ -68,7 +68,7 @@ const STOPS = [
     ],
     galleryImages: ["/gallery/halong/cruise.jpg", "/gallery/halong/bay.jpg", "/gallery/halong/group.png", "/gallery/halong/sunset.jpg"],
     galleryCaptions: ["Luxury Cruise", "Ha Long Bay", "Sunset Drinks on Deck", "Golden Hour on the Bay"],
-    galleryPositions: ["center", "center", "center", "center 60%"],
+    objectPosition: "center 70%",
   },
   {
     id: 5,
@@ -83,7 +83,7 @@ const STOPS = [
     ],
     galleryImages: ["/gallery/hanoi/old-quarter.jpg", "/gallery/hanoi/hoan-kiem.jpg", "/gallery/hanoi/group.png", "/gallery/hanoi/egg-coffee.jpg"],
     galleryCaptions: ["Last Evening in Hanoi", "Farewell Walk", "Farewell Drinks", "One Last Coffee"],
-    galleryPositions: ["center", "center", "center", "center"],
+    objectPosition: "center center",
   },
 ]
 
@@ -103,13 +103,31 @@ export function RouteMap() {
     return () => window.removeEventListener("resize", check)
   }, [])
 
+  // Preload ALL gallery images at mount for instant transitions
+  useEffect(() => {
+    STOPS.forEach(s => s.galleryImages.forEach(src => {
+      const img = new window.Image()
+      img.src = src
+    }))
+  }, [])
+
+  // Preload all map images at mount
+  useEffect(() => {
+    STOPS.forEach(s => {
+      const img = new window.Image()
+      img.src = s.image
+    })
+  }, [])
+
   const goTo = (index: number) => {
     setVisible(false)
+    setGalleryVisible(false)
     setTimeout(() => {
       setCurrent((index + total) % total)
       setGalleryIndex(0)
       setVisible(true)
-    }, 180)
+      setGalleryVisible(true)
+    }, 200)
   }
 
   const prev = () => goTo(current - 1)
@@ -130,15 +148,6 @@ export function RouteMap() {
       setGalleryVisible(true)
     }, 180)
   }
-
-  useEffect(() => {
-    const preload = (src: string) => {
-      const img = new window.Image()
-      img.src = src
-    }
-    preload(STOPS[(current + 1) % total].image)
-    preload(STOPS[(current - 1 + total) % total].image)
-  }, [current, total])
 
   return (
     <section style={{ padding: "80px 0", backgroundColor: "#F9F8F6", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
@@ -167,7 +176,7 @@ export function RouteMap() {
           </h2>
         </div>
 
-        {/* Card — single unified block */}
+        {/* Card */}
         <div style={{
           borderRadius: "1rem",
           overflow: "hidden",
@@ -178,7 +187,7 @@ export function RouteMap() {
           height: isDesktop ? "540px" : "auto",
         }}>
 
-          {/* LEFT: Map carousel (45% desktop) */}
+          {/* ── LEFT: Map carousel ── */}
           <div style={{
             position: "relative",
             width: isDesktop ? "45%" : "100%",
@@ -210,24 +219,14 @@ export function RouteMap() {
               </div>
             ))}
 
-            {/* Prev arrow */}
             <button
               onClick={prev}
               aria-label="Previous stop"
               style={{
-                position: "absolute",
-                bottom: 24,
-                left: 24,
-                zIndex: 10,
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                backgroundColor: "#EA5A2A",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                position: "absolute", bottom: 24, left: 24, zIndex: 10,
+                width: 48, height: 48, borderRadius: "50%",
+                backgroundColor: "#EA5A2A", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
                 transition: "opacity 200ms",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
@@ -236,16 +235,9 @@ export function RouteMap() {
               <ChevronLeft style={{ width: 20, height: 20, color: "white" }} />
             </button>
 
-            {/* Dots */}
             <div style={{
-              position: "absolute",
-              bottom: 64,
-              left: 0,
-              right: 0,
-              zIndex: 10,
-              display: "flex",
-              justifyContent: "center",
-              gap: 8,
+              position: "absolute", bottom: 64, left: 0, right: 0, zIndex: 10,
+              display: "flex", justifyContent: "center", gap: 8,
             }}>
               {STOPS.map((_, i) => (
                 <button
@@ -253,37 +245,23 @@ export function RouteMap() {
                   onClick={() => goTo(i)}
                   aria-label={`Go to stop ${i + 1}`}
                   style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: "50%",
+                    width: 8, height: 8, borderRadius: "50%",
                     border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
                     backgroundColor: i === current ? "#EA5A2A" : "transparent",
-                    cursor: "pointer",
-                    padding: 0,
-                    transition: "all 200ms",
+                    cursor: "pointer", padding: 0, transition: "all 200ms",
                   }}
                 />
               ))}
             </div>
 
-            {/* Next arrow */}
             <button
               onClick={next}
               aria-label="Next stop"
               style={{
-                position: "absolute",
-                bottom: 24,
-                right: 24,
-                zIndex: 10,
-                width: 48,
-                height: 48,
-                borderRadius: "50%",
-                backgroundColor: "#EA5A2A",
-                border: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                position: "absolute", bottom: 24, right: 24, zIndex: 10,
+                width: 48, height: 48, borderRadius: "50%",
+                backgroundColor: "#EA5A2A", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
                 transition: "opacity 200ms",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
@@ -293,196 +271,50 @@ export function RouteMap() {
             </button>
           </div>
 
-          {/* RIGHT: highlights (top) + gallery (bottom) */}
+          {/* ── RIGHT: Full-height gallery + overlaid stop info (desktop) ── */}
           <div style={{
             flex: 1,
             minWidth: 0,
-            height: isDesktop ? "100%" : "auto",
-            display: "flex",
-            flexDirection: "column",
-            backgroundColor: "#F9F8F6",
+            position: "relative",
+            overflow: "hidden",
+            backgroundColor: "#1a2d47",
           }}>
 
-            {/* RIGHT-TOP: stop info + highlights (~46% of card height) */}
-            <div style={{
-              flex: isDesktop ? "0 0 46%" : "none",
-              overflowY: "auto",
-              padding: "clamp(1.2rem, 2.5vw, 1.8rem)",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(8px)",
-              transition: "opacity 300ms, transform 300ms",
-            }}>
+            {/* Gallery image — fills full right column on desktop, fixed height on mobile */}
+            {isDesktop ? (
               <div style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                backgroundColor: "#0E1F38",
-                color: "#FAF6EF",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                fontSize: "1rem",
-                fontWeight: 700,
+                position: "absolute",
+                inset: 0,
+                opacity: galleryVisible ? 1 : 0,
+                transition: "opacity 300ms",
               }}>
-                {String(stop.id).padStart(2, "0")}
+                <Image
+                  src={stop.galleryImages[galleryIndex]}
+                  alt={stop.galleryCaptions[galleryIndex]}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: stop.objectPosition }}
+                />
               </div>
-
-              <h3 style={{
-                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)",
-                fontWeight: 700,
-                color: "#0E1F38",
-                marginTop: 10,
-                lineHeight: 1.2,
-              }}>
-                {stop.city}
-              </h3>
-
-              <p style={{
-                fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.72rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "#1F8A8F",
-                marginTop: 4,
-              }}>
-                {stop.subtitle}
-              </p>
-
-              <div style={{ width: 40, height: 1, backgroundColor: "#B89870", margin: "12px 0" }} />
-
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {stop.highlights.map((item, i) => (
-                  <li
-                    key={i}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: 8,
-                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                      fontSize: "0.8rem",
-                      color: "#5a4a3a",
-                      lineHeight: 1.6,
-                      marginBottom: 2,
-                    }}
-                  >
-                    <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Horizontal divider */}
-            <div style={{ height: 1, backgroundColor: "#E8DDD0", margin: "0 20px", flexShrink: 0 }} />
-
-            {/* RIGHT-BOTTOM: gallery */}
-            <div style={{
-              flex: isDesktop ? "1 1 0" : "none",
-              minHeight: 0,
-              padding: "12px 16px 14px",
-              display: "flex",
-              flexDirection: "column",
-            }}>
-              <p style={{
-                fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.65rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.2em",
-                color: "#1F8A8F",
-                marginBottom: "8px",
-                flexShrink: 0,
-              }}>
-                DISCOVER {stop.city.toUpperCase()}
-              </p>
-
-              {/* Image container — flex: 1 on desktop, fixed height on mobile */}
+            ) : (
               <div style={{
                 position: "relative",
-                borderRadius: "0.6rem",
+                height: 260,
                 overflow: "hidden",
-                ...(isDesktop ? { flex: 1, minHeight: 0 } : { height: 220 }),
+                opacity: galleryVisible ? 1 : 0,
+                transition: "opacity 300ms",
               }}>
+                <Image
+                  src={stop.galleryImages[galleryIndex]}
+                  alt={stop.galleryCaptions[galleryIndex]}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: stop.objectPosition }}
+                />
+                {/* Mobile dots */}
                 <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  opacity: galleryVisible ? 1 : 0,
-                  transition: "opacity 300ms",
-                }}>
-                  <Image
-                    src={stop.galleryImages[galleryIndex]}
-                    alt={stop.galleryCaptions[galleryIndex]}
-                    fill
-                    className="object-cover"
-                    style={{ objectPosition: stop.galleryPositions[galleryIndex] }}
-                  />
-                </div>
-
-                {/* Left arrow */}
-                <button
-                  onClick={galleryPrev}
-                  aria-label="Previous photo"
-                  style={{
-                    position: "absolute",
-                    left: 10,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    zIndex: 10,
-                    width: 36,
-                    height: 36,
-                    borderRadius: "50%",
-                    backgroundColor: "#EA5A2A",
-                    border: "none",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "opacity 200ms",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                >
-                  <ChevronLeft style={{ width: 16, height: 16, color: "white" }} />
-                </button>
-
-                {/* Right arrow */}
-                <button
-                  onClick={galleryNext}
-                  aria-label="Next photo"
-                  style={{
-                    position: "absolute",
-                    right: 10,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    zIndex: 10,
-                    width: 36,
-                    height: 36,
-                    borderRadius: "50%",
-                    backgroundColor: "#EA5A2A",
-                    border: "none",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    transition: "opacity 200ms",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                >
-                  <ChevronRight style={{ width: 16, height: 16, color: "white" }} />
-                </button>
-
-                {/* Dot indicators */}
-                <div style={{
-                  position: "absolute",
-                  bottom: 8,
-                  left: 0,
-                  right: 0,
-                  zIndex: 10,
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: 5,
+                  position: "absolute", bottom: 10, left: 0, right: 0,
+                  zIndex: 10, display: "flex", justifyContent: "center", gap: 5,
                 }}>
                   {stop.galleryImages.map((_, i) => (
                     <button
@@ -493,34 +325,243 @@ export function RouteMap() {
                       }}
                       aria-label={`Photo ${i + 1}`}
                       style={{
-                        width: 6,
-                        height: 6,
-                        borderRadius: "50%",
-                        border: "none",
-                        backgroundColor: i === galleryIndex ? "white" : "rgba(255,255,255,0.5)",
-                        cursor: "pointer",
-                        padding: 0,
-                        transition: "background-color 200ms",
+                        width: 6, height: 6, borderRadius: "50%", border: "none",
+                        backgroundColor: i === galleryIndex ? "white" : "rgba(255,255,255,0.45)",
+                        cursor: "pointer", padding: 0, transition: "background-color 200ms",
                       }}
                     />
                   ))}
                 </div>
               </div>
+            )}
 
-              {/* Caption */}
+            {/* Desktop gradient overlay */}
+            {isDesktop && (
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to bottom, rgba(14,31,56,0) 28%, rgba(14,31,56,0.80) 60%, rgba(14,31,56,0.94) 100%)",
+                pointerEvents: "none",
+              }} />
+            )}
+
+            {/* Desktop: "DISCOVER" label top-left */}
+            {isDesktop && (
               <p style={{
+                position: "absolute", top: 14, left: 18, zIndex: 6, margin: 0,
                 fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.72rem",
-                color: "#B89870",
-                marginTop: "6px",
-                flexShrink: 0,
-                opacity: galleryVisible ? 1 : 0,
+                fontSize: "0.6rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.22em",
+                color: "rgba(255,255,255,0.65)",
+              }}>
+                Discover {stop.city}
+              </p>
+            )}
+
+            {/* Gallery prev/next arrows */}
+            <button
+              onClick={galleryPrev}
+              aria-label="Previous photo"
+              style={{
+                position: "absolute",
+                left: 10,
+                top: isDesktop ? "32%" : "50%",
+                transform: "translateY(-50%)",
+                zIndex: 10,
+                width: 36, height: 36, borderRadius: "50%",
+                backgroundColor: "#EA5A2A", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "opacity 200ms",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              <ChevronLeft style={{ width: 16, height: 16, color: "white" }} />
+            </button>
+
+            <button
+              onClick={galleryNext}
+              aria-label="Next photo"
+              style={{
+                position: "absolute",
+                right: 10,
+                top: isDesktop ? "32%" : "50%",
+                transform: "translateY(-50%)",
+                zIndex: 10,
+                width: 36, height: 36, borderRadius: "50%",
+                backgroundColor: "#EA5A2A", border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "opacity 200ms",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              <ChevronRight style={{ width: 16, height: 16, color: "white" }} />
+            </button>
+
+            {/* Desktop dots — above the text overlay */}
+            {isDesktop && (
+              <div style={{
+                position: "absolute", bottom: 178, left: 0, right: 0,
+                zIndex: 10, display: "flex", justifyContent: "center", gap: 5,
+              }}>
+                {stop.galleryImages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setGalleryVisible(false)
+                      setTimeout(() => { setGalleryIndex(i); setGalleryVisible(true) }, 180)
+                    }}
+                    aria-label={`Photo ${i + 1}`}
+                    style={{
+                      width: 6, height: 6, borderRadius: "50%", border: "none",
+                      backgroundColor: i === galleryIndex ? "white" : "rgba(255,255,255,0.4)",
+                      cursor: "pointer", padding: 0, transition: "background-color 200ms",
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Desktop: stop info overlaid at bottom */}
+            {isDesktop && (
+              <div style={{
+                position: "absolute",
+                bottom: 0, left: 0, right: 0,
+                padding: "10px 20px 14px",
+                zIndex: 5,
+                opacity: visible ? 1 : 0,
                 transition: "opacity 300ms",
               }}>
-                {stop.city} · {stop.galleryCaptions[galleryIndex]}
-              </p>
-            </div>
+                {/* Badge + city + subtitle row */}
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                  <div style={{
+                    width: 36, height: 36, borderRadius: "50%", flexShrink: 0,
+                    backgroundColor: "rgba(255,255,255,0.12)",
+                    border: "1px solid rgba(255,255,255,0.28)",
+                    color: "#FDFAF6",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                    fontSize: "0.85rem", fontWeight: 700,
+                  }}>
+                    {String(stop.id).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                      fontSize: "1.55rem", fontWeight: 700,
+                      color: "#FDFAF6", lineHeight: 1.1, margin: 0,
+                    }}>
+                      {stop.city}
+                    </h3>
+                    <p style={{
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                      fontSize: "0.65rem",
+                      textTransform: "uppercase", letterSpacing: "0.1em",
+                      color: "rgba(255,255,255,0.58)", margin: "2px 0 0",
+                    }}>
+                      {stop.subtitle}
+                    </p>
+                  </div>
+                </div>
 
+                {/* Divider */}
+                <div style={{ width: 34, height: 1, backgroundColor: "rgba(184,152,112,0.5)", marginBottom: 10 }} />
+
+                {/* Highlights — 2-column grid */}
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "2px 14px",
+                  marginBottom: 10,
+                }}>
+                  {stop.highlights.map((item, i) => (
+                    <div key={i} style={{
+                      display: "flex", alignItems: "flex-start", gap: 6,
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                      fontSize: "0.7rem", color: "rgba(255,255,255,0.8)", lineHeight: 1.45,
+                    }}>
+                      <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0, fontSize: "0.68rem" }}>•</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Caption */}
+                <p style={{
+                  fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                  fontSize: "0.64rem",
+                  color: "rgba(184,152,112,0.7)",
+                  margin: 0,
+                  opacity: galleryVisible ? 1 : 0,
+                  transition: "opacity 300ms",
+                }}>
+                  {stop.city} · {stop.galleryCaptions[galleryIndex]}
+                </p>
+              </div>
+            )}
+
+            {/* Mobile: stop info below the image on light background */}
+            {!isDesktop && (
+              <div style={{
+                padding: "16px 18px 22px",
+                backgroundColor: "#F9F8F6",
+                opacity: visible ? 1 : 0,
+                transition: "opacity 300ms",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                  <div style={{
+                    width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
+                    backgroundColor: "#0E1F38", color: "#FAF6EF",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                    fontSize: "1rem", fontWeight: 700,
+                  }}>
+                    {String(stop.id).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                      fontSize: "1.4rem", fontWeight: 700,
+                      color: "#0E1F38", lineHeight: 1.2, margin: 0,
+                    }}>
+                      {stop.city}
+                    </h3>
+                    <p style={{
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                      fontSize: "0.7rem",
+                      textTransform: "uppercase", letterSpacing: "0.1em",
+                      color: "#1F8A8F", margin: "3px 0 0",
+                    }}>
+                      {stop.subtitle}
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ width: 36, height: 1, backgroundColor: "#B89870", marginBottom: 12 }} />
+
+                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 10px" }}>
+                  {stop.highlights.map((item, i) => (
+                    <li key={i} style={{
+                      display: "flex", alignItems: "flex-start", gap: 8,
+                      fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                      fontSize: "0.82rem", color: "#5a4a3a", lineHeight: 1.6, marginBottom: 2,
+                    }}>
+                      <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <p style={{
+                  fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                  fontSize: "0.72rem", color: "#B89870", margin: 0,
+                }}>
+                  {stop.city} · {stop.galleryCaptions[galleryIndex]}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
