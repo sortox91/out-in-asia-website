@@ -330,7 +330,7 @@ export function RouteMap() {
      DESKTOP LAYOUT
   ───────────────────────────────────── */
   return (
-    <section id="route-overview" style={{ padding: "80px 0", backgroundColor: "#F9F8F6", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
+    <section id="route-overview" style={{ padding: "80px 0", backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem" }}>
 
         {/* Section header */}
@@ -357,10 +357,10 @@ export function RouteMap() {
           border: "1px solid #E8DDD0", boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
         }}>
 
-          {/* ── MAP — full width, 500px ── */}
+          {/* ── MAP — full width, 420px ── */}
           <div style={{
-            position: "relative", height: "500px",
-            backgroundColor: "#F9F8F6", overflow: "hidden",
+            position: "relative", height: "420px",
+            backgroundColor: "#FAF6EF", overflow: "hidden",
           }}>
             {STOPS.map((s, i) => (
               <div key={s.id} style={{
@@ -391,33 +391,33 @@ export function RouteMap() {
           {/* ── INFO BANNER ── */}
           <div style={{
             borderTop: "1px solid #E8DDD0", borderBottom: "1px solid #E8DDD0",
-            backgroundColor: "#FAF8F5", padding: "18px 28px",
+            backgroundColor: "#FAF6EF", padding: "10px 28px",
             opacity: visible ? 1 : 0, transition: "opacity 300ms",
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
 
               {/* Left: badge + city + subtitle */}
-              <div style={{ display: "flex", alignItems: "center", gap: 14, flexShrink: 0, paddingRight: 24 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0, paddingRight: 20 }}>
                 <div style={{
-                  width: 46, height: 46, borderRadius: "50%",
+                  width: 38, height: 38, borderRadius: "50%",
                   backgroundColor: "#0E1F38", color: "#FAF6EF",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                  fontSize: "1rem", fontWeight: 700,
+                  fontSize: "0.85rem", fontWeight: 700,
                 }}>
                   {String(stop.id).padStart(2, "0")}
                 </div>
                 <div>
                   <h3 style={{
                     fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                    fontSize: "1.45rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
+                    fontSize: "1.2rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
                   }}>
                     {stop.city}
                   </h3>
                   <p style={{
                     fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.1em",
-                    color: "#1F8A8F", margin: "4px 0 0",
+                    fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.1em",
+                    color: "#1F8A8F", margin: "2px 0 0",
                   }}>
                     {stop.subtitle}
                   </p>
@@ -425,18 +425,18 @@ export function RouteMap() {
               </div>
 
               {/* Vertical divider */}
-              <div style={{ width: 1, height: 46, backgroundColor: "#D9C9B5", flexShrink: 0, marginRight: 24 }} />
+              <div style={{ width: 1, height: 38, backgroundColor: "#D9C9B5", flexShrink: 0, marginRight: 20 }} />
 
               {/* Highlights in 2 columns */}
               <div style={{
                 display: "grid", gridTemplateColumns: "1fr 1fr",
-                gap: "3px 28px", flex: 1,
+                gap: "1px 20px", flex: 1,
               }}>
                 {stop.highlights.map((item, i) => (
                   <div key={i} style={{
-                    display: "flex", alignItems: "flex-start", gap: 7,
+                    display: "flex", alignItems: "flex-start", gap: 6,
                     fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    fontSize: "0.79rem", color: "#5a4a3a", lineHeight: 1.5,
+                    fontSize: "0.72rem", color: "#5a4a3a", lineHeight: 1.4,
                   }}>
                     <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
                     {item}
@@ -447,20 +447,20 @@ export function RouteMap() {
           </div>
 
           {/* ── GALLERY SECTION ── */}
-          <div style={{ backgroundColor: "#F9F8F6", padding: "0 24px 24px" }}>
+          <div style={{ backgroundColor: "#FAF6EF", padding: "0 24px 20px" }}>
 
             {/* "Discover" label */}
             <p style={{
               fontFamily: "var(--font-manrope), Manrope, sans-serif",
               fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.22em",
-              color: "#1F8A8F", margin: "0", padding: "16px 0 12px",
+              color: "#1F8A8F", margin: "0", padding: "10px 0 8px",
             }}>
               DISCOVER {stop.city.toUpperCase()}
             </p>
 
-            {/* Photo — 400px */}
+            {/* Photo — 320px */}
             <div style={{
-              position: "relative", height: "400px",
+              position: "relative", height: "320px",
               borderRadius: "0.75rem", overflow: "hidden",
             }}>
               <div style={{
