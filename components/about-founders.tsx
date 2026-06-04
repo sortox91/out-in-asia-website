@@ -1,7 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
-import { Instagram } from "lucide-react"
+import { Instagram, ChevronDown } from "lucide-react"
 
 const founders = [
   {
@@ -32,6 +33,49 @@ const founders = [
   },
 ]
 
+function FounderBio({ bio }: { bio: string[] }) {
+  const [expanded, setExpanded] = useState(false)
+  return (
+    <>
+      {/* Mobile: show first paragraph + truncate rest behind "Read more" */}
+      <div className="md:hidden">
+        <p className="font-sans text-sm leading-relaxed mb-3" style={{ color: "rgba(250,246,239,0.78)" }}>
+          {bio[0]}
+        </p>
+        {expanded && (
+          <div className="space-y-3">
+            {bio.slice(1).map((para, i) => (
+              <p key={i} className="font-sans text-sm leading-relaxed" style={{ color: "rgba(250,246,239,0.78)" }}>
+                {para}
+              </p>
+            ))}
+          </div>
+        )}
+        {bio.length > 1 && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
+            style={{ color: "#1F8A8F" }}
+          >
+            {expanded ? "Show less" : "Read more"}
+            <ChevronDown
+              className="h-3.5 w-3.5 transition-transform duration-200"
+              style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}
+            />
+          </button>
+        )}
+      </div>
+
+      {/* Desktop: all paragraphs */}
+      <div className="hidden md:block space-y-4 font-sans text-base leading-relaxed" style={{ color: "rgba(250,246,239,0.78)" }}>
+        {bio.map((para, i) => (
+          <p key={i}>{para}</p>
+        ))}
+      </div>
+    </>
+  )
+}
+
 export function AboutFounders() {
   return (
     <section>
@@ -40,7 +84,7 @@ export function AboutFounders() {
           <div className={`flex flex-col ${founder.photoLeft ? "lg:flex-row" : "lg:flex-row-reverse"} min-h-[480px]`}>
 
             {/* Photo panel */}
-            <div className="relative h-72 lg:h-auto lg:w-[42%] flex-shrink-0">
+            <div className="relative h-64 lg:h-auto lg:w-[42%] flex-shrink-0">
               <Image
                 src={founder.photo}
                 alt={founder.name}
@@ -50,10 +94,10 @@ export function AboutFounders() {
               />
               {/* Name overlay at bottom */}
               <div
-                className="absolute bottom-0 left-0 right-0 px-8 py-6"
+                className="absolute bottom-0 left-0 right-0 px-6 py-5"
                 style={{ background: "linear-gradient(to top, rgba(14,31,56,0.85) 0%, transparent 100%)" }}
               >
-                <p className="font-serif text-xl font-bold text-white mb-1">{founder.name}</p>
+                <p className="font-serif text-lg font-bold text-white mb-1">{founder.name}</p>
                 <a
                   href={founder.instagram}
                   target="_blank"
@@ -68,13 +112,9 @@ export function AboutFounders() {
             </div>
 
             {/* Bio panel */}
-            <div className="flex-1 flex flex-col justify-center px-5 md:px-12 py-10 md:py-14">
-              <h3 className="font-serif font-extrabold text-3xl text-white mb-6">{founder.name}</h3>
-              <div className="space-y-4 font-sans text-base leading-relaxed" style={{ color: "rgba(250,246,239,0.78)" }}>
-                {founder.bio.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
+            <div className="flex-1 flex flex-col justify-center px-5 md:px-12 py-8 md:py-14">
+              <h3 className="font-serif font-extrabold text-2xl md:text-3xl text-white mb-4 md:mb-6">{founder.name}</h3>
+              <FounderBio bio={founder.bio} />
             </div>
 
           </div>

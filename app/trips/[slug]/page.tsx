@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check } from "lucide-react";
+import { Check, Calendar, Users, MapPin, Sparkles } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { RouteMap } from "@/components/route-map";
@@ -9,6 +9,7 @@ import { TripHeroParallax } from "@/components/trip-hero-parallax";
 import { TripPricingBlock } from "@/components/trip-pricing-block";
 import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
+import { TripStickyCta } from "@/components/trip-sticky-cta";
 
 // ─── Extended trip data ───────────────────────────────────────────────────────
 
@@ -178,14 +179,14 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
 
         {/* ── Quick facts bar (north-vietnam) / Highlights bar (other trips) ── */}
         {slug === "north-vietnam" ? (
-          <section className="bg-sunset-orange py-5">
+          <section className="bg-sunset-orange py-4">
             <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4">
                 {([
-                  { icon: "📅", value: "12 Days", label: "Duration" },
-                  { icon: "👥", value: "Small Group", label: "Max 12" },
-                  { icon: "📍", value: "4 Stops", label: "Hanoi → Sapa → Tam Coc → Ha Long" },
-                  { icon: "✨", value: "From €4,400", label: "Per person" },
+                  { Icon: Calendar, value: "12 Days", label: "Duration" },
+                  { Icon: Users, value: "Small Group", label: "Max 12" },
+                  { Icon: MapPin, value: "4 Stops", label: "Hanoi · Sapa · Tam Coc · Ha Long" },
+                  { Icon: Sparkles, value: "From €4,400", label: "Per person" },
                 ] as const).map((fact, i) => (
                   <div
                     key={i}
@@ -193,9 +194,9 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                       i === 1 || i === 3 ? " border-l border-white/25" : i === 2 ? " md:border-l md:border-white/25" : ""
                     }`}
                   >
-                    <span className="text-xl mb-1">{fact.icon}</span>
+                    <fact.Icon className="h-4 w-4 text-white mb-1.5" strokeWidth={1.5} />
                     <p className="font-serif text-white font-bold text-sm sm:text-base leading-tight mb-0.5">{fact.value}</p>
-                    <p className="font-sans text-white/75 text-[0.68rem] leading-tight">{fact.label}</p>
+                    <p className="font-sans text-white/75 text-[0.65rem] leading-tight">{fact.label}</p>
                   </div>
                 ))}
               </div>
@@ -316,6 +317,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         </section>
 
       </main>
+      <TripStickyCta price={trip.price} tripTitle={trip.title} />
       <Footer />
     </>
   );

@@ -50,7 +50,7 @@ export default function RootLayout({
       <body className="font-sans antialiased min-h-screen">
         {/* forcedTheme="light" locks the site to light mode — no dark mode toggle exists in the UI */}
         <ThemeProvider attribute="class" forcedTheme="light">
-          <div className="pb-20 md:pb-0">
+          <div className="pb-32 md:pb-0">
             {children}
           </div>
           {process.env.NODE_ENV === 'production' && <Analytics />}

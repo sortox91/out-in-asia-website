@@ -223,7 +223,7 @@ export function RouteMap() {
         {/* 2. Gallery: main image + thumbnails */}
         <div style={{ borderTop: "1px solid #E8DDD0", padding: "14px 16px 0" }}>
 
-          {/* Main image — 4:3 ratio */}
+          {/* Main image — 4:3 ratio — with prev/next overlay arrows + counter */}
           <div style={{ position: "relative", width: "100%", paddingBottom: "75%", borderRadius: "0.5rem", overflow: "hidden" }}>
             {stop.galleryImages.map((src, i) => (
               <div key={src} style={{
@@ -242,6 +242,52 @@ export function RouteMap() {
                 />
               </div>
             ))}
+
+            {/* Prev arrow */}
+            {galleryIndex > 0 && (
+              <button
+                onClick={() => selectPhoto(galleryIndex - 1)}
+                aria-label="Previous photo"
+                style={{
+                  position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)",
+                  zIndex: 10, width: 36, height: 36, borderRadius: "50%",
+                  backgroundColor: "rgba(14,31,56,0.65)", border: "none",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <ChevronLeft style={{ width: 18, height: 18, color: "white" }} />
+              </button>
+            )}
+
+            {/* Next arrow */}
+            {galleryIndex < stop.galleryImages.length - 1 && (
+              <button
+                onClick={() => selectPhoto(galleryIndex + 1)}
+                aria-label="Next photo"
+                style={{
+                  position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)",
+                  zIndex: 10, width: 36, height: 36, borderRadius: "50%",
+                  backgroundColor: "rgba(14,31,56,0.65)", border: "none",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <ChevronRight style={{ width: 18, height: 18, color: "white" }} />
+              </button>
+            )}
+
+            {/* Photo counter */}
+            <div style={{
+              position: "absolute", top: 10, right: 10,
+              backgroundColor: "rgba(14,31,56,0.65)",
+              borderRadius: "999px", padding: "2px 10px",
+              fontFamily: "var(--font-manrope), Manrope, sans-serif",
+              fontSize: "0.65rem", color: "rgba(255,255,255,0.85)",
+              zIndex: 10,
+            }}>
+              {galleryIndex + 1}/{stop.galleryImages.length}
+            </div>
           </div>
 
           {/* Thumbnails */}
@@ -252,9 +298,9 @@ export function RouteMap() {
                 onClick={() => selectPhoto(i)}
                 aria-label={stop.galleryCaptions[i]}
                 style={{
-                  flex: 1, position: "relative", height: 64,
+                  flex: 1, position: "relative", height: 56,
                   borderRadius: "0.3rem", overflow: "hidden",
-                  border: `2px solid ${i === galleryIndex ? "#1F8A8F" : "transparent"}`,
+                  border: `2.5px solid ${i === galleryIndex ? "#1F8A8F" : "transparent"}`,
                   padding: 0, cursor: "pointer",
                   opacity: i === galleryIndex ? 1 : 0.52,
                   transition: "opacity 200ms, border-color 200ms",

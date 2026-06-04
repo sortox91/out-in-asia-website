@@ -81,38 +81,47 @@ export function Header() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 top-20 bg-[#0E1F38] z-40 flex flex-col items-center justify-center gap-10 lg:hidden"
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 top-20 bg-[#0E1F38] z-40 flex flex-col lg:hidden"
           >
-            {navLinks.map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.08 + i * 0.06, duration: 0.3 }}
-              >
-                <Link
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="font-serif text-5xl text-white hover:text-[#EA5A2A] transition-colors"
+            {/* Nav links — centred vertically, compact */}
+            <div className="flex-1 flex flex-col items-center justify-center gap-1">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 + i * 0.05, duration: 0.25 }}
+                  className="w-full"
                 >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center py-4 font-serif text-2xl text-white hover:text-[#EA5A2A] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                  {i < navLinks.length - 1 && (
+                    <div className="w-8 h-px bg-white/10 mx-auto" />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Book a Trip CTA — pinned to bottom */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.26, duration: 0.3 }}
-              className="mt-4"
+              transition={{ delay: 0.22, duration: 0.25 }}
+              className="px-6 pb-10"
             >
               <Link
                 href="/contact"
                 onClick={() => setIsMenuOpen(false)}
-                className="inline-flex items-center justify-center px-10 py-4 bg-[#EA5A2A] text-white rounded-full font-sans font-semibold text-lg min-h-[56px]"
+                className="flex items-center justify-center w-full py-4 bg-[#EA5A2A] text-white rounded-full font-sans font-semibold text-base min-h-[52px]"
               >
                 Book a Trip
               </Link>

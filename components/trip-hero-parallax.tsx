@@ -29,7 +29,7 @@ export function TripHeroParallax({
   return (
     <>
       {/* ── Hero image: 50vh mobile / full-screen desktop ── */}
-      <div ref={ref} className="relative h-[50vh] md:h-[80vh] min-h-[280px] md:min-h-[500px] overflow-hidden">
+      <div ref={ref} className="relative h-[45vh] md:h-[80vh] min-h-[260px] md:min-h-[500px] overflow-hidden">
         {/* Parallax image */}
         <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.22]">
           <Image
@@ -99,22 +99,19 @@ export function TripHeroParallax({
         </motion.div>
       </div>
 
-      {/* ── Mobile-only: title + dates below hero (scroll to see) ── */}
-      <div className="md:hidden bg-[#0E1F38] px-6 py-8">
-        <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-ocean-teal mb-3">
+      {/* ── Mobile-only: title + dates below hero ── */}
+      <div className="md:hidden bg-[#0E1F38] px-5 py-5">
+        <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-ocean-teal mb-2">
           {subtitle}
         </p>
-        <h1 className="font-serif text-white text-3xl leading-tight mb-5">
+        <h1 className="font-serif text-white text-2xl leading-tight mb-3">
           {title}
         </h1>
-        <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/35 mb-3">
-          Departures
-        </p>
         <div className="flex flex-wrap gap-2">
           {nextDates.map((date, i) => (
             <span
               key={i}
-              className="px-4 py-2 bg-white/10 border border-white/20 text-white text-xs font-sans rounded-full"
+              className="px-3 py-1.5 bg-white/10 border border-white/20 text-white text-xs font-sans rounded-full"
             >
               {date}
             </span>

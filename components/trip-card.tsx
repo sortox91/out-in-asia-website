@@ -31,7 +31,7 @@ export function TripCard({
       className="group block relative rounded-2xl overflow-hidden"
     >
       {/* Fixed-height image area */}
-      <div className="h-[420px] relative overflow-hidden bg-ocean-teal/20">
+      <div className="h-[260px] sm:h-[360px] md:h-[420px] relative overflow-hidden bg-ocean-teal/20">
         {/* TODO: add real photos to /public/trips/ */}
         {!imgError && (
           <Image
@@ -39,6 +39,7 @@ export function TripCard({
             alt={title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 50vw"
             onError={() => setImgError(true)}
           />
         )}
@@ -59,7 +60,7 @@ export function TripCard({
             {subtitle}
           </p>
           <div className="flex items-end justify-between gap-4">
-            <h3 className="font-serif text-3xl md:text-4xl text-white leading-tight">
+            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl text-white leading-tight">
               {title}
             </h3>
             <span className="font-sans font-semibold text-warm-cream/80 text-sm flex-shrink-0 mb-1">

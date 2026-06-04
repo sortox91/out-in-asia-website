@@ -78,7 +78,7 @@ function HeroSection() {
   const bgY = useTransform(scrollY, [0, 800], [0, -160])
 
   return (
-    <section className="relative h-screen min-h-[640px] overflow-hidden">
+    <section className="relative h-[85vh] min-h-[560px] overflow-hidden">
       {/* Parallax background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18]">
         <Image
@@ -87,6 +87,7 @@ function HeroSection() {
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
       </motion.div>
 
@@ -165,14 +166,14 @@ function HeroSection() {
         transition={{ delay: 1.7 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/30">
+        <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/60">
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-5 w-5 text-white/30" />
+          <ChevronDown className="h-5 w-5 text-white/60" />
         </motion.div>
       </motion.div>
     </section>
@@ -202,20 +203,33 @@ const PILLARS = [
 function PremiumStatsSection() {
   return (
     <section style={{ background: "radial-gradient(ellipse at 50% 50%, #132842 0%, #0E1F38 68%)" }}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 md:py-14">
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[rgba(250,246,239,0.12)]">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-8 md:py-14">
+
+        {/* MOBILE: compact horizontal rows */}
+        <div className="flex flex-col gap-0 divide-y divide-[rgba(250,246,239,0.10)] md:hidden">
           {PILLARS.map(({ label, statement, Icon }) => (
-            <div key={label} className="px-5 md:px-8 py-6 md:py-6 text-center flex flex-col items-center">
-              {/* Icon */}
+            <div key={label} className="flex items-center gap-4 py-4 px-1">
+              <Icon className="h-6 w-6 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+              <div>
+                <p className="font-sans text-[10px] uppercase font-semibold mb-0.5" style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}>
+                  {label}
+                </p>
+                <p className="font-serif text-sm italic leading-snug" style={{ color: "#FAF6EF" }}>
+                  {statement}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* DESKTOP: 3 columns centred */}
+        <div className="hidden md:grid grid-cols-3 divide-x divide-[rgba(250,246,239,0.12)]">
+          {PILLARS.map(({ label, statement, Icon }) => (
+            <div key={label} className="px-8 py-6 text-center flex flex-col items-center">
               <Icon className="h-7 w-7 mb-4" style={{ color: "#1F8A8F" }} />
-              {/* Label */}
-              <p
-                className="font-sans text-xs uppercase mb-3"
-                style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}
-              >
+              <p className="font-sans text-xs uppercase mb-3" style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}>
                 {label}
               </p>
-              {/* Decorative teal line */}
               <div style={{ width: 40, height: 1, backgroundColor: "#1F8A8F", opacity: 0.5, marginBottom: "1rem" }} />
               <p className="font-serif text-xl italic" style={{ color: "#FAF6EF" }}>
                 {statement}
@@ -223,6 +237,7 @@ function PremiumStatsSection() {
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )
@@ -246,13 +261,14 @@ function DestinationCard({
     >
       <Link
         href={`/trips/${dest.id}`}
-        className="group block relative rounded-2xl overflow-hidden h-[320px] lg:h-[368px]"
+        className="group block relative rounded-2xl overflow-hidden h-[220px] sm:h-[300px] lg:h-[368px]"
       >
         <Image
           src={dest.image}
           alt={dest.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, 50vw"
         />
 
         {/* Gradient — strong base for mobile readability */}
@@ -273,12 +289,12 @@ function DestinationCard({
         </div>
 
         {/* Text — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
           <p className="font-sans text-[10px] text-white/50 uppercase tracking-[0.22em] mb-2">
             {dest.subtitle}
           </p>
           <div className="flex items-end justify-between gap-4">
-            <h3 className="font-serif text-3xl lg:text-4xl text-white leading-tight">
+            <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
               {dest.title}
             </h3>
             <div className="opacity-0 group-hover:opacity-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0">
