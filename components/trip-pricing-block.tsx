@@ -61,7 +61,7 @@ const NOT_INCLUDED = [
 
 export function TripPricingBlock() {
   return (
-    <section className="py-20 lg:py-24 bg-[#0E1F38]">
+    <section className="py-12 md:py-20 lg:py-24 bg-[#0E1F38]">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -78,26 +78,26 @@ export function TripPricingBlock() {
           </h2>
         </motion.div>
 
-        {/* Two pricing cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+        {/* Two pricing cards — stacked on mobile, side by side on desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3 mb-6">
           {/* Shared */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="border border-ocean-teal/50 rounded-2xl p-8 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
+            className="border border-ocean-teal/50 rounded-2xl p-5 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
           >
-            <div className="text-ocean-teal mb-6">
+            <div className="text-ocean-teal mb-4">
               <BedIcon />
             </div>
-            <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-3">
-              Shared Deluxe Room
+            <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-2">
+              Shared Room
             </p>
-            <p className="font-serif text-sunset-orange leading-none mb-1" style={{ fontSize: "clamp(2.5rem, 5vw, 3rem)" }}>
+            <p className="font-serif text-sunset-orange leading-none mb-1" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}>
               €4,400
             </p>
-            <p className="font-sans text-white/35 text-sm">per person</p>
+            <p className="font-sans text-white/35 text-xs">per person</p>
           </motion.div>
 
           {/* Single */}
@@ -106,38 +106,38 @@ export function TripPricingBlock() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="border border-white/15 rounded-2xl p-8 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
+            className="border border-white/15 rounded-2xl p-5 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
           >
-            <div className="text-white/50 mb-6">
+            <div className="text-white/50 mb-4">
               <BedIcon single />
             </div>
-            <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-3">
-              Single Deluxe Room
+            <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-2">
+              Single Room
             </p>
-            <p className="font-serif text-white leading-none mb-1" style={{ fontSize: "clamp(2.5rem, 5vw, 3rem)" }}>
+            <p className="font-serif text-white leading-none mb-1" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}>
               €4,900
             </p>
-            <p className="font-sans text-white/35 text-sm">per person</p>
+            <p className="font-sans text-white/35 text-xs">per person</p>
           </motion.div>
         </div>
 
-        {/* Included / Not included */}
+        {/* Included / Not included — two columns always */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 mb-6"
+          className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-8 mb-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-4 md:gap-8">
             {/* Included */}
             <div>
-              <p className="font-sans text-xs tracking-[0.2em] uppercase text-ocean-teal mb-4">Included</p>
-              <ul className="space-y-2.5">
+              <p className="font-sans text-xs tracking-[0.2em] uppercase text-ocean-teal mb-3">Included</p>
+              <ul className="space-y-1.5">
                 {INCLUDED.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
+                  <li key={item} className="flex items-start gap-2">
                     <CheckIcon />
-                    <span className="font-sans text-white/70 text-sm leading-snug">{item}</span>
+                    <span className="font-sans text-white/70 text-xs leading-snug">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -145,12 +145,12 @@ export function TripPricingBlock() {
 
             {/* Not included */}
             <div>
-              <p className="font-sans text-xs tracking-[0.2em] uppercase text-white/30 mb-4">Not Included</p>
-              <ul className="space-y-2.5">
+              <p className="font-sans text-xs tracking-[0.2em] uppercase text-white/30 mb-3">Not Included</p>
+              <ul className="space-y-1.5">
                 {NOT_INCLUDED.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
+                  <li key={item} className="flex items-start gap-2">
                     <XIcon />
-                    <span className="font-sans text-white/40 text-sm leading-snug">{item}</span>
+                    <span className="font-sans text-white/40 text-xs leading-snug">{item}</span>
                   </li>
                 ))}
               </ul>

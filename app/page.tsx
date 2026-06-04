@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown, ShieldCheck, Compass, Sparkles } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
@@ -90,8 +90,8 @@ function HeroSection() {
         />
       </motion.div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+      {/* Overlay — fades to navy at bottom for seamless strip transition */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-[#0E1F38]" />
 
       {/* Bottom-left text block */}
       <div className="absolute bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
@@ -105,7 +105,7 @@ function HeroSection() {
             Luxury LGBTQ+ Travel · Southeast Asia
           </motion.p>
 
-          <h1 className="font-serif" style={{ paddingBottom: "0.2em" }}>
+          <h1 className="font-serif font-extrabold" style={{ paddingBottom: "0.2em" }}>
             {[
               { text: "Travel Gay.", italic: false },
               { text: "Be You.", italic: true, orange: true },
@@ -185,39 +185,39 @@ const PILLARS = [
   {
     label: "SAFETY FIRST",
     statement: "Every destination handpicked for LGBTQ+ comfort",
+    Icon: ShieldCheck,
   },
   {
     label: "EXPERT GUIDES",
     statement: "Led by gay travellers who know Asia deeply",
+    Icon: Compass,
   },
   {
     label: "CURATED LUXURY",
     statement: "4 & 5-star stays, private transfers, no compromises",
+    Icon: Sparkles,
   },
 ]
 
 function PremiumStatsSection() {
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{
-        backgroundImage: "url(/ai-landscapes/vietnam-1.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.82)" }} />
-      <div className="relative py-[100px] mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[rgba(250,246,239,0.2)]">
-          {PILLARS.map(({ label, statement }) => (
-            <div key={label} className="px-8 py-10 md:py-0 text-center">
+    <section style={{ background: "radial-gradient(ellipse at 50% 50%, #132842 0%, #0E1F38 68%)" }}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 md:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[rgba(250,246,239,0.12)]">
+          {PILLARS.map(({ label, statement, Icon }) => (
+            <div key={label} className="px-5 md:px-8 py-6 md:py-6 text-center flex flex-col items-center">
+              {/* Icon */}
+              <Icon className="h-7 w-7 mb-4" style={{ color: "#1F8A8F" }} />
+              {/* Label */}
               <p
-                className="font-sans text-xs uppercase mb-5"
+                className="font-sans text-xs uppercase mb-3"
                 style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}
               >
                 {label}
               </p>
-              <p className="font-serif text-2xl italic" style={{ color: "#FAF6EF" }}>
+              {/* Decorative teal line */}
+              <div style={{ width: 40, height: 1, backgroundColor: "#1F8A8F", opacity: 0.5, marginBottom: "1rem" }} />
+              <p className="font-serif text-xl italic" style={{ color: "#FAF6EF" }}>
                 {statement}
               </p>
             </div>
@@ -246,7 +246,7 @@ function DestinationCard({
     >
       <Link
         href={`/trips/${dest.id}`}
-        className="group block relative rounded-2xl overflow-hidden h-[400px] lg:h-[460px]"
+        className="group block relative rounded-2xl overflow-hidden h-[320px] lg:h-[368px]"
       >
         <Image
           src={dest.image}
@@ -255,8 +255,8 @@ function DestinationCard({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1F38]/90 via-[#0E1F38]/10 to-transparent transition-all duration-500 group-hover:via-[#0E1F38]/30" />
+        {/* Gradient — strong base for mobile readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-500 group-hover:via-black/50" />
 
         {/* Duration — top left */}
         <div className="absolute top-5 left-5">
@@ -296,7 +296,7 @@ function DestinationCard({
 
 function DestinationsSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[#FAF6EF]">
+    <section className="py-14 md:py-24 lg:py-32 bg-[#FAF6EF]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6">
@@ -314,11 +314,11 @@ function DestinationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-serif text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
+              className="font-serif font-extrabold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
             >
-              Four destinations,{" "}
+              Four Destinations,{" "}
               <span className="italic text-sunset-orange">
-                endless memories
+                Endless Memories
               </span>
             </motion.h2>
           </div>
@@ -351,124 +351,94 @@ function DestinationsSection() {
 
 // ─── Founders ──────────────────────────────────────────────────────────────────
 
+// Shared text content for FoundersSection (used on both mobile and desktop)
+function FoundersText({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <>
+      <p className="font-sans text-xs uppercase mb-6" style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}>
+        Meet Your Guides
+      </p>
+      <h2
+        className={`font-serif font-extrabold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
+        style={{ color: "#FAF6EF" }}
+      >
+        Two <span style={{ color: "#EA5A2A" }}>Gay</span> Travellers.
+        <br />One Shared Obsession with <span style={{ color: "#EA5A2A" }}>Asia</span>.
+      </h2>
+      <p className="font-sans text-base leading-relaxed mb-10" style={{ color: "rgba(250,246,239,0.78)", maxWidth: mobile ? "100%" : "440px" }}>
+        Between us, we have over 6 years of living across Southeast Asia.
+        Filippo navigating Bali&apos;s backroads by motorbike, Szilard embedded
+        in local communities since 2018. We are gay, we know this region deeply,
+        and we design journeys for travellers who want to experience Asia
+        the way we do: authentically, safely, and unforgettably.
+      </p>
+
+      <div className="flex gap-8 mb-10">
+        <div className="flex flex-col items-center">
+          <div className="relative w-16 h-16 rounded-full overflow-hidden mb-3">
+            <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover object-center" />
+          </div>
+          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
+          <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="relative w-16 h-16 rounded-full overflow-hidden mb-3">
+            <Image src="/founders/szilard-2.jpg" alt="Szilárd Utakon" fill className="object-cover object-top" />
+          </div>
+          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Szilárd Utakon</p>
+          <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
+        </div>
+      </div>
+
+      <Link
+        href="/about"
+        className="font-sans font-semibold px-7 py-3.5 rounded-full border-2 transition-all self-start text-sm inline-block"
+        style={{ borderColor: "#FAF6EF", color: "#FAF6EF" }}
+        onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "#FAF6EF"; el.style.color = "#0E1F38" }}
+        onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "transparent"; el.style.color = "#FAF6EF" }}
+      >
+        Read Our Full Story →
+      </Link>
+    </>
+  )
+}
+
 function FoundersSection() {
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{
-        backgroundImage: "url(/founders/together.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "600px",
-      }}
-    >
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.75)" }} />
+    <section style={{ backgroundColor: "#0E1F38" }}>
 
-      <div className="relative mx-auto max-w-[900px] px-6 lg:px-8 py-24 flex flex-col items-center text-center">
-        {/* Label */}
-        <p
-          className="font-sans text-xs uppercase mb-8"
-          style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}
-        >
-          MEET YOUR GUIDES
-        </p>
-
-        {/* Headline */}
-        <h2
-          className="font-serif font-bold leading-tight mb-8"
-          style={{ color: "#FAF6EF", fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
-        >
-          Two gay travellers. One shared obsession with Asia.
-        </h2>
-
-        {/* Paragraph */}
-        <p
-          className="font-sans text-base leading-relaxed mb-16 max-w-[600px]"
-          style={{ color: "rgba(250,246,239,0.8)" }}
-        >
-          We met in an unusual way: we discovered we had a boyfriend in common.
-          Instead of rivals, we became best friends, then business partners.
-          Between us, we have over 6 years of living across Southeast Asia.
-          Filippo navigating Bali&apos;s backroads by motorbike, Szilard embedded
-          in local communities since 2018. We are gay, we know this region deeply,
-          and we design journeys for travellers who want to experience Asia
-          the way we do: authentically, safely, and unforgettably.
-        </p>
-
-        {/* Founder cards */}
-        <div className="flex flex-col sm:flex-row gap-12 sm:gap-20 mb-14">
-          {/* Filippo */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
-              <Image
-                src="/founders/filippo.jpg"
-                alt="Filippo Rossi"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <p className="font-serif text-lg mb-2" style={{ color: "#FAF6EF" }}>
-              Filippo Rossi
-            </p>
-            <a
-              href="https://instagram.com/fillorossi.91"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-sans text-sm transition-colors"
-              style={{ color: "#1F8A8F" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EA5A2A")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#1F8A8F")}
-            >
-              @fillorossi.91
-            </a>
-          </div>
-
-          {/* Szilard */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
-              <Image
-                src="/founders/szilard.jpg"
-                alt="Szilárd Utakon"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <p className="font-serif text-lg mb-2" style={{ color: "#FAF6EF" }}>
-              Szilárd Utakon
-            </p>
-            <a
-              href="https://instagram.com/szilard_utakon"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-sans text-sm transition-colors"
-              style={{ color: "#1F8A8F" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EA5A2A")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#1F8A8F")}
-            >
-              @szilard_utakon
-            </a>
-          </div>
+      {/* ── MOBILE: image on top, text below ── */}
+      <div className="md:hidden">
+        <div className="relative h-72 overflow-hidden">
+          <Image
+            src="/founders/together-ai-1.jpg"
+            alt="Filippo and Szilard"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0E1F38 0%, rgba(14,31,56,0.3) 60%, transparent 100%)" }} />
         </div>
-
-        {/* CTA */}
-        <Link
-          href="/about"
-          className="font-sans font-semibold px-8 py-4 rounded-full border-2 transition-all"
-          style={{ borderColor: "#FAF6EF", color: "#FAF6EF" }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget as HTMLElement
-            el.style.backgroundColor = "#FAF6EF"
-            el.style.color = "#0E1F38"
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget as HTMLElement
-            el.style.backgroundColor = "transparent"
-            el.style.color = "#FAF6EF"
-          }}
-        >
-          Read Our Full Story →
-        </Link>
+        <div className="px-6 pb-14 -mt-6 relative z-10">
+          <FoundersText mobile />
+        </div>
       </div>
+
+      {/* ── DESKTOP: image right, text left ── */}
+      <div className="hidden md:flex relative overflow-hidden items-center" style={{ minHeight: "540px" }}>
+        <div className="absolute top-0 right-0 bottom-0 w-[55%]" style={{ overflow: "hidden" }}>
+          <Image
+            src="/founders/together-ai-1.jpg"
+            alt="Filippo and Szilard"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #0E1F38 0%, rgba(14,31,56,0.55) 25%, rgba(14,31,56,0.1) 55%, transparent 75%)" }} />
+        </div>
+        <div className="relative z-10 px-8 lg:px-16 py-16 lg:py-20 w-full max-w-[560px] lg:max-w-[46%]">
+          <FoundersText />
+        </div>
+      </div>
+
     </section>
   )
 }
@@ -485,44 +455,28 @@ function TestimonialsSection() {
 
   return (
     <section
-      className="py-24 lg:py-36 bg-black relative overflow-hidden"
-      style={{
-        backgroundImage: "url(/ai-landscapes/vietnam-group.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
+      className="py-12 lg:py-16 relative overflow-hidden"
+      style={{ backgroundColor: "#0E1F38" }}
     >
-      {/* Dark overlay — sits above bg image, below all content */}
-      <div className="absolute inset-0 bg-black/75" />
-
-      {/* Giant decorative quote */}
-      <div
-        className="absolute -top-10 left-1/2 -translate-x-1/2 font-serif text-[22rem] leading-none text-sunset-orange/8 select-none pointer-events-none"
-        aria-hidden
-      >
-        &ldquo;
-      </div>
-
       <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-14"
+          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-6"
         >
-          Traveler Stories
+          What People Say About Us
         </motion.p>
 
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.45 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.4 }}
           >
-            <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl italic text-white leading-relaxed mb-10">
+            <blockquote className="font-serif text-base sm:text-lg lg:text-xl italic text-white leading-relaxed mb-5">
               &ldquo;{TESTIMONIALS[current].quote}&rdquo;
             </blockquote>
             <p className="font-sans font-semibold text-white text-sm">
@@ -535,17 +489,19 @@ function TestimonialsSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation dots */}
-        <div className="flex justify-center gap-3 mt-12">
+        {/* Navigation dots — padded for 44px touch target */}
+        <div className="flex justify-center gap-1 mt-6">
           {TESTIMONIALS.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Testimonial ${i + 1}`}
-              className={`h-[3px] rounded-full transition-all duration-300 ${
+              className="py-5 px-2 flex items-center"
+            >
+              <span className={`block h-[3px] rounded-full transition-all duration-300 ${
                 i === current ? "bg-sunset-orange w-8" : "bg-white/20 w-3"
-              }`}
-            />
+              }`} />
+            </button>
           ))}
         </div>
       </div>
@@ -557,74 +513,52 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="py-24 lg:py-32 bg-navy relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.07]">
-        <Image
-          src="/ai-landscapes/vietnam-6.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
+    <section className="relative py-16 lg:py-20 overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image src="/trips/north-vietnam.jpg" alt="" fill className="object-cover" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12">
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
-            >
-              Ready to explore
-              <br />
-              <span className="italic text-sunset-orange">Southeast Asia?</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="font-sans text-white/45 text-lg mb-10 max-w-md"
-            >
-              Join Filippo and Szilard on a journey like no other.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-wrap gap-4"
-            >
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
-              >
-                Start Planning <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/trips"
-                className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/25 text-white hover:bg-white/10 transition-colors"
-              >
-                Browse All Trips
-              </Link>
-            </motion.div>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="relative h-72 w-96 max-w-full rounded-2xl overflow-hidden flex-shrink-0"
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.78)" }} />
+
+      <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-serif font-extrabold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
+        >
+          Ready To Explore<br />
+          <span className="italic text-sunset-orange">Southeast Asia?</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="font-sans text-white/60 text-lg mb-10"
+        >
+          Join Filippo and Szilard on a journey like no other.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap gap-4 justify-center"
+        >
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
           >
-            <Image
-              src="/founders/together.jpg"
-              alt="Filippo and Szilard"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-          </motion.div>
-        </div>
+            Start Planning <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/trips"
+            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
+          >
+            Browse All Trips
+          </Link>
+        </motion.div>
       </div>
     </section>
   )

@@ -21,14 +21,7 @@ const links = [
 export function Footer() {
   return (
     <footer className="bg-navy text-warm-cream relative overflow-hidden border-t-4 border-sunset-orange">
-      {/* Large decorative text */}
-      <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none select-none">
-        <p className="font-serif text-[20vw] leading-none text-warm-cream whitespace-nowrap -mb-[0.15em]" style={{ opacity: 0.08 }}>
-          Out in Asia
-        </p>
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-24 pb-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-12 md:pt-24 pb-8 md:pb-12">
         {/* Top Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
           {/* Brand Column */}

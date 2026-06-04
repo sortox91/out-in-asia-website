@@ -54,7 +54,7 @@ export function TripCard({
         </div>
 
         {/* Main overlay text — always visible */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 pb-8">
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 pb-6 md:pb-8">
           <p className="font-sans text-xs text-white/60 uppercase tracking-[0.2em] mb-2">
             {subtitle}
           </p>

@@ -48,7 +48,7 @@ export const siteConfig = {
         "Discover Hanoi's old quarter charm, trek through the terraced rice fields of Sapa, cruise Ha Long Bay's limestone karsts, and unwind in the scenic valleys of Ninh Binh.",
       duration: "12 days",
       image: "https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=800&q=80",
-      heroImage: "/ai-landscapes/vietnam-5.png",
+      heroImage: "/ai-landscapes/vietnam-6.png",
       price: "€4,400",
       highlights: [
         "Hanoi Old Quarter",

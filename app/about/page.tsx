@@ -17,9 +17,9 @@ export default function AboutPage() {
     <>
       <Header />
       <PageTransition>
-        <main>
+        <main className="overflow-x-hidden">
           {/* Hero */}
-          <section className="relative py-32 bg-navy overflow-hidden">
+          <section className="relative py-20 md:py-32 bg-navy overflow-hidden">
             <Image
               src="/founders/together.jpg"
               alt="Filippo and Szilard in Southeast Asia"
@@ -33,11 +33,11 @@ export default function AboutPage() {
                 <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-4 text-xs">
                   Our Story
                 </p>
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 leading-tight break-words">
                   Two Guides, One{" "}
                   <span className="italic text-sunset-orange">Passion</span>
                 </h1>
-                <p className="font-sans text-xl text-sand/90 leading-relaxed">
+                <p className="font-sans text-base md:text-xl text-sand/90 leading-relaxed">
                   Out in Asia was born from a shared love of Southeast Asia and a
                   desire to create meaningful travel experiences for the LGBTQ+
                   community. We believe that travel should be transformative,
@@ -49,19 +49,19 @@ export default function AboutPage() {
           </section>
 
           {/* Our Mission */}
-          <section className="py-24 bg-warm-cream">
+          <section className="py-14 md:py-24 bg-warm-cream">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl mx-auto text-center mb-16">
                 <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-4 text-xs">
                   Our Mission
                 </p>
-                <h2 className="font-serif text-4xl font-bold text-navy mb-8">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-navy mb-8">
                   Creating Safe Spaces for{" "}
                   <span className="italic text-sunset-orange">
                     Authentic Travel
                   </span>
                 </h2>
-                <div className="space-y-4 font-sans leading-relaxed text-lg text-left" style={{ color: 'var(--clay)' }}>
+                <div className="space-y-4 font-sans leading-relaxed text-lg text-left text-navy">
                   <p>
                     We started Out in Asia because we saw a gap in the travel
                     industry. Too often, LGBTQ+ travelers have to compromise on
@@ -82,31 +82,22 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Stats bar */}
-              <div className="bg-navy rounded-2xl overflow-hidden">
-                <div className="grid grid-cols-2 md:grid-cols-4">
-                  {[
-                    "10+ Years Experience",
-                    "4 Destinations",
-                    "Small Groups Only",
-                    "100% LGBTQ+ Led",
-                  ].map((stat, index) => (
-                    <div
-                      key={index}
-                      className={`py-10 px-6 text-center ${
-                        index % 2 !== 0 ? "border-l border-white/10" : ""
-                      } ${
-                        index >= 2
-                          ? "border-t border-white/10 md:border-t-0 md:border-l"
-                          : ""
-                      }`}
-                    >
-                      <p className="font-sans text-white font-semibold text-sm">
-                        {stat}
-                      </p>
+              {/* Stats with icons */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  { icon: "🗓", number: "10+", label: "Years Experience" },
+                  { icon: "🗺", number: "4", label: "Destinations" },
+                  { icon: "👥", number: "Small", label: "Groups Only" },
+                  { icon: "⭐", number: "100%", label: "Personalised" },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex items-start gap-3 bg-navy rounded-xl px-5 py-5">
+                    <span className="text-2xl flex-shrink-0">{stat.icon}</span>
+                    <div>
+                      <p className="font-serif font-bold text-xl text-white leading-tight">{stat.number}</p>
+                      <p className="font-sans text-xs text-white/60 mt-0.5">{stat.label}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
@@ -114,13 +105,13 @@ export default function AboutPage() {
           <AboutFounders />
 
           {/* Our Values */}
-          <section className="py-24 bg-warm-cream">
+          <section className="py-14 md:py-24 bg-warm-cream">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <p className="font-sans text-xs text-ocean-teal font-medium tracking-widest uppercase mb-4">
                   What We Stand For
                 </p>
-                <h2 className="font-serif text-4xl sm:text-5xl font-bold text-navy">
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-navy">
                   Our <span className="italic text-sunset-orange">Values</span>
                 </h2>
               </div>
@@ -150,7 +141,7 @@ export default function AboutPage() {
                       {value.title}
                     </h3>
                     <div className="w-12 h-0.5 bg-ocean-teal mb-5" />
-                    <p className="font-sans text-clay leading-relaxed">
+                    <p className="font-sans text-navy leading-relaxed">
                       {value.description}
                     </p>
                   </div>
@@ -160,14 +151,14 @@ export default function AboutPage() {
           </section>
 
           {/* CTA */}
-          <section className="py-24 bg-navy">
+          <section className="py-14 md:py-24 bg-navy">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <h2 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-6 text-balance">
+                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
                     Ready to Travel <span className="italic text-sunset-orange">With Us</span>?
                   </h2>
-                  <p className="font-sans text-xl text-sand/80 mb-10 leading-relaxed">
+                  <p className="font-sans text-base md:text-xl text-sand/80 mb-10 leading-relaxed">
                     Join Filippo and Szilard on an unforgettable journey through Southeast Asia.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
@@ -186,7 +177,7 @@ export default function AboutPage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-64 w-80 rounded-2xl overflow-hidden mx-auto lg:ml-auto">
+                <div className="relative h-64 w-full max-w-xs rounded-2xl overflow-hidden mx-auto lg:ml-auto">
                   <Image
                     src="/founders/together-ai-2.jpg"
                     alt="Filippo and Szilard"

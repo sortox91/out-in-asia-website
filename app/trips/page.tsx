@@ -18,7 +18,7 @@ export default function TripsPage() {
     <>
       <Header />
       <PageTransition>
-      <main>
+      <main className="overflow-x-hidden">
         {/* Fullscreen-ish hero — 60vh with background image */}
         <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
           <Image
@@ -33,10 +33,10 @@ export default function TripsPage() {
             <p className="font-sans text-xs tracking-[0.3em] uppercase text-white/50 mb-5">
               Our Destinations
             </p>
-            <h1 className="font-serif text-5xl md:text-7xl text-white mb-5 leading-tight">
+            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white mb-5 leading-tight">
               Our Journeys
             </h1>
-            <p className="font-sans text-lg text-sand/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="font-sans text-lg text-sand/80 max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
               Each trip is carefully designed to showcase the best of Southeast Asia
               while ensuring comfort, safety, and authentic experiences for LGBTQ+ travelers.
             </p>
@@ -64,7 +64,7 @@ export default function TripsPage() {
         </section>
 
         {/* What's Included */}
-        <section className="py-24 bg-navy">
+        <section className="py-14 md:py-24 bg-navy">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-4 text-xs">
@@ -131,7 +131,7 @@ export default function TripsPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-warm-cream border-t-2 border-sunset-orange">
+        <section className="py-12 md:py-20 bg-warm-cream border-t-2 border-sunset-orange">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-navy max-w-lg leading-tight">

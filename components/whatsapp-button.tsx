@@ -7,20 +7,10 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      className="fixed bottom-4 right-4 md:bottom-20 md:right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-200"
       style={{
-        position: "fixed",
-        right: 24,
-        bottom: 80,
-        zIndex: 50,
-        width: 56,
-        height: 56,
-        borderRadius: "50%",
         backgroundColor: "#1F8A8F",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
-        transition: "background-color 200ms",
       }}
       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#EA5A2A")}
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#1F8A8F")}

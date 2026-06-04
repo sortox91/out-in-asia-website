@@ -176,19 +176,45 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
           nextDates={details.nextDates}
         />
 
-        {/* ── Highlights bar ── */}
-        <section className="py-5 bg-sunset-orange">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
-              {trip.highlights.map((h, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-white">
-                  <Check className="h-4 w-4 flex-shrink-0" />
-                  <span className="font-sans font-medium text-sm">{h}</span>
-                </div>
-              ))}
+        {/* ── Quick facts bar (north-vietnam) / Highlights bar (other trips) ── */}
+        {slug === "north-vietnam" ? (
+          <section className="bg-sunset-orange py-5">
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-2 md:grid-cols-4">
+                {([
+                  { icon: "📅", value: "12 Days", label: "Duration" },
+                  { icon: "👥", value: "Small Group", label: "Max 12" },
+                  { icon: "📍", value: "4 Stops", label: "Hanoi → Sapa → Tam Coc → Ha Long" },
+                  { icon: "✨", value: "From €4,400", label: "Per person" },
+                ] as const).map((fact, i) => (
+                  <div
+                    key={i}
+                    className={`flex flex-col items-center justify-center py-3 px-3 text-center${
+                      i === 1 || i === 3 ? " border-l border-white/25" : i === 2 ? " md:border-l md:border-white/25" : ""
+                    }`}
+                  >
+                    <span className="text-xl mb-1">{fact.icon}</span>
+                    <p className="font-serif text-white font-bold text-sm sm:text-base leading-tight mb-0.5">{fact.value}</p>
+                    <p className="font-sans text-white/75 text-[0.68rem] leading-tight">{fact.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : (
+          <section className="hidden md:block py-5 bg-sunset-orange">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-wrap justify-center gap-6 lg:gap-10">
+                {trip.highlights.map((h, i) => (
+                  <div key={i} className="flex items-center gap-2.5 text-white">
+                    <Check className="h-4 w-4 flex-shrink-0" />
+                    <span className="font-sans font-medium text-sm">{h}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ── Route map ── */}
         {slug === "north-vietnam" && <RouteMap />}
@@ -222,7 +248,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         {slug === "north-vietnam" && <TripPricingBlock />}
 
         {/* ── What's included ── */}
-        <section className="py-24 bg-[#F0E8DA]">
+        <section className="py-14 md:py-24 bg-[#F0E8DA]">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             <div className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4">What You Get</p>
@@ -263,7 +289,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         </section>
 
         {/* ── Upcoming dates + final CTA ── */}
-        <section className="py-24 bg-navy">
+        <section className="py-14 md:py-24 bg-navy">
           <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
             <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4">
               Upcoming Departures
@@ -278,12 +304,14 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 </div>
               ))}
             </div>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 font-sans font-semibold px-10 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
-            >
-              Inquire About This Trip
-            </Link>
+            <div className="mb-16 md:mb-0 flex justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 font-sans font-semibold px-10 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
+              >
+                Inquire About This Trip
+              </Link>
+            </div>
           </div>
         </section>
 

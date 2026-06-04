@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const STOPS = [
   {
     id: 1,
-    image: "/maps/map-1-hanoi.png",
+    image: "/maps/map-1-hanoi.svg",
     city: "Hanoi",
     subtitle: "Days 1–3 · Vietnam's Capital",
     highlights: [
@@ -24,7 +24,7 @@ const STOPS = [
   },
   {
     id: 2,
-    image: "/maps/map-2-sapa.png",
+    image: "/maps/map-2-sapa.svg",
     city: "Sapa",
     subtitle: "Days 4–6 · Mountain Escape",
     highlights: [
@@ -40,7 +40,7 @@ const STOPS = [
   },
   {
     id: 3,
-    image: "/maps/map-3-tamcoc.png",
+    image: "/maps/map-3-tamcoc.svg",
     city: "Tam Coc",
     subtitle: "Days 7–9 · Ha Long Bay on Land",
     highlights: [
@@ -56,7 +56,7 @@ const STOPS = [
   },
   {
     id: 4,
-    image: "/maps/map-4-halongbay.png",
+    image: "/maps/map-4-halong.svg",
     city: "Ha Long Bay",
     subtitle: "Days 10–11 · Luxury Yacht Cruise",
     highlights: [
@@ -72,7 +72,7 @@ const STOPS = [
   },
   {
     id: 5,
-    image: "/maps/map-5-return.png",
+    image: "/maps/map-5-return.svg",
     city: "Return to Hanoi",
     subtitle: "Day 12 · Farewell",
     highlights: [
@@ -87,15 +87,11 @@ const STOPS = [
   },
 ]
 
-// Reusable arrow button
+// Level-1 orange circle arrow — map stop navigation
 function NavBtn({
   onClick, label, side, size = 48, top = "50%",
 }: {
-  onClick: () => void
-  label: string
-  side: "left" | "right"
-  size?: number
-  top?: string
+  onClick: () => void; label: string; side: "left" | "right"; size?: number; top?: string
 }) {
   return (
     <button
@@ -103,19 +99,15 @@ function NavBtn({
       aria-label={label}
       style={{
         position: "absolute",
-        [side]: 16,
+        [side]: 12,
         top,
         transform: "translateY(-50%)",
         zIndex: 10,
-        width: size,
-        height: size,
+        width: size, height: size,
         borderRadius: "50%",
         backgroundColor: "#EA5A2A",
-        border: "none",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        border: "none", cursor: "pointer",
+        display: "flex", alignItems: "center", justifyContent: "center",
         boxShadow: "0 2px 10px rgba(234,90,42,0.35)",
         transition: "opacity 200ms",
       }}
@@ -145,7 +137,7 @@ export function RouteMap() {
     return () => window.removeEventListener("resize", check)
   }, [])
 
-  // Preload every map + gallery image at mount → instant transitions
+  // Preload all maps + gallery images at mount → instant transitions
   useEffect(() => {
     STOPS.forEach(s => {
       const m = new window.Image(); m.src = s.image
@@ -153,6 +145,7 @@ export function RouteMap() {
     })
   }, [])
 
+  // Navigate between stops (resets gallery to first photo)
   const goTo = (index: number) => {
     setVisible(false)
     setGalleryVisible(false)
@@ -167,94 +160,50 @@ export function RouteMap() {
   const prev = () => goTo(current - 1)
   const next = () => goTo(current + 1)
 
-  const galleryPrev = () => {
+  // Select a photo within the current stop
+  const selectPhoto = (index: number) => {
+    if (index === galleryIndex) return
     setGalleryVisible(false)
     setTimeout(() => {
-      setGalleryIndex(i => (i - 1 + stop.galleryImages.length) % stop.galleryImages.length)
+      setGalleryIndex(index)
       setGalleryVisible(true)
-    }, 180)
-  }
-  const galleryNext = () => {
-    setGalleryVisible(false)
-    setTimeout(() => {
-      setGalleryIndex(i => (i + 1) % stop.galleryImages.length)
-      setGalleryVisible(true)
-    }, 180)
+    }, 150)
   }
 
-  // Shared dot strip
-  const StopDots = ({ light = false }: { light?: boolean }) => (
-    <div style={{ display: "flex", justifyContent: "center", gap: 9 }}>
+  // Stop navigation dots — padded to 44px touch target
+  const StopDots = () => (
+    <div style={{ display: "flex", justifyContent: "center", gap: 4 }}>
       {STOPS.map((_, i) => (
         <button
           key={i}
           onClick={() => goTo(i)}
           aria-label={`Stop ${i + 1}`}
           style={{
-            width: 9, height: 9, borderRadius: "50%", padding: 0, cursor: "pointer",
-            border: `2px solid ${i === current ? "#EA5A2A" : light ? "rgba(255,255,255,0.65)" : "#1F8A8F"}`,
+            padding: "10px 8px", cursor: "pointer",
+            background: "none", border: "none", display: "flex", alignItems: "center",
+          }}
+        >
+          <span style={{
+            display: "block",
+            width: 9, height: 9, borderRadius: "50%",
+            border: `2px solid ${i === current ? "#EA5A2A" : "#1F8A8F"}`,
             backgroundColor: i === current ? "#EA5A2A" : "transparent",
             transition: "all 200ms",
-          }}
-        />
+          }} />
+        </button>
       ))}
     </div>
   )
 
   /* ─────────────────────────────────────
-     MOBILE LAYOUT
+     MOBILE LAYOUT — stacked
   ───────────────────────────────────── */
   if (!isDesktop) {
     return (
-      <section id="route-overview" style={{ backgroundColor: "#F9F8F6", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
+      <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
-        {/* Top half — destination photo (50vh) */}
-        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "#1a2d47" }}>
-          <div style={{
-            position: "absolute", inset: 0,
-            opacity: galleryVisible ? 1 : 0, transition: "opacity 300ms",
-          }}>
-            <Image
-              src={stop.galleryImages[0]}
-              alt={stop.city}
-              fill
-              className="object-cover"
-              style={{ objectPosition: stop.objectPosition }}
-              priority
-            />
-          </div>
-
-          {/* Gradient overlay for legibility */}
-          <div style={{
-            position: "absolute", inset: 0, pointerEvents: "none",
-            background: "linear-gradient(to bottom, rgba(14,31,56,0.18) 0%, rgba(14,31,56,0) 40%, rgba(14,31,56,0.55) 100%)",
-          }} />
-
-          {/* City label */}
-          <p style={{
-            position: "absolute", top: 14, left: 16, zIndex: 5, margin: 0,
-            fontFamily: "var(--font-manrope), Manrope, sans-serif",
-            fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: "0.22em",
-            color: "rgba(255,255,255,0.88)",
-          }}>
-            Discover {stop.city}
-          </p>
-
-          {/* Stop navigation arrows */}
-          <NavBtn onClick={prev} label="Previous stop" side="left" size={44} />
-          <NavBtn onClick={next} label="Next stop" side="right" size={44} />
-
-          {/* Stop dots */}
-          <div style={{ position: "absolute", bottom: 14, left: 0, right: 0, zIndex: 10 }}>
-            <StopDots light />
-          </div>
-        </div>
-
-        {/* Bottom half — map (50vh) */}
-        <div style={{
-          position: "relative", height: "50vh", overflow: "hidden",
-          backgroundColor: "#F9F8F6", borderTop: "1px solid #E8DDD0",
-        }}>
+        {/* 1. Map */}
+        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
           {STOPS.map((s, i) => (
             <div key={s.id} style={{
               position: "absolute", inset: 0,
@@ -264,35 +213,100 @@ export function RouteMap() {
               <Image src={s.image} alt={`Map of ${s.city}`} fill className="object-contain" />
             </div>
           ))}
+          <NavBtn onClick={prev} label="Previous stop" side="left" size={44} />
+          <NavBtn onClick={next} label="Next stop" side="right" size={44} />
+          <div style={{ position: "absolute", bottom: 12, left: 0, right: 0, zIndex: 10 }}>
+            <StopDots />
+          </div>
         </div>
 
-        {/* Below fold — stop info (scroll to see) */}
+        {/* 2. Gallery: main image + thumbnails */}
+        <div style={{ borderTop: "1px solid #E8DDD0", padding: "14px 16px 0" }}>
+
+          {/* Main image — 4:3 ratio */}
+          <div style={{ position: "relative", width: "100%", paddingBottom: "75%", borderRadius: "0.5rem", overflow: "hidden" }}>
+            {stop.galleryImages.map((src, i) => (
+              <div key={src} style={{
+                position: "absolute", inset: 0,
+                opacity: i === galleryIndex && galleryVisible ? 1 : 0,
+                transition: "opacity 250ms",
+                pointerEvents: "none",
+              }}>
+                <Image
+                  src={src}
+                  alt={stop.galleryCaptions[i]}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: stop.objectPosition }}
+                  priority
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Thumbnails */}
+          <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
+            {stop.galleryImages.map((src, i) => (
+              <button
+                key={i}
+                onClick={() => selectPhoto(i)}
+                aria-label={stop.galleryCaptions[i]}
+                style={{
+                  flex: 1, position: "relative", height: 64,
+                  borderRadius: "0.3rem", overflow: "hidden",
+                  border: `2px solid ${i === galleryIndex ? "#1F8A8F" : "transparent"}`,
+                  padding: 0, cursor: "pointer",
+                  opacity: i === galleryIndex ? 1 : 0.52,
+                  transition: "opacity 200ms, border-color 200ms",
+                }}
+              >
+                <Image
+                  src={src}
+                  alt={stop.galleryCaptions[i]}
+                  fill
+                  className="object-cover"
+                  style={{ objectPosition: stop.objectPosition }}
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* Caption */}
+          <p style={{
+            fontFamily: "var(--font-manrope), Manrope, sans-serif",
+            fontSize: "0.7rem", color: "#B89870", margin: "8px 0 14px",
+            opacity: galleryVisible ? 1 : 0, transition: "opacity 250ms",
+          }}>
+            {stop.city} · {stop.galleryCaptions[galleryIndex]}
+          </p>
+        </div>
+
+        {/* 3. Info banner */}
         <div style={{
-          padding: "22px 20px 28px", backgroundColor: "#F9F8F6",
           borderTop: "1px solid #E8DDD0",
+          padding: "18px 16px 26px", backgroundColor: "#FAF6EF",
           opacity: visible ? 1 : 0, transition: "opacity 300ms",
         }}>
-          {/* Badge + city */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
             <div style={{
-              width: 42, height: 42, borderRadius: "50%", flexShrink: 0,
+              width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
               backgroundColor: "#0E1F38", color: "#FAF6EF",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-              fontSize: "1rem", fontWeight: 700,
+              fontSize: "0.9rem", fontWeight: 700,
             }}>
               {String(stop.id).padStart(2, "0")}
             </div>
             <div>
               <h3 style={{
                 fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                fontSize: "1.5rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
+                fontSize: "1.4rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
               }}>
                 {stop.city}
               </h3>
               <p style={{
                 fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "0.1em",
+                fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em",
                 color: "#1F8A8F", margin: "3px 0 0",
               }}>
                 {stop.subtitle}
@@ -300,9 +314,9 @@ export function RouteMap() {
             </div>
           </div>
 
-          <div style={{ width: 36, height: 1, backgroundColor: "#B89870", marginBottom: 14 }} />
+          <div style={{ width: 36, height: 1, backgroundColor: "#B89870", marginBottom: 12 }} />
 
-          <ul style={{ listStyle: "none", padding: 0, margin: "0 0 14px" }}>
+          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             {stop.highlights.map((item, i) => (
               <li key={i} style={{
                 display: "flex", alignItems: "flex-start", gap: 8,
@@ -314,89 +328,145 @@ export function RouteMap() {
               </li>
             ))}
           </ul>
-
-          <p style={{
-            fontFamily: "var(--font-manrope), Manrope, sans-serif",
-            fontSize: "0.72rem", color: "#B89870", margin: 0,
-          }}>
-            {stop.city} · {stop.galleryCaptions[0]}
-          </p>
         </div>
+
       </section>
     )
   }
 
   /* ─────────────────────────────────────
-     DESKTOP LAYOUT
+     DESKTOP LAYOUT — two columns
   ───────────────────────────────────── */
   return (
-    <section id="route-overview" style={{ padding: "80px 0", backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
+    <section id="route-overview" style={{ padding: "40px 0 60px", backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem" }}>
-
-        {/* Section header */}
-        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <p style={{
-            fontFamily: "var(--font-manrope), Manrope, sans-serif",
-            fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.25em",
-            color: "#1F8A8F", marginBottom: "1rem",
-          }}>
-            Your Journey
-          </p>
-          <h2 style={{
-            fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-            fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 700, color: "#0E1F38",
-          }}>
-            Route{" "}
-            <span style={{ fontStyle: "italic", color: "#EA5A2A" }}>Overview</span>
-          </h2>
-        </div>
-
-        {/* Card wrapper */}
         <div style={{
           borderRadius: "1rem", overflow: "hidden",
           border: "1px solid #E8DDD0", boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
         }}>
 
-          {/* ── MAP — full width, 420px ── */}
-          <div style={{
-            position: "relative", height: "420px",
-            backgroundColor: "#FAF6EF", overflow: "hidden",
-          }}>
-            {STOPS.map((s, i) => (
-              <div key={s.id} style={{
-                position: "absolute", inset: 0,
-                opacity: i === current ? 1 : 0, transition: "opacity 400ms",
-                pointerEvents: "none",
-              }}>
-                <Image
-                  src={s.image}
-                  alt={`Map of ${s.city}`}
-                  fill
-                  className="object-contain"
-                  priority={i === 0}
-                />
+          {/* ── TWO COLUMNS: map (38%) + gallery (62%) ── */}
+          <div style={{ display: "flex", alignItems: "stretch", borderBottom: "1px solid #E8DDD0" }}>
+
+            {/* LEFT — SVG Map */}
+            <div style={{
+              width: "38%", flexShrink: 0,
+              borderRight: "1px solid #E8DDD0",
+              backgroundColor: "#FAF6EF",
+              display: "flex", flexDirection: "column",
+            }}>
+              {/* Map area — flex:1 so it matches gallery column height */}
+              <div style={{ position: "relative", flex: 1, minHeight: 320 }}>
+                {STOPS.map((s, i) => (
+                  <div key={s.id} style={{
+                    position: "absolute", inset: 0,
+                    opacity: i === current ? 1 : 0, transition: "opacity 400ms",
+                    pointerEvents: "none",
+                  }}>
+                    <Image
+                      src={s.image}
+                      alt={`Map of ${s.city}`}
+                      fill
+                      className="object-contain"
+                      priority={i === 0}
+                    />
+                  </div>
+                ))}
+
+                {/* Navigation arrows */}
+                <NavBtn onClick={prev} label="Previous stop" side="left" size={42} top="50%" />
+                <NavBtn onClick={next} label="Next stop"     side="right" size={42} top="50%" />
               </div>
-            ))}
 
-            {/* Stop navigation arrows */}
-            <NavBtn onClick={prev} label="Previous stop" side="left" size={52} />
-            <NavBtn onClick={next} label="Next stop" side="right" size={52} />
+              {/* Stop dots below map */}
+              <div style={{ padding: "10px 0 14px" }}>
+                <StopDots />
+              </div>
+            </div>
 
-            {/* Stop dots */}
-            <div style={{ position: "absolute", bottom: 22, left: 0, right: 0, zIndex: 10 }}>
-              <StopDots />
+            {/* RIGHT — Gallery: main image + thumbnails */}
+            <div style={{
+              flex: 1,
+              padding: "20px 24px 18px",
+              backgroundColor: "#FAF6EF",
+              display: "flex", flexDirection: "column",
+            }}>
+
+              {/* Main image — 16:10 aspect ratio */}
+              <div style={{
+                position: "relative", width: "100%", paddingBottom: "63%",
+                borderRadius: "0.5rem", overflow: "hidden",
+                flexShrink: 0, marginBottom: 10,
+              }}>
+                {stop.galleryImages.map((src, i) => (
+                  <div key={src} style={{
+                    position: "absolute", inset: 0,
+                    opacity: i === galleryIndex && galleryVisible ? 1 : 0,
+                    transition: "opacity 250ms",
+                    pointerEvents: "none",
+                  }}>
+                    <Image
+                      src={src}
+                      alt={stop.galleryCaptions[i]}
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: stop.objectPosition }}
+                      priority={i === 0}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Thumbnail strip */}
+              <div style={{ display: "flex", gap: 8, marginBottom: 10, flexShrink: 0 }}>
+                {stop.galleryImages.map((src, i) => (
+                  <button
+                    key={i}
+                    onClick={() => selectPhoto(i)}
+                    aria-label={stop.galleryCaptions[i]}
+                    style={{
+                      flex: 1, position: "relative", height: 76,
+                      borderRadius: "0.35rem", overflow: "hidden",
+                      border: `2.5px solid ${i === galleryIndex ? "#1F8A8F" : "transparent"}`,
+                      padding: 0, cursor: "pointer",
+                      opacity: i === galleryIndex ? 1 : 0.5,
+                      transition: "opacity 200ms, border-color 200ms",
+                    }}
+                    onMouseEnter={e => { if (i !== galleryIndex) e.currentTarget.style.opacity = "0.78" }}
+                    onMouseLeave={e => { if (i !== galleryIndex) e.currentTarget.style.opacity = "0.5" }}
+                  >
+                    <Image
+                      src={src}
+                      alt={stop.galleryCaptions[i]}
+                      fill
+                      className="object-cover"
+                      style={{ objectPosition: stop.objectPosition }}
+                    />
+                  </button>
+                ))}
+              </div>
+
+              {/* Caption */}
+              <p style={{
+                fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                fontSize: "0.72rem", color: "#B89870", margin: 0,
+                opacity: galleryVisible ? 1 : 0, transition: "opacity 250ms",
+                flexShrink: 0,
+              }}>
+                {stop.city} · {stop.galleryCaptions[galleryIndex]}
+              </p>
+
             </div>
           </div>
 
-          {/* ── INFO BANNER ── */}
+          {/* ── INFO BANNER — full width ── */}
           <div style={{
-            borderTop: "1px solid #E8DDD0", borderBottom: "1px solid #E8DDD0",
-            backgroundColor: "#FAF6EF", padding: "10px 28px",
+            backgroundColor: "#FAF6EF", padding: "13px 24px",
             opacity: visible ? 1 : 0, transition: "opacity 300ms",
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
 
-              {/* Left: badge + city + subtitle */}
+              {/* Badge + city + subtitle */}
               <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0, paddingRight: 20 }}>
                 <div style={{
                   width: 38, height: 38, borderRadius: "50%",
@@ -410,14 +480,14 @@ export function RouteMap() {
                 <div>
                   <h3 style={{
                     fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                    fontSize: "1.2rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
+                    fontSize: "1.15rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
                   }}>
                     {stop.city}
                   </h3>
                   <p style={{
                     fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.1em",
-                    color: "#1F8A8F", margin: "2px 0 0",
+                    fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.1em",
+                    color: "#1F8A8F", margin: "3px 0 0",
                   }}>
                     {stop.subtitle}
                   </p>
@@ -427,10 +497,10 @@ export function RouteMap() {
               {/* Vertical divider */}
               <div style={{ width: 1, height: 38, backgroundColor: "#D9C9B5", flexShrink: 0, marginRight: 20 }} />
 
-              {/* Highlights in 2 columns */}
+              {/* Highlights — 2 columns */}
               <div style={{
                 display: "grid", gridTemplateColumns: "1fr 1fr",
-                gap: "1px 20px", flex: 1,
+                gap: "2px 24px", flex: 1,
               }}>
                 {stop.highlights.map((item, i) => (
                   <div key={i} style={{
@@ -443,75 +513,8 @@ export function RouteMap() {
                   </div>
                 ))}
               </div>
+
             </div>
-          </div>
-
-          {/* ── GALLERY SECTION ── */}
-          <div style={{ backgroundColor: "#FAF6EF", padding: "0 24px 20px" }}>
-
-            {/* "Discover" label */}
-            <p style={{
-              fontFamily: "var(--font-manrope), Manrope, sans-serif",
-              fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.22em",
-              color: "#1F8A8F", margin: "0", padding: "10px 0 8px",
-            }}>
-              DISCOVER {stop.city.toUpperCase()}
-            </p>
-
-            {/* Photo — 320px */}
-            <div style={{
-              position: "relative", height: "320px",
-              borderRadius: "0.75rem", overflow: "hidden",
-            }}>
-              <div style={{
-                position: "absolute", inset: 0,
-                opacity: galleryVisible ? 1 : 0, transition: "opacity 300ms",
-              }}>
-                <Image
-                  src={stop.galleryImages[galleryIndex]}
-                  alt={stop.galleryCaptions[galleryIndex]}
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: stop.objectPosition }}
-                />
-              </div>
-
-              {/* Gallery photo navigation */}
-              <NavBtn onClick={galleryPrev} label="Previous photo" side="left" size={44} />
-              <NavBtn onClick={galleryNext} label="Next photo" side="right" size={44} />
-
-              {/* Photo dots */}
-              <div style={{
-                position: "absolute", bottom: 14, left: 0, right: 0, zIndex: 10,
-                display: "flex", justifyContent: "center", gap: 6,
-              }}>
-                {stop.galleryImages.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setGalleryVisible(false)
-                      setTimeout(() => { setGalleryIndex(i); setGalleryVisible(true) }, 180)
-                    }}
-                    aria-label={`Photo ${i + 1}`}
-                    style={{
-                      width: 7, height: 7, borderRadius: "50%", border: "none", padding: 0,
-                      backgroundColor: i === galleryIndex ? "white" : "rgba(255,255,255,0.48)",
-                      cursor: "pointer", transition: "background-color 200ms",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Caption */}
-            <p style={{
-              fontFamily: "var(--font-manrope), Manrope, sans-serif",
-              fontSize: "0.75rem", color: "#B89870",
-              marginTop: "10px", marginBottom: 0,
-              opacity: galleryVisible ? 1 : 0, transition: "opacity 300ms",
-            }}>
-              {stop.city} · {stop.galleryCaptions[galleryIndex]}
-            </p>
           </div>
 
         </div>

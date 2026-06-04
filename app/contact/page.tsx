@@ -101,7 +101,7 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main>
+      <main className="overflow-x-hidden">
         {/* Hero */}
         <section className="relative h-[40vh] min-h-[300px] flex items-end overflow-hidden">
           <Image
@@ -116,7 +116,7 @@ export default function ContactPage() {
             <p className="font-sans text-xs text-ocean-teal font-medium tracking-widest uppercase mb-4">
               Get in Touch
             </p>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
               Let&apos;s Plan Your{" "}
               <span className="italic text-sunset-orange">Adventure</span>
             </h1>
@@ -124,7 +124,7 @@ export default function ContactPage() {
         </section>
 
         {/* Main Content */}
-        <section className="py-20 bg-warm-cream">
+        <section className="py-10 md:py-20 bg-warm-cream">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
               {/* Form */}
@@ -159,7 +159,7 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="flex flex-col md:flex-row gap-4">
                         <div>
                           <label
                             htmlFor="firstName"
@@ -171,7 +171,7 @@ export default function ContactPage() {
                             id="firstName"
                             name="firstName"
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
+                            className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
                           />
                         </div>
                         <div>
@@ -185,7 +185,7 @@ export default function ContactPage() {
                             id="lastName"
                             name="lastName"
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
+                            className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
                           />
                         </div>
                       </div>
@@ -202,7 +202,7 @@ export default function ContactPage() {
                           name="email"
                           type="email"
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
+                          className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
                         />
                       </div>
 
@@ -217,7 +217,7 @@ export default function ContactPage() {
                           id="trip"
                           value={selectedTrip}
                           onChange={(e) => setSelectedTrip(e.target.value)}
-                          className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy focus:outline-none focus:border-ocean-teal transition-colors appearance-none"
+                          className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy focus:outline-none focus:border-ocean-teal transition-colors appearance-none"
                         >
                           <option value="">Select a trip (optional)</option>
                           <option value="general">General Inquiry</option>
@@ -242,7 +242,7 @@ export default function ContactPage() {
                           required
                           rows={5}
                           placeholder="Tell us about your travel dreams..."
-                          className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors resize-none"
+                          className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors resize-none"
                         />
                       </div>
 
