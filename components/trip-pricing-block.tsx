@@ -172,7 +172,7 @@ export function TripPricingBlock() {
           className="space-y-3"
         >
           <a
-            href="https://wa.me/36305326286"
+            href="https://wa.me/393475006791"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold hover:bg-ember transition-colors text-sm"

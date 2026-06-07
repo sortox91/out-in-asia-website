@@ -101,7 +101,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-sans text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/50 mb-6"
+            className="hidden sm:block font-sans text-xs tracking-[0.35em] uppercase text-white/50 mb-6"
           >
             Luxury LGBTQ+ Travel · Southeast Asia
           </motion.p>
@@ -471,15 +471,15 @@ function TestimonialsSection() {
 
   return (
     <section
-      className="py-12 lg:py-16 relative overflow-hidden"
+      className="py-14 lg:py-20 relative overflow-hidden"
       style={{ backgroundColor: "#0E1F38" }}
     >
-      <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
+      <div className="relative mx-auto max-w-2xl px-6 lg:px-8 text-center">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-6"
+          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-10"
         >
           What People Say About Us
         </motion.p>
@@ -491,22 +491,35 @@ function TestimonialsSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.4 }}
+            className="relative"
           >
-            <blockquote className="font-serif text-base sm:text-lg lg:text-xl italic text-white leading-relaxed mb-5">
-              &ldquo;{TESTIMONIALS[current].quote}&rdquo;
-            </blockquote>
-            <p className="font-sans font-semibold text-white text-sm">
-              {TESTIMONIALS[current].author}{" "}
-              <span className="ml-1">{TESTIMONIALS[current].flag}</span>
-            </p>
-            <p className="font-sans text-xs text-white/35 mt-1">
-              {TESTIMONIALS[current].trip}
-            </p>
+            {/* Decorative quote mark */}
+            <span
+              aria-hidden
+              className="absolute -top-6 left-1/2 -translate-x-1/2 font-serif leading-none select-none pointer-events-none"
+              style={{ fontSize: "5rem", color: "#EA5A2A", opacity: 0.25, lineHeight: 1 }}
+            >
+              &ldquo;
+            </span>
+
+            {/* Orange left-border accent on desktop */}
+            <div className="relative sm:border-l-2 sm:border-sunset-orange/60 sm:pl-6 sm:text-left">
+              <blockquote className="font-serif text-base sm:text-lg lg:text-xl italic leading-relaxed mb-6" style={{ color: "#FAF6EF" }}>
+                &ldquo;{TESTIMONIALS[current].quote}&rdquo;
+              </blockquote>
+              <p className="font-sans font-semibold text-sm" style={{ color: "#FAF6EF" }}>
+                {TESTIMONIALS[current].author}{" "}
+                <span className="ml-1">{TESTIMONIALS[current].flag}</span>
+              </p>
+              <p className="font-sans text-xs mt-1" style={{ color: "#1F8A8F" }}>
+                {TESTIMONIALS[current].trip}
+              </p>
+            </div>
           </motion.div>
         </AnimatePresence>
 
         {/* Navigation dots — padded for 44px touch target */}
-        <div className="flex justify-center gap-1 mt-6">
+        <div className="flex justify-center gap-1 mt-8">
           {TESTIMONIALS.map((_, i) => (
             <button
               key={i}
@@ -515,7 +528,7 @@ function TestimonialsSection() {
               className="py-5 px-2 flex items-center"
             >
               <span className={`block h-[3px] rounded-full transition-all duration-300 ${
-                i === current ? "bg-sunset-orange w-8" : "bg-white/20 w-3"
+                i === current ? "bg-sunset-orange w-8" : "bg-white/40 w-3"
               }`} />
             </button>
           ))}

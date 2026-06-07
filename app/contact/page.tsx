@@ -105,10 +105,10 @@ export default function ContactPage() {
         {/* Hero */}
         <section className="relative h-[40vh] min-h-[300px] flex items-end overflow-hidden">
           <Image
-            src="/contact-hero.jpg"
-            alt="Southeast Asia"
+            src="/gallery/halong/bay.jpg"
+            alt="Ha Long Bay, Vietnam"
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
           <div className="absolute inset-0 bg-navy/70" />
@@ -297,12 +297,12 @@ export default function ContactPage() {
                         WhatsApp
                       </h3>
                       <a
-                        href="https://wa.me/36305326286"
+                        href="https://wa.me/393475006791"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-sans text-clay hover:text-sunset-orange transition-colors"
                       >
-                        +36 30 532 6286
+                        +39 347 500 6791
                       </a>
                     </div>
                   </div>
