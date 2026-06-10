@@ -84,7 +84,7 @@ export function Footer() {
                     className="font-sans text-sand/80 hover:text-sunset-orange transition-colors duration-300 group flex items-center gap-2"
                   >
                     {item.name}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                 ))}
               </nav>
@@ -102,7 +102,7 @@ export function Footer() {
                     className="font-sans text-sand/80 hover:text-sunset-orange transition-colors duration-300 group flex items-center gap-2"
                   >
                     {item.name}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </Link>
                 ))}
               </nav>

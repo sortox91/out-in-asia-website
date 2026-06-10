@@ -99,8 +99,8 @@ function HeroSection() {
         <div className="max-w-7xl mx-auto">
           <h1 className="font-serif font-extrabold" style={{ paddingBottom: "0.2em" }}>
             {[
-              { text: "Travel Gay /", italic: false },
-              { text: "Be You /", italic: true, orange: true },
+              { text: "Travel Gay", italic: false },
+              { text: "Be You", italic: true, orange: true },
               { text: "Belong Together", italic: false },
             ].map(({ text, italic, orange }, i) => (
               <div key={i}>
@@ -464,21 +464,8 @@ function TestimonialsSection() {
   }, [])
 
   return (
-    <section className="py-14 md:py-20 relative overflow-hidden" style={{ backgroundColor: "#0E1F38" }}>
-
-      {/* Background landscape — very dark overlay */}
-      <div className="absolute inset-0">
-        <Image
-          src="/ai-landscapes/vietnam-3.png"
-          alt=""
-          fill
-          className="object-cover object-center"
-          aria-hidden
-        />
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.93)" }} />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-7xl px-5 md:px-8">
+    <section className="py-14 md:py-20" style={{ backgroundColor: "#FAF6EF" }}>
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
 
         {/* Label */}
         <motion.p
@@ -491,7 +478,7 @@ function TestimonialsSection() {
           What People Say About Us
         </motion.p>
 
-        {/* Testimonial card */}
+        {/* Testimonial card — navy on cream */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -503,38 +490,47 @@ function TestimonialsSection() {
             <div
               className="mx-auto max-w-2xl rounded-2xl p-7 md:p-10 relative"
               style={{
-                backgroundColor: "#FAF6EF",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.28)",
+                backgroundColor: "#0E1F38",
+                boxShadow: "0 8px 40px rgba(0,0,0,0.14)",
               }}
             >
               {/* Decorative opening quote */}
               <span
                 aria-hidden
                 className="absolute top-4 left-6 font-serif leading-none select-none pointer-events-none"
-                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.18, lineHeight: 1 }}
+                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.25, lineHeight: 1 }}
               >
                 &ldquo;
               </span>
 
               {/* Quote text */}
               <blockquote
-                className="font-serif text-base md:text-lg italic leading-relaxed mb-6 relative z-10 pt-4"
-                style={{ color: "#0E1F38" }}
+                className="font-serif text-base md:text-lg italic leading-relaxed mb-7 relative z-10 pt-4"
+                style={{ color: "#FAF6EF" }}
               >
                 &ldquo;{TESTIMONIALS[current].quote}&rdquo;
               </blockquote>
 
-              {/* Divider + author */}
-              <div className="flex items-center gap-3 mb-1">
-                <div className="w-8 h-0.5 flex-shrink-0" style={{ backgroundColor: "#EA5A2A" }} />
-                <p className="font-sans font-bold text-sm" style={{ color: "#EA5A2A" }}>
-                  {TESTIMONIALS[current].author}{" "}
-                  <span className="ml-1 font-normal">{TESTIMONIALS[current].flag}</span>
-                </p>
+              {/* Avatar + author */}
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-20 h-20 rounded-full flex-shrink-0 flex items-center justify-center"
+                  style={{ backgroundColor: "rgba(250,246,239,0.10)" }}
+                >
+                  <span className="font-serif font-bold text-2xl" style={{ color: "#FAF6EF" }}>
+                    {TESTIMONIALS[current].author.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <p className="font-sans font-bold text-sm" style={{ color: "#EA5A2A" }}>
+                    {TESTIMONIALS[current].author}{" "}
+                    <span className="font-normal">{TESTIMONIALS[current].flag}</span>
+                  </p>
+                  <p className="font-sans text-xs mt-1" style={{ color: "#1F8A8F" }}>
+                    {TESTIMONIALS[current].trip}
+                  </p>
+                </div>
               </div>
-              <p className="font-sans text-xs ml-11" style={{ color: "#1F8A8F" }}>
-                {TESTIMONIALS[current].trip}
-              </p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -549,7 +545,7 @@ function TestimonialsSection() {
               className="py-4 px-2 flex items-center"
             >
               <span className={`block h-[3px] rounded-full transition-all duration-300 ${
-                i === current ? "bg-sunset-orange w-8" : "bg-white/40 w-3"
+                i === current ? "bg-sunset-orange w-8" : "bg-navy/30 w-3"
               }`} />
             </button>
           ))}
