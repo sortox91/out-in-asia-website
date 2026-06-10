@@ -99,9 +99,9 @@ function HeroSection() {
         <div className="max-w-7xl mx-auto">
           <h1 className="font-serif font-extrabold" style={{ paddingBottom: "0.2em" }}>
             {[
-              { text: "Travel Gay.", italic: false },
-              { text: "Be You.", italic: true, orange: true },
-              { text: "Belong Together.", italic: false },
+              { text: "Travel Gay /", italic: false },
+              { text: "Be You /", italic: true, orange: true },
+              { text: "Belong Together", italic: false },
             ].map(({ text, italic, orange }, i) => (
               <div key={i}>
                 <motion.span
@@ -345,10 +345,12 @@ function DestinationsSection() {
           </motion.div>
         </div>
 
-        {/* 2×2 grid */}
+        {/* 2×2 grid — mobile shows Thailand + Bali only */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {DESTINATIONS.map((dest, i) => (
-            <DestinationCard key={dest.id} dest={dest} index={i} />
+            <div key={dest.id} className={dest.id === "north-vietnam" || dest.id === "south-vietnam" ? "hidden md:block" : ""}>
+              <DestinationCard dest={dest} index={i} />
+            </div>
           ))}
         </div>
       </div>
@@ -369,27 +371,28 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         className={`font-serif font-extrabold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
         style={{ color: "#FAF6EF" }}
       >
-        Two <span style={{ color: "#EA5A2A" }}>Gay</span> Travellers.
-        <br />One Shared Obsession with <span style={{ color: "#EA5A2A" }}>Asia</span>.
+        Two <span style={{ color: "#EA5A2A" }}>Gay</span> Travellers
+        <br />One Shared Love for <span style={{ color: "#EA5A2A" }}>Asia</span>
       </h2>
       <p className="font-sans text-base leading-relaxed mb-10" style={{ color: "rgba(250,246,239,0.78)", maxWidth: mobile ? "100%" : "440px" }}>
-        Between us, we have over 6 years of living across Southeast Asia.
-        Filippo navigating Bali&apos;s backroads by motorbike, Szilard embedded
-        in local communities since 2018. We are gay, we know this region deeply,
-        and we design journeys for travellers who want to experience Asia
-        the way we do: authentically, safely, and unforgettably.
+        Between us, we have over 10 years of living across Southeast Asia.
+        Filippo spent years as a digital nomad, discovering the region&apos;s
+        hidden corners by motorbike. Szilard built a thriving premium travel
+        business serving discerning clients from Hungary. We design journeys
+        for travellers who want to experience Asia the way we do: authentically,
+        safely, and unforgettably.
       </p>
 
-      <div className="flex gap-8 mb-10">
+      <div className="flex gap-10 mb-10">
         <div className="flex flex-col items-center">
-          <div className="relative w-16 h-16 rounded-full overflow-hidden mb-3">
+          <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
             <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover object-center" />
           </div>
           <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
           <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
         </div>
         <div className="flex flex-col items-center">
-          <div className="relative w-16 h-16 rounded-full overflow-hidden mb-3">
+          <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
             <Image src="/founders/szilard-2.jpg" alt="Szilárd Utakon" fill className="object-cover object-top" />
           </div>
           <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Szilárd Utakon</p>

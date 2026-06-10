@@ -190,13 +190,15 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 ] as const).map((fact, i) => (
                   <div
                     key={i}
-                    className={`flex flex-col items-center justify-center py-3 px-3 text-center${
+                    className={`flex flex-row md:flex-col items-center justify-center gap-2 md:gap-0 py-3 px-3 md:text-center${
                       i === 1 || i === 3 ? " border-l border-white/25" : i === 2 ? " md:border-l md:border-white/25" : ""
                     }`}
                   >
-                    <fact.Icon className="h-4 w-4 text-white mb-1.5" strokeWidth={1.5} />
-                    <p className="font-serif text-white font-bold text-sm sm:text-base leading-tight mb-0.5">{fact.value}</p>
-                    <p className="font-sans text-white/75 text-[0.65rem] leading-tight">{fact.label}</p>
+                    <fact.Icon className="h-4 w-4 text-white flex-shrink-0 md:mb-1.5" strokeWidth={1.5} />
+                    <div>
+                      <p className="font-serif text-white font-bold text-sm leading-tight md:mb-0.5">{fact.value}</p>
+                      <p className="font-sans text-white/75 text-[0.6rem] leading-tight">{fact.label}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -248,8 +250,8 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         {/* ── North Vietnam pricing block ── */}
         {slug === "north-vietnam" && <TripPricingBlock />}
 
-        {/* ── What's included ── */}
-        <section className="py-14 md:py-24 bg-[#F0E8DA]">
+        {/* ── What's included — hidden for north-vietnam (covered by TripPricingBlock) ── */}
+        {slug !== "north-vietnam" && <section className="py-14 md:py-24 bg-[#F0E8DA]">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             <div className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4">What You Get</p>
@@ -287,32 +289,17 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
           </div>
-        </section>
+        </section>}
 
-        {/* ── Upcoming dates + final CTA ── */}
-        <section className="py-14 md:py-24 bg-navy">
-          <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-            <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4">
-              Upcoming Departures
-            </p>
-            <h2 className="font-serif text-3xl lg:text-4xl text-white mb-10">
-              Choose Your <span className="italic text-sunset-orange">Dates</span>
-            </h2>
-            <div className="flex flex-wrap gap-4 justify-center mb-12">
-              {details.nextDates.map((date, i) => (
-                <div key={i} className="bg-white/[0.07] border border-white/15 px-8 py-4 rounded-xl">
-                  <p className="font-sans font-semibold text-white text-sm">{date}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mb-16 md:mb-0 flex justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 font-sans font-semibold px-10 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
-              >
-                Inquire About This Trip
-              </Link>
-            </div>
+        {/* ── Final CTA ── */}
+        <section className="py-12 md:py-16 bg-navy">
+          <div className="flex justify-center px-6">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 font-sans font-semibold px-10 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
+            >
+              Inquire About This Trip
+            </Link>
           </div>
         </section>
 

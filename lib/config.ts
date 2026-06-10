@@ -94,8 +94,8 @@ export const siteConfig = {
   ],
   navigation: [
     { label: "Trips", href: "/trips" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+    { label: "Meet Us", href: "/about" },
+    { label: "Get in Touch", href: "/contact" },
   ],
   social: {
     instagram: "https://instagram.com/outinasia",

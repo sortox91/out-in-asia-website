@@ -43,13 +43,8 @@ const INCLUDED = [
   "6 nights with breakfast in premium 4-star hotels",
   "3 nights with breakfast in a premium 5-star hotel",
   "2 nights on a 5-star exclusive yacht with full board",
-  "3 additional lunches",
-  "3 additional dinners",
-  "Premium air-conditioned minivan throughout the trip",
-  "Organisation fees, taxes and local charges",
-  "English-language travel information",
-  "Welcome gift package",
-  "Group guidance and assistance during the stay",
+  "Private air-conditioned minivan throughout the trip",
+  "See more in the brochure",
 ]
 
 const NOT_INCLUDED = [
@@ -78,8 +73,8 @@ export function TripPricingBlock() {
           </h2>
         </motion.div>
 
-        {/* Two pricing cards — stacked on mobile, side by side on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3 mb-6">
+        {/* Two pricing cards — always side by side */}
+        <div className="grid grid-cols-2 gap-3 md:gap-3 mb-6">
           {/* Shared */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -181,13 +176,13 @@ export function TripPricingBlock() {
             Contact Us on WhatsApp
           </a>
           <a
-            href="https://drive.google.com/uc?export=download&id=17-Q1ewgfsz1qfnys3RtQI9GCpmwc00Nx"
+            href="https://drive.google.com/file/d/17-Q1ewgfsz1qfnys3RtQI9GCpmwc00Nx/view"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center gap-2 py-4 px-8 border-2 border-sunset-orange text-sunset-orange rounded-full font-sans font-semibold hover:bg-sunset-orange hover:text-white transition-all text-sm"
           >
             <DownloadIcon />
-            Download Full Brochure (PDF)
+            Check the Full Details
           </a>
         </motion.div>
 

@@ -223,8 +223,8 @@ export function RouteMap() {
         {/* 2. Gallery: main image + thumbnails */}
         <div style={{ borderTop: "1px solid #E8DDD0", padding: "14px 16px 0" }}>
 
-          {/* Main image — 4:3 ratio — with prev/next overlay arrows + counter */}
-          <div style={{ position: "relative", width: "100%", paddingBottom: "75%", borderRadius: "0.5rem", overflow: "hidden" }}>
+          {/* Main image — slimmer ratio — with prev/next overlay arrows + counter */}
+          <div style={{ position: "relative", width: "100%", paddingBottom: "60%", borderRadius: "0.5rem", overflow: "hidden" }}>
             {stop.galleryImages.map((src, i) => (
               <div key={src} style={{
                 position: "absolute", inset: 0,
@@ -360,20 +360,6 @@ export function RouteMap() {
             </div>
           </div>
 
-          <div style={{ width: 36, height: 1, backgroundColor: "#B89870", marginBottom: 12 }} />
-
-          <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-            {stop.highlights.map((item, i) => (
-              <li key={i} style={{
-                display: "flex", alignItems: "flex-start", gap: 8,
-                fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.84rem", color: "#5a4a3a", lineHeight: 1.65, marginBottom: 3,
-              }}>
-                <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
 
       </section>
@@ -396,7 +382,7 @@ export function RouteMap() {
 
             {/* LEFT — SVG Map */}
             <div style={{
-              width: "38%", flexShrink: 0,
+              width: "40%", flexShrink: 0,
               borderRight: "1px solid #E8DDD0",
               backgroundColor: "#FAF6EF",
               display: "flex", flexDirection: "column",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, MapPin, Users, Sparkles } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AboutFounders } from "@/components/about-founders";
@@ -38,11 +38,7 @@ export default function AboutPage() {
                   <span className="italic text-sunset-orange">Passion</span>
                 </h1>
                 <p className="font-sans text-base md:text-xl text-sand/90 leading-relaxed">
-                  Out in Asia was born from a shared love of Southeast Asia and a
-                  desire to create meaningful travel experiences for the LGBTQ+
-                  community. We believe that travel should be transformative,
-                  authentic, and most importantly, a space where you can be
-                  completely yourself.
+                  We built Out in Asia to give LGBTQ+ travellers the journey they deserve — luxurious, safe, and authentically Southeast Asian.
                 </p>
               </div>
             </div>
@@ -61,39 +57,23 @@ export default function AboutPage() {
                     Authentic Travel
                   </span>
                 </h2>
-                <div className="space-y-4 font-sans leading-relaxed text-lg text-left text-navy">
-                  <p>
-                    We started Out in Asia because we saw a gap in the travel
-                    industry. Too often, LGBTQ+ travelers have to compromise on
-                    their experiences, worry about safety, or travel without the
-                    support of a community.
-                  </p>
-                  <p>
-                    Our mission is simple: to create high-end, curated travel
-                    experiences where gay travelers can explore the wonders of
-                    Southeast Asia without hesitation, surrounded by like-minded
-                    people and led by guides who understand their needs.
-                  </p>
-                  <p>
-                    Every trip is personally designed and led by us, ensuring
-                    that you get not just a tour, but a genuine connection to
-                    the places you visit and the people you meet along the way.
-                  </p>
-                </div>
+                <p className="font-sans leading-relaxed text-lg text-navy">
+                  We launched Out in Asia to fill a gap: premium LGBTQ+ travel designed by gay travellers who know Southeast Asia intimately. Every trip is personally led by us — so you explore freely, connect authentically, and feel completely at home.
+                </p>
               </div>
 
               {/* Stats with icons */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 {[
-                  { icon: "🗓", number: "10+", label: "Years Experience" },
-                  { icon: "🗺", number: "4", label: "Destinations" },
-                  { icon: "👥", number: "Small", label: "Groups Only" },
-                  { icon: "⭐", number: "100%", label: "Personalised" },
+                  { Icon: Calendar, number: "10+", label: "Years Experience" },
+                  { Icon: MapPin, number: "4", label: "Destinations" },
+                  { Icon: Users, number: "Small", label: "Groups Only" },
+                  { Icon: Sparkles, number: "100%", label: "Personalised" },
                 ].map((stat) => (
-                  <div key={stat.label} className="flex items-start gap-3 bg-navy rounded-xl px-5 py-5">
-                    <span className="text-2xl flex-shrink-0">{stat.icon}</span>
+                  <div key={stat.label} className="flex items-start gap-3 bg-navy rounded-xl px-4 py-4 md:px-5 md:py-5">
+                    <stat.Icon className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: "#1F8A8F" }} strokeWidth={1.5} />
                     <div>
-                      <p className="font-serif font-bold text-xl text-white leading-tight">{stat.number}</p>
+                      <p className="font-serif font-bold text-lg md:text-xl text-white leading-tight">{stat.number}</p>
                       <p className="font-sans text-xs text-white/60 mt-0.5">{stat.label}</p>
                     </div>
                   </div>
@@ -115,22 +95,32 @@ export default function AboutPage() {
                   Our <span className="italic text-sunset-orange">Values</span>
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+              {/* Mobile: compact single line */}
+              <p className="md:hidden font-serif text-xl text-center text-navy mb-2">
+                <em className="text-sunset-orange">Authenticity</em>
+                {" · "}
+                <em className="text-sunset-orange">Inclusivity</em>
+                {" · "}
+                <em className="text-sunset-orange">Excellence</em>
+              </p>
+
+              {/* Desktop: full value cards */}
+              <div className="hidden md:grid grid-cols-3 gap-0">
                 {[
                   {
                     title: "Authenticity",
                     description:
-                      "We create experiences that go beyond the surface. Our trips are designed to give you a genuine understanding of each destination, its culture, and its people.",
+                      "We create experiences that go beyond the surface — designed to give you a genuine understanding of each destination, its culture, and its people.",
                   },
                   {
                     title: "Inclusivity",
                     description:
-                      "Every traveler deserves to feel welcome and safe. We create spaces where LGBTQ+ travelers can explore freely, connect openly, and be themselves completely.",
+                      "Every traveller deserves to feel welcome and safe. We create spaces where LGBTQ+ travellers can explore freely and be themselves completely.",
                   },
                   {
                     title: "Excellence",
                     description:
-                      "From carefully selected accommodations to thoughtfully planned itineraries, we maintain the highest standards to ensure every aspect of your journey is exceptional.",
+                      "From carefully selected accommodations to thoughtfully planned itineraries, we maintain the highest standards across every aspect of your journey.",
                   },
                 ].map((value, index) => (
                   <div
@@ -161,17 +151,17 @@ export default function AboutPage() {
                   <p className="font-sans text-base md:text-xl text-sand/80 mb-10 leading-relaxed">
                     Join Filippo and Szilard on an unforgettable journey through Southeast Asia.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-wrap gap-4">
                     <Link
                       href="/trips"
-                      className="inline-flex items-center justify-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300"
+                      className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300"
                     >
                       Explore Our Trips
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center justify-center font-sans font-semibold tracking-wide px-8 py-4 rounded-full border-2 border-white text-white hover:bg-white hover:text-navy transition-colors duration-300"
+                      className="inline-flex items-center font-sans font-semibold tracking-wide px-8 py-4 rounded-full border-2 border-white text-white hover:bg-white hover:text-navy transition-colors duration-300"
                     >
                       Get in Touch
                     </Link>

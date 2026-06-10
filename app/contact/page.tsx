@@ -18,7 +18,11 @@ import { siteConfig } from "@/lib/config";
 const faqs = [
   {
     q: "What's the group size?",
-    a: "Our trips typically have 6-12 travelers for an intimate experience. Small groups are at the heart of everything we do.",
+    a: "Our trips typically have 8-12 travelers for an intimate experience. Small groups are at the heart of everything we do.",
+  },
+  {
+    q: "What about the weather?",
+    a: "Our trips run during the best seasons. However, weather in Asia can sometimes be unpredictable — but always warm.",
   },
   {
     q: "Are the trips LGBTQ+ exclusive?",
