@@ -304,9 +304,17 @@ export default function ContactPage() {
                         href="https://wa.me/393475006791"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-sans text-clay hover:text-sunset-orange transition-colors"
+                        className="font-sans text-clay hover:text-sunset-orange transition-colors block"
                       >
-                        +39 347 500 6791
+                        Filippo · +39 347 500 6791
+                      </a>
+                      <a
+                        href="https://wa.me/393475006791"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-sans text-clay hover:text-sunset-orange transition-colors block mt-1"
+                      >
+                        Szilárd · +39 347 500 6791
                       </a>
                     </div>
                   </div>
