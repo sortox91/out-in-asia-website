@@ -91,8 +91,8 @@ function HeroSection() {
         />
       </motion.div>
 
-      {/* Overlay — fades to navy at bottom for seamless strip transition */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-[#0E1F38]" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70" />
 
       {/* Bottom-left text block */}
       <div className="absolute bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
@@ -415,7 +415,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
 
 function FoundersSection() {
   return (
-    <section style={{ backgroundColor: "#0E1F38" }}>
+    <section className="overflow-hidden" style={{ backgroundColor: "#0E1F38" }}>
 
       {/* ── MOBILE: image on top, text below ── */}
       <div className="md:hidden">
