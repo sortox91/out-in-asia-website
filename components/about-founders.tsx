@@ -12,27 +12,28 @@ const founders = [
     photo: "/founders/filippo.jpg",
     objectPosition: "center center",
     bio: [
-      "Originally from Italy, Filippo built his life on the road as a digital nomad architect, exploring Southeast Asia's most remote corners by motorbike. What began as a passion for adventure grew into a deep love for the region's cultures, communities, and hidden gems.",
-      "With a background in design and a genuine talent for connecting people, Filippo brings warmth, organisation, and an eye for detail to every trip. He believes the best travel experiences come from authentic connections — with the places you visit and the people you travel with.",
-      "When he's not leading trips, you'll find him exploring local markets, perfecting his Thai cooking, or planning the next adventure.",
+      "I'm Filippo, an Italian architect, and in 2021 I left my office life in London to embrace a more independent and adventurous lifestyle, working remotely while travelling across Asia.",
+      "Since then, I have explored the region extensively by scooter, following remote roads, discovering hidden landscapes and connecting with local communities far beyond the usual tourist trail. Those experiences gave me a deeper understanding of the cultures, traditions and people that make each destination unique.",
+      "Today, I combine my passion for adventure, local knowledge and eye for detail to help create journeys that feel authentic, personal and genuinely connected to the places we visit.",
     ],
     photoLeft: true,
   },
   {
-    name: "Szilárd Utakon",
+    name: "Szilárd Daróczi",
     handle: "@szilard_utakon",
     instagram: "https://www.instagram.com/szilard_utakon/",
     photo: "/founders/szilard-hat.jpg",
     objectPosition: "center top",
     bio: [
-      "Originally from Hungary, Szilard built a well-established premium travel business serving discerning clients who want more from Southeast Asia. His outsider-turned-insider perspective is what sets him apart: he sees the region through two lenses — the wonder of discovery and the intimacy of someone who now calls it home.",
-      "Passionate about sustainable tourism and genuine cultural connection, Szilard has spent years curating experiences that go far beyond the guidebook. His dream? To show LGBTQ+ travellers the Asia he knows and loves — a place of incredible diversity, acceptance, and endless wonder.",
+      "I'm Szilárd, and travel has shaped the path of my life. What began as a career in journalism gradually became a passion for creating memorable journeys and helping others discover extraordinary destinations.",
+      "Since 2018, I have been based in Bali, where I built a successful travel company creating curated journeys across Southeast Asia, primarily for Hungarian travellers. Over the years, I have developed strong local partnerships and destination knowledge, allowing me to create authentic experiences while maintaining the comfort and quality expected from premium travel.",
+      "Today, I combine my local expertise, trusted network and passion for hospitality to create journeys that bring people and destinations together in a meaningful way.",
     ],
     photoLeft: false,
   },
 ]
 
-function FounderBio({ bio }: { bio: string[] }) {
+function FounderBio({ bio, handle, instagram }: { bio: string[]; handle: string; instagram: string }) {
   const [expanded, setExpanded] = useState(false)
   return (
     <>
@@ -63,13 +64,33 @@ function FounderBio({ bio }: { bio: string[] }) {
             />
           </button>
         )}
+        <a
+          href={instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 font-sans text-xs font-medium mt-4"
+          style={{ color: "#1F8A8F" }}
+        >
+          <Instagram className="h-3.5 w-3.5" />
+          {handle}
+        </a>
       </div>
 
-      {/* Desktop: all paragraphs */}
+      {/* Desktop: all paragraphs + Instagram link */}
       <div className="hidden md:block space-y-4 font-sans text-base leading-relaxed" style={{ color: "rgba(250,246,239,0.78)" }}>
         {bio.map((para, i) => (
           <p key={i}>{para}</p>
         ))}
+        <a
+          href={instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 font-sans text-sm font-medium pt-1"
+          style={{ color: "#1F8A8F" }}
+        >
+          <Instagram className="h-4 w-4" />
+          {handle}
+        </a>
       </div>
     </>
   )
@@ -88,7 +109,7 @@ export function AboutFounders() {
             >
               <div className={`flex flex-col ${founder.photoLeft ? "md:flex-row" : "md:flex-row-reverse"} md:min-h-[400px]`}>
 
-                {/* Photo panel */}
+                {/* Photo panel — clean, no overlay text */}
                 <div className="relative h-72 md:h-auto md:w-[42%] flex-shrink-0">
                   <Image
                     src={founder.photo}
@@ -97,29 +118,12 @@ export function AboutFounders() {
                     className="object-cover"
                     style={{ objectPosition: founder.objectPosition }}
                   />
-                  {/* Name overlay */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 px-5 py-4"
-                    style={{ background: "linear-gradient(to top, rgba(14,31,56,0.85) 0%, transparent 100%)" }}
-                  >
-                    <p className="font-serif text-base font-bold text-white mb-0.5">{founder.name}</p>
-                    <a
-                      href={founder.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-sans text-xs transition-colors"
-                      style={{ color: "#1F8A8F" }}
-                    >
-                      <Instagram className="h-3.5 w-3.5" />
-                      {founder.handle}
-                    </a>
-                  </div>
                 </div>
 
                 {/* Bio panel */}
                 <div className="flex-1 flex flex-col justify-center px-5 md:px-10 py-6 md:py-12">
                   <h3 className="font-serif font-extrabold text-xl md:text-3xl text-white mb-4 md:mb-6">{founder.name}</h3>
-                  <FounderBio bio={founder.bio} />
+                  <FounderBio bio={founder.bio} handle={founder.handle} instagram={founder.instagram} />
                 </div>
 
               </div>

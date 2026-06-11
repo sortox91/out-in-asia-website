@@ -14,7 +14,7 @@ export const siteConfig = {
       initials: "FR",
     },
     {
-      name: "Szilard Utakon",
+      name: "Szilard Daróczi",
       role: "Co-Founder & Guide",
       bio: "A Hungarian with an outsider-turned-insider perspective on Southeast Asia, Szilard ensures every trip is filled with hidden gems and genuine cultural experiences.",
       // TODO: add real photos to /public/founders/

@@ -203,7 +203,7 @@ export function RouteMap() {
       <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
         {/* 1. Map */}
-        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
+        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "white" }}>
           {STOPS.map((s, i) => (
             <div key={s.id} style={{
               position: "absolute", inset: 0,
@@ -384,7 +384,7 @@ export function RouteMap() {
             <div style={{
               width: "40%", flexShrink: 0,
               borderRight: "1px solid #E8DDD0",
-              backgroundColor: "#FAF6EF",
+              backgroundColor: "white",
               display: "flex", flexDirection: "column",
             }}>
               {/* Map area — flex:1 so it matches gallery column height */}

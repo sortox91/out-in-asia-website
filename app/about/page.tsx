@@ -9,7 +9,7 @@ import { PageTransition } from "@/components/page-transition";
 export const metadata = {
   title: "About Us | Out in Asia",
   description:
-    "Meet the founders of Out in Asia — Filippo Rossi and Szilard Utakon. Discover our story and passion for LGBTQ+ travel in Southeast Asia.",
+    "Meet the founders of Out in Asia — Filippo Rossi and Szilard Daróczi. Discover our story and passion for LGBTQ+ travel in Southeast Asia.",
 };
 
 export default function AboutPage() {

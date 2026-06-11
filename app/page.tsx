@@ -393,9 +393,9 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         </div>
         <div className="flex flex-col items-center">
           <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
-            <Image src="/founders/szilard-2.jpg" alt="Szilárd Utakon" fill className="object-cover object-top" />
+            <Image src="/founders/szilard-2.jpg" alt="Szilárd Daróczi" fill className="object-cover object-top" />
           </div>
-          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Szilárd Utakon</p>
+          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Szilárd Daróczi</p>
           <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
         </div>
       </div>
