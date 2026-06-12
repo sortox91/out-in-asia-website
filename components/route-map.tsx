@@ -382,7 +382,7 @@ export function RouteMap() {
 
             {/* LEFT — SVG Map */}
             <div style={{
-              width: "40%", flexShrink: 0,
+              width: "45%", flexShrink: 0,
               borderRight: "1px solid #E8DDD0",
               display: "flex", flexDirection: "column",
             }}>
