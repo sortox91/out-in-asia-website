@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const STOPS = [
   {
     id: 1,
-    image: "/maps/map-1-hanoi.svg",
+    image: "/maps/north-vietnam-step-1.svg",
     city: "Hanoi",
     subtitle: "Days 1–3 · Vietnam's Capital",
     highlights: [
@@ -24,7 +24,7 @@ const STOPS = [
   },
   {
     id: 2,
-    image: "/maps/map-2-sapa.svg",
+    image: "/maps/north-vietnam-step-2.svg",
     city: "Sapa",
     subtitle: "Days 4–6 · Mountain Escape",
     highlights: [
@@ -40,7 +40,7 @@ const STOPS = [
   },
   {
     id: 3,
-    image: "/maps/map-3-tamcoc.svg",
+    image: "/maps/north-vietnam-step-3.svg",
     city: "Tam Coc",
     subtitle: "Days 7–9 · Ha Long Bay on Land",
     highlights: [
@@ -56,7 +56,7 @@ const STOPS = [
   },
   {
     id: 4,
-    image: "/maps/map-4-halong.svg",
+    image: "/maps/north-vietnam-step-4.svg",
     city: "Ha Long Bay",
     subtitle: "Days 10–11 · Luxury Yacht Cruise",
     highlights: [
@@ -72,7 +72,7 @@ const STOPS = [
   },
   {
     id: 5,
-    image: "/maps/map-5-return.svg",
+    image: "/maps/north-vietnam-step-5.svg",
     city: "Return to Hanoi",
     subtitle: "Day 12 · Farewell",
     highlights: [
@@ -203,7 +203,7 @@ export function RouteMap() {
       <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
         {/* 1. Map */}
-        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "white" }}>
+        <div style={{ position: "relative", height: "50vh", overflow: "hidden" }}>
           {STOPS.map((s, i) => (
             <div key={s.id} style={{
               position: "absolute", inset: 0,
@@ -384,7 +384,6 @@ export function RouteMap() {
             <div style={{
               width: "40%", flexShrink: 0,
               borderRight: "1px solid #E8DDD0",
-              backgroundColor: "white",
               display: "flex", flexDirection: "column",
             }}>
               {/* Map area — flex:1 so it matches gallery column height */}

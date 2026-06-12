@@ -110,7 +110,7 @@ export default function PrivateTripsPage() {
                         <trip.icon
                           className="h-4 w-4 flex-shrink-0"
                           style={{ color: "#1F8A8F" }}
-                          strokeWidth={1.75}
+                          strokeWidth={1.5}
                         />
                         <p className="font-sans text-xs font-semibold tracking-widest uppercase text-ocean-teal">
                           {trip.subtitle}
@@ -151,7 +151,7 @@ export default function PrivateTripsPage() {
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Link
-                      href="/contact"
+                      href="/contact#reach-out"
                       className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300"
                     >
                       Book a Consultation

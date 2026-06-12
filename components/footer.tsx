@@ -165,13 +165,15 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="font-sans text-xs text-sand/35">
-            &copy; {new Date().getFullYear()} Out in Asia. All rights reserved.
-          </p>
-          <p className="font-serif italic text-sand/50 text-sm">
+        <div className="pt-4">
+          <p className="font-serif italic text-sand/50 text-sm text-center mb-4">
             Travel Gay &bull; Be You &bull; Belong Together
           </p>
+          <div className="border-t border-white/20 pt-4 flex justify-center">
+            <p className="font-sans text-xs text-sand/35">
+              &copy; {new Date().getFullYear()} Out in Asia. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -129,7 +129,7 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.9 }}
             className="mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
           >
-            <p className="font-sans text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed hidden sm:block">
+            <p className="font-sans text-[10px] sm:text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
               Curated luxury journeys exclusively for the LGBTQ+ community.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -512,7 +512,7 @@ function TestimonialsSection() {
               </blockquote>
 
               {/* Avatar + author */}
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
                 <div
                   className="w-20 h-20 rounded-full flex-shrink-0 flex items-center justify-center"
                   style={{ backgroundColor: "rgba(250,246,239,0.10)" }}

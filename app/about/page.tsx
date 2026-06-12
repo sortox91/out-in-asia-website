@@ -37,9 +37,6 @@ export default function AboutPage() {
                   Two Guides, One{" "}
                   <span className="italic text-sunset-orange">Passion</span>
                 </h1>
-                <p className="font-sans text-base md:text-xl text-sand/90 leading-relaxed">
-                  We built Out in Asia to give LGBTQ+ travellers the journey they deserve — luxurious, safe, and authentically Southeast Asian.
-                </p>
               </div>
             </div>
           </section>
@@ -95,14 +92,19 @@ export default function AboutPage() {
                   Our <span className="italic text-sunset-orange">Values</span>
                 </h2>
               </div>
-              {/* Mobile: compact single line */}
-              <p className="md:hidden font-serif text-xl text-center text-navy mb-2">
-                <em className="text-sunset-orange">Authenticity</em>
-                {" · "}
-                <em className="text-sunset-orange">Inclusivity</em>
-                {" · "}
-                <em className="text-sunset-orange">Excellence</em>
-              </p>
+              {/* Mobile: one sentence per value */}
+              <div className="md:hidden space-y-4 mb-2">
+                {[
+                  { title: "Authenticity", desc: "Experiences beyond the surface — genuine, local, and deeply connected to each destination." },
+                  { title: "Inclusivity", desc: "Every traveller deserves to feel welcome, safe, and completely themselves." },
+                  { title: "Excellence", desc: "The highest standards across every hotel, itinerary, and experience we offer." },
+                ].map((v) => (
+                  <div key={v.title} className="pl-4 border-l-2 border-ocean-teal">
+                    <p className="font-serif font-bold text-base italic text-sunset-orange">{v.title}</p>
+                    <p className="font-sans text-xs text-navy/70 leading-relaxed mt-0.5">{v.desc}</p>
+                  </div>
+                ))}
+              </div>
 
               {/* Desktop: full value cards */}
               <div className="hidden md:grid grid-cols-3 gap-0">

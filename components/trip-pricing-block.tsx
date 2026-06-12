@@ -81,7 +81,7 @@ export function TripPricingBlock() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="border border-ocean-teal/50 rounded-2xl p-5 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
+            className="border border-ocean-teal/50 rounded-2xl p-3 md:p-5 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
           >
             <div className="text-ocean-teal mb-4">
               <BedIcon />
@@ -89,7 +89,7 @@ export function TripPricingBlock() {
             <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-2">
               Shared Room
             </p>
-            <p className="font-serif text-sunset-orange leading-none mb-1" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}>
+            <p className="font-serif text-sunset-orange leading-none mb-1" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)" }}>
               €4,400
             </p>
             <p className="font-sans text-white/35 text-xs">per person</p>
@@ -101,7 +101,7 @@ export function TripPricingBlock() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="border border-white/15 rounded-2xl p-5 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
+            className="border border-white/15 rounded-2xl p-3 md:p-5 bg-white/[0.04] hover:bg-white/[0.07] transition-colors"
           >
             <div className="text-white/50 mb-4">
               <BedIcon single />
@@ -109,7 +109,7 @@ export function TripPricingBlock() {
             <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-2">
               Single Room
             </p>
-            <p className="font-serif text-white leading-none mb-1" style={{ fontSize: "clamp(1.8rem, 5vw, 3rem)" }}>
+            <p className="font-serif text-white leading-none mb-1" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)" }}>
               €4,900
             </p>
             <p className="font-sans text-white/35 text-xs">per person</p>

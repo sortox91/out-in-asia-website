@@ -128,7 +128,7 @@ export default function ContactPage() {
         </section>
 
         {/* Main Content */}
-        <section className="py-10 md:py-20 bg-warm-cream">
+        <section id="reach-out" className="py-10 md:py-20 bg-warm-cream">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
               {/* Form */}
