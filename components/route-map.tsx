@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const STOPS = [
   {
     id: 1,
-    image: "/maps/north-vietnam-step-1.svg",
+    image: "/maps/north-vietnam-step-1.png",
     city: "Hanoi",
     subtitle: "Days 1–3 · Vietnam's Capital",
     highlights: [
@@ -24,7 +24,7 @@ const STOPS = [
   },
   {
     id: 2,
-    image: "/maps/north-vietnam-step-2.svg",
+    image: "/maps/north-vietnam-step-2.png",
     city: "Sapa",
     subtitle: "Days 4–6 · Mountain Escape",
     highlights: [
@@ -40,7 +40,7 @@ const STOPS = [
   },
   {
     id: 3,
-    image: "/maps/north-vietnam-step-3.svg",
+    image: "/maps/north-vietnam-step-3.png",
     city: "Tam Coc",
     subtitle: "Days 7–9 · Ha Long Bay on Land",
     highlights: [
@@ -56,7 +56,7 @@ const STOPS = [
   },
   {
     id: 4,
-    image: "/maps/north-vietnam-step-4.svg",
+    image: "/maps/north-vietnam-step-4.png",
     city: "Ha Long Bay",
     subtitle: "Days 10–11 · Luxury Yacht Cruise",
     highlights: [
@@ -72,7 +72,7 @@ const STOPS = [
   },
   {
     id: 5,
-    image: "/maps/north-vietnam-step-5.svg",
+    image: "/maps/north-vietnam-step-5.png",
     city: "Return to Hanoi",
     subtitle: "Day 12 · Farewell",
     highlights: [
