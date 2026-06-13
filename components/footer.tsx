@@ -44,9 +44,8 @@ export function Footer() {
               height={52}
               className="h-12 w-auto mb-5"
             />
-            <p className="font-sans text-sm lg:text-base text-sand/65 max-w-md leading-relaxed mb-6">
-              Curated luxury travel experiences for the LGBTQ+ community across Southeast Asia.
-              Travel authentically, connect meaningfully.
+            <p className="font-sans text-xs lg:text-sm text-sand/65 max-w-sm leading-relaxed mb-6">
+              Curated premium travel experiences for the LGBTQ+ community across Southeast Asia.
             </p>
 
             {/* Mobile only: Get in Touch heading + social icons */}
