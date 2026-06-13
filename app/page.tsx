@@ -50,21 +50,21 @@ const DESTINATIONS = [
 const TESTIMONIALS = [
   {
     quote:
-      "I've been to 30+ countries, but Out in Asia was something else entirely. Filippo and Szilard created a space where I could be completely myself — visiting temples by day and dancing freely at night.",
+      "I've been to 30+ countries, but Out in Asia was something else entirely. Filippo and Szilard created a space where I could be completely myself, visiting temples by day and dancing freely at night.",
     author: "James M.",
     flag: "🇬🇧",
     trip: "Thailand · December 2026",
   },
   {
     quote:
-      "Every detail was perfect — from the handpicked boutique hotels to the secret local restaurants no guidebook mentions. What moved me most was feeling truly safe and welcomed as a gay traveller everywhere we went.",
+      "Every detail was perfect, from the handpicked boutique hotels to the secret local restaurants no guidebook mentions. What moved me most was feeling truly safe and welcomed as a gay traveller everywhere we went.",
     author: "Marco V.",
     flag: "🇩🇪",
     trip: "Bali · March 2027",
   },
   {
     quote:
-      "Waking up on a junk boat in Ha Long Bay surrounded by people who just got it — I still tear up thinking about it. Already planning my return.",
+      "Waking up on a junk boat in Ha Long Bay surrounded by people who just got it. I still tear up thinking about it. Already planning my return.",
     author: "Thomas K.",
     flag: "🇫🇷",
     trip: "North Vietnam · April 2027",

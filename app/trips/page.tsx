@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/config";
 export const metadata = {
   title: "Our Trips | Out in Asia",
   description:
-    "Explore our curated LGBTQ+ travel experiences across Southeast Asia — Thailand, Vietnam, and Bali. High-end journeys designed for gay travelers.",
+    "Explore our curated LGBTQ+ travel experiences across Southeast Asia: Thailand, Vietnam, and Bali. High-end journeys designed for gay travelers.",
 };
 
 export default function TripsPage() {
@@ -108,28 +108,6 @@ export default function TripsPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-12 md:py-20 bg-warm-cream border-t-2 border-sunset-orange">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-navy max-w-lg leading-tight">
-                Not sure which trip is right for you?
-              </h2>
-              <div className="text-center md:text-right flex-shrink-0">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300 mb-3"
-                >
-                  Talk to Filippo &amp; Szilard
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <p className="font-sans text-sm text-clay">
-                  We reply within 24 hours
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       </PageTransition>
       <Footer />

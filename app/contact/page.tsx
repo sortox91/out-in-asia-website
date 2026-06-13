@@ -22,11 +22,11 @@ const faqs = [
   },
   {
     q: "What about the weather?",
-    a: "Our trips run during the best seasons. However, weather in Asia can sometimes be unpredictable — but always warm.",
+    a: "Our trips run during the best seasons. However, weather in Asia can sometimes be unpredictable, but always warm.",
   },
   {
     q: "Are the trips LGBTQ+ exclusive?",
-    a: "Yes — all Out in Asia trips are designed exclusively for LGBTQ+ travelers and their guests. Every hotel, guide, and experience is chosen with the community in mind.",
+    a: "Yes, all Out in Asia trips are designed exclusively for LGBTQ+ travelers and their guests. Every hotel, guide, and experience is chosen with the community in mind.",
   },
   {
     q: "Do I need a visa?",

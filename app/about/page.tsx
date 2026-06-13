@@ -9,7 +9,7 @@ import { PageTransition } from "@/components/page-transition";
 export const metadata = {
   title: "About Us | Out in Asia",
   description:
-    "Meet the founders of Out in Asia — Filippo Rossi and Szilard Daróczi. Discover our story and passion for LGBTQ+ travel in Southeast Asia.",
+    "Meet the founders of Out in Asia, Filippo Rossi and Szilard Daróczi. Discover our story and passion for LGBTQ+ travel in Southeast Asia.",
 };
 
 export default function AboutPage() {
@@ -55,7 +55,7 @@ export default function AboutPage() {
                   </span>
                 </h2>
                 <p className="font-sans leading-relaxed text-lg text-navy">
-                  We launched Out in Asia to fill a gap: premium LGBTQ+ travel designed by gay travellers who know Southeast Asia intimately. Every trip is personally led by us — so you explore freely, connect authentically, and feel completely at home.
+                  We launched Out in Asia to fill a gap: premium LGBTQ+ travel designed by gay travellers who know Southeast Asia intimately. Every trip is personally led by us, so you explore freely, connect authentically, and feel completely at home.
                 </p>
               </div>
 
@@ -95,7 +95,7 @@ export default function AboutPage() {
               {/* Mobile: one sentence per value */}
               <div className="md:hidden space-y-4 mb-2">
                 {[
-                  { title: "Authenticity", desc: "Experiences beyond the surface — genuine, local, and deeply connected to each destination." },
+                  { title: "Authenticity", desc: "Experiences beyond the surface, genuine, local, and deeply connected to each destination." },
                   { title: "Inclusivity", desc: "Every traveller deserves to feel welcome, safe, and completely themselves." },
                   { title: "Excellence", desc: "The highest standards across every hotel, itinerary, and experience we offer." },
                 ].map((v) => (
@@ -112,7 +112,7 @@ export default function AboutPage() {
                   {
                     title: "Authenticity",
                     description:
-                      "We create experiences that go beyond the surface — designed to give you a genuine understanding of each destination, its culture, and its people.",
+                      "We create experiences that go beyond the surface, designed to give you a genuine understanding of each destination, its culture, and its people.",
                   },
                   {
                     title: "Inclusivity",

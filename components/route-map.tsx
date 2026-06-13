@@ -31,7 +31,7 @@ const STOPS = [
       "5–6h scenic minivan from Hanoi",
       "Guided trek through rice terraces & villages",
       "Overnight in 5-star mountain hotel",
-      "Cable Car to Fansipan — Vietnam's highest peak",
+      "Cable Car to Fansipan: Vietnam's highest peak",
       "Traditional Sapa Hot Pot dinner",
     ],
     galleryImages: ["/gallery/sapa/rice-terraces.jpg", "/gallery/sapa/cable-car.jpg", "/gallery/sapa/village.jpg", "/gallery/sapa/group.png"],
@@ -202,19 +202,20 @@ export function RouteMap() {
     return (
       <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
-        {/* City title — updates dynamically with current stop */}
-        <div style={{ textAlign: "center", padding: "14px 16px 6px" }}>
+        {/* Step info — updates dynamically with current stop */}
+        <div style={{ textAlign: "center", padding: "12px 16px 4px" }}>
           <p style={{
-            fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-            fontSize: "1.4rem", fontWeight: 700, color: "#0E1F38",
+            fontFamily: "var(--font-manrope), Manrope, sans-serif",
+            fontSize: "0.7rem", fontWeight: 600, color: "#0E1F38",
+            letterSpacing: "0.04em", textTransform: "uppercase",
             opacity: visible ? 1 : 0, transition: "opacity 300ms",
           }}>
-            {stop.city}
+            Step {stop.id} · {stop.city} · {stop.subtitle}
           </p>
         </div>
 
         {/* 1. Map */}
-        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
+        <div style={{ position: "relative", height: "40vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
           {STOPS.map((s, i) => (
             <div key={s.id} style={{
               position: "absolute", inset: "8px 14px",
@@ -235,7 +236,7 @@ export function RouteMap() {
         <div style={{ borderTop: "1px solid #E8DDD0", padding: "14px 16px 0" }}>
 
           {/* Main image — slimmer ratio — with prev/next overlay arrows + counter */}
-          <div style={{ position: "relative", width: "100%", paddingBottom: "60%", borderRadius: "0.5rem", overflow: "hidden" }}>
+          <div style={{ position: "relative", width: "100%", paddingBottom: "52%", borderRadius: "0.5rem", overflow: "hidden" }}>
             {stop.galleryImages.map((src, i) => (
               <div key={src} style={{
                 position: "absolute", inset: 0,

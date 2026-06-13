@@ -8,14 +8,14 @@ const CARDS = [
   {
     image: "/accommodation/hanoi-1.jpg",
     title: "Premium 4-Star Hotels",
-    description: "Elegant hotels in Hanoi and Tam Coc — ideally located, with breakfast included.",
+    description: "Elegant hotels in Hanoi and Tam Coc, ideally located, with breakfast included.",
     tag: "6 nights · Breakfast included",
     location: "Hanoi · Tam Coc",
   },
   {
     image: "/accommodation/sapa-1.jpg",
     title: "5-Star Mountain Resort",
-    description: "Cloud-wrapped luxury in Sapa — a perfect retreat after a day of trekking in the terraces.",
+    description: "Cloud-wrapped luxury in Sapa, a perfect retreat after a day of trekking in the terraces.",
     tag: "3 nights · Breakfast included",
     location: "Sapa",
   },

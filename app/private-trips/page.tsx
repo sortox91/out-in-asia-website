@@ -8,7 +8,7 @@ import { PageTransition } from "@/components/page-transition";
 export const metadata = {
   title: "Private Trips | Out in Asia",
   description:
-    "Bespoke LGBTQ+ travel experiences in Southeast Asia — tailored entirely around you. Small group private tours, romantic escapes, and motorbike adventures.",
+    "Bespoke LGBTQ+ travel experiences in Southeast Asia, tailored entirely around you. Small group private tours, romantic escapes, and motorbike adventures.",
 };
 
 const tripTypes = [
@@ -28,7 +28,7 @@ const tripTypes = [
     titleAccent: "Escapes",
     subtitle: "Unforgettable moments for two",
     description:
-      "For couples celebrating a honeymoon, anniversary or special moment together. We design romantic journeys with style, care and attention to every detail — effortless, beautiful, completely personal.",
+      "For couples celebrating a honeymoon, anniversary or special moment together. We design romantic journeys with style, care and attention to every detail: effortless, beautiful, completely personal.",
     image: "/private-trips/card-honeymoon.png",
     alt: "Romantic escape in Southeast Asia",
   },
@@ -156,7 +156,7 @@ export default function PrivateTripsPage() {
                     Start with a one-on-one consultation with Filippo or Szilárd. We'll listen to your ideas, understand what you're looking for, and build a trip that's truly yours.
                   </p>
                   <p className="font-sans text-sm mb-10" style={{ color: "rgba(250,246,239,0.50)" }}>
-                    A €60 consultation fee applies — fully deducted from your trip cost if you book with us.
+                    A €60 consultation fee applies, fully deducted from your trip cost if you book with us.
                   </p>
                   <div className="flex justify-center lg:justify-start">
                     <Link
