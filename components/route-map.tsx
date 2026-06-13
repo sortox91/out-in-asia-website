@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 const STOPS = [
   {
     id: 1,
-    image: "/maps/north-vietnam-step-1.png",
+    image: "/maps/north-vietnam-step-1.svg",
     city: "Hanoi",
     subtitle: "Days 1–3 · Vietnam's Capital",
     highlights: [
@@ -24,7 +24,7 @@ const STOPS = [
   },
   {
     id: 2,
-    image: "/maps/north-vietnam-step-2.png",
+    image: "/maps/north-vietnam-step-2.svg",
     city: "Sapa",
     subtitle: "Days 4–6 · Mountain Escape",
     highlights: [
@@ -40,7 +40,7 @@ const STOPS = [
   },
   {
     id: 3,
-    image: "/maps/north-vietnam-step-3.png",
+    image: "/maps/north-vietnam-step-3.svg",
     city: "Tam Coc",
     subtitle: "Days 7–9 · Ha Long Bay on Land",
     highlights: [
@@ -56,7 +56,7 @@ const STOPS = [
   },
   {
     id: 4,
-    image: "/maps/north-vietnam-step-4.png",
+    image: "/maps/north-vietnam-step-4.svg",
     city: "Ha Long Bay",
     subtitle: "Days 10–11 · Luxury Yacht Cruise",
     highlights: [
@@ -72,7 +72,7 @@ const STOPS = [
   },
   {
     id: 5,
-    image: "/maps/north-vietnam-step-5.png",
+    image: "/maps/north-vietnam-step-5.svg",
     city: "Return to Hanoi",
     subtitle: "Day 12 · Farewell",
     highlights: [
@@ -203,18 +203,18 @@ export function RouteMap() {
       <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
         {/* 1. Map */}
-        <div style={{ position: "relative", height: "50vh", overflow: "hidden" }}>
+        <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
           {STOPS.map((s, i) => (
             <div key={s.id} style={{
-              position: "absolute", inset: 0,
+              position: "absolute", inset: "8px 14px",
               opacity: i === current ? 1 : 0, transition: "opacity 400ms",
               pointerEvents: "none",
             }}>
               <Image src={s.image} alt={`Map of ${s.city}`} fill className="object-contain" />
             </div>
           ))}
-          <NavBtn onClick={prev} label="Previous stop" side="left" size={44} />
-          <NavBtn onClick={next} label="Next stop" side="right" size={44} />
+          <NavBtn onClick={prev} label="Previous stop" side="left" size={37} />
+          <NavBtn onClick={next} label="Next stop" side="right" size={37} />
           <div style={{ position: "absolute", bottom: 12, left: 0, right: 0, zIndex: 10 }}>
             <StopDots />
           </div>
@@ -385,12 +385,13 @@ export function RouteMap() {
               width: "45%", flexShrink: 0,
               borderRight: "1px solid #E8DDD0",
               display: "flex", flexDirection: "column",
+              backgroundColor: "#FAF6EF",
             }}>
               {/* Map area — flex:1 so it matches gallery column height */}
               <div style={{ position: "relative", flex: 1, minHeight: 320 }}>
                 {STOPS.map((s, i) => (
                   <div key={s.id} style={{
-                    position: "absolute", inset: 0,
+                    position: "absolute", inset: "10px 16px",
                     opacity: i === current ? 1 : 0, transition: "opacity 400ms",
                     pointerEvents: "none",
                   }}>
@@ -405,8 +406,8 @@ export function RouteMap() {
                 ))}
 
                 {/* Navigation arrows */}
-                <NavBtn onClick={prev} label="Previous stop" side="left" size={42} top="50%" />
-                <NavBtn onClick={next} label="Next stop"     side="right" size={42} top="50%" />
+                <NavBtn onClick={prev} label="Previous stop" side="left" size={36} top="50%" />
+                <NavBtn onClick={next} label="Next stop"     side="right" size={36} top="50%" />
               </div>
 
               {/* Stop dots below map */}

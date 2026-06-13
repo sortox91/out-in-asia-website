@@ -133,16 +133,25 @@ export function TripComfortSection() {
             backgroundColor: "white", borderRadius: "1rem", overflow: "hidden",
             boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
           }}>
-            {/* Image with location label */}
+            {/* Image with location label — stacked layers for smooth transitions */}
             <div style={{ position: "relative", width: "100%", paddingBottom: "56%" }}>
-              <Image
-                src={CARDS[current].image}
-                alt={CARDS[current].title}
-                fill
-                className="object-cover"
-              />
+              {CARDS.map((card, i) => (
+                <div key={card.image} style={{
+                  position: "absolute", inset: 0,
+                  opacity: i === current ? 1 : 0,
+                  transition: "opacity 350ms ease",
+                  pointerEvents: "none",
+                }}>
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
               <span style={{
-                position: "absolute", top: 12, left: 12,
+                position: "absolute", top: 12, left: 12, zIndex: 2,
                 backgroundColor: "#EA5A2A", color: "white",
                 fontFamily: "var(--font-manrope), Manrope, sans-serif",
                 fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",

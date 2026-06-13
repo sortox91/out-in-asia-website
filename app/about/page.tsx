@@ -169,7 +169,7 @@ export default function AboutPage() {
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-64 w-full max-w-xs rounded-2xl overflow-hidden mx-auto lg:ml-auto">
+                <div className="relative h-72 md:h-96 w-full rounded-2xl overflow-hidden">
                   <Image
                     src="/founders/together-ai-2.jpg"
                     alt="Filippo and Szilard"

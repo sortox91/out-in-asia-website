@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: "What is the best time to travel?",
-    a: "Southeast Asia has different seasons by destination. We plan our departures to avoid the monsoon season — our guides will help you pick the right time for your chosen destination.",
+    a: "Every trip is scheduled at the perfect time of year for its destination.",
   },
 ];
 

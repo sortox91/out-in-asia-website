@@ -6,10 +6,10 @@ import { Instagram, Facebook, Mail, Compass, Users, MessageCircle } from "lucide
 import { motion } from "framer-motion"
 
 const destinations = [
-  { name: "Thailand",      href: "/trips/thailand",      image: "/trips/thailand.jpg" },
-  { name: "North Vietnam", href: "/trips/north-vietnam", image: "/trips/north-vietnam.jpg" },
-  { name: "South Vietnam", href: "/trips/south-vietnam", image: "/trips/south-vietnam.jpg" },
-  { name: "Bali",          href: "/trips/bali",          image: "/trips/bali.jpg" },
+  { name: "Thailand",      href: "/trips/thailand" },
+  { name: "North Vietnam", href: "/trips/north-vietnam" },
+  { name: "South Vietnam", href: "/trips/south-vietnam" },
+  { name: "Bali",          href: "/trips/bali" },
 ]
 
 const exploreLinks = [
@@ -30,7 +30,7 @@ export function Footer() {
       className="text-warm-cream relative overflow-hidden border-t-4 border-sunset-orange"
       style={{ background: "linear-gradient(160deg, #0E1F38 0%, #0a1628 100%)" }}
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-10 md:pt-14 pb-5 md:pb-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-8 md:pt-10 pb-5 md:pb-6">
 
         {/* Top Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 md:mb-10">
@@ -81,27 +81,14 @@ export function Footer() {
               <h4 className="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-sand/40 mb-5">
                 Destinations
               </h4>
-              <nav className="flex flex-col gap-3">
+              <nav className="flex flex-col gap-4">
                 {destinations.map((dest) => (
                   <Link
                     key={dest.href}
                     href={dest.href}
-                    className="group flex items-center gap-3"
+                    className="font-sans text-sm text-sand/80 hover:text-sunset-orange transition-colors duration-300"
                   >
-                    {/* Thumbnail */}
-                    <div className="relative w-14 h-10 rounded-lg overflow-hidden flex-shrink-0">
-                      <Image
-                        src={dest.image}
-                        alt={dest.name}
-                        fill
-                        className="object-cover transition-all duration-300 group-hover:scale-110 group-hover:brightness-110"
-                        sizes="56px"
-                      />
-                    </div>
-                    {/* Name */}
-                    <span className="font-sans text-sm text-sand/80 group-hover:text-sunset-orange transition-colors duration-300">
-                      {dest.name}
-                    </span>
+                    {dest.name}
                   </Link>
                 ))}
               </nav>

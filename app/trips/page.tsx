@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home, Car, Compass, Sparkles, Users, UtensilsCrossed } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { TripCard } from "@/components/trip-card";
@@ -44,7 +44,7 @@ export default function TripsPage() {
         </section>
 
         {/* Trips Grid */}
-        <section className="py-24 bg-warm-cream">
+        <section className="py-14 md:py-20 bg-warm-cream">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {siteConfig.trips.map((trip) => (
@@ -78,44 +78,22 @@ export default function TripsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
               {[
-                {
-                  title: "Boutique Accommodations",
-                  description:
-                    "Handpicked hotels and resorts that combine local character with modern comfort and LGBTQ+ friendly atmospheres.",
-                },
-                {
-                  title: "Local Transportation",
-                  description:
-                    "Comfortable private transfers and unique local transport experiences, from long-tail boats to tuk-tuks.",
-                },
-                {
-                  title: "Expert Guidance",
-                  description:
-                    "Personal guidance from our founders throughout your journey, with deep local knowledge and 24/7 support.",
-                },
-                {
-                  title: "Curated Experiences",
-                  description:
-                    "Carefully selected activities that go beyond typical tourism — cooking classes, temple visits, and hidden gems.",
-                },
-                {
-                  title: "Community Connection",
-                  description:
-                    "Small group sizes that foster meaningful connections with fellow travelers and local communities.",
-                },
-                {
-                  title: "Culinary Adventures",
-                  description:
-                    "Selected meals at outstanding local restaurants, street food tours, and authentic dining experiences.",
-                },
+                { Icon: Home,             title: "Boutique Accommodations", description: "Handpicked hotels and resorts that combine local character with modern comfort and LGBTQ+ friendly atmospheres." },
+                { Icon: Car,              title: "Local Transportation",     description: "Comfortable private transfers and unique local transport experiences, from long-tail boats to tuk-tuks." },
+                { Icon: Compass,          title: "Expert Guidance",          description: "Personal guidance from our founders throughout your journey, with deep local knowledge and 24/7 support." },
+                { Icon: Sparkles,         title: "Curated Experiences",      description: "Carefully selected activities that go beyond typical tourism: cooking classes, temple visits, and hidden gems." },
+                { Icon: Users,            title: "Community Connection",     description: "Small group sizes that foster meaningful connections with fellow travelers and local communities." },
+                { Icon: UtensilsCrossed,  title: "Culinary Adventures",      description: "Selected meals at outstanding local restaurants, street food tours, and authentic dining experiences." },
               ].map((item, index) => (
                 <div
                   key={index}
                   className="py-8 border-b border-white/10 flex gap-6 last:border-0"
                 >
-                  <span className="font-serif text-sunset-orange text-lg flex-shrink-0 w-8 pt-0.5">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <item.Icon
+                    className="flex-shrink-0 mt-0.5"
+                    style={{ width: 20, height: 20, color: "#EA5A2A" }}
+                    strokeWidth={1.75}
+                  />
                   <div>
                     <h3 className="font-serif text-xl text-white mb-2">
                       {item.title}
