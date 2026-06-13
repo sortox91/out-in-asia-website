@@ -95,7 +95,7 @@ function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/30" />
 
       {/* Bottom-left text block */}
-      <div className="absolute bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
+      <div className="absolute bottom-[5%] sm:bottom-[12%] lg:bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
         <div className="max-w-7xl mx-auto">
           <h1 className="font-serif font-extrabold" style={{ paddingBottom: "0.2em" }}>
             {[
@@ -155,7 +155,7 @@ function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.7 }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-24 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
       >
         <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/60">
           Scroll
@@ -201,12 +201,12 @@ function PremiumStatsSection() {
         WebkitBackdropFilter: "blur(14px)",
       }}
     >
-      <div className="mx-auto max-w-7xl px-5 md:px-8 py-8 md:py-14">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-14">
 
         {/* MOBILE: compact horizontal rows */}
         <div className="flex flex-col gap-0 divide-y divide-[rgba(250,246,239,0.10)] md:hidden">
           {PILLARS.map(({ label, statement, Icon }) => (
-            <div key={label} className="flex items-center gap-4 py-4 px-1">
+            <div key={label} className="flex items-center gap-4 py-2.5 md:py-4 px-1">
               <Icon className="h-6 w-6 flex-shrink-0" style={{ color: "#1F8A8F" }} />
               <div>
                 <p className="font-sans text-[10px] uppercase font-semibold mb-0.5" style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}>

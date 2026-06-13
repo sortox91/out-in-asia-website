@@ -202,6 +202,17 @@ export function RouteMap() {
     return (
       <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
+        {/* City title — updates dynamically with current stop */}
+        <div style={{ textAlign: "center", padding: "14px 16px 6px" }}>
+          <p style={{
+            fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+            fontSize: "1.4rem", fontWeight: 700, color: "#0E1F38",
+            opacity: visible ? 1 : 0, transition: "opacity 300ms",
+          }}>
+            {stop.city}
+          </p>
+        </div>
+
         {/* 1. Map */}
         <div style={{ position: "relative", height: "50vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
           {STOPS.map((s, i) => (

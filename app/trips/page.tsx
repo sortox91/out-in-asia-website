@@ -64,7 +64,7 @@ export default function TripsPage() {
         </section>
 
         {/* What's Included */}
-        <section className="py-14 md:py-24 bg-navy">
+        <section className="py-8 md:py-24 bg-navy">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-4 text-xs">
@@ -78,16 +78,16 @@ export default function TripsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
               {[
-                { Icon: Home,             title: "Boutique Accommodations", description: "Handpicked hotels and resorts that combine local character with modern comfort and LGBTQ+ friendly atmospheres." },
-                { Icon: Car,              title: "Local Transportation",     description: "Comfortable private transfers and unique local transport experiences, from long-tail boats to tuk-tuks." },
-                { Icon: Compass,          title: "Expert Guidance",          description: "Personal guidance from our founders throughout your journey, with deep local knowledge and 24/7 support." },
-                { Icon: Sparkles,         title: "Curated Experiences",      description: "Carefully selected activities that go beyond typical tourism: cooking classes, temple visits, and hidden gems." },
-                { Icon: Users,            title: "Community Connection",     description: "Small group sizes that foster meaningful connections with fellow travelers and local communities." },
-                { Icon: UtensilsCrossed,  title: "Culinary Adventures",      description: "Selected meals at outstanding local restaurants, street food tours, and authentic dining experiences." },
+                { Icon: Home,             title: "Boutique Accommodations", description: "Handpicked 4 & 5-star hotels, LGBTQ+ friendly." },
+                { Icon: Car,              title: "Local Transportation",     description: "Private transfers, long-tail boats and tuk-tuks." },
+                { Icon: Compass,          title: "Expert Guidance",          description: "Personal guidance by our founders, 24/7 support." },
+                { Icon: Sparkles,         title: "Curated Experiences",      description: "Cooking classes, temple visits and hidden gems." },
+                { Icon: Users,            title: "Community Connection",     description: "Small groups that create lasting connections." },
+                { Icon: UtensilsCrossed,  title: "Culinary Adventures",      description: "Local restaurants, street food tours and authentic dining." },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="py-8 border-b border-white/10 flex gap-6 last:border-0"
+                  className="py-3 md:py-8 border-b border-white/10 flex gap-4 md:gap-6 last:border-0"
                 >
                   <item.Icon
                     className="flex-shrink-0 mt-0.5"
@@ -95,10 +95,10 @@ export default function TripsPage() {
                     strokeWidth={1.75}
                   />
                   <div>
-                    <h3 className="font-serif text-xl text-white mb-2">
+                    <h3 className="font-serif text-base md:text-xl text-white mb-1 md:mb-2">
                       {item.title}
                     </h3>
-                    <p className="font-sans text-sand/70 leading-relaxed">
+                    <p className="font-sans text-xs md:text-base text-sand/70 leading-relaxed">
                       {item.description}
                     </p>
                   </div>

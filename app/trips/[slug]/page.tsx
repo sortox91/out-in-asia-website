@@ -190,11 +190,11 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 ] as const).map((fact, i) => (
                   <div
                     key={i}
-                    className={`flex flex-row md:flex-col items-center justify-center gap-2 md:gap-0 py-3 px-3 md:text-center${
+                    className={`flex flex-row md:flex-col items-start md:items-center justify-start md:justify-center gap-2 md:gap-0 py-3 px-3 md:text-center${
                       i === 1 || i === 3 ? " border-l border-white/25" : i === 2 ? " md:border-l md:border-white/25" : ""
                     }`}
                   >
-                    <fact.Icon className="h-4 w-4 text-white flex-shrink-0 md:mb-1.5" strokeWidth={1.5} />
+                    <fact.Icon className="h-4 w-4 text-white flex-shrink-0 mt-0.5 md:mt-0 md:mb-1.5" strokeWidth={1.5} />
                     <div>
                       <p className="font-serif text-white font-bold text-sm leading-tight md:mb-0.5">{fact.value}</p>
                       <p className="font-sans text-white/75 text-[0.6rem] leading-tight">{fact.label}</p>
