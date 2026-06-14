@@ -309,12 +309,12 @@ export default function ContactPage() {
                         Filippo · +39 347 500 6791
                       </a>
                       <a
-                        href="https://wa.me/393475006791"
+                        href="https://wa.me/36305326286"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-sans text-clay hover:text-sunset-orange transition-colors block mt-1"
                       >
-                        Szilárd · +39 347 500 6791
+                        Szilárd · +36 30 532 6286
                       </a>
                     </div>
                   </div>
