@@ -202,16 +202,36 @@ export function RouteMap() {
     return (
       <section id="route-overview" style={{ backgroundColor: "#FAF6EF" }}>
 
-        {/* Step info — updates dynamically with current stop */}
-        <div style={{ textAlign: "center", padding: "12px 16px 4px" }}>
-          <p style={{
-            fontFamily: "var(--font-manrope), Manrope, sans-serif",
-            fontSize: "0.7rem", fontWeight: 600, color: "#0E1F38",
-            letterSpacing: "0.04em", textTransform: "uppercase",
-            opacity: visible ? 1 : 0, transition: "opacity 300ms",
+        {/* Step info — badge + city + subtitle, synced with active stop */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: 12,
+          padding: "14px 16px 10px",
+          opacity: visible ? 1 : 0, transition: "opacity 300ms",
+        }}>
+          <div style={{
+            width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
+            backgroundColor: "#0E1F38", color: "#FAF6EF",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+            fontSize: "0.9rem", fontWeight: 700,
           }}>
-            Step {stop.id} · {stop.city} · {stop.subtitle}
-          </p>
+            {String(stop.id).padStart(2, "0")}
+          </div>
+          <div>
+            <h3 style={{
+              fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+              fontSize: "1.4rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
+            }}>
+              {stop.city}
+            </h3>
+            <p style={{
+              fontFamily: "var(--font-manrope), Manrope, sans-serif",
+              fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em",
+              color: "#1F8A8F", margin: "3px 0 0",
+            }}>
+              {stop.subtitle}
+            </p>
+          </div>
         </div>
 
         {/* 1. Map */}
@@ -339,40 +359,6 @@ export function RouteMap() {
           </p>
         </div>
 
-        {/* 3. Info banner */}
-        <div style={{
-          borderTop: "1px solid #E8DDD0",
-          padding: "18px 16px 26px", backgroundColor: "#FAF6EF",
-          opacity: visible ? 1 : 0, transition: "opacity 300ms",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-            <div style={{
-              width: 40, height: 40, borderRadius: "50%", flexShrink: 0,
-              backgroundColor: "#0E1F38", color: "#FAF6EF",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-              fontSize: "0.9rem", fontWeight: 700,
-            }}>
-              {String(stop.id).padStart(2, "0")}
-            </div>
-            <div>
-              <h3 style={{
-                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                fontSize: "1.4rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
-              }}>
-                {stop.city}
-              </h3>
-              <p style={{
-                fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em",
-                color: "#1F8A8F", margin: "3px 0 0",
-              }}>
-                {stop.subtitle}
-              </p>
-            </div>
-          </div>
-
-        </div>
 
       </section>
     )

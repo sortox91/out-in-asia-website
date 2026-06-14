@@ -95,7 +95,7 @@ function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/30" />
 
       {/* Bottom-left text block */}
-      <div className="absolute bottom-[5%] sm:bottom-[12%] lg:bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
+      <div className="absolute bottom-[10%] sm:bottom-[12%] lg:bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
         <div className="max-w-7xl mx-auto">
           <h1 className="font-serif font-extrabold" style={{ paddingBottom: "0.2em" }}>
             {[
@@ -194,9 +194,9 @@ const PILLARS = [
 function PremiumStatsSection() {
   return (
     <section
-      className="relative z-10 -mt-10 md:-mt-16"
+      className="relative z-10 -mt-12 md:-mt-16"
       style={{
-        background: "rgba(14,31,56,0.82)",
+        background: "rgba(14,31,56,0.72)",
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
       }}
