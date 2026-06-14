@@ -78,7 +78,7 @@ function HeroSection() {
   const bgY = useTransform(scrollY, [0, 800], [0, -160])
 
   return (
-    <section className="relative h-[85vh] min-h-[560px] overflow-hidden">
+    <section className="relative h-[85vh] md:h-screen min-h-[560px] overflow-hidden">
       {/* Parallax background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18]">
         <Image
@@ -201,12 +201,12 @@ function PremiumStatsSection() {
         WebkitBackdropFilter: "blur(14px)",
       }}
     >
-      <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-14">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-0">
 
         {/* MOBILE: compact horizontal rows */}
         <div className="flex flex-col gap-0 divide-y divide-[rgba(250,246,239,0.10)] md:hidden">
           {PILLARS.map(({ label, statement, Icon }) => (
-            <div key={label} className="flex items-center gap-4 py-2.5 md:py-4 px-1">
+            <div key={label} className="flex items-center gap-4 py-2.5 px-1">
               <Icon className="h-6 w-6 flex-shrink-0" style={{ color: "#1F8A8F" }} />
               <div>
                 <p className="font-sans text-[10px] uppercase font-semibold mb-0.5" style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}>
@@ -220,18 +220,19 @@ function PremiumStatsSection() {
           ))}
         </div>
 
-        {/* DESKTOP: 3 columns centred */}
-        <div className="hidden md:grid grid-cols-3 divide-x divide-[rgba(250,246,239,0.12)]">
+        {/* DESKTOP: slim 3-column strip */}
+        <div className="hidden md:grid grid-cols-3 divide-x divide-[rgba(250,246,239,0.10)]">
           {PILLARS.map(({ label, statement, Icon }) => (
-            <div key={label} className="px-8 py-6 text-center flex flex-col items-center">
-              <Icon className="h-7 w-7 mb-4" style={{ color: "#1F8A8F" }} />
-              <p className="font-sans text-xs uppercase mb-3" style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}>
-                {label}
-              </p>
-              <div style={{ width: 40, height: 1, backgroundColor: "#1F8A8F", opacity: 0.5, marginBottom: "1rem" }} />
-              <p className="font-serif text-xl italic" style={{ color: "#FAF6EF" }}>
-                {statement}
-              </p>
+            <div key={label} className="flex items-center gap-3 px-8 py-4">
+              <Icon className="h-4 w-4 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+              <div>
+                <p className="font-sans uppercase font-semibold leading-none mb-1" style={{ color: "#1F8A8F", letterSpacing: "0.18em", fontSize: "0.6rem" }}>
+                  {label}
+                </p>
+                <p className="font-serif italic leading-snug" style={{ color: "rgba(250,246,239,0.82)", fontSize: "0.78rem" }}>
+                  {statement}
+                </p>
+              </div>
             </div>
           ))}
         </div>
