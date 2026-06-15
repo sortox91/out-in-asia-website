@@ -194,45 +194,36 @@ const PILLARS = [
 function PremiumStatsSection() {
   return (
     <section
-      className="relative z-10 -mt-12 md:-mt-16"
-      style={{
-        background: "rgba(14,31,56,0.72)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-      }}
+      className="relative z-10 -mt-12 md:-mt-16 bg-navy"
     >
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-0">
 
         {/* MOBILE: compact horizontal rows */}
         <div className="flex flex-col gap-0 divide-y divide-[rgba(250,246,239,0.10)] md:hidden">
-          {PILLARS.map(({ label, statement, Icon }) => (
-            <div key={label} className="flex items-center gap-4 py-2.5 px-1">
-              <Icon className="h-6 w-6 flex-shrink-0" style={{ color: "#1F8A8F" }} />
-              <div>
-                <p className="font-sans text-[10px] uppercase font-semibold mb-0.5" style={{ color: "#1F8A8F", letterSpacing: "0.15em" }}>
-                  {label}
-                </p>
-                <p className="font-serif text-sm italic leading-snug" style={{ color: "#FAF6EF" }}>
-                  {statement}
-                </p>
-              </div>
+          {[
+            "Destinations chosen for LGBTQ+ comfort",
+            "Led by gay travellers who know Asia deeply",
+            "Premium stays, private transfers, always",
+          ].map((statement, idx) => (
+            <div key={idx} className="py-3 px-2">
+              <p className="font-serif italic text-sm leading-snug" style={{ color: "#FAF6EF" }}>
+                {statement}
+              </p>
             </div>
           ))}
         </div>
 
         {/* DESKTOP: slim 3-column strip */}
         <div className="hidden md:grid grid-cols-3 divide-x divide-[rgba(250,246,239,0.10)]">
-          {PILLARS.map(({ label, statement, Icon }) => (
-            <div key={label} className="flex items-center gap-3 px-8 py-4">
-              <Icon className="h-4 w-4 flex-shrink-0" style={{ color: "#1F8A8F" }} />
-              <div>
-                <p className="font-sans uppercase font-semibold leading-none mb-1" style={{ color: "#1F8A8F", letterSpacing: "0.18em", fontSize: "0.6rem" }}>
-                  {label}
-                </p>
-                <p className="font-serif italic leading-snug" style={{ color: "rgba(250,246,239,0.82)", fontSize: "0.78rem" }}>
-                  {statement}
-                </p>
-              </div>
+          {[
+            "Destinations chosen for LGBTQ+ comfort",
+            "Led by gay travellers who know Asia deeply",
+            "Premium stays, private transfers, always",
+          ].map((statement, idx) => (
+            <div key={idx} className="flex items-center justify-center px-8 py-5">
+              <p className="font-serif italic leading-snug text-center" style={{ color: "rgba(250,246,239,0.82)", fontSize: "0.95rem" }}>
+                {statement}
+              </p>
             </div>
           ))}
         </div>
@@ -329,7 +320,7 @@ function DestinationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-serif font-extrabold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
+              className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
             >
               Four Destinations,{" "}
               <span className="italic text-sunset-orange">
@@ -376,7 +367,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         Meet Your Guides
       </p>
       <h2
-        className={`font-serif font-extrabold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
+        className={`font-serif font-bold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
         style={{ color: "#FAF6EF" }}
       >
         Two <span style={{ color: "#EA5A2A" }}>Gay</span> Travellers
@@ -580,7 +571,7 @@ function CTASection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-serif font-extrabold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
+          className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
         >
           Ready To Explore<br />
           <span className="italic text-sunset-orange">Southeast Asia?</span>
