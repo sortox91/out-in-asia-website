@@ -18,11 +18,15 @@ import { siteConfig } from "@/lib/config";
 const faqs = [
   {
     q: "What's the group size?",
-    a: "Our trips typically have 6-12 travelers for an intimate experience. Small groups are at the heart of everything we do.",
+    a: "Our trips typically have 8-12 travelers for an intimate experience. Small groups are at the heart of everything we do.",
+  },
+  {
+    q: "What about the weather?",
+    a: "Our trips run during the best seasons. However, weather in Asia can sometimes be unpredictable, but always warm.",
   },
   {
     q: "Are the trips LGBTQ+ exclusive?",
-    a: "Yes — all Out in Asia trips are designed exclusively for LGBTQ+ travelers and their guests. Every hotel, guide, and experience is chosen with the community in mind.",
+    a: "Yes, all Out in Asia trips are designed exclusively for LGBTQ+ travelers and their guests. Every hotel, guide, and experience is chosen with the community in mind.",
   },
   {
     q: "Do I need a visa?",
@@ -34,7 +38,7 @@ const faqs = [
   },
   {
     q: "What is the best time to travel?",
-    a: "Southeast Asia has different seasons by destination. We plan our departures to avoid the monsoon season — our guides will help you pick the right time for your chosen destination.",
+    a: "Every trip is scheduled at the perfect time of year for its destination.",
   },
 ];
 
@@ -101,32 +105,41 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main>
-        {/* Hero */}
-        <section className="relative h-[40vh] min-h-[300px] flex items-end overflow-hidden">
+      <main className="overflow-x-hidden">
+
+        {/* Page hero — consistent template */}
+        <section className="relative h-[55vh] md:h-[65vh] min-h-[380px] flex items-center overflow-hidden">
           <Image
-            src="/contact-hero.jpg"
-            alt="Southeast Asia"
+            src="/gallery/halong/bay.jpg"
+            alt="Ha Long Bay, Vietnam"
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-navy/70" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 w-full">
-            <p className="font-sans text-xs text-ocean-teal font-medium tracking-widest uppercase mb-4">
-              Get in Touch
-            </p>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Let&apos;s Plan Your{" "}
-              <span className="italic text-sunset-orange">Adventure</span>
-            </h1>
+          {/* Left-side dark gradient */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(14,31,56,0.90) 0%, rgba(14,31,56,0.65) 45%, rgba(14,31,56,0.15) 75%, transparent 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.3) 0%, transparent 40%)" }} />
+
+          <div className="relative z-10 mx-auto max-w-7xl px-8 lg:px-16 w-full">
+            <div className="max-w-xl">
+              <p className="font-sans text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "#EA5A2A" }}>
+                Get in Touch
+              </p>
+              <h1 className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
+                Your Next Journey<br />
+                Starts <span className="italic text-sunset-orange">Here</span>
+              </h1>
+              <p className="font-sans text-base text-white/70 max-w-md leading-relaxed">
+                Join one of our group journeys, or let us design one around your dreams
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Main Content */}
-        <section className="py-20 bg-warm-cream">
+        <section id="reach-out" className="py-10 md:py-20 bg-warm-cream">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:items-end">
               {/* Form */}
               <div className="lg:col-span-3">
                 <div className="bg-white shadow-lg rounded-2xl p-8">
@@ -159,8 +172,8 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-1">
                           <label
                             htmlFor="firstName"
                             className="block font-sans text-sm font-medium text-navy mb-2"
@@ -171,10 +184,10 @@ export default function ContactPage() {
                             id="firstName"
                             name="firstName"
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
+                            className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
                           />
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <label
                             htmlFor="lastName"
                             className="block font-sans text-sm font-medium text-navy mb-2"
@@ -185,7 +198,7 @@ export default function ContactPage() {
                             id="lastName"
                             name="lastName"
                             required
-                            className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
+                            className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
                           />
                         </div>
                       </div>
@@ -202,7 +215,7 @@ export default function ContactPage() {
                           name="email"
                           type="email"
                           required
-                          className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
+                          className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors"
                         />
                       </div>
 
@@ -217,10 +230,11 @@ export default function ContactPage() {
                           id="trip"
                           value={selectedTrip}
                           onChange={(e) => setSelectedTrip(e.target.value)}
-                          className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy focus:outline-none focus:border-ocean-teal transition-colors appearance-none"
+                          className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy focus:outline-none focus:border-ocean-teal transition-colors appearance-none"
                         >
-                          <option value="">Select a trip (optional)</option>
+                          <option value="">Select an option (optional)</option>
                           <option value="general">General Inquiry</option>
+                          <option value="private-trips">Private Trips</option>
                           {siteConfig.trips.map((trip) => (
                             <option key={trip.id} value={trip.id}>
                               {trip.title}
@@ -242,7 +256,7 @@ export default function ContactPage() {
                           required
                           rows={5}
                           placeholder="Tell us about your travel dreams..."
-                          className="w-full px-4 py-3 rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors resize-none"
+                          className="w-full px-4 py-3 min-h-[48px] rounded-xl border border-dune bg-warm-cream font-sans text-navy placeholder:text-clay/50 focus:outline-none focus:border-ocean-teal transition-colors resize-none"
                         />
                       </div>
 
@@ -268,7 +282,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Sidebar */}
+              {/* Sidebar — aligned to bottom of form on desktop */}
               <div className="lg:col-span-2 space-y-8">
                 <div className="space-y-6">
                   <div className="flex gap-4 items-start">
@@ -297,12 +311,20 @@ export default function ContactPage() {
                         WhatsApp
                       </h3>
                       <a
+                        href="https://wa.me/393475006791"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-sans text-clay hover:text-sunset-orange transition-colors block"
+                      >
+                        Filippo · +39 347 500 6791
+                      </a>
+                      <a
                         href="https://wa.me/36305326286"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-sans text-clay hover:text-sunset-orange transition-colors"
+                        className="font-sans text-clay hover:text-sunset-orange transition-colors block mt-1"
                       >
-                        +36 30 532 6286
+                        Szilárd · +36 30 532 6286
                       </a>
                     </div>
                   </div>
