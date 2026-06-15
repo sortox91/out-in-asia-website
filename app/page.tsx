@@ -1,22 +1,14 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown, ShieldCheck, Compass, Sparkles } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { FoundersPreview } from "@/components/founders-preview"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-
-const STATS = [
-  { end: 4,   suffix: "",  label: "Destinations" },
-  { end: 12,  suffix: "",  label: "Max group size" },
-  { end: 100, suffix: "%", label: "LGBTQ+ led" },
-  { end: 6,   suffix: "+",  label: "Years of expertise" },
-]
 
 const DESTINATIONS = [
   {
@@ -33,7 +25,7 @@ const DESTINATIONS = [
     subtitle: "Land of Smiles",
     image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80",
     price: "€2,900",
-    duration: "10 days",
+    duration: "12 days",
   },
   {
     id: "south-vietnam",
@@ -41,7 +33,7 @@ const DESTINATIONS = [
     subtitle: "Rivers & History",
     image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&q=80",
     price: "€2,500",
-    duration: "9 days",
+    duration: "12 days",
   },
   {
     id: "bali",
@@ -49,49 +41,38 @@ const DESTINATIONS = [
     subtitle: "Island of Gods",
     image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
     price: "€2,400",
-    duration: "7 days",
-  },
-]
-
-const VALUES = [
-  {
-    number: "01",
-    title: "Small Groups",
-    desc: "Intimate journeys with 6–12 like-minded travelers for genuine, lasting connection.",
-  },
-  {
-    number: "02",
-    title: "Curated Luxury",
-    desc: "Handpicked boutique hotels and one-of-a-kind experiences at every single stop.",
-  },
-  {
-    number: "03",
-    title: "Safe Spaces",
-    desc: "LGBTQ+ friendly throughout — every hotel, every guide, every single moment.",
+    duration: "13 days",
   },
 ]
 
 const TESTIMONIALS = [
   {
     quote:
-      "I've been to 30+ countries, but Out in Asia was something else entirely. Filippo and Szilard created a space where I could be completely myself — visiting temples by day and dancing freely at night.",
-    author: "James M.",
-    flag: "🇬🇧",
-    trip: "Thailand · December 2026",
-  },
-  {
-    quote:
-      "Every detail was perfect — from the handpicked boutique hotels to the secret local restaurants no guidebook mentions. What moved me most was feeling truly safe and welcomed as a gay traveller everywhere we went.",
+      "Every detail was perfect, from the handpicked boutique hotels to the secret local restaurants no guidebook mentions. What moved me most was feeling truly safe and welcomed as a gay traveller everywhere we went.",
     author: "Marco V.",
-    flag: "🇩🇪",
-    trip: "Bali · March 2027",
+    trip: "Bali · April 2026",
+    image: "/reviews/review-1.jpg",
   },
   {
     quote:
-      "Waking up on a junk boat in Ha Long Bay surrounded by people who just got it — I still tear up thinking about it. Already planning my return.",
-    author: "Thomas K.",
-    flag: "🇫🇷",
-    trip: "North Vietnam · April 2027",
+      "North Vietnam completely exceeded my expectations. The landscapes were incredible, but what made the journey special was the atmosphere of the group — relaxed, elegant and genuinely inclusive. I never felt like just another tourist.",
+    author: "David C.",
+    trip: "North Vietnam · March 2026",
+    image: "/reviews/review-2.jpg",
+  },
+  {
+    quote:
+      "I loved how well everything flowed, from the hotels and transfers to the local experiences. South Vietnam felt vibrant, authentic and easy to enjoy because everything had been so thoughtfully planned. It was my first gay group trip, and definitely not my last.",
+    author: "Marcus R.",
+    trip: "South Vietnam · January 2026",
+    image: "/reviews/review-3.jpg",
+  },
+  {
+    quote:
+      "Bali was the perfect mix of beauty, comfort and connection. I joined solo and left with unforgettable memories and new friends. The trip felt polished but never stiff, and I could fully relax and be myself throughout.",
+    author: "Kenji N.",
+    trip: "Bali · May 2026",
+    image: "/reviews/review-4.jpg",
   },
 ]
 
@@ -102,55 +83,60 @@ function HeroSection() {
   const bgY = useTransform(scrollY, [0, 800], [0, -160])
 
   return (
-    <section className="relative h-screen min-h-[640px] overflow-hidden">
-      {/* Parallax background */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18]">
+    <section className="relative h-[85vh] md:h-screen min-h-[560px] overflow-hidden">
+      {/* Desktop background image */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18] hidden md:block">
         <Image
           src="/ai-landscapes/vietnam-1.png"
           alt="Vietnam landscape"
           fill
-          className="object-cover"
+          className="object-cover object-[65%_50%]"
           priority
+          sizes="100vw"
+        />
+      </motion.div>
+
+      {/* Mobile background image — replace src with your mobile hero image */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18] md:hidden">
+        <Image
+          src="/ai-landscapes/vietnam-1.png"
+          alt="Vietnam landscape"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
         />
       </motion.div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/30" />
 
-      {/* Bottom-left text block */}
-      <div className="absolute bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
+      {/* Text block — top on mobile, bottom on desktop */}
+      <div className="absolute top-[12%] md:bottom-[15%] md:top-auto left-0 w-full px-6 sm:px-10 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-sans text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/50 mb-6"
-          >
-            Luxury LGBTQ+ Travel · Southeast Asia
-          </motion.p>
-
-          <h1 className="font-serif">
+          <h1 className="font-serif font-bold" style={{ paddingBottom: "0.2em" }}>
             {[
-              { text: "Travel Gay.", italic: false },
-              { text: "Be You.", italic: true, orange: true },
-              { text: "Belong Together.", italic: false },
+              { text: "Travel Gay", italic: false },
+              { text: "Be You", italic: true, orange: true },
+              { text: "Belong Together", italic: false },
             ].map(({ text, italic, orange }, i) => (
-              <motion.span
-                key={i}
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{
-                  duration: 1,
-                  delay: 0.35 + i * 0.18,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className={`block leading-[0.9] ${italic ? "italic" : ""} ${
-                  orange ? "text-sunset-orange" : "text-white"
-                }`}
-                style={{ fontSize: "clamp(2.8rem, 7.5vw, 6.5rem)" }}
-              >
-                {text}
-              </motion.span>
+              <div key={i}>
+                <motion.span
+                  initial={{ y: "110%" }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.35 + i * 0.18,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className={`block leading-[1.3] ${italic ? "italic" : ""} ${
+                    orange ? "text-white md:text-sunset-orange" : "text-white"
+                  }`}
+                  style={{ fontSize: "clamp(2.2rem, 6vw, 5.2rem)" }}
+                >
+                  {text}
+                </motion.span>
+              </div>
             ))}
           </h1>
 
@@ -160,7 +146,7 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.9 }}
             className="mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
           >
-            <p className="font-sans text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed hidden sm:block">
+            <p className="font-sans text-[10px] sm:text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
               Curated luxury journeys exclusively for the LGBTQ+ community.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -186,101 +172,79 @@ function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.7 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-24 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
       >
-        <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/30">
+        <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/60">
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-5 w-5 text-white/30" />
+          <ChevronDown className="h-5 w-5 text-white/60" />
         </motion.div>
       </motion.div>
     </section>
   )
 }
 
-// ─── Stats ──────────────────���──────────────────────────────────────────────────
+// ─── Strip below hero ──────────────────────────────────────────────────────────
 
-function StatsBar() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [inView, setInView] = useState(false)
+const PILLARS = [
+  {
+    label: "DESTINATIONS",
+    statement: "Destinations chosen for LGBTQ+ comfort",
+    Icon: ShieldCheck,
+  },
+  {
+    label: "EXPERT GUIDES",
+    statement: "Led by gay travellers who know Asia deeply",
+    Icon: Compass,
+  },
+  {
+    label: "PREMIUM",
+    statement: "Premium stays, private transfers, always",
+    Icon: Sparkles,
+  },
+]
 
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) setInView(true)
-      },
-      { threshold: 0.3 }
-    )
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [])
-
-  const premiumStats = [
-    {
-      label: "Safety First",
-      statement: "Every destination, every hotel, every guide vetted for your peace of mind.",
-    },
-    {
-      label: "Expert Guides",
-      statement: "Local LGBTQ+ leaders who know hidden gems and authentic cultural experiences.",
-    },
-    {
-      label: "Curated Luxury",
-      statement: "Handpicked boutique accommodations and one-of-a-kind experiences at every step.",
-    },
-  ]
-
+function PremiumStatsSection() {
   return (
     <section
-      ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{
-        backgroundImage: "url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 600\"><defs><linearGradient id=\"grad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" style=\"stop-color:%23001f3f;stop-opacity:0.95\" /><stop offset=\"100%\" style=\"stop-color:%230e1f38;stop-opacity:0.98\" /></linearGradient></defs><rect fill=\"url(%23grad)\" width=\"1200\" height=\"600\"/></svg>')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative z-10 -mt-12 md:-mt-16"
+      style={{ backgroundColor: "#0E1F38" }}
     >
-      {/* Overlay for depth */}
-      <div className="absolute inset-0 bg-navy/40 pointer-events-none" />
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-0">
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 relative">
-          {premiumStats.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ delay: i * 0.12, duration: 0.7 }}
-              className="flex flex-col backdrop-blur-sm bg-white/[0.03] p-6 lg:p-8 rounded-lg border border-white/[0.05] hover:border-ocean-teal/30 transition-colors duration-300"
-            >
-              <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4 font-semibold">
-                {stat.label}
+        {/* MOBILE: compact horizontal rows */}
+        <div className="flex flex-col gap-0 divide-y divide-[rgba(250,246,239,0.10)] md:hidden">
+          {PILLARS.map(({ label, statement, Icon }) => (
+            <div key={label} className="flex items-center gap-4 py-2.5 px-1">
+              <Icon className="h-6 w-6 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+              <p className="font-serif text-sm italic leading-snug" style={{ color: "#FAF6EF" }}>
+                {statement}
               </p>
-              <p className="font-serif italic text-xl lg:text-2xl text-[#FAF6EF] leading-tight">
-                {stat.statement}
-              </p>
-            </motion.div>
-          ))}
-
-          {/* Desktop vertical dividers */}
-          <div className="hidden md:block absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/4 bottom-1/4 left-1/3 w-px bg-white/[0.1]" />
-            <div className="absolute top-1/4 bottom-1/4 left-2/3 w-px bg-white/[0.1]" />
-          </div>
-        </div>
-
-        {/* Mobile horizontal dividers */}
-        <div className="md:hidden space-y-0 mt-0">
-          {premiumStats.map((stat, i) => (
-            i > 0 && (
-              <div key={i} className="h-px bg-white/[0.1] my-8" />
-            )
+            </div>
           ))}
         </div>
+
+        {/* DESKTOP: slim 3-column strip */}
+        <div className="hidden md:grid grid-cols-3 divide-x divide-[rgba(250,246,239,0.10)]">
+          {PILLARS.map(({ label, statement, Icon }) => (
+            <div key={label} className="flex items-center gap-3 px-8 py-4">
+              <Icon className="h-4 w-4 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+              <div>
+                <p className="font-sans uppercase font-semibold leading-none mb-1" style={{ color: "#1F8A8F", letterSpacing: "0.18em", fontSize: "0.6rem" }}>
+                  {label}
+                </p>
+                <p className="font-serif italic leading-snug" style={{ color: "rgba(250,246,239,0.82)", fontSize: "0.78rem" }}>
+                  {statement}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   )
@@ -304,17 +268,17 @@ function DestinationCard({
     >
       <Link
         href={`/trips/${dest.id}`}
-        className="group block relative rounded-2xl overflow-hidden h-[400px] lg:h-[460px]"
+        className="group block relative rounded-2xl overflow-hidden h-[220px] sm:h-[300px] lg:h-[368px]"
       >
         <Image
           src={dest.image}
           alt={dest.title}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, 50vw"
         />
 
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1F38]/90 via-[#0E1F38]/10 to-transparent transition-all duration-500 group-hover:via-[#0E1F38]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-500 group-hover:via-black/50" />
 
         {/* Duration — top left */}
         <div className="absolute top-5 left-5">
@@ -331,12 +295,12 @@ function DestinationCard({
         </div>
 
         {/* Text — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
           <p className="font-sans text-[10px] text-white/50 uppercase tracking-[0.22em] mb-2">
             {dest.subtitle}
           </p>
           <div className="flex items-end justify-between gap-4">
-            <h3 className="font-serif text-3xl lg:text-4xl text-white leading-tight">
+            <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
               {dest.title}
             </h3>
             <div className="opacity-0 group-hover:opacity-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0">
@@ -354,7 +318,7 @@ function DestinationCard({
 
 function DestinationsSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[#FAF6EF]">
+    <section className="py-14 md:py-24 lg:py-32 bg-[#FAF6EF]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-6">
@@ -372,11 +336,11 @@ function DestinationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-serif text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
+              className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
             >
-              Four destinations,{" "}
-              <span className="italic text-sunset-orange relative inline-block">
-                endless memories
+              Four Destinations,{" "}
+              <span className="italic text-sunset-orange">
+                Endless Memories
               </span>
             </motion.h2>
           </div>
@@ -396,55 +360,122 @@ function DestinationsSection() {
           </motion.div>
         </div>
 
-        {/* 2×2 grid */}
+        {/* 2×2 grid — mobile shows Thailand + Bali only */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {DESTINATIONS.map((dest, i) => (
-            <DestinationCard key={dest.id} dest={dest} index={i} />
+            <div key={dest.id} className={dest.id === "north-vietnam" || dest.id === "south-vietnam" ? "hidden md:block" : ""}>
+              <DestinationCard dest={dest} index={i} />
+            </div>
           ))}
+        </div>
+
+        {/* Mobile only: View All Trips button after the 2 cards */}
+        <div className="md:hidden mt-8 flex justify-center">
+          <Link
+            href="/trips"
+            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-3.5 rounded-full bg-navy text-white hover:bg-ocean-teal transition-colors text-sm"
+          >
+            View All Trips <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
   )
 }
 
-// ─── Values ────────────────────────────────────────────────────────────────────
+// ─── Founders ──────────────────────────────────────────────────────────────────
 
-function ValuesSection() {
+function FoundersText({ mobile = false }: { mobile?: boolean }) {
   return (
-    <section className="py-24 lg:py-32 bg-navy overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-16"
-        >
-          Why Travel With Us
-        </motion.p>
+    <>
+      <p className="font-sans text-xs uppercase mb-6" style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}>
+        Meet Your Guides
+      </p>
+      <h2
+        className={`font-serif font-bold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
+        style={{ color: "#FAF6EF" }}
+      >
+        Two <span style={{ color: "#EA5A2A", fontStyle: "italic" }}>Gay</span> Travellers
+        <br />One <span style={{ color: "#EA5A2A", fontStyle: "italic" }}>Love</span> for Asia
+      </h2>
+      <p
+        className={`font-sans text-base leading-relaxed mb-10 ${mobile ? "text-sm" : ""}`}
+        style={{ color: "rgba(250,246,239,0.78)" }}
+      >
+        Between us, we have over 10 years of living across Southeast Asia.
+        Filippo spent years as a digital nomad, discovering the region&apos;s
+        hidden corners by motorbike. Szilard built a thriving premium travel
+        business serving discerning clients from Hungary. We design journeys
+        for travellers who want to experience Asia the way we do: authentically,
+        safely, and unforgettably.
+      </p>
 
-        <div className="divide-y divide-white/[0.07]">
-          {VALUES.map((v, i) => (
-            <motion.div
-              key={v.number}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="py-10 lg:py-14 flex items-start gap-8 lg:gap-16"
-            >
-              <span className="font-serif text-5xl lg:text-8xl text-ocean-teal font-bold leading-none flex-shrink-0 mt-1 select-none">
-                {v.number}
-              </span>
-              <div className="flex-1 flex flex-col lg:flex-row lg:items-center lg:gap-16 pt-2">
-                <h3 className="font-serif text-2xl lg:text-4xl text-white mb-3 lg:mb-0 lg:w-72 flex-shrink-0">
-                  {v.title}
-                </h3>
-                <p className="font-sans text-white/40 leading-relaxed">{v.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+      <div className="flex gap-10 mb-10">
+        <div className="flex flex-col items-center">
+          <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
+            <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover object-center" />
+          </div>
+          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
+          <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
+            <Image src="/founders/szilard-2.jpg" alt="Szilárd Daróczi" fill className="object-cover object-top" />
+          </div>
+          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Szilárd Daróczi</p>
+          <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
         </div>
       </div>
+
+      <Link
+        href="/about"
+        className="font-sans font-semibold px-7 py-3.5 rounded-full border-2 transition-all self-start text-sm inline-block"
+        style={{ borderColor: "#FAF6EF", color: "#FAF6EF" }}
+        onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "#FAF6EF"; el.style.color = "#0E1F38" }}
+        onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "transparent"; el.style.color = "#FAF6EF" }}
+      >
+        Read Our Full Story →
+      </Link>
+    </>
+  )
+}
+
+function FoundersSection() {
+  return (
+    <section className="overflow-hidden" style={{ backgroundColor: "#0E1F38" }}>
+
+      {/* ── MOBILE: image on top, text below ── */}
+      <div className="md:hidden">
+        <div className="relative h-72 overflow-hidden">
+          <Image
+            src="/founders/together-ai-1.jpg"
+            alt="Filippo and Szilard"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #0E1F38 0%, rgba(14,31,56,0.3) 60%, transparent 100%)" }} />
+        </div>
+        <div className="px-6 pb-14 -mt-6 relative z-10">
+          <FoundersText mobile />
+        </div>
+      </div>
+
+      {/* ── DESKTOP: image right, text left ── */}
+      <div className="hidden md:flex relative overflow-hidden items-center" style={{ minHeight: "540px" }}>
+        <div className="absolute top-0 right-0 bottom-0 w-[55%]" style={{ overflow: "hidden" }}>
+          <Image
+            src="/founders/together-ai-1.jpg"
+            alt="Filippo and Szilard"
+            fill
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #0E1F38 0%, rgba(14,31,56,0.55) 25%, rgba(14,31,56,0.1) 55%, transparent 75%)" }} />
+        </div>
+        <div className="relative z-10 px-8 lg:px-16 py-16 lg:py-20 w-full max-w-[560px] lg:max-w-[46%]">
+          <FoundersText />
+        </div>
+      </div>
+
     </section>
   )
 }
@@ -460,70 +491,91 @@ function TestimonialsSection() {
   }, [])
 
   return (
-    <section
-      className="py-24 lg:py-36 bg-black relative overflow-hidden"
-      style={{
-        backgroundImage: "url(/ai-landscapes/vietnam-group.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
-    >
-      {/* Dark overlay — sits above bg image, below all content */}
-      <div className="absolute inset-0 bg-black/75" />
+    <section className="py-14 md:py-20" style={{ backgroundColor: "#FAF6EF" }}>
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
 
-      {/* Giant decorative quote */}
-      <div
-        className="absolute -top-10 left-1/2 -translate-x-1/2 font-serif text-[22rem] leading-none text-sunset-orange/8 select-none pointer-events-none"
-        aria-hidden
-      >
-        &ldquo;
-      </div>
-
-      <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-14"
+          className="font-sans text-xs tracking-[0.25em] uppercase text-center mb-8"
+          style={{ color: "#1F8A8F" }}
         >
-          Traveler Stories
+          What People Say About Us
         </motion.p>
 
+        {/* Testimonial card — cream with shadow */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.45 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
-            <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl italic text-white leading-relaxed mb-10">
-              &ldquo;{TESTIMONIALS[current].quote}&rdquo;
-            </blockquote>
-            <p className="font-sans font-semibold text-white text-sm">
-              {TESTIMONIALS[current].author}{" "}
-              <span className="ml-1">{TESTIMONIALS[current].flag}</span>
-            </p>
-            <p className="font-sans text-xs text-white/35 mt-1">
-              {TESTIMONIALS[current].trip}
-            </p>
+            <div
+              className="mx-auto max-w-2xl rounded-2xl p-7 md:p-10 relative"
+              style={{
+                backgroundColor: "#FFFDF8",
+                boxShadow: "0 4px 32px rgba(14,31,56,0.10), 0 1px 4px rgba(14,31,56,0.06)",
+              }}
+            >
+              {/* Decorative opening quote */}
+              <span
+                aria-hidden
+                className="absolute top-4 left-6 font-serif leading-none select-none pointer-events-none"
+                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.18, lineHeight: 1 }}
+              >
+                &ldquo;
+              </span>
+
+              {/* Quote text */}
+              <blockquote
+                className="font-serif text-base md:text-lg italic leading-relaxed mb-7 relative z-10 pt-4"
+                style={{ color: "#0E1F38" }}
+              >
+                &ldquo;{TESTIMONIALS[current].quote}&rdquo;
+              </blockquote>
+
+              {/* Avatar + author */}
+              <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+                <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-sand/30">
+                  <Image
+                    src={TESTIMONIALS[current].image}
+                    alt={TESTIMONIALS[current].author}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="font-sans font-bold text-sm" style={{ color: "#EA5A2A" }}>
+                    {TESTIMONIALS[current].author}
+                  </p>
+                  <p className="font-sans text-xs mt-1" style={{ color: "#1F8A8F" }}>
+                    {TESTIMONIALS[current].trip}
+                  </p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </AnimatePresence>
 
         {/* Navigation dots */}
-        <div className="flex justify-center gap-3 mt-12">
+        <div className="flex justify-center gap-1 mt-6">
           {TESTIMONIALS.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
               aria-label={`Testimonial ${i + 1}`}
-              className={`h-[3px] rounded-full transition-all duration-300 ${
-                i === current ? "bg-sunset-orange w-8" : "bg-white/20 w-3"
-              }`}
-            />
+              className="py-4 px-2 flex items-center"
+            >
+              <span className={`block h-[3px] rounded-full transition-all duration-300 ${
+                i === current ? "bg-sunset-orange w-8" : "bg-navy/30 w-3"
+              }`} />
+            </button>
           ))}
         </div>
+
       </div>
     </section>
   )
@@ -533,74 +585,56 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="py-24 lg:py-32 bg-navy relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.07]">
-        <Image
-          src="/ai-landscapes/vietnam-6.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
+    <section className="relative py-16 lg:py-20 overflow-hidden">
+      {/* Desktop background image */}
+      <div className="absolute inset-0 hidden md:block">
+        <Image src="/trips/north-vietnam.jpg" alt="" fill className="object-cover" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12">
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-serif text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
-            >
-              Ready to explore
-              <br />
-              <span className="italic text-sunset-orange">Southeast Asia?</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="font-sans text-white/45 text-lg mb-10 max-w-md"
-            >
-              Join Filippo and Szilard on a journey like no other.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-wrap gap-4"
-            >
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
-              >
-                Start Planning <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/trips"
-                className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/25 text-white hover:bg-white/10 transition-colors"
-              >
-                Browse All Trips
-              </Link>
-            </motion.div>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="relative h-72 w-96 max-w-full rounded-2xl overflow-hidden flex-shrink-0"
+      {/* Mobile background image — replace with mobile-specific image when available */}
+      <div className="absolute inset-0 md:hidden">
+        <Image src="/trips/north-vietnam.jpg" alt="" fill className="object-cover" />
+      </div>
+      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.78)" }} />
+
+      <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
+        >
+          Ready To Explore<br />
+          <span className="italic text-sunset-orange">Southeast Asia?</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="font-sans text-white/60 text-sm md:text-lg mb-10"
+        >
+          Join Filippo and Szilard on a journey like no other
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap gap-4 justify-center"
+        >
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
           >
-            <Image
-              src="/founders/together.jpg"
-              alt="Filippo and Szilard"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-          </motion.div>
-        </div>
+            Start Planning <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/trips"
+            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
+          >
+            Browse All Trips
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
@@ -613,10 +647,9 @@ export default function HomePage() {
     <main className="overflow-x-hidden">
       <Header />
       <HeroSection />
-      <StatsBar />
+      <PremiumStatsSection />
       <DestinationsSection />
-      <FoundersPreview />
-      <ValuesSection />
+      <FoundersSection />
       <TestimonialsSection />
       <CTASection />
       <Footer />

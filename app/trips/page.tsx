@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home, Car, Compass, Sparkles, Users, UtensilsCrossed } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { TripCard } from "@/components/trip-card";
@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/config";
 export const metadata = {
   title: "Our Trips | Out in Asia",
   description:
-    "Explore our curated LGBTQ+ travel experiences across Southeast Asia — Thailand, Vietnam, and Bali. High-end journeys designed for gay travelers.",
+    "Explore our curated LGBTQ+ travel experiences across Southeast Asia: Thailand, Vietnam, and Bali. High-end journeys designed for gay travelers.",
 };
 
 export default function TripsPage() {
@@ -18,9 +18,10 @@ export default function TripsPage() {
     <>
       <Header />
       <PageTransition>
-      <main>
-        {/* Fullscreen-ish hero — 60vh with background image */}
-        <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <main className="overflow-x-hidden">
+
+        {/* Page hero — consistent template */}
+        <section className="relative h-[55vh] md:h-[65vh] min-h-[380px] flex items-center overflow-hidden">
           <Image
             src="/trips/bali.jpg"
             alt="Southeast Asia"
@@ -28,23 +29,28 @@ export default function TripsPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/50 to-navy/80" />
-          <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <p className="font-sans text-xs tracking-[0.3em] uppercase text-white/50 mb-5">
-              Our Destinations
-            </p>
-            <h1 className="font-serif text-5xl md:text-7xl text-white mb-5 leading-tight">
-              Our Journeys
-            </h1>
-            <p className="font-sans text-lg text-sand/80 max-w-2xl mx-auto leading-relaxed">
-              Each trip is carefully designed to showcase the best of Southeast Asia
-              while ensuring comfort, safety, and authentic experiences for LGBTQ+ travelers.
-            </p>
+          {/* Left-side dark gradient */}
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(14,31,56,0.90) 0%, rgba(14,31,56,0.65) 45%, rgba(14,31,56,0.15) 75%, transparent 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.3) 0%, transparent 40%)" }} />
+
+          <div className="relative z-10 mx-auto max-w-7xl px-8 lg:px-16 w-full">
+            <div className="max-w-xl">
+              <p className="font-sans text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "#EA5A2A" }}>
+                Four Destinations
+              </p>
+              <h1 className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white mb-4 leading-tight">
+                Shared Journeys<br />
+                Real <span className="italic text-sunset-orange">Connections</span>
+              </h1>
+              <p className="font-sans text-base text-white/70 max-w-md leading-relaxed">
+                Curated gay group trips across Southeast Asia, designed with care
+              </p>
+            </div>
           </div>
         </section>
 
         {/* Trips Grid */}
-        <section className="py-24 bg-warm-cream">
+        <section className="py-14 md:py-20 bg-warm-cream">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {siteConfig.trips.map((trip) => (
@@ -63,64 +69,42 @@ export default function TripsPage() {
           </div>
         </section>
 
-        {/* What's Included */}
-        <section className="py-24 bg-navy">
+        {/* What We Offer */}
+        <section className="py-8 md:py-24 bg-navy">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-4 text-xs">
-                The Experience
+                What We Offer
               </p>
               <h2 className="font-serif text-4xl sm:text-5xl font-bold text-white">
-                What&apos;s{" "}
-                <span className="italic text-sunset-orange">Included</span>
+                The Out in Asia{" "}
+                <span className="italic text-sunset-orange">Experience</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16">
               {[
-                {
-                  title: "Boutique Accommodations",
-                  description:
-                    "Handpicked hotels and resorts that combine local character with modern comfort and LGBTQ+ friendly atmospheres.",
-                },
-                {
-                  title: "Local Transportation",
-                  description:
-                    "Comfortable private transfers and unique local transport experiences, from long-tail boats to tuk-tuks.",
-                },
-                {
-                  title: "Expert Guidance",
-                  description:
-                    "Personal guidance from our founders throughout your journey, with deep local knowledge and 24/7 support.",
-                },
-                {
-                  title: "Curated Experiences",
-                  description:
-                    "Carefully selected activities that go beyond typical tourism — cooking classes, temple visits, and hidden gems.",
-                },
-                {
-                  title: "Community Connection",
-                  description:
-                    "Small group sizes that foster meaningful connections with fellow travelers and local communities.",
-                },
-                {
-                  title: "Culinary Adventures",
-                  description:
-                    "Selected meals at outstanding local restaurants, street food tours, and authentic dining experiences.",
-                },
+                { Icon: Home,             title: "Handpicked Stays",          description: "Premium hotels, resorts and selected unique stays" },
+                { Icon: Car,              title: "Seamless Transportation",   description: "Private transfers and comfortable transport throughout" },
+                { Icon: Compass,          title: "Expert Guidance",           description: "Hosted with care by our team and trusted local guides" },
+                { Icon: Sparkles,         title: "Curated Experiences",       description: "Culture, nature and local moments designed with purpose" },
+                { Icon: Users,            title: "Community Connection",      description: "Small groups that create genuine LGBTQ+ connections" },
+                { Icon: UtensilsCrossed,  title: "Dining Experiences",        description: "Selected meals, local restaurants and authentic flavours" },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="py-8 border-b border-white/10 flex gap-6 last:border-0"
+                  className="py-3 md:py-8 border-b border-white/10 flex gap-4 md:gap-6 last:border-0"
                 >
-                  <span className="font-serif text-sunset-orange text-lg flex-shrink-0 w-8 pt-0.5">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <item.Icon
+                    className="flex-shrink-0 mt-0.5"
+                    style={{ width: 20, height: 20, color: "#EA5A2A" }}
+                    strokeWidth={1.75}
+                  />
                   <div>
-                    <h3 className="font-serif text-xl text-white mb-2">
+                    <h3 className="font-serif text-base md:text-xl text-white mb-1 md:mb-2">
                       {item.title}
                     </h3>
-                    <p className="font-sans text-sand/70 leading-relaxed">
+                    <p className="font-sans text-xs md:text-base text-sand/70 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -130,28 +114,6 @@ export default function TripsPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-20 bg-warm-cream border-t-2 border-sunset-orange">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-navy max-w-lg leading-tight">
-                Not sure which trip is right for you?
-              </h2>
-              <div className="text-center md:text-right flex-shrink-0">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300 mb-3"
-                >
-                  Talk to Filippo &amp; Szilard
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <p className="font-sans text-sm text-clay">
-                  We reply within 24 hours
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       </PageTransition>
       <Footer />
