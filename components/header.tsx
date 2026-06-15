@@ -3,11 +3,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { Menu, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const navLinks = [
-  { href: "/trips", label: "Trips" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/trips", label: "Group Trips" },
+  { href: "/private-trips", label: "Private Trips" },
+  { href: "/about", label: "Meet Us" },
+  { href: "/contact", label: "Get in Touch" },
 ]
 
 export function Header() {
@@ -20,21 +23,25 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
+  }, [isMenuOpen])
+
+  const logoSrc = isMenuOpen || !isScrolled ? "/logo-text-navy-bg.svg" : "/logo-text-light-bg.svg"
+  const headerBg = isMenuOpen ? "bg-[#0E1F38]" : isScrolled ? "bg-[#FAF6EF] shadow-sm" : "bg-transparent"
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "bg-[#FAF6EF] shadow-sm" : "bg-transparent"}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <nav className="flex items-center justify-between h-20">
-          <Link href="/" className="relative z-50">
+          <Link href="/" onClick={() => setIsMenuOpen(false)}>
             <Image
-              src={isScrolled ? "/logo-text-navy-bg.svg" : "/logo-text-light-bg.svg"}
+              src={logoSrc}
               alt="Out in Asia"
-              width={180}
+              width={160}
               height={48}
-              className="h-12 w-auto transition-opacity duration-500"
-              style={{
-                opacity: 1,
-                visibility: "visible",
-              }}
+              className="h-12 w-auto opacity-100"
               priority
             />
           </Link>
@@ -60,36 +67,67 @@ export function Header() {
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden flex flex-col gap-1.5 w-8 h-8 items-center justify-center"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="lg:hidden flex items-center justify-center w-11 h-11 -mr-1.5"
           >
-            <span className={`w-6 h-0.5 block transition-all ${isScrolled ? "bg-[#0E1F38]" : "bg-white"}`} />
-            <span className={`w-6 h-0.5 block transition-all ${isScrolled ? "bg-[#0E1F38]" : "bg-white"}`} />
-            <span className={`w-6 h-0.5 block transition-all ${isScrolled ? "bg-[#0E1F38]" : "bg-white"}`} />
+            {isMenuOpen
+              ? <X className="h-6 w-6 text-white" />
+              : <Menu className={`h-6 w-6 ${isScrolled ? "text-[#0E1F38]" : "text-white"}`} />
+            }
           </button>
         </nav>
       </div>
 
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-[#0E1F38] z-40 flex flex-col items-center justify-center gap-8 lg:hidden">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="font-serif text-4xl text-white hover:text-[#EA5A2A] transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            onClick={() => setIsMenuOpen(false)}
-            className="mt-4 px-8 py-3 bg-[#EA5A2A] text-white rounded-full font-sans font-semibold"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 top-20 bg-[#0E1F38] z-40 flex flex-col lg:hidden"
           >
-            Book a Trip
-          </Link>
-        </div>
-      )}
+            <div className="flex-1 flex flex-col items-center justify-center gap-1">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.06 + i * 0.05, duration: 0.25 }}
+                  className="w-full"
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center py-4 font-serif text-2xl text-white hover:text-[#EA5A2A] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                  {i < navLinks.length - 1 && (
+                    <div className="w-8 h-px bg-white/10 mx-auto" />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Book a Trip CTA — pinned to bottom, NOT full width */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.22, duration: 0.25 }}
+              className="flex justify-center px-6 pb-10"
+            >
+              <Link
+                href="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="inline-flex items-center justify-center px-10 py-4 bg-[#EA5A2A] text-white rounded-full font-sans font-semibold text-base min-h-[52px]"
+              >
+                Book a Trip
+              </Link>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }
