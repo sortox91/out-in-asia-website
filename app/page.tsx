@@ -176,7 +176,7 @@ function HeroSection() {
 const PILLARS = [
   {
     label: "SAFETY FIRST",
-    statement: "Every destination handpicked for LGBTQ+ comfort",
+    statement: "Destinations chosen for LGBTQ+ comfort",
     Icon: ShieldCheck,
   },
   {
@@ -186,7 +186,7 @@ const PILLARS = [
   },
   {
     label: "CURATED LUXURY",
-    statement: "4 & 5-star stays, private transfers, no compromises",
+    statement: "Premium stays, private transfers, always",
     Icon: Sparkles,
   },
 ]
@@ -196,9 +196,7 @@ function PremiumStatsSection() {
     <section
       className="relative z-10 -mt-12 md:-mt-16"
       style={{
-        background: "rgba(14,31,56,0.72)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
+        backgroundColor: "#0E1F38",
       }}
     >
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-0">
@@ -329,7 +327,7 @@ function DestinationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-serif font-extrabold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
+              className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
             >
               Four Destinations,{" "}
               <span className="italic text-sunset-orange">
@@ -580,7 +578,7 @@ function CTASection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-serif font-extrabold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
+          className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
         >
           Ready To Explore<br />
           <span className="italic text-sunset-orange">Southeast Asia?</span>

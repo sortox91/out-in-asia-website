@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const navLinks = [
-  { href: "/trips", label: "Trips" },
+  { href: "/trips", label: "Group Trips" },
   { href: "/private-trips", label: "Private Trips" },
   { href: "/about", label: "Meet Us" },
   { href: "/contact", label: "Get in Touch" },
@@ -117,12 +117,12 @@ export function Header() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.22, duration: 0.25 }}
-              className="px-6 pb-10"
+              className="px-6 pb-10 flex justify-center"
             >
               <Link
                 href="/contact"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center justify-center w-full py-4 bg-[#EA5A2A] text-white rounded-full font-sans font-semibold text-base min-h-[52px]"
+                className="inline-flex items-center justify-center py-4 px-8 bg-[#EA5A2A] text-white rounded-full font-sans font-semibold text-base min-h-[52px]"
               >
                 Book a Trip
               </Link>
