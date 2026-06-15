@@ -30,10 +30,10 @@ export function Footer() {
       className="text-warm-cream relative overflow-hidden border-t-4 border-sunset-orange"
       style={{ background: "linear-gradient(160deg, #0E1F38 0%, #0a1628 100%)" }}
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-8 md:pt-10 pb-5 md:pb-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-5 md:pt-10 pb-5 md:pb-6">
 
         {/* Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 md:mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-8 mb-3 md:mb-10">
 
           {/* Brand Column */}
           <div className="lg:col-span-5">
@@ -42,18 +42,24 @@ export function Footer() {
               alt="Out in Asia"
               width={200}
               height={52}
-              className="h-12 w-auto mb-5"
+              className="h-12 w-auto mb-3 md:mb-5"
             />
-            <p className="font-sans text-xs lg:text-sm text-sand/65 max-w-sm leading-relaxed mb-6">
+
+            {/* Mobile: short description */}
+            <p className="font-sans text-xs text-sand/65 leading-relaxed mb-4 md:hidden">
+              Premium LGBTQ+ travel in Southeast Asia.
+            </p>
+            {/* Desktop: full description */}
+            <p className="hidden md:block font-sans text-xs lg:text-sm text-sand/65 max-w-sm leading-relaxed mb-6">
               Curated premium travel experiences for the LGBTQ+ community across Southeast Asia.
             </p>
 
             {/* Mobile only: Get in Touch heading + social icons */}
             <div className="lg:hidden">
-              <h4 className="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-sand/40 mb-4">
+              <h4 className="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-sand/40 mb-3">
                 Get in Touch
               </h4>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 {socialItems.map((social) => (
                   <motion.a
                     key={social.label}
@@ -151,11 +157,11 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-4">
-          <p className="font-serif italic text-sand/50 text-sm text-center mb-4">
+        <div className="pt-3 md:pt-4">
+          <p className="hidden md:block font-serif italic text-sand/50 text-sm text-center mb-4">
             Travel Gay &bull; Be You &bull; Belong Together
           </p>
-          <div className="border-t border-white/20 pt-4 flex justify-center">
+          <div className="border-t border-white/20 pt-3 md:pt-4 flex justify-center">
             <p className="font-sans text-xs text-sand/35">
               &copy; {new Date().getFullYear()} Out in Asia. All rights reserved.
             </p>
