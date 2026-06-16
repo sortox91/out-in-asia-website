@@ -99,7 +99,21 @@
       "Bash(awk '-F\"' '{for\\(i=1;i<=NF;i++\\){if\\($i==\"width\"\\){w=$\\(i+1\\)}; if\\($i==\"height\"\\){h=$\\(i+1\\)}}; if\\(w+0>100\\) print w, h, $0}')",
       "Bash(node *)",
       "Bash(npx vercel *)",
-      "Bash(vercel *)"
+      "Bash(vercel *)",
+      "mcp__claude_ai_Google_Drive__read_file_content",
+      "Bash(curl -s http://localhost:3456/trips/north-vietnam)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3456/trips/north-vietnam)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3456/)",
+      "Bash(grep -E \"^ws$\")",
+      "Bash(osascript)",
+      "Bash(osascript -e 'tell application \"Google Chrome\" to set URL of active tab of front window to \"http://localhost:3000/trips/north-vietnam\"')",
+      "Bash(screencapture -x /tmp/map-noscroll.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --print-to-pdf=/tmp/map-page.pdf --window-size=1280,900 --virtual-time-budget=5000 http://localhost:3000/trips/north-vietnam)",
+      "Bash(brew install *)",
+      "Bash(qlmanage -t -s 1200 -o /tmp/ /tmp/map-page.pdf)",
+      "Bash(curl -s http://localhost:3000/maps/north-vietnam-step-1.svg)",
+      "mcp__claude_ai_Google_Drive__search_files",
+      "mcp__claude_ai_Google_Drive__download_file_content"
     ]
   }
 }
