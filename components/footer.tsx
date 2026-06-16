@@ -13,7 +13,7 @@ const destinations = [
 ]
 
 const exploreLinks = [
-  { name: "Trips",         href: "/trips",   Icon: Compass },
+  { name: "Group Trips",   href: "/trips",   Icon: Compass },
   { name: "Meet Us",       href: "/about",   Icon: Users },
   { name: "Get in Touch",  href: "/contact", Icon: MessageCircle },
 ]
@@ -30,10 +30,10 @@ export function Footer() {
       className="text-warm-cream relative overflow-hidden border-t-4 border-sunset-orange"
       style={{ background: "linear-gradient(160deg, #0E1F38 0%, #0a1628 100%)" }}
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-5 md:pt-10 pb-5 md:pb-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-4 md:pt-10 pb-4 md:pb-6">
 
         {/* Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-8 mb-3 md:mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 md:gap-8 mb-2 md:mb-10">
 
           {/* Brand Column */}
           <div className="lg:col-span-5">
@@ -54,27 +54,25 @@ export function Footer() {
               Curated premium travel experiences for the LGBTQ+ community across Southeast Asia.
             </p>
 
-            {/* Mobile only: Get in Touch heading + social icons */}
-            <div className="lg:hidden">
-              <h4 className="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-sand/40 mb-3">
+            {/* Mobile only: Get in Touch heading + social icons on same row */}
+            <div className="lg:hidden flex items-center gap-3">
+              <h4 className="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-sand/40">
                 Get in Touch
               </h4>
-              <div className="flex gap-3">
-                {socialItems.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target={social.href.startsWith("mailto") ? undefined : "_blank"}
-                    rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                    className="w-11 h-11 rounded-full border border-sand/20 flex items-center justify-center text-sand/60 hover:text-sunset-orange hover:border-sunset-orange transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-5 w-5" />
-                  </motion.a>
-                ))}
-              </div>
+              {socialItems.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={social.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  className="w-9 h-9 rounded-full border border-sand/20 flex items-center justify-center text-sand/60 hover:text-sunset-orange hover:border-sunset-orange transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label={social.label}
+                >
+                  <social.icon className="h-4 w-4" />
+                </motion.a>
+              ))}
             </div>
           </div>
 
