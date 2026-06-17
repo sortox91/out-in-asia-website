@@ -29,8 +29,8 @@ export const siteConfig = {
       subtitle: "Land of Smiles",
       description:
         "From Bangkok's vibrant energy to the serene temples of Chiang Mai and pristine beaches of the south. Experience Thailand's warmth, culture, and legendary hospitality.",
-      duration: "10 days",
-      image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80",
+      duration: "12 days",
+      image: "/trips/thailand.png",
       heroImage: "/trips/thailand.jpg",
       price: "€2,900",
       highlights: [
@@ -47,7 +47,7 @@ export const siteConfig = {
       description:
         "Discover Hanoi's old quarter charm, trek through the terraced rice fields of Sapa, cruise Ha Long Bay's limestone karsts, and unwind in the scenic valleys of Ninh Binh.",
       duration: "12 days",
-      image: "https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=800&q=80",
+      image: "/trips/north-vietnam.png",
       heroImage: "/ai-landscapes/vietnam-6.png",
       price: "€4,400",
       highlights: [
@@ -63,8 +63,8 @@ export const siteConfig = {
       subtitle: "Rivers & History",
       description:
         "Explore Ho Chi Minh City's fascinating history, cruise the Mekong Delta's waterways, and relax on the beaches of Phu Quoc.",
-      duration: "9 days",
-      image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&q=80",
+      duration: "12 days",
+      image: "/trips/south-vietnam.png",
       heroImage: "/trips/south-vietnam.jpg",
       price: "€2,500",
       highlights: [
@@ -80,8 +80,8 @@ export const siteConfig = {
       subtitle: "Island of Gods",
       description:
         "Immerse yourself in Bali's spiritual heart, from Ubud's rice terraces and temples to the stunning beaches and vibrant nightlife of Seminyak.",
-      duration: "7 days",
-      image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
+      duration: "13 days",
+      image: "/trips/bali.png",
       heroImage: "/trips/bali.jpg",
       price: "€2,400",
       highlights: [

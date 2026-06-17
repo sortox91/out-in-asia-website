@@ -7,10 +7,14 @@ interface PageHeroProps {
   imageMobile?: string
   /** Small teal label above the title */
   eyebrow: string
-  /** Main title text */
+  /** Main title — line 1 */
   title: string
-  /** Optional word/phrase rendered italic orange after the title */
+  /** Optional italic orange word appended to line 1 */
   titleAccent?: string
+  /** Optional second title line */
+  titleLine2?: string
+  /** Optional italic orange word appended to line 2 */
+  titleLine2Accent?: string
   /** Optional subtitle in Manrope below the title */
   subtitle?: string
 }
@@ -26,6 +30,8 @@ export function PageHero({
   eyebrow,
   title,
   titleAccent,
+  titleLine2,
+  titleLine2Accent,
   subtitle,
 }: PageHeroProps) {
   const mobileImage = imageMobile ?? image
@@ -85,12 +91,19 @@ export function PageHero({
               {eyebrow}
             </p>
             <h1 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4">
-              {title}
-              {titleAccent && (
-                <>
-                  {" "}
-                  <span className="italic text-sunset-orange">{titleAccent}</span>
-                </>
+              <span className="block">
+                {title}
+                {titleAccent && (
+                  <>{" "}<span className="italic text-sunset-orange">{titleAccent}</span></>
+                )}
+              </span>
+              {titleLine2 && (
+                <span className="block">
+                  {titleLine2}
+                  {titleLine2Accent && (
+                    <>{" "}<span className="italic text-sunset-orange">{titleLine2Accent}</span></>
+                  )}
+                </span>
               )}
             </h1>
             {subtitle && (
