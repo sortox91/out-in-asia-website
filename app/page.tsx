@@ -10,13 +10,12 @@ import { Footer } from "@/components/footer"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-
 const DESTINATIONS = [
   {
     id: "north-vietnam",
     title: "North Vietnam",
     subtitle: "Mountains & Heritage",
-    image: "/ai-landscapes/vietnam-2.png",
+    image: "/trips/north-vietnam.jpg",
     price: "€4,400",
     duration: "12 days",
   },
@@ -24,7 +23,7 @@ const DESTINATIONS = [
     id: "thailand",
     title: "Thailand",
     subtitle: "Land of Smiles",
-    image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80",
+    image: "/trips/thailand.jpg",
     price: "€2,900",
     duration: "10 days",
   },
@@ -32,7 +31,7 @@ const DESTINATIONS = [
     id: "south-vietnam",
     title: "South Vietnam",
     subtitle: "Rivers & History",
-    image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&q=80",
+    image: "/trips/south-vietnam.jpg",
     price: "€2,500",
     duration: "9 days",
   },
@@ -40,34 +39,44 @@ const DESTINATIONS = [
     id: "bali",
     title: "Bali",
     subtitle: "Island of Gods",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
+    image: "/trips/bali.jpg",
     price: "€2,400",
     duration: "7 days",
   },
 ]
 
-
 const TESTIMONIALS = [
-  {
-    quote:
-      "I've been to 30+ countries, but Out in Asia was something else entirely. Filippo and Szilard created a space where I could be completely myself, visiting temples by day and dancing freely at night.",
-    author: "James M.",
-    flag: "🇬🇧",
-    trip: "Thailand · December 2026",
-  },
   {
     quote:
       "Every detail was perfect, from the handpicked boutique hotels to the secret local restaurants no guidebook mentions. What moved me most was feeling truly safe and welcomed as a gay traveller everywhere we went.",
     author: "Marco V.",
-    flag: "🇩🇪",
-    trip: "Bali · March 2027",
+    flag: "🇮🇹",
+    trip: "Bali · April 2026",
+    photo: "/reviews/reviewer-1.png",
   },
   {
     quote:
-      "Waking up on a junk boat in Ha Long Bay surrounded by people who just got it. I still tear up thinking about it. Already planning my return.",
-    author: "Thomas K.",
-    flag: "🇫🇷",
-    trip: "North Vietnam · April 2027",
+      "North Vietnam completely exceeded my expectations. The landscapes were incredible, but what made the journey special was the atmosphere of the group, relaxed, elegant and genuinely inclusive. I never felt like just another tourist.",
+    author: "David C.",
+    flag: "🇬🇧",
+    trip: "North Vietnam · March 2026",
+    photo: "/reviews/reviewer-2.png",
+  },
+  {
+    quote:
+      "I loved how well everything flowed, from the hotels and transfers to the local experiences. South Vietnam felt vibrant, authentic and easy to enjoy because everything had been so thoughtfully planned. It was my first gay group trip, and definitely not my last.",
+    author: "Marcus R.",
+    flag: "🇺🇸",
+    trip: "South Vietnam · January 2026",
+    photo: "/reviews/reviewer-3.png",
+  },
+  {
+    quote:
+      "Bali was the perfect mix of beauty, comfort and connection. I joined solo and left with unforgettable memories and new friends. The trip felt polished but never stiff, and I could fully relax and be myself throughout.",
+    author: "Kenji N.",
+    flag: "🇯🇵",
+    trip: "Bali · May 2026",
+    photo: "/reviews/reviewer-4.png",
   },
 ]
 
@@ -78,32 +87,49 @@ function HeroSection() {
   const bgY = useTransform(scrollY, [0, 800], [0, -160])
 
   return (
-    <section className="relative h-[85vh] md:h-screen min-h-[560px] overflow-hidden">
-      {/* Parallax background */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18]">
+    <section className="relative h-[65vh] md:h-screen min-h-[480px] md:min-h-[600px] overflow-hidden">
+
+      {/* Desktop background — landscape, with parallax */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-[1.18] hidden md:block">
         <Image
-          src="/ai-landscapes/vietnam-1.png"
-          alt="Vietnam landscape"
+          src="/hero/hero-home-web.png"
+          alt="Out in Asia"
           fill
-          className="object-cover object-[65%_50%]"
+          className="object-cover"
           priority
           sizes="100vw"
         />
       </motion.div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/30" />
+      {/* Mobile background — portrait 4:5, no parallax */}
+      <div className="absolute inset-0 md:hidden">
+        <Image
+          src="/hero/hero-home-mobile.png"
+          alt="Out in Asia"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+      </div>
 
-      {/* Bottom-left text block */}
-      <div className="absolute bottom-[10%] sm:bottom-[12%] lg:bottom-[15%] left-0 w-full px-6 sm:px-10 lg:px-16">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/15 to-black/25" />
+
+      {/* Title block:
+          Mobile → top of section (people are in bottom of image)
+          Desktop → bottom-left */}
+      <div className="absolute top-24 left-0 w-full px-6 sm:px-10 md:top-auto md:bottom-[15%] lg:bottom-[18%] lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <h1 className="font-serif font-extrabold" style={{ paddingBottom: "0.2em" }}>
+          {/* A — font-bold (700), ~20% smaller than before.
+              All text white — "Be You" orange had <1.5:1 contrast on the warm sunset image. */}
+          <h1 className="font-serif font-bold" style={{ paddingBottom: "0.2em" }}>
             {[
               { text: "Travel Gay", italic: false },
-              { text: "Be You", italic: true, orange: true },
+              { text: "Be You", italic: true },
               { text: "Belong Together", italic: false },
-            ].map(({ text, italic, orange }, i) => (
-              <div key={i}>
+            ].map(({ text, italic }, i) => (
+              <div key={i} className="overflow-hidden">
                 <motion.span
                   initial={{ y: "110%" }}
                   animate={{ y: 0 }}
@@ -112,10 +138,7 @@ function HeroSection() {
                     delay: 0.35 + i * 0.18,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={`block leading-[1.3] ${italic ? "italic" : ""} ${
-                    orange ? "text-sunset-orange" : "text-white"
-                  }`}
-                  style={{ fontSize: "clamp(2.8rem, 7.5vw, 6.5rem)" }}
+                  className={`block leading-[1.3] text-white text-[clamp(1.75rem,5vw,2.2rem)] md:text-[clamp(2.2rem,6vw,5.2rem)] ${italic ? "italic" : ""}`}
                 >
                   {text}
                 </motion.span>
@@ -127,7 +150,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.9 }}
-            className="mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
+            className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
           >
             <p className="font-sans text-[10px] sm:text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
               Curated luxury journeys exclusively for the LGBTQ+ community.
@@ -150,12 +173,12 @@ function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — desktop only */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.7 }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
       >
         <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-white/60">
           Scroll
@@ -171,12 +194,12 @@ function HeroSection() {
   )
 }
 
-// ─── Premium Stats ─────────────────────────────────────────────────────────────
+// ─── Pillars ──────────────────────────────────────────────────────────────────
 
 const PILLARS = [
   {
     label: "SAFETY FIRST",
-    statement: "Every destination handpicked for LGBTQ+ comfort",
+    statement: "Destinations chosen for LGBTQ+ comfort",
     Icon: ShieldCheck,
   },
   {
@@ -186,21 +209,14 @@ const PILLARS = [
   },
   {
     label: "CURATED LUXURY",
-    statement: "4 & 5-star stays, private transfers, no compromises",
+    statement: "Premium stays, private transfers, always",
     Icon: Sparkles,
   },
 ]
 
 function PremiumStatsSection() {
   return (
-    <section
-      className="relative z-10 -mt-12 md:-mt-16"
-      style={{
-        background: "rgba(14,31,56,0.72)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-      }}
-    >
+    <section className="relative z-10" style={{ backgroundColor: "#0E1F38" }}>
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-3 md:py-0">
 
         {/* MOBILE: compact horizontal rows */}
@@ -260,7 +276,7 @@ function DestinationCard({
     >
       <Link
         href={`/trips/${dest.id}`}
-        className="group block relative rounded-2xl overflow-hidden h-[220px] sm:h-[300px] lg:h-[368px]"
+        className="group block relative rounded-2xl overflow-hidden h-[180px] sm:h-[260px] lg:h-[320px]"
       >
         <Image
           src={dest.image}
@@ -270,7 +286,6 @@ function DestinationCard({
           sizes="(max-width: 640px) 100vw, 50vw"
         />
 
-        {/* Gradient — strong base for mobile readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-500 group-hover:via-black/50" />
 
         {/* Duration — top left */}
@@ -324,12 +339,13 @@ function DestinationsSection() {
             >
               Our Journeys
             </motion.p>
+            {/* A — font-bold */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-serif font-extrabold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
+              className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-navy leading-[1.05]"
             >
               Four Destinations,{" "}
               <span className="italic text-sunset-orange">
@@ -337,11 +353,13 @@ function DestinationsSection() {
               </span>
             </motion.h2>
           </div>
+          {/* View all trips — desktop */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
+            className="hidden md:block"
           >
             <Link
               href="/trips"
@@ -356,10 +374,24 @@ function DestinationsSection() {
         {/* 2×2 grid — mobile shows Thailand + Bali only */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {DESTINATIONS.map((dest, i) => (
-            <div key={dest.id} className={dest.id === "north-vietnam" || dest.id === "south-vietnam" ? "hidden md:block" : ""}>
+            <div
+              key={dest.id}
+              className={dest.id === "north-vietnam" || dest.id === "south-vietnam" ? "hidden md:block" : ""}
+            >
               <DestinationCard dest={dest} index={i} />
             </div>
           ))}
+        </div>
+
+        {/* Mobile only — View all trips after the 2 visible cards */}
+        <div className="md:hidden mt-6 flex justify-center">
+          <Link
+            href="/trips"
+            className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-navy hover:text-sunset-orange transition-colors group"
+          >
+            View all trips{" "}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>
@@ -368,21 +400,30 @@ function DestinationsSection() {
 
 // ─── Founders ──────────────────────────────────────────────────────────────────
 
-// Shared text content for FoundersSection (used on both mobile and desktop)
 function FoundersText({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
       <p className="font-sans text-xs uppercase mb-6" style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}>
         Meet Your Guides
       </p>
+      {/* A — font-bold, E — "Gay" and "Love" in orange italic, "Shared" removed */}
       <h2
-        className={`font-serif font-extrabold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
+        className={`font-serif font-bold leading-tight mb-6 ${mobile ? "text-3xl" : "text-3xl md:text-5xl md:leading-snug"}`}
         style={{ color: "#FAF6EF" }}
       >
-        Two <span style={{ color: "#EA5A2A" }}>Gay</span> Travellers
-        <br />One Shared Love for <span style={{ color: "#EA5A2A" }}>Asia</span>
+        Two{" "}
+        <span className="italic" style={{ color: "#EA5A2A" }}>Gay</span>
+        {" "}Travellers
+        <br />
+        One{" "}
+        <span className="italic" style={{ color: "#EA5A2A" }}>Love</span>
+        {" "}for Asia
       </h2>
-      <p className="font-sans text-base leading-relaxed mb-10" style={{ color: "rgba(250,246,239,0.78)", maxWidth: mobile ? "100%" : "440px" }}>
+      {/* E — description as wide as title (no maxWidth cap), smaller on mobile */}
+      <p
+        className={`font-sans leading-relaxed mb-10 ${mobile ? "text-sm" : "text-sm md:text-base"}`}
+        style={{ color: "rgba(250,246,239,0.78)" }}
+      >
         Between us, we have over 10 years of living across Southeast Asia.
         Filippo spent years as a digital nomad, discovering the region&apos;s
         hidden corners by motorbike. Szilard built a thriving premium travel
@@ -429,7 +470,7 @@ function FoundersSection() {
       <div className="md:hidden">
         <div className="relative h-72 overflow-hidden">
           <Image
-            src="/founders/together-ai-1.jpg"
+            src="/guides/founders-home.png"
             alt="Filippo and Szilard"
             fill
             className="object-cover object-center"
@@ -445,7 +486,7 @@ function FoundersSection() {
       <div className="hidden md:flex relative overflow-hidden items-center" style={{ minHeight: "540px" }}>
         <div className="absolute top-0 right-0 bottom-0 w-[55%]" style={{ overflow: "hidden" }}>
           <Image
-            src="/founders/together-ai-1.jpg"
+            src="/guides/founders-home.png"
             alt="Filippo and Szilard"
             fill
             className="object-cover object-center"
@@ -475,7 +516,6 @@ function TestimonialsSection() {
     <section className="py-14 md:py-20" style={{ backgroundColor: "#FAF6EF" }}>
       <div className="mx-auto max-w-7xl px-5 md:px-8">
 
-        {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -486,7 +526,7 @@ function TestimonialsSection() {
           What People Say About Us
         </motion.p>
 
-        {/* Testimonial card — navy on cream */}
+        {/* F — cream card with soft shadow (previously navy) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -498,41 +538,42 @@ function TestimonialsSection() {
             <div
               className="mx-auto max-w-2xl rounded-2xl p-7 md:p-10 relative"
               style={{
-                backgroundColor: "#0E1F38",
-                boxShadow: "0 8px 40px rgba(0,0,0,0.14)",
+                backgroundColor: "#FFFFFF",
+                boxShadow: "0 2px 20px rgba(14,31,56,0.08)",
+                border: "1px solid rgba(14,31,56,0.06)",
               }}
             >
               {/* Decorative opening quote */}
               <span
                 aria-hidden
                 className="absolute top-4 left-6 font-serif leading-none select-none pointer-events-none"
-                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.25, lineHeight: 1 }}
+                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.15, lineHeight: 1 }}
               >
                 &ldquo;
               </span>
 
-              {/* Quote text */}
               <blockquote
                 className="font-serif text-base md:text-lg italic leading-relaxed mb-7 relative z-10 pt-4"
-                style={{ color: "#FAF6EF" }}
+                style={{ color: "#0E1F38" }}
               >
                 &ldquo;{TESTIMONIALS[current].quote}&rdquo;
               </blockquote>
 
-              {/* Avatar + author */}
+              {/* Photo + author */}
               <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
-                <div
-                  className="w-20 h-20 rounded-full flex-shrink-0 flex items-center justify-center"
-                  style={{ backgroundColor: "rgba(250,246,239,0.10)" }}
-                >
-                  <span className="font-serif font-bold text-2xl" style={{ color: "#FAF6EF" }}>
-                    {TESTIMONIALS[current].author.charAt(0)}
-                  </span>
+                <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                  <Image
+                    src={TESTIMONIALS[current].photo}
+                    alt={TESTIMONIALS[current].author}
+                    width={64}
+                    height={64}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
                 <div>
                   <p className="font-sans font-bold text-sm" style={{ color: "#EA5A2A" }}>
                     {TESTIMONIALS[current].author}{" "}
-                    <span className="font-normal">{TESTIMONIALS[current].flag}</span>
+                    <span className="font-normal" style={{ color: "#0E1F38" }}>{TESTIMONIALS[current].flag}</span>
                   </p>
                   <p className="font-sans text-xs mt-1" style={{ color: "#1F8A8F" }}>
                     {TESTIMONIALS[current].trip}
@@ -569,30 +610,36 @@ function TestimonialsSection() {
 function CTASection() {
   return (
     <section className="relative py-16 lg:py-20 overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <Image src="/trips/north-vietnam.jpg" alt="" fill className="object-cover" />
+      {/* G — desktop image */}
+      <div className="absolute inset-0 hidden md:block">
+        <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover" />
+      </div>
+      {/* G — mobile image (different proportions) */}
+      <div className="absolute inset-0 md:hidden">
+        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-center" />
       </div>
       <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.78)" }} />
 
       <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
+        {/* A — font-bold */}
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-serif font-extrabold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
+          className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
         >
           Ready To Explore<br />
           <span className="italic text-sunset-orange">Southeast Asia?</span>
         </motion.h2>
+        {/* G — smaller on mobile, one line, no period */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="font-sans text-white/60 text-lg mb-10"
+          className="font-sans text-white/60 text-xs md:text-lg mb-10"
         >
-          Join Filippo and Szilard on a journey like no other.
+          Join Filippo and Szilard on a journey like no other
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
