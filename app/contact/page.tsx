@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { PageHero } from "@/components/page-hero";
 import { siteConfig } from "@/lib/config";
 
 const faqs = [
@@ -106,26 +107,13 @@ export default function ContactPage() {
     <>
       <Header />
       <main className="overflow-x-hidden">
-        {/* Hero */}
-        <section className="relative h-[40vh] min-h-[300px] flex items-end overflow-hidden">
-          <Image
-            src="/gallery/halong/bay.jpg"
-            alt="Ha Long Bay, Vietnam"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-navy/70" />
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 w-full">
-            <p className="font-sans text-xs text-ocean-teal font-medium tracking-widest uppercase mb-4">
-              Get in Touch
-            </p>
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Let&apos;s Plan Your{" "}
-              <span className="italic text-sunset-orange">Adventure</span>
-            </h1>
-          </div>
-        </section>
+        <PageHero
+          image="/gallery/halong/bay.jpg"
+          eyebrow="Get in Touch"
+          title="Let's Plan Your"
+          titleAccent="Adventure"
+          subtitle="We reply within 24 hours"
+        />
 
         {/* Main Content */}
         <section id="reach-out" className="py-10 md:py-20 bg-warm-cream">

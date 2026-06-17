@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { AboutFounders } from "@/components/about-founders";
 import { PageTransition } from "@/components/page-transition";
+import { PageHero } from "@/components/page-hero";
 
 export const metadata = {
   title: "About Us | Out in Asia",
@@ -18,28 +19,13 @@ export default function AboutPage() {
       <Header />
       <PageTransition>
         <main className="overflow-x-hidden">
-          {/* Hero */}
-          <section className="relative py-20 md:py-32 bg-navy overflow-hidden">
-            <Image
-              src="/founders/together.jpg"
-              alt="Filippo and Szilard in Southeast Asia"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-            <div className="absolute inset-0 bg-navy/70" />
-            <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl">
-                <p className="font-sans text-ocean-teal font-medium tracking-widest uppercase mb-4 text-xs">
-                  Our Story
-                </p>
-                <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 leading-tight break-words">
-                  Two Guides, One{" "}
-                  <span className="italic text-sunset-orange">Passion</span>
-                </h1>
-              </div>
-            </div>
-          </section>
+          <PageHero
+            image="/founders/together.jpg"
+            eyebrow="Our Story"
+            title="Two Guides, One"
+            titleAccent="Passion"
+            subtitle="Meet Filippo & Szilard — gay travellers with 10+ years across Southeast Asia"
+          />
 
           {/* Our Mission */}
           <section className="py-14 md:py-24 bg-warm-cream">
