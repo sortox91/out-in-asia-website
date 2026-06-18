@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, Calendar, Users, MapPin, Sparkles } from "lucide-react";
+import { Check, Calendar, Users, MapPin, Sparkles, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { RouteMap } from "@/components/route-map";
 import { TripHeroParallax } from "@/components/trip-hero-parallax";
+import { PageHero } from "@/components/page-hero";
 import { TripPricingBlock } from "@/components/trip-pricing-block";
 import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
@@ -169,13 +170,46 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
       <Header />
       <main className="overflow-x-hidden">
 
-        {/* ── Parallax Hero ── */}
-        <TripHeroParallax
-          title={trip.title}
-          subtitle={trip.subtitle}
-          heroImage={trip.heroImage}
-          nextDates={details.nextDates}
-        />
+        {/* ── Hero ── */}
+        {slug === "north-vietnam" ? (
+          <>
+            <div className="relative">
+              <PageHero
+                image="/north-vietnam/northvietnam-cover-web.png"
+                imageMobile="/north-vietnam/northvietnam-cover-mobile.png"
+                eyebrow="GROUP GAY TRIPS"
+                title="North Vietnam"
+                subtitle="Rice terraces, mountain villages, limestone bays and immersive local experiences"
+              />
+              <div className="absolute top-24 left-6 sm:left-10 lg:left-16 z-10">
+                <Link
+                  href="/trips"
+                  className="inline-flex items-center gap-2 font-sans text-white/60 hover:text-white transition-colors text-sm"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  All trips
+                </Link>
+              </div>
+            </div>
+            <div className="bg-[#0E1F38] px-6 py-4">
+              <div className="mx-auto max-w-7xl flex flex-wrap items-center gap-3">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-white/35">Departures</p>
+                {details.nextDates.map((date, i) => (
+                  <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs font-sans rounded-full">
+                    {date}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          <TripHeroParallax
+            title={trip.title}
+            subtitle={trip.subtitle}
+            heroImage={trip.heroImage}
+            nextDates={details.nextDates}
+          />
+        )}
 
         {/* ── Quick facts bar (north-vietnam) / Highlights bar (other trips) ── */}
         {slug === "north-vietnam" ? (

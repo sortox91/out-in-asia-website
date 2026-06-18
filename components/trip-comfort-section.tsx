@@ -6,18 +6,25 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const CARDS = [
   {
-    image: "/accommodation/hanoi-1.jpg",
-    title: "Premium 4-Star Hotels",
-    description: "Elegant hotels in Hanoi and Tam Coc, ideally located, with breakfast included.",
-    tag: "6 nights · Breakfast included",
-    location: "Hanoi · Tam Coc",
+    image: "/north-vietnam/accommodation/A.Hanoi.jpg",
+    title: "Premium 4-Star Hotel",
+    description: "Elegantly located hotel in central Hanoi, with breakfast included.",
+    tag: "3 nights · Breakfast included",
+    location: "Hanoi",
   },
   {
-    image: "/accommodation/sapa-1.jpg",
+    image: "/north-vietnam/accommodation/A.Sapa.jpg",
     title: "5-Star Mountain Resort",
     description: "Cloud-wrapped luxury in Sapa, a perfect retreat after a day of trekking in the terraces.",
     tag: "3 nights · Breakfast included",
     location: "Sapa",
+  },
+  {
+    image: "/north-vietnam/accommodation/A.TamCoc.jpg",
+    title: "Premium 4-Star Hotel",
+    description: "Boutique eco-resort with a pool, nestled in Ninh Binh's stunning karst landscape.",
+    tag: "3 nights · Breakfast included",
+    location: "Tam Coc",
   },
   {
     image: "/accommodation/halong-1.jpg",
@@ -74,7 +81,7 @@ export function TripComfortSection() {
             fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
             fontSize: "clamp(1.75rem, 4vw, 2.25rem)", fontWeight: 700, color: "#0E1F38", marginBottom: "0.75rem",
           }}>
-            Travel with Comfort
+            Travel with <span style={{ color: "#EA5A2A", fontStyle: "italic" }}>Comfort</span>
           </h2>
           <p style={{
             fontFamily: "var(--font-manrope), Manrope, sans-serif",

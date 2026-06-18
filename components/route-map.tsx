@@ -4,7 +4,19 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const STOPS = [
+interface Stop {
+  id: number
+  image: string
+  city: string
+  galleryCity?: string
+  subtitle: string
+  highlights: string[]
+  galleryImages: string[]
+  galleryCaptions: string[]
+  objectPosition: string
+}
+
+const STOPS: Stop[] = [
   {
     id: 1,
     image: "/maps/north-vietnam-step-1.svg",
@@ -18,8 +30,18 @@ const STOPS = [
       "Optional: Hanoi's vibrant gay bars",
       "Full city discovery on Day 2",
     ],
-    galleryImages: ["/gallery/hanoi/hoan-kiem.jpg", "/gallery/hanoi/old-quarter.jpg", "/gallery/hanoi/group.png", "/gallery/hanoi/egg-coffee.jpg"],
-    galleryCaptions: ["Hoan Kiem Lake", "Old Quarter at Night", "Coffee on Train Street", "Iconic Egg Coffee"],
+    galleryImages: [
+      "/north-vietnam/gallery/hanoi/hanoi-01.png",
+      "/north-vietnam/gallery/hanoi/hanoi-02.png",
+      "/north-vietnam/gallery/hanoi/hanoi-03.png",
+      "/north-vietnam/gallery/hanoi/hanoi-04.png",
+    ],
+    galleryCaptions: [
+      "Visit Ngoc Son Temple, on a small island in Hoan Kiem Lake",
+      "Guided street food tour in Hanoi Old Quarter",
+      "Hanoi's iconic egg coffee, creamy, sweet and unique",
+      "Drinks at one of Hanoi's vibrant gay bars",
+    ],
     objectPosition: "center center",
   },
   {
@@ -34,8 +56,18 @@ const STOPS = [
       "Cable Car to Fansipan: Vietnam's highest peak",
       "Traditional Sapa Hot Pot dinner",
     ],
-    galleryImages: ["/gallery/sapa/rice-terraces.jpg", "/gallery/sapa/cable-car.jpg", "/gallery/sapa/village.jpg", "/gallery/sapa/group.png"],
-    galleryCaptions: ["Golden Rice Terraces", "Fansipan Cable Car", "Traditional Village", "Trekking Together"],
+    galleryImages: [
+      "/north-vietnam/gallery/sapa/sapa-01.png",
+      "/north-vietnam/gallery/sapa/sapa-02.png",
+      "/north-vietnam/gallery/sapa/sapa-03.png",
+      "/north-vietnam/gallery/sapa/sapa-04.png",
+    ],
+    galleryCaptions: [
+      "Trek through bamboo forests, rice terraces, villages and valleys",
+      "Meet local communities and observe traditional crafts",
+      "Cable Car Fansipan experience to Vietnam's highest mountain",
+      "Traditional Sapa Hot Pot",
+    ],
     objectPosition: "center 40%",
   },
   {
@@ -50,8 +82,18 @@ const STOPS = [
       "Cycling tour: Thung Nang Lake & Bich Dong Pagoda",
       "Boutique eco-resort with pool",
     ],
-    galleryImages: ["/gallery/tamcoc/dragon-mountain.jpg", "/gallery/tamcoc/boats.jpg", "/gallery/tamcoc/cycling-group.png", "/gallery/tamcoc/group-cycling.jpg"],
-    galleryCaptions: ["Dragon Mountain View", "Tam Coc Boat Trip", "Cycling the Rice Fields", "Together on Two Wheels"],
+    galleryImages: [
+      "/north-vietnam/gallery/tamcoc/tamcoc-01.png",
+      "/north-vietnam/gallery/tamcoc/tamcoc-02.png",
+      "/north-vietnam/gallery/tamcoc/tamcoc-03.png",
+      "/north-vietnam/gallery/tamcoc/tamcoc-04.png",
+    ],
+    galleryCaptions: [
+      "Early morning climb to Dragon Mountain",
+      "Boat trip through rivers, cliffs and caves",
+      "Hidden cycling tour through the countryside of Tam Coc",
+      "Bich Dong Pagoda",
+    ],
     objectPosition: "center 60%",
   },
   {
@@ -66,14 +108,25 @@ const STOPS = [
       "Full board dining + sunset cocktails on deck",
       "Private balcony cabin on luxury yacht",
     ],
-    galleryImages: ["/gallery/halong/cruise.jpg", "/gallery/halong/bay.jpg", "/gallery/halong/group.png", "/gallery/halong/sunset.jpg"],
-    galleryCaptions: ["Luxury Cruise", "Ha Long Bay", "Sunset Drinks on Deck", "Golden Hour on the Bay"],
+    galleryImages: [
+      "/north-vietnam/gallery/halong/halongbay-01.png",
+      "/north-vietnam/gallery/halong/halongbay-02.png",
+      "/north-vietnam/gallery/halong/halongbay-03.png",
+      "/north-vietnam/gallery/halong/halongbay-04.png",
+    ],
+    galleryCaptions: [
+      "3-Day, 2-night full-board luxury yacht experience",
+      "Cat Ba Island beach",
+      "Spring roll making cooking class on the yacht",
+      "Visit a majestic cave filled with shimmering stalactites",
+    ],
     objectPosition: "center 70%",
   },
   {
     id: 5,
     image: "/maps/north-vietnam-step-5.svg",
     city: "Return to Hanoi",
+    galleryCity: "Hanoi",
     subtitle: "Day 12 · Farewell",
     highlights: [
       "Final morning free in Hanoi",
@@ -81,8 +134,18 @@ const STOPS = [
       "Farewell lunch with the group",
       "Private airport transfer",
     ],
-    galleryImages: ["/gallery/hanoi/old-quarter.jpg", "/gallery/hanoi/hoan-kiem.jpg", "/gallery/hanoi/group.png", "/gallery/hanoi/egg-coffee.jpg"],
-    galleryCaptions: ["Last Evening in Hanoi", "Farewell Walk", "Farewell Drinks", "One Last Coffee"],
+    galleryImages: [
+      "/north-vietnam/gallery/hanoi/hanoi-21.png",
+      "/north-vietnam/gallery/hanoi/hanoi-22.png",
+      "/north-vietnam/gallery/hanoi/hanoi-23.png",
+      "/north-vietnam/gallery/hanoi/hanoi-24.png",
+    ],
+    galleryCaptions: [
+      "Iconic Train Street visit",
+      "Final stroll and last shopping",
+      "Curated farewell dinner",
+      "Last gay night out in Vietnam's vibrant capital",
+    ],
     objectPosition: "center center",
   },
 ]
@@ -355,7 +418,7 @@ export function RouteMap() {
             fontSize: "0.7rem", color: "#B89870", margin: "8px 0 14px",
             opacity: galleryVisible ? 1 : 0, transition: "opacity 250ms",
           }}>
-            {stop.city} · {stop.galleryCaptions[galleryIndex]}
+            {stop.galleryCity ?? stop.city} · {stop.galleryCaptions[galleryIndex]}
           </p>
         </div>
 
@@ -483,7 +546,7 @@ export function RouteMap() {
                 opacity: galleryVisible ? 1 : 0, transition: "opacity 250ms",
                 flexShrink: 0,
               }}>
-                {stop.city} · {stop.galleryCaptions[galleryIndex]}
+                {stop.galleryCity ?? stop.city} · {stop.galleryCaptions[galleryIndex]}
               </p>
 
             </div>
