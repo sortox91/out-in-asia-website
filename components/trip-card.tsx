@@ -12,7 +12,7 @@ interface TripCardProps {
   description: string
   duration: string
   image: string
-  price: string
+  price: { shared: string; single: string }
 }
 
 export function TripCard({
@@ -64,7 +64,7 @@ export function TripCard({
               {title}
             </h3>
             <span className="font-sans font-semibold text-warm-cream/80 text-sm flex-shrink-0 mb-1">
-              From {price} /person
+              From {price.shared} /person
             </span>
           </div>
 

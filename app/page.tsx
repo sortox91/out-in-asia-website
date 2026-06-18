@@ -16,7 +16,7 @@ const DESTINATIONS = [
     title: "North Vietnam",
     subtitle: "Mountains & Heritage",
     image: "/trips/north-vietnam.png",
-    price: "€4,400",
+    price: { shared: "€4,700", single: "€5,500" },
     duration: "12 days",
   },
   {
@@ -24,24 +24,24 @@ const DESTINATIONS = [
     title: "Thailand",
     subtitle: "Land of Smiles",
     image: "/trips/thailand.png",
-    price: "€2,900",
-    duration: "10 days",
+    price: { shared: "€5,600", single: "€6,700" },
+    duration: "12 days",
   },
   {
     id: "south-vietnam",
     title: "South Vietnam",
     subtitle: "Rivers & History",
     image: "/trips/south-vietnam.png",
-    price: "€2,500",
-    duration: "9 days",
+    price: { shared: "€5,100", single: "€5,800" },
+    duration: "12 days",
   },
   {
     id: "bali",
     title: "Bali",
     subtitle: "Island of Gods",
     image: "/trips/bali.png",
-    price: "€2,400",
-    duration: "7 days",
+    price: { shared: "€5,700", single: "€6,800" },
+    duration: "13 days",
   },
 ]
 
@@ -298,7 +298,7 @@ function DestinationCard({
         {/* Price — top right */}
         <div className="absolute top-5 right-5">
           <span className="px-3 py-1.5 bg-black/30 backdrop-blur-sm text-white text-xs font-sans rounded-full border border-white/20">
-            From {dest.price} /person
+            From {dest.price.shared} /person
           </span>
         </div>
 

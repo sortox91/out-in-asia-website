@@ -32,7 +32,7 @@ export const siteConfig = {
       duration: "12 days",
       image: "/trips/thailand.png",
       heroImage: "/trips/thailand.jpg",
-      price: "€2,900",
+      price: { shared: "€5,600", single: "€6,700" },
       highlights: [
         "Bangkok nightlife & temples",
         "Chiang Mai culture",
@@ -49,7 +49,7 @@ export const siteConfig = {
       duration: "12 days",
       image: "/trips/north-vietnam.png",
       heroImage: "/ai-landscapes/vietnam-6.png",
-      price: "€4,400",
+      price: { shared: "€4,700", single: "€5,500" },
       highlights: [
         "Hanoi Old Quarter",
         "Ha Long Bay cruise",
@@ -66,7 +66,7 @@ export const siteConfig = {
       duration: "12 days",
       image: "/trips/south-vietnam.png",
       heroImage: "/trips/south-vietnam.jpg",
-      price: "€2,500",
+      price: { shared: "€5,100", single: "€5,800" },
       highlights: [
         "Ho Chi Minh City",
         "Mekong Delta",
@@ -83,7 +83,7 @@ export const siteConfig = {
       duration: "13 days",
       image: "/trips/bali.png",
       heroImage: "/trips/bali.jpg",
-      price: "€2,400",
+      price: { shared: "€5,700", single: "€6,800" },
       highlights: [
         "Ubud temples & arts",
         "Rice terrace treks",

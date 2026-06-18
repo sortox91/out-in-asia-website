@@ -186,7 +186,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                   { Icon: Calendar, value: "12 Days", label: "Duration" },
                   { Icon: Users, value: "Small Group", label: "Max 12" },
                   { Icon: MapPin, value: "4 Stops", label: "Hanoi · Sapa · Tam Coc · Ha Long" },
-                  { Icon: Sparkles, value: "From €4,400", label: "Per person" },
+                  { Icon: Sparkles, value: `From ${trip.price.shared}`, label: "Per person" },
                 ] as const).map((fact, i) => (
                   <div
                     key={i}
@@ -248,7 +248,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         )}
 
         {/* ── North Vietnam pricing block ── */}
-        {slug === "north-vietnam" && <TripPricingBlock />}
+        {slug === "north-vietnam" && <TripPricingBlock priceShared={trip.price.shared} priceSingle={trip.price.single} />}
 
         {/* ── What's included — hidden for north-vietnam (covered by TripPricingBlock) ── */}
         {slug !== "north-vietnam" && <section className="py-14 md:py-24 bg-[#F0E8DA]">

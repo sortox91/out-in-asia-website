@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 interface TripStickyCtaProps {
-  price: string
+  price: { shared: string; single: string }
   tripTitle: string
 }
 
@@ -20,7 +20,7 @@ export function TripStickyCta({ price, tripTitle }: TripStickyCtaProps) {
             {tripTitle}
           </p>
           <p className="font-serif text-white font-bold text-lg leading-none">
-            {price} <span className="font-sans font-normal text-xs text-white/50">/person</span>
+            {price.shared} <span className="font-sans font-normal text-xs text-white/50">/person</span>
           </p>
         </div>
         <Link

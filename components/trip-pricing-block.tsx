@@ -54,7 +54,12 @@ const NOT_INCLUDED = [
   "Additional meals not listed in the programme",
 ]
 
-export function TripPricingBlock() {
+interface TripPricingBlockProps {
+  priceShared: string
+  priceSingle: string
+}
+
+export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockProps) {
   return (
     <section className="py-12 md:py-20 lg:py-24 bg-[#0E1F38]">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
@@ -87,10 +92,10 @@ export function TripPricingBlock() {
               <BedIcon />
             </div>
             <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-2">
-              Shared Room
+              Shared Deluxe Room
             </p>
             <p className="font-serif text-sunset-orange leading-none mb-1" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)" }}>
-              €4,400
+              {priceShared}
             </p>
             <p className="font-sans text-white/35 text-xs">per person</p>
           </motion.div>
@@ -107,10 +112,10 @@ export function TripPricingBlock() {
               <BedIcon single />
             </div>
             <p className="font-sans text-white/50 text-xs uppercase tracking-[0.2em] mb-2">
-              Single Room
+              Single Deluxe Room
             </p>
             <p className="font-serif text-white leading-none mb-1" style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)" }}>
-              €4,900
+              {priceSingle}
             </p>
             <p className="font-sans text-white/35 text-xs">per person</p>
           </motion.div>
