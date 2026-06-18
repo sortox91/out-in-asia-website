@@ -10,7 +10,7 @@ import { PageHero } from "@/components/page-hero";
 export const metadata = {
   title: "About Us | Out in Asia",
   description:
-    "Meet the founders of Out in Asia, Filippo Rossi and Szilard Daróczi. Discover our story and passion for LGBTQ+ travel in Southeast Asia.",
+    "Meet the founders of Out in Asia, Filippo Rossi and Szilárd Daróczi. Discover our story and passion for LGBTQ+ travel in Southeast Asia.",
 };
 
 export default function AboutPage() {
@@ -20,11 +20,12 @@ export default function AboutPage() {
       <PageTransition>
         <main className="overflow-x-hidden">
           <PageHero
-            image="/founders/together.jpg"
-            eyebrow="Our Story"
-            title="Two Guides, One"
-            titleAccent="Passion"
-            subtitle="Meet Filippo & Szilard — gay travellers with 10+ years across Southeast Asia"
+            image="/meet-us/meetus-cover.png"
+            eyebrow="OUR STORY"
+            title="Two Guides"
+            titleLine2="One"
+            titleLine2Accent="Passion"
+            subtitle="Guiding you through Asia with experience, care and passion"
           />
 
           {/* Our Mission */}
@@ -40,7 +41,7 @@ export default function AboutPage() {
                     Authentic Travel
                   </span>
                 </h2>
-                <p className="font-sans leading-relaxed text-lg text-navy">
+                <p className="font-sans leading-relaxed text-sm md:text-lg text-navy">
                   We launched Out in Asia to fill a gap: premium LGBTQ+ travel designed by gay travellers who know Southeast Asia intimately. Every trip is personally led by us, so you explore freely, connect authentically, and feel completely at home.
                 </p>
               </div>
@@ -133,8 +134,8 @@ export default function AboutPage() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
-                    Ready to Travel <span className="italic text-sunset-orange">With Us</span>?
+                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-balance leading-snug">
+                    Ready to Travel <span className="italic text-sunset-orange">With Us</span><span className="text-sunset-orange">?</span>
                   </h2>
                   <p className="font-sans text-base md:text-xl text-sand/80 mb-10 leading-relaxed">
                     Join Filippo and Szilard on an unforgettable journey through Southeast Asia.
@@ -149,15 +150,15 @@ export default function AboutPage() {
                     </Link>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center font-sans font-semibold tracking-wide px-8 py-4 rounded-full border-2 border-white text-white hover:bg-white hover:text-navy transition-colors duration-300"
+                      className="inline-flex items-center font-sans font-semibold tracking-wide px-8 py-4 rounded-full border border-white/50 text-white/70 md:border-2 md:border-white md:text-white hover:bg-white hover:text-navy transition-colors duration-300"
                     >
                       Get in Touch
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-72 md:h-96 w-full rounded-2xl overflow-hidden">
+                <div className="relative h-48 md:h-96 w-full rounded-2xl overflow-hidden">
                   <Image
-                    src="/founders/together-ai-2.jpg"
+                    src="/meet-us/meetus-bottom.png"
                     alt="Filippo and Szilard"
                     fill
                     className="object-cover"
