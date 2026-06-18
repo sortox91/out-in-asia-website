@@ -37,10 +37,6 @@ const faqs = [
     q: "Is travel insurance required?",
     a: "Yes, comprehensive travel insurance is required for all our trips. We can recommend policies that cover adventure activities.",
   },
-  {
-    q: "What is the best time to travel?",
-    a: "Every trip is scheduled at the perfect time of year for its destination.",
-  },
 ];
 
 function FAQItem({ q, a }: { q: string; a: string }) {
@@ -108,11 +104,13 @@ export default function ContactPage() {
       <Header />
       <main className="overflow-x-hidden">
         <PageHero
-          image="/gallery/halong/bay.jpg"
-          eyebrow="Get in Touch"
-          title="Let's Plan Your"
-          titleAccent="Adventure"
-          subtitle="We reply within 24 hours"
+          image="/get-in-touch/getintouch-cover-web.png"
+          imageMobile="/get-in-touch/getintouch-cover-mobile.png"
+          eyebrow="GET IN TOUCH"
+          title="Your Next Journey"
+          titleLine2="Starts"
+          titleLine2Accent="Here"
+          subtitle="Join one of our group journeys, or let us design one around your dreams"
         />
 
         {/* Main Content */}
@@ -213,6 +211,7 @@ export default function ContactPage() {
                         >
                           <option value="">Select a trip (optional)</option>
                           <option value="general">General Inquiry</option>
+                          <option value="private-trips">Private Trips</option>
                           {siteConfig.trips.map((trip) => (
                             <option key={trip.id} value={trip.id}>
                               {trip.title}
@@ -261,8 +260,8 @@ export default function ContactPage() {
               </div>
 
               {/* Sidebar */}
-              <div className="lg:col-span-2 space-y-8">
-                <div className="space-y-6">
+              <div className="lg:col-span-2 lg:flex lg:flex-col">
+                <div className="space-y-6 mb-8 lg:mb-0">
                   <div className="flex gap-4 items-start">
                     <div className="flex-shrink-0 w-11 h-11 bg-ocean-teal/10 text-ocean-teal rounded-full flex items-center justify-center">
                       <Mail className="h-5 w-5" />
@@ -340,7 +339,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* FAQ Accordion */}
-                <div className="bg-navy rounded-2xl p-8">
+                <div className="bg-navy rounded-2xl p-8 lg:mt-auto">
                   <h3 className="font-serif text-xl font-bold text-white mb-6">
                     Frequently Asked Questions
                   </h3>
