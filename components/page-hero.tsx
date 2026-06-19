@@ -81,16 +81,16 @@ export function PageHero({
       />
 
       {/* Text — mobile: top-anchored. Desktop: vertically centred */}
-      <div className="absolute inset-0 flex items-start pt-24 md:items-center md:pt-20">
+      <div className="absolute inset-0 flex items-start pt-28 md:items-center md:pt-14">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="max-w-xl">
             <p
-              className="font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-4"
+              className="font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-2 md:mb-4"
               style={{ color: "#1F8A8F" }}
             >
               {eyebrow}
             </p>
-            <h1 className="font-serif font-bold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4">
+            <h1 className="font-serif font-bold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight mb-2 md:mb-4">
               <span className="block">
                 {title}
                 {titleAccent && (

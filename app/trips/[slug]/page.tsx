@@ -181,7 +181,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 title="North Vietnam"
                 subtitle="Rice terraces, mountain villages, limestone bays and immersive local experiences"
               />
-              <div className="absolute top-24 left-6 sm:left-10 lg:left-16 z-10">
+              <div className="absolute top-20 left-6 sm:left-10 lg:left-16 z-10">
                 <Link
                   href="/trips"
                   className="inline-flex items-center gap-2 font-sans text-white/60 hover:text-white transition-colors text-sm"
