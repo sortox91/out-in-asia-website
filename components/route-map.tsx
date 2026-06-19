@@ -452,7 +452,7 @@ export function RouteMap() {
               <div style={{ position: "relative", flex: 1, minHeight: 320 }}>
                 {STOPS.map((s, i) => (
                   <div key={s.id} style={{
-                    position: "absolute", inset: "10px 16px",
+                    position: "absolute", inset: "40px 16px 10px",
                     opacity: i === current ? 1 : 0, transition: "opacity 400ms",
                     pointerEvents: "none",
                   }}>

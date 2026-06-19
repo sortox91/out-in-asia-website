@@ -119,7 +119,7 @@ function HeroSection() {
       {/* Title block:
           Mobile → top of section (people are in bottom of image)
           Desktop → bottom-left */}
-      <div className="absolute top-24 left-0 w-full px-6 sm:px-10 md:top-auto md:bottom-[15%] lg:bottom-[18%] lg:px-16">
+      <div className="absolute top-[108px] left-0 w-full px-6 sm:px-10 md:top-auto md:bottom-[18%] lg:bottom-[22%] lg:px-16">
         <div className="max-w-7xl mx-auto">
           {/* A — font-bold (700), ~20% smaller than before.
               All text white — "Be You" orange had <1.5:1 contrast on the warm sunset image. */}
@@ -150,12 +150,12 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.9 }}
-            className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
+            className="mt-3 md:mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
           >
             <p className="font-sans text-[10px] sm:text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
               Curated luxury journeys exclusively for the LGBTQ+ community.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="hidden md:flex flex-wrap gap-3">
               <Link
                 href="/trips"
                 className="inline-flex items-center gap-2 font-sans font-semibold px-7 py-3.5 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors text-sm"

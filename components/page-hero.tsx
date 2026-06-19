@@ -80,8 +80,8 @@ export function PageHero({
         }}
       />
 
-      {/* Text — vertically centred, left-aligned, below fixed header */}
-      <div className="absolute inset-0 flex items-center pt-20">
+      {/* Text — mobile: top-anchored. Desktop: vertically centred */}
+      <div className="absolute inset-0 flex items-start pt-24 md:items-center md:pt-20">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="max-w-xl">
             <p
@@ -90,7 +90,7 @@ export function PageHero({
             >
               {eyebrow}
             </p>
-            <h1 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4">
+            <h1 className="font-serif font-bold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight mb-4">
               <span className="block">
                 {title}
                 {titleAccent && (
@@ -107,7 +107,7 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-base text-white/70 leading-relaxed">
+              <p className="font-sans text-sm md:text-base text-white/70 leading-relaxed">
                 {subtitle}
               </p>
             )}
