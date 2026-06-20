@@ -140,7 +140,7 @@ export default function AboutPage() {
                   <p className="font-sans text-base md:text-xl text-sand/80 mb-10 leading-relaxed">
                     Join Filippo and Szilard on an unforgettable journey through Southeast Asia.
                   </p>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
                     <Link
                       href="/trips"
                       className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300"
@@ -150,18 +150,24 @@ export default function AboutPage() {
                     </Link>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center font-sans font-semibold tracking-wide px-8 py-4 rounded-full border border-white/50 text-white/70 md:border-2 md:border-white md:text-white hover:bg-white hover:text-navy transition-colors duration-300"
+                      className="md:hidden font-sans text-sm text-white/80 underline underline-offset-4 hover:text-white transition-colors"
+                    >
+                      Get in Touch
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="hidden md:inline-flex items-center font-sans font-semibold tracking-wide px-8 py-4 rounded-full border-2 border-white text-white hover:bg-white hover:text-navy transition-colors duration-300"
                     >
                       Get in Touch
                     </Link>
                   </div>
                 </div>
-                <div className="relative h-48 md:h-96 w-full rounded-2xl overflow-hidden">
+                <div className="relative h-56 md:h-96 w-full rounded-2xl overflow-hidden">
                   <Image
                     src="/meet-us/meetus-bottom.png"
                     alt="Filippo and Szilard"
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
               </div>
