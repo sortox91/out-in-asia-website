@@ -295,11 +295,11 @@ function DestinationCard({
           </span>
         </div>
 
-        {/* Price — top right */}
-        <div className="absolute top-5 right-5">
-          <span className="px-3 py-1.5 bg-black/30 backdrop-blur-sm text-white text-xs font-sans rounded-full border border-white/20">
-            From {dest.price.shared} /person
-          </span>
+        {/* Arrow hover — top right */}
+        <div className="absolute top-4 right-4 sm:top-5 sm:right-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 z-10">
+          <div className="w-10 h-10 rounded-full bg-sunset-orange flex items-center justify-center">
+            <ArrowRight className="h-5 w-5 text-white" />
+          </div>
         </div>
 
         {/* Text — bottom */}
@@ -311,11 +311,9 @@ function DestinationCard({
             <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
               {dest.title}
             </h3>
-            <div className="opacity-0 group-hover:opacity-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300 flex-shrink-0">
-              <div className="w-10 h-10 rounded-full bg-sunset-orange flex items-center justify-center">
-                <ArrowRight className="h-5 w-5 text-white" />
-              </div>
-            </div>
+            <p className="font-sans text-xs text-white/70 whitespace-nowrap flex-shrink-0">
+              From {dest.price.shared} /person
+            </p>
           </div>
           <div className="mt-4 h-px bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
         </div>
@@ -609,58 +607,67 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="relative py-16 lg:py-20 overflow-hidden">
-      {/* G — desktop image */}
+    <section className="relative pt-8 pb-20 md:py-16 lg:py-20 overflow-hidden">
+      {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
-        <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover" />
+        <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_65%]" />
       </div>
-      {/* G — mobile image (different proportions) */}
+      {/* Mobile image */}
       <div className="absolute inset-0 md:hidden">
-        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-center" />
+        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-[center_70%]" />
       </div>
-      <div className="absolute inset-0" style={{ backgroundColor: "rgba(14,31,56,0.78)" }} />
+      {/* Desktop overlay : fade droite→gauche, miroir du hero principal */}
+      <div className="absolute inset-0 hidden md:block" style={{ background: "linear-gradient(to left, rgba(14,31,56,0.90) 0%, rgba(14,31,56,0.70) 30%, rgba(14,31,56,0.25) 60%, transparent 85%)" }} />
+      {/* Mobile overlay : fade haut→bas, sombre dans le ciel (zone texte) */}
+      <div className="absolute inset-0 md:hidden" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.72) 0%, rgba(14,31,56,0.45) 40%, rgba(14,31,56,0.05) 100%)" }} />
 
-      <div className="relative mx-auto max-w-3xl px-6 lg:px-8 text-center">
-        {/* A — font-bold */}
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6"
-        >
-          Ready To Explore<br />
-          <span className="italic text-sunset-orange">Southeast Asia?</span>
-        </motion.h2>
-        {/* G — smaller on mobile, one line, no period */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="font-sans text-white/60 text-xs md:text-lg mb-10"
-        >
-          Join Filippo and Szilard on a journey like no other
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap gap-4 justify-center"
-        >
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
+      <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-16 flex flex-col items-center md:items-end">
+        <div className="w-full max-w-lg text-center md:text-right">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-3 md:mb-6"
           >
-            Start Planning <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/trips"
-            className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
+            Ready To Explore<br />
+            <span className="italic text-sunset-orange">Southeast Asia?</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-sans text-white/60 text-xs md:text-lg mb-5 md:mb-10"
           >
-            Browse All Trips
-          </Link>
-        </motion.div>
+            Join Filippo and Szilard on a journey like no other
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col items-center gap-3 md:flex-row md:gap-4 md:justify-end"
+          >
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
+            >
+              Start Planning <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/trips"
+              className="md:hidden font-sans text-sm text-white/80 underline underline-offset-4 hover:text-white transition-colors"
+            >
+              Browse All Trips
+            </Link>
+            <Link
+              href="/trips"
+              className="hidden md:inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
+            >
+              Browse All Trips
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

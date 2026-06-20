@@ -7,7 +7,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-20 right-4 md:bottom-20 md:right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-200"
+      className="fixed bottom-6 right-4 md:bottom-8 md:right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center transition-colors duration-200"
       style={{
         backgroundColor: "#1F8A8F",
         boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
