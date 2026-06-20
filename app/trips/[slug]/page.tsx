@@ -12,6 +12,20 @@ import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
 import { TripStickyCta } from "@/components/trip-sticky-cta";
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function formatTripDate(raw: string): string {
+  const parts = raw.split(/\s[–—]\s/)
+  if (parts.length !== 2) return raw
+  const [startDay, startMonth] = parts[0].trim().split(" ")
+  const endTokens = parts[1].trim().split(" ")
+  const endDay = endTokens[0]
+  const endMonth = endTokens[1]
+  const year = endTokens[2]
+  if (startMonth === endMonth) return `${startDay} - ${endDay} ${endMonth} ${year}`
+  return `${startDay} ${startMonth} - ${endDay} ${endMonth} ${year}`
+}
+
 // ─── Extended trip data ───────────────────────────────────────────────────────
 
 const tripDetails: Record<
@@ -190,15 +204,21 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                   All trips
                 </Link>
               </div>
-            </div>
-            <div className="bg-[#0E1F38] px-6 py-4">
-              <div className="mx-auto max-w-7xl flex flex-wrap items-center gap-3">
-                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-white/35">Departures</p>
-                {details.nextDates.map((date, i) => (
-                  <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs font-sans rounded-full">
-                    {date}
-                  </span>
-                ))}
+              {/* Departures — overlay en bas de l'image */}
+              <div
+                className="absolute bottom-0 left-0 right-0 pt-16 pb-4 md:pb-5"
+                style={{ background: "linear-gradient(to top, rgba(14,31,56,0.60) 0%, transparent 100%)" }}
+              >
+                <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Departures</p>
+                  <div className="flex flex-wrap gap-2">
+                    {details.nextDates.map((date, i) => (
+                      <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs font-sans rounded-full">
+                        {formatTripDate(date)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </>
