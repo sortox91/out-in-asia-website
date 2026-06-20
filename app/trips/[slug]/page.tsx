@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, Calendar, Users, MapPin, Sparkles, ArrowLeft } from "lucide-react";
+import { Check, Calendar, Users, MapPin, Sparkles, ArrowLeft, FileText } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { RouteMap } from "@/components/route-map";
 import { TripHeroParallax } from "@/components/trip-hero-parallax";
 import { PageHero } from "@/components/page-hero";
-import { TripPricingBlock } from "@/components/trip-pricing-block";
+import { TripPricingBlock, BROCHURE_URL } from "@/components/trip-pricing-block";
 import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
 import { TripStickyCta } from "@/components/trip-sticky-cta";
@@ -275,6 +275,19 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
 
         {/* ── Route map ── */}
         {slug === "north-vietnam" && <RouteMap />}
+        {slug === "north-vietnam" && (
+          <div className="bg-[#FAF6EF] py-10 md:py-12 flex justify-center px-6">
+            <a
+              href={BROCHURE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 font-sans font-semibold text-sm px-8 py-4 rounded-full border-2 border-navy text-navy hover:bg-navy hover:text-white transition-colors duration-300"
+            >
+              <FileText className="h-4 w-4 flex-shrink-0" />
+              Day-by-Day Itinerary
+            </a>
+          </div>
+        )}
         {slug === "north-vietnam" && <TripComfortSection />}
         {slug !== "north-vietnam" && tripRoutes[slug] && (
           <section className="py-16 bg-[#FAF6EF] border-t border-[#E8DDD0]/50">

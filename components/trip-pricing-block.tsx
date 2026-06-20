@@ -1,5 +1,8 @@
 "use client"
 
+export const BROCHURE_URL =
+  "https://drive.google.com/file/d/17-Q1ewgfsz1qfnys3RtQI9GCpmwc00Nx/view"
+
 import { useState, useRef } from "react"
 import { motion } from "framer-motion"
 import { Check, X, FileText, Mail } from "lucide-react"
@@ -195,7 +198,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           className="space-y-2.5"
         >
           <a
-            href="https://drive.google.com/file/d/17-Q1ewgfsz1qfnys3RtQI9GCpmwc00Nx/view"
+            href={BROCHURE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
