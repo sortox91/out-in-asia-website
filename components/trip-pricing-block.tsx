@@ -5,7 +5,7 @@ export const BROCHURE_URL =
 
 import { useState, useRef } from "react"
 import { motion } from "framer-motion"
-import { Check, X, FileText, Mail } from "lucide-react"
+import { Check, X, FileText } from "lucide-react"
 
 const BedIcon = ({ single = false }: { single?: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -195,7 +195,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="space-y-2.5"
+          className=""
         >
           <a
             href={BROCHURE_URL}
@@ -205,13 +205,6 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           >
             <FileText className="h-4 w-4 flex-shrink-0" />
             Download the full brochure
-          </a>
-          <a
-            href="/contact"
-            className="w-full flex items-center justify-center gap-2 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
-          >
-            <Mail className="h-4 w-4 flex-shrink-0" />
-            Inquire about this trip
           </a>
         </motion.div>
 
