@@ -71,7 +71,7 @@ export function TripComfortSection() {
 
         {/* Carrousel horizontal scroll-snap — desktop 3 visible, mobile ~1 */}
         <div
-          className="flex gap-5 overflow-x-auto pb-4 -mx-6 px-6 md:-mx-0 md:px-0 snap-x snap-mandatory"
+          className="flex gap-5 overflow-x-auto pb-4 -mx-6 pl-6 md:mx-0 md:pl-0 snap-x snap-mandatory [scroll-padding-left:1.5rem] md:[scroll-padding-left:0]"
           style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           {CARDS.map((card) => (
