@@ -1,3 +1,4 @@
+import type React from "react"
 import Image from "next/image"
 
 interface PageHeroProps {
@@ -16,7 +17,7 @@ interface PageHeroProps {
   /** Optional italic orange word appended to line 2 */
   titleLine2Accent?: string
   /** Optional subtitle in Manrope below the title */
-  subtitle?: string
+  subtitle?: React.ReactNode
 }
 
 /**
