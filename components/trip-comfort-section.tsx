@@ -31,6 +31,13 @@ const CARDS = [
     tag: "2 nights · Full board",
     location: "Ha Long Bay",
   },
+  {
+    image: "/north-vietnam/accommodation/A.Minivan.jpg",
+    title: "Premium Minivan",
+    description: "Enjoy relaxed journeys across Northern Vietnam in premium minivans",
+    tag: "Private transfers",
+    location: "Northern Vietnam",
+  },
 ]
 
 export function TripComfortSection() {
