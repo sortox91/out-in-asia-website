@@ -432,14 +432,47 @@ export function RouteMap() {
   ───────────────────────────────────── */
   return (
     <section id="route-overview" style={{ padding: "40px 0 60px", backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
-      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem" }}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div style={{
           borderRadius: "1rem", overflow: "hidden",
           border: "1px solid #E8DDD0", boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
         }}>
 
-          {/* ── TWO COLUMNS: map (38%) + gallery (62%) ── */}
-          <div style={{ display: "flex", alignItems: "stretch", borderBottom: "1px solid #E8DDD0" }}>
+          {/* ── TITLE BAR — badge + city + subtitle, top left ── */}
+          <div style={{
+            padding: "14px 24px", backgroundColor: "#FAF6EF",
+            borderBottom: "1px solid #E8DDD0",
+            display: "flex", alignItems: "center", gap: 12,
+            opacity: visible ? 1 : 0, transition: "opacity 300ms",
+          }}>
+            <div style={{
+              width: 38, height: 38, borderRadius: "50%",
+              backgroundColor: "#0E1F38", color: "#FAF6EF",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+              fontSize: "0.85rem", fontWeight: 700, flexShrink: 0,
+            }}>
+              {String(stop.id).padStart(2, "0")}
+            </div>
+            <div>
+              <h3 style={{
+                fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
+                fontSize: "1.15rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
+              }}>
+                {stop.city}
+              </h3>
+              <p style={{
+                fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.1em",
+                color: "#1F8A8F", margin: "3px 0 0",
+              }}>
+                {stop.subtitle}
+              </p>
+            </div>
+          </div>
+
+          {/* ── TWO COLUMNS: map (45%) + gallery (55%) ── */}
+          <div style={{ display: "flex", alignItems: "stretch" }}>
 
             {/* LEFT — SVG Map */}
             <div style={{
@@ -548,64 +581,6 @@ export function RouteMap() {
               }}>
                 {stop.galleryCity ?? stop.city} · {stop.galleryCaptions[galleryIndex]}
               </p>
-
-            </div>
-          </div>
-
-          {/* ── INFO BANNER — full width ── */}
-          <div style={{
-            backgroundColor: "#FAF6EF", padding: "13px 24px",
-            opacity: visible ? 1 : 0, transition: "opacity 300ms",
-          }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
-
-              {/* Badge + city + subtitle */}
-              <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0, paddingRight: 20 }}>
-                <div style={{
-                  width: 38, height: 38, borderRadius: "50%",
-                  backgroundColor: "#0E1F38", color: "#FAF6EF",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                  fontSize: "0.85rem", fontWeight: 700,
-                }}>
-                  {String(stop.id).padStart(2, "0")}
-                </div>
-                <div>
-                  <h3 style={{
-                    fontFamily: "var(--font-fraunces), Fraunces, Georgia, serif",
-                    fontSize: "1.15rem", fontWeight: 700, color: "#0E1F38", lineHeight: 1.1, margin: 0,
-                  }}>
-                    {stop.city}
-                  </h3>
-                  <p style={{
-                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.1em",
-                    color: "#1F8A8F", margin: "3px 0 0",
-                  }}>
-                    {stop.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              {/* Vertical divider */}
-              <div style={{ width: 1, height: 38, backgroundColor: "#D9C9B5", flexShrink: 0, marginRight: 20 }} />
-
-              {/* Highlights — 2 columns */}
-              <div style={{
-                display: "grid", gridTemplateColumns: "1fr 1fr",
-                gap: "2px 24px", flex: 1,
-              }}>
-                {stop.highlights.map((item, i) => (
-                  <div key={i} style={{
-                    display: "flex", alignItems: "flex-start", gap: 6,
-                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                    fontSize: "0.72rem", color: "#5a4a3a", lineHeight: 1.4,
-                  }}>
-                    <span style={{ color: "#EA5A2A", fontWeight: 700, flexShrink: 0 }}>•</span>
-                    {item}
-                  </div>
-                ))}
-              </div>
 
             </div>
           </div>

@@ -276,7 +276,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         {/* ── Route map ── */}
         {slug === "north-vietnam" && <RouteMap />}
         {slug === "north-vietnam" && (
-          <div className="bg-[#FAF6EF] py-10 md:py-12 flex justify-center px-6">
+          <div className="bg-[#FAF6EF] pt-4 pb-10 md:pt-5 md:pb-12 flex justify-center px-6">
             <a
               href={BROCHURE_URL}
               target="_blank"
