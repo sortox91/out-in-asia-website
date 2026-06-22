@@ -17,19 +17,26 @@ const BedIcon = ({ single = false }: { single?: boolean }) => (
 )
 
 const INCLUDED = [
-  "Travel with Filippo and Szilard",
-  "9 nights in 4/5 star hotels",
-  "2 night luxury yacht cruise",
-  "Selected meals and activities",
-  "Private premium transports",
+  "Group guidance and assistance during the stay",
+  "9 nights with breakfast in premium 4 and 5-star hotels",
+  "2 nights on a 5-star exclusive yacht with full board",
+  "6 selected additional meals",
+  "All included activities listed in the itinerary",
+  "Premium air-conditioned minivans throughout the trip",
+  "Private airport transfer on arrival and departure",
+  "Organisation fees, taxes and local charges",
+  "Welcome gift package",
 ]
 
 const NOT_INCLUDED = [
   "International flights",
+  "Additional meals not listed in the programme",
   "Travel insurance",
   "Personal expenses",
-  "Extra activities not listed",
-  "Early check-in / late check-out",
+  "Extra activities not included in the programme",
+  "Additional private assistance outside the programme",
+  "Early check-in on arrival day",
+  "Late check-out on departure day",
 ]
 
 interface TripPricingBlockProps {
@@ -59,7 +66,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           className="text-center mb-8"
         >
           <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-3">
-            Pricing
+            THE DETAILS
           </p>
           <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white mb-2">
             Pricing &amp; <span className="italic text-sunset-orange">Inclusions</span>
@@ -197,6 +204,9 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           transition={{ delay: 0.15 }}
           className=""
         >
+          <p className="font-sans text-white/40 text-xs text-center mb-3">
+            Check day-by-day itinerary, booking conditions and full trip details
+          </p>
           <a
             href={BROCHURE_URL}
             target="_blank"
@@ -204,7 +214,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
             className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
           >
             <FileText className="h-4 w-4 flex-shrink-0" />
-            Download the full brochure
+            Download Brochure
           </a>
         </motion.div>
 

@@ -28,7 +28,7 @@ export function TripStickyCta({ price, tripTitle }: TripStickyCtaProps) {
           className="flex-shrink-0 flex items-center gap-1.5 px-5 py-3 rounded-full font-sans font-semibold text-sm text-white min-h-[44px]"
           style={{ backgroundColor: "#EA5A2A" }}
         >
-          Book This Trip
+          Join This Trip
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
