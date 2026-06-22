@@ -3,9 +3,9 @@
 export const BROCHURE_URL =
   "https://drive.google.com/file/d/17-Q1ewgfsz1qfnys3RtQI9GCpmwc00Nx/view"
 
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
-import { Check, X, FileText } from "lucide-react"
+import { Check, X, FileText, ChevronDown, Mail } from "lucide-react"
 
 const BedIcon = ({ single = false }: { single?: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -39,20 +39,17 @@ const NOT_INCLUDED = [
   "Late check-out on departure day",
 ]
 
+const INCLUDED_PREVIEW = 3
+const EXCLUDED_PREVIEW = 3
+
 interface TripPricingBlockProps {
   priceShared: string
   priceSingle: string
 }
 
 export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockProps) {
-  const [activeList, setActiveList] = useState(0)
-  const scrollRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = () => {
-    if (!scrollRef.current) return
-    const { scrollLeft, scrollWidth } = scrollRef.current
-    setActiveList(scrollLeft > scrollWidth / 4 ? 1 : 0)
-  }
+  const [includedExpanded, setIncludedExpanded] = useState(false)
+  const [excludedExpanded, setExcludedExpanded] = useState(false)
 
   return (
     <section className="py-10 md:py-16 bg-[#0E1F38]">
@@ -117,49 +114,64 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           </motion.div>
         </div>
 
-        {/* Lists — mobile: horizontal scroll cards, desktop: two-column grid */}
+        {/* Lists — MOBILE: vertical stacked with read-more */}
+        <div className="md:hidden space-y-4 mb-4">
 
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="md:hidden overflow-x-auto flex gap-3 pb-2 -mx-6 px-6 snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none" }}
-        >
-          <div className="flex-shrink-0 w-[75vw] snap-start rounded-xl border border-white/10 bg-white/[0.03] p-4">
+          {/* Included */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-ocean-teal mb-3">Included</p>
             <ul className="space-y-2.5">
-              {INCLUDED.map((item) => (
+              {(includedExpanded ? INCLUDED : INCLUDED.slice(0, INCLUDED_PREVIEW)).map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <Check className="h-3.5 w-3.5 text-ocean-teal flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                   <span className="font-sans text-white/70 text-xs leading-snug">{item}</span>
                 </li>
               ))}
             </ul>
+            {INCLUDED.length > INCLUDED_PREVIEW && (
+              <button
+                onClick={() => setIncludedExpanded(!includedExpanded)}
+                className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
+                style={{ color: "#1F8A8F" }}
+              >
+                {includedExpanded ? "Show less" : `Show ${INCLUDED.length - INCLUDED_PREVIEW} more`}
+                <ChevronDown
+                  className="h-3.5 w-3.5 transition-transform duration-200"
+                  style={{ transform: includedExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
+                />
+              </button>
+            )}
           </div>
-          <div className="flex-shrink-0 w-[75vw] snap-start rounded-xl border border-white/10 bg-white/[0.03] p-4">
+
+          {/* Not Included */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/30 mb-3">Not Included</p>
             <ul className="space-y-2.5">
-              {NOT_INCLUDED.map((item) => (
+              {(excludedExpanded ? NOT_INCLUDED : NOT_INCLUDED.slice(0, EXCLUDED_PREVIEW)).map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#B89870", opacity: 0.55 }} strokeWidth={2} />
                   <span className="font-sans text-white/35 text-xs leading-snug">{item}</span>
                 </li>
               ))}
             </ul>
+            {NOT_INCLUDED.length > EXCLUDED_PREVIEW && (
+              <button
+                onClick={() => setExcludedExpanded(!excludedExpanded)}
+                className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
+                style={{ color: "#1F8A8F" }}
+              >
+                {excludedExpanded ? "Show less" : `Show ${NOT_INCLUDED.length - EXCLUDED_PREVIEW} more`}
+                <ChevronDown
+                  className="h-3.5 w-3.5 transition-transform duration-200"
+                  style={{ transform: excludedExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
+                />
+              </button>
+            )}
           </div>
+
         </div>
 
-        {/* Scroll dots — mobile only */}
-        <div className="md:hidden flex justify-center gap-2 mt-2.5 mb-4">
-          {[0, 1].map((i) => (
-            <span
-              key={i}
-              className="block w-2 h-2 rounded-full transition-colors duration-250"
-              style={{ backgroundColor: i === activeList ? "#EA5A2A" : "rgba(255,255,255,0.18)" }}
-            />
-          ))}
-        </div>
-
+        {/* Lists — DESKTOP: two-column grid, all visible */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -202,7 +214,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className=""
+          className="space-y-2.5"
         >
           <p className="font-sans text-white/40 text-xs text-center mb-3">
             Check day-by-day itinerary, booking conditions and full trip details
@@ -215,6 +227,13 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           >
             <FileText className="h-4 w-4 flex-shrink-0" />
             Download Brochure
+          </a>
+          <a
+            href="/contact"
+            className="hidden md:flex w-full items-center justify-center gap-2 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
+          >
+            <Mail className="h-4 w-4 flex-shrink-0" />
+            Inquire about this trip
           </a>
         </motion.div>
 
