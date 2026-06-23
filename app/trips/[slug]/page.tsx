@@ -358,17 +358,6 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
           </div>
         </section>}
 
-        {/* ── Final CTA ── */}
-        <section className="py-12 md:py-16 bg-navy">
-          <div className="flex justify-center px-6">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 font-sans font-semibold px-10 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
-            >
-              Inquire About This Trip
-            </Link>
-          </div>
-        </section>
 
       </main>
       <Footer />
