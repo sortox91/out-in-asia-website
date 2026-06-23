@@ -10,7 +10,7 @@ import { PageHero } from "@/components/page-hero";
 import { TripPricingBlock, BROCHURE_URL } from "@/components/trip-pricing-block";
 import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
-import { TripStickyCta } from "@/components/trip-sticky-cta";
+
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -371,7 +371,6 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         </section>
 
       </main>
-      <TripStickyCta price={trip.price} tripTitle={trip.title} />
       <Footer />
     </>
   );

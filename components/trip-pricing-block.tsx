@@ -214,11 +214,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="space-y-2.5"
         >
-          <p className="font-sans text-white/40 text-xs text-center mb-3">
-            Check day-by-day itinerary, booking conditions and full trip details
-          </p>
           <a
             href={BROCHURE_URL}
             target="_blank"
@@ -228,9 +224,12 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
             <FileText className="h-4 w-4 flex-shrink-0" />
             Download Brochure
           </a>
+          <p className="font-sans text-white/40 text-xs text-center mt-3">
+            Check day-by-day itinerary, booking conditions and full trip details
+          </p>
           <a
             href="/contact"
-            className="hidden md:flex w-full items-center justify-center gap-2 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
+            className="hidden md:flex w-full items-center justify-center gap-2 mt-2 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
           >
             <Mail className="h-4 w-4 flex-shrink-0" />
             Inquire about this trip
