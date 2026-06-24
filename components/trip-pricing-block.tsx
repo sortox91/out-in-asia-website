@@ -203,8 +203,8 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           </div>
         </motion.div>
 
-        {/* Note */}
-        <p className="font-sans text-white/25 text-xs text-center mb-5">
+        {/* Note — mobile only (repris dans le bloc desktop 2-col ci-dessous) */}
+        <p className="md:hidden font-sans text-white/25 text-xs text-center mb-5">
           Minimum 8 participants · 50% deposit to confirm booking
         </p>
 
@@ -215,21 +215,45 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
         >
+          {/* MOBILE : Download Brochure plein largeur + note centrée (inchangé) */}
           <a
             href={BROCHURE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
+            className="md:hidden w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
           >
             <FileText className="h-4 w-4 flex-shrink-0" />
             Download Brochure
           </a>
-          <p className="font-sans text-white/40 text-xs text-center mt-3">
+          <p className="md:hidden font-sans text-white/40 text-xs text-center mt-3">
             Check day-by-day itinerary, booking conditions and full trip details
           </p>
+
+          {/* DESKTOP : 2 colonnes — textes à gauche / Download à droite */}
+          <div className="hidden md:flex items-center gap-6 mb-2">
+            <div className="flex-1 min-w-0">
+              <p className="font-sans text-white/40 text-xs leading-snug">
+                Check day-by-day itinerary, booking conditions and full trip details
+              </p>
+              <p className="font-sans text-white/25 text-xs mt-1.5">
+                Minimum 8 participants · 50% deposit to confirm booking
+              </p>
+            </div>
+            <a
+              href={BROCHURE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 flex items-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
+            >
+              <FileText className="h-4 w-4 flex-shrink-0" />
+              Download Brochure
+            </a>
+          </div>
+
+          {/* Inquire — desktop only */}
           <a
             href="/contact"
-            className="hidden md:flex w-full items-center justify-center gap-2 mt-2 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
+            className="hidden md:flex w-full items-center justify-center gap-2 mt-1.5 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
           >
             <Mail className="h-4 w-4 flex-shrink-0" />
             Inquire about this trip
