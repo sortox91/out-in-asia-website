@@ -3,152 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-
-interface Stop {
-  id: number
-  image: string
-  city: string
-  galleryCity?: string
-  subtitle: string
-  highlights: string[]
-  galleryImages: string[]
-  galleryCaptions: string[]
-  objectPosition: string
-}
-
-const STOPS: Stop[] = [
-  {
-    id: 1,
-    image: "/maps/north-vietnam-step-1.svg",
-    city: "Hanoi",
-    subtitle: "Days 1–3 · Vietnam's Capital",
-    highlights: [
-      "Airport transfer & boutique hotel check-in",
-      "Ngoc Son Temple on Hoan Kiem Lake",
-      "Iconic egg coffee experience",
-      "Guided street food tour from 16:00",
-      "Optional: Hanoi's vibrant gay bars",
-      "Full city discovery on Day 2",
-    ],
-    galleryImages: [
-      "/north-vietnam/gallery/hanoi/hanoi-01.png",
-      "/north-vietnam/gallery/hanoi/hanoi-02.png",
-      "/north-vietnam/gallery/hanoi/hanoi-03.png",
-      "/north-vietnam/gallery/hanoi/hanoi-04.png",
-    ],
-    galleryCaptions: [
-      "Visit Ngoc Son Temple, on a small island in Hoan Kiem Lake",
-      "Guided street food tour in Hanoi Old Quarter",
-      "Hanoi's iconic egg coffee, creamy, sweet and unique",
-      "Drinks at one of Hanoi's vibrant gay bars",
-    ],
-    objectPosition: "center center",
-  },
-  {
-    id: 2,
-    image: "/maps/north-vietnam-step-2.svg",
-    city: "Sapa",
-    subtitle: "Days 4–6 · Mountain Escape",
-    highlights: [
-      "5–6h scenic minivan from Hanoi",
-      "Guided trek through rice terraces & villages",
-      "Overnight in 5-star mountain hotel",
-      "Cable Car to Fansipan: Vietnam's highest peak",
-      "Traditional Sapa Hot Pot dinner",
-    ],
-    galleryImages: [
-      "/north-vietnam/gallery/sapa/sapa-01.png",
-      "/north-vietnam/gallery/sapa/sapa-02.png",
-      "/north-vietnam/gallery/sapa/sapa-03.png",
-      "/north-vietnam/gallery/sapa/sapa-04.png",
-    ],
-    galleryCaptions: [
-      "Trek through bamboo forests, rice terraces, villages and valleys",
-      "Meet local communities and observe traditional crafts",
-      "Cable Car Fansipan experience to Vietnam's highest mountain",
-      "Traditional Sapa Hot Pot",
-    ],
-    objectPosition: "center 40%",
-  },
-  {
-    id: 3,
-    image: "/maps/north-vietnam-step-3.svg",
-    city: "Tam Coc",
-    subtitle: "Days 7–9 · Ha Long Bay on Land",
-    highlights: [
-      "Scenic minivan direct from Sapa",
-      "Dragon Mountain sunrise viewpoint",
-      "Scenic boat trip through caves & cliffs",
-      "Cycling tour: Thung Nang Lake & Bich Dong Pagoda",
-      "Boutique eco-resort with pool",
-    ],
-    galleryImages: [
-      "/north-vietnam/gallery/tamcoc/tamcoc-01.png",
-      "/north-vietnam/gallery/tamcoc/tamcoc-02.png",
-      "/north-vietnam/gallery/tamcoc/tamcoc-03.png",
-      "/north-vietnam/gallery/tamcoc/tamcoc-04.png",
-    ],
-    galleryCaptions: [
-      "Early morning climb to Dragon Mountain",
-      "Boat trip through rivers, cliffs and caves",
-      "Hidden cycling tour through the countryside of Tam Coc",
-      "Bich Dong Pagoda",
-    ],
-    objectPosition: "center 60%",
-  },
-  {
-    id: 4,
-    image: "/maps/north-vietnam-step-4.svg",
-    city: "Ha Long Bay",
-    subtitle: "Days 10–11 · Luxury Yacht Cruise",
-    highlights: [
-      "3h drive + private boat transfer to yacht",
-      "Kayaking through limestone islands",
-      "Cat Ba Island & Three Peaches Beach",
-      "Full board dining + sunset cocktails on deck",
-      "Private balcony cabin on luxury yacht",
-    ],
-    galleryImages: [
-      "/north-vietnam/gallery/halong/halongbay-01.png",
-      "/north-vietnam/gallery/halong/halongbay-02.png",
-      "/north-vietnam/gallery/halong/halongbay-03.png",
-      "/north-vietnam/gallery/halong/halongbay-04.png",
-    ],
-    galleryCaptions: [
-      "3-Day, 2-night full-board luxury yacht experience",
-      "Cat Ba Island beach",
-      "Spring roll making cooking class on the yacht",
-      "Visit a majestic cave filled with shimmering stalactites",
-    ],
-    objectPosition: "center 70%",
-  },
-  {
-    id: 5,
-    image: "/maps/north-vietnam-step-5.svg",
-    city: "Return to Hanoi",
-    galleryCity: "Hanoi",
-    subtitle: "Day 12 · Farewell",
-    highlights: [
-      "Final morning free in Hanoi",
-      "Train Street visit",
-      "Farewell lunch with the group",
-      "Private airport transfer",
-    ],
-    galleryImages: [
-      "/north-vietnam/gallery/hanoi/hanoi-21.png",
-      "/north-vietnam/gallery/hanoi/hanoi-22.png",
-      "/north-vietnam/gallery/hanoi/hanoi-23.png",
-      "/north-vietnam/gallery/hanoi/hanoi-24.png",
-    ],
-    galleryCaptions: [
-      "Iconic Train Street visit",
-      "Final stroll and last shopping",
-      "Curated farewell dinner",
-      "Last gay night out in Vietnam's vibrant capital",
-    ],
-    objectPosition: "center center",
-  },
-]
+import type { TripStop } from "@/lib/trips/types"
 
 // Level-1 orange circle arrow — map stop navigation
 function NavBtn({
@@ -184,14 +39,14 @@ function NavBtn({
   )
 }
 
-export function RouteMap() {
+export function RouteMap({ stops }: { stops: TripStop[] }) {
   const [current, setCurrent] = useState(0)
   const [visible, setVisible] = useState(true)
   const [isDesktop, setIsDesktop] = useState(true)
   const [galleryIndex, setGalleryIndex] = useState(0)
   const [galleryVisible, setGalleryVisible] = useState(true)
-  const total = STOPS.length
-  const stop = STOPS[current]
+  const total = stops.length
+  const stop = stops[current]
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768)
@@ -202,11 +57,11 @@ export function RouteMap() {
 
   // Preload all maps + gallery images at mount → instant transitions
   useEffect(() => {
-    STOPS.forEach(s => {
-      const m = new window.Image(); m.src = s.image
-      s.galleryImages.forEach(src => { const g = new window.Image(); g.src = src })
+    stops.forEach(s => {
+      const m = new window.Image(); m.src = s.mapSvg
+      s.gallery.forEach(({ src }) => { const g = new window.Image(); g.src = src })
     })
-  }, [])
+  }, [stops])
 
   // Navigate between stops (resets gallery to first photo)
   const goTo = (index: number) => {
@@ -236,7 +91,7 @@ export function RouteMap() {
   // Stop navigation dots — padded to 44px touch target
   const StopDots = () => (
     <div style={{ display: "flex", justifyContent: "center", gap: 4 }}>
-      {STOPS.map((_, i) => (
+      {stops.map((_, i) => (
         <button
           key={i}
           onClick={() => goTo(i)}
@@ -292,20 +147,20 @@ export function RouteMap() {
               fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em",
               color: "#1F8A8F", margin: "3px 0 0",
             }}>
-              {stop.subtitle}
+              {stop.daysLabel} · {stop.subtitle}
             </p>
           </div>
         </div>
 
         {/* 1. Map */}
         <div style={{ position: "relative", height: "40vh", overflow: "hidden", backgroundColor: "#FAF6EF" }}>
-          {STOPS.map((s, i) => (
+          {stops.map((s, i) => (
             <div key={s.id} style={{
               position: "absolute", inset: "8px 14px",
               opacity: i === current ? 1 : 0, transition: "opacity 400ms",
               pointerEvents: "none",
             }}>
-              <Image src={s.image} alt={`Map of ${s.city}`} fill className="object-contain" />
+              <Image src={s.mapSvg} alt={`Map of ${s.city}`} fill className="object-contain" />
             </div>
           ))}
           <NavBtn onClick={prev} label="Previous stop" side="left" size={37} />
@@ -320,19 +175,19 @@ export function RouteMap() {
 
           {/* Main image — slimmer ratio — with prev/next overlay arrows + counter */}
           <div style={{ position: "relative", width: "100%", paddingBottom: "52%", borderRadius: "0.5rem", overflow: "hidden" }}>
-            {stop.galleryImages.map((src, i) => (
-              <div key={src} style={{
+            {stop.gallery.map((photo, i) => (
+              <div key={photo.src} style={{
                 position: "absolute", inset: 0,
                 opacity: i === galleryIndex && galleryVisible ? 1 : 0,
                 transition: "opacity 250ms",
                 pointerEvents: "none",
               }}>
                 <Image
-                  src={src}
-                  alt={stop.galleryCaptions[i]}
+                  src={photo.src}
+                  alt={photo.caption}
                   fill
                   className="object-cover"
-                  style={{ objectPosition: stop.objectPosition }}
+                  style={{ objectPosition: stop.objectPosition ?? "center center" }}
                   priority
                 />
               </div>
@@ -356,7 +211,7 @@ export function RouteMap() {
             )}
 
             {/* Next arrow */}
-            {galleryIndex < stop.galleryImages.length - 1 && (
+            {galleryIndex < stop.gallery.length - 1 && (
               <button
                 onClick={() => selectPhoto(galleryIndex + 1)}
                 aria-label="Next photo"
@@ -381,17 +236,17 @@ export function RouteMap() {
               fontSize: "0.65rem", color: "rgba(255,255,255,0.85)",
               zIndex: 10,
             }}>
-              {galleryIndex + 1}/{stop.galleryImages.length}
+              {galleryIndex + 1}/{stop.gallery.length}
             </div>
           </div>
 
           {/* Thumbnails */}
           <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
-            {stop.galleryImages.map((src, i) => (
+            {stop.gallery.map((photo, i) => (
               <button
                 key={i}
                 onClick={() => selectPhoto(i)}
-                aria-label={stop.galleryCaptions[i]}
+                aria-label={photo.caption}
                 style={{
                   flex: 1, position: "relative", height: 56,
                   borderRadius: "0.3rem", overflow: "hidden",
@@ -402,11 +257,11 @@ export function RouteMap() {
                 }}
               >
                 <Image
-                  src={src}
-                  alt={stop.galleryCaptions[i]}
+                  src={photo.src}
+                  alt={photo.caption}
                   fill
                   className="object-cover"
-                  style={{ objectPosition: stop.objectPosition }}
+                  style={{ objectPosition: stop.objectPosition ?? "center center" }}
                 />
               </button>
             ))}
@@ -418,7 +273,7 @@ export function RouteMap() {
             fontSize: "0.7rem", color: "#B89870", margin: "8px 0 14px",
             opacity: galleryVisible ? 1 : 0, transition: "opacity 250ms",
           }}>
-            {stop.galleryCity ?? stop.city} · {stop.galleryCaptions[galleryIndex]}
+            {stop.galleryCity ?? stop.city} · {stop.gallery[galleryIndex].caption}
           </p>
         </div>
 
@@ -466,7 +321,7 @@ export function RouteMap() {
                 fontSize: "0.62rem", textTransform: "uppercase", letterSpacing: "0.1em",
                 color: "#1F8A8F", margin: "3px 0 0",
               }}>
-                {stop.subtitle}
+                {stop.daysLabel} · {stop.subtitle}
               </p>
             </div>
           </div>
@@ -483,14 +338,14 @@ export function RouteMap() {
             }}>
               {/* Map area — flex:1 so it matches gallery column height */}
               <div style={{ position: "relative", flex: 1, minHeight: 320 }}>
-                {STOPS.map((s, i) => (
+                {stops.map((s, i) => (
                   <div key={s.id} style={{
                     position: "absolute", inset: "40px 16px 10px",
                     opacity: i === current ? 1 : 0, transition: "opacity 400ms",
                     pointerEvents: "none",
                   }}>
                     <Image
-                      src={s.image}
+                      src={s.mapSvg}
                       alt={`Map of ${s.city}`}
                       fill
                       className="object-contain"
@@ -524,19 +379,19 @@ export function RouteMap() {
                 borderRadius: "0.5rem", overflow: "hidden",
                 flexShrink: 0, marginBottom: 10,
               }}>
-                {stop.galleryImages.map((src, i) => (
-                  <div key={src} style={{
+                {stop.gallery.map((photo, i) => (
+                  <div key={photo.src} style={{
                     position: "absolute", inset: 0,
                     opacity: i === galleryIndex && galleryVisible ? 1 : 0,
                     transition: "opacity 250ms",
                     pointerEvents: "none",
                   }}>
                     <Image
-                      src={src}
-                      alt={stop.galleryCaptions[i]}
+                      src={photo.src}
+                      alt={photo.caption}
                       fill
                       className="object-cover"
-                      style={{ objectPosition: stop.objectPosition }}
+                      style={{ objectPosition: stop.objectPosition ?? "center center" }}
                       priority={i === 0}
                     />
                   </div>
@@ -545,11 +400,11 @@ export function RouteMap() {
 
               {/* Thumbnail strip */}
               <div style={{ display: "flex", gap: 8, marginBottom: 10, flexShrink: 0 }}>
-                {stop.galleryImages.map((src, i) => (
+                {stop.gallery.map((photo, i) => (
                   <button
                     key={i}
                     onClick={() => selectPhoto(i)}
-                    aria-label={stop.galleryCaptions[i]}
+                    aria-label={photo.caption}
                     style={{
                       flex: 1, position: "relative", height: 76,
                       borderRadius: "0.35rem", overflow: "hidden",
@@ -562,11 +417,11 @@ export function RouteMap() {
                     onMouseLeave={e => { if (i !== galleryIndex) e.currentTarget.style.opacity = "0.5" }}
                   >
                     <Image
-                      src={src}
-                      alt={stop.galleryCaptions[i]}
+                      src={photo.src}
+                      alt={photo.caption}
                       fill
                       className="object-cover"
-                      style={{ objectPosition: stop.objectPosition }}
+                      style={{ objectPosition: stop.objectPosition ?? "center center" }}
                     />
                   </button>
                 ))}
@@ -579,7 +434,7 @@ export function RouteMap() {
                 opacity: galleryVisible ? 1 : 0, transition: "opacity 250ms",
                 flexShrink: 0,
               }}>
-                {stop.galleryCity ?? stop.city} · {stop.galleryCaptions[galleryIndex]}
+                {stop.galleryCity ?? stop.city} · {stop.gallery[galleryIndex].caption}
               </p>
 
             </div>

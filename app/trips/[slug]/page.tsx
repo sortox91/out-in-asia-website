@@ -7,9 +7,10 @@ import { Footer } from "@/components/footer";
 import { RouteMap } from "@/components/route-map";
 import { TripHeroParallax } from "@/components/trip-hero-parallax";
 import { PageHero } from "@/components/page-hero";
-import { TripPricingBlock, BROCHURE_URL } from "@/components/trip-pricing-block";
+import { TripPricingBlock } from "@/components/trip-pricing-block";
 import { TripComfortSection } from "@/components/trip-comfort-section";
 import { siteConfig } from "@/lib/config";
+import { getTripContent } from "@/lib/trips";
 
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -149,13 +150,6 @@ const tripRoutes: Record<string, { city: string; day: number }[]> = {
   bali:           [{ city: "Bali", day: 1 }, { city: "Ubud", day: 2 }, { city: "Seminyak", day: 5 }, { city: "Komodo", day: 7 }],
 };
 
-const galleryImages: Record<string, { large: string; small1: string; small2: string }> = {
-  thailand:        { large: "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=1200&q=80", small1: "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=600&q=80", small2: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&q=80" },
-  "north-vietnam": { large: "/ai-landscapes/vietnam-3.png", small1: "/ai-landscapes/vietnam-4.png", small2: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" },
-  "south-vietnam": { large: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1200&q=80", small1: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600&q=80", small2: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" },
-  bali:            { large: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80", small1: "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80", small2: "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80" },
-};
-
 // ─── Static params + metadata ─────────────────────────────────────────────────
 
 export async function generateStaticParams() {
@@ -175,7 +169,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const trip    = siteConfig.trips.find((t) => t.id === slug);
   const details = tripDetails[slug];
-  const gallery = galleryImages[slug];
+  const content = getTripContent(slug);
 
   if (!trip || !details) notFound();
 
@@ -185,14 +179,14 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
       <main className="overflow-x-hidden">
 
         {/* ── Hero ── */}
-        {slug === "north-vietnam" ? (
+        {content ? (
           <>
             <div className="relative">
               <PageHero
-                image="/north-vietnam/northvietnam-cover-web.png"
-                imageMobile="/north-vietnam/northvietnam-cover-mobile.png"
+                image={content.coverWeb}
+                imageMobile={content.coverMobile}
                 eyebrow="GROUP GAY TRIPS"
-                title="North Vietnam"
+                title={trip.title}
                 subtitle="Rice terraces, mountain villages, limestone bays and immersive local experiences"
               />
               <div className="absolute top-20 left-6 sm:left-10 lg:left-16 z-10">
@@ -231,30 +225,33 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
           />
         )}
 
-        {/* ── Quick facts bar (north-vietnam) / Highlights bar (other trips) ── */}
-        {slug === "north-vietnam" ? (
+        {/* ── Quick facts bar (rich trip) / Highlights bar (stub trip) ── */}
+        {content ? (
           <section className="bg-sunset-orange py-4">
             <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4">
-                {([
-                  { Icon: Calendar, value: "12 Days", label: "Duration" },
-                  { Icon: Users, value: "Small Group", label: "Max 12" },
-                  { Icon: MapPin, value: "4 Stops", label: "Hanoi · Sapa · Tam Coc · Ha Long" },
+                {[
+                  { Icon: Calendar, value: trip.duration.replace(/\bdays?\b/i, w => w.charAt(0).toUpperCase() + w.slice(1)), label: "Duration" },
+                  { Icon: Users, value: "Small Group", label: content.groupSize },
+                  { Icon: MapPin, value: `${content.stopsCities.split(" · ").length} Stops`, label: content.stopsCities },
                   { Icon: Sparkles, value: `From ${trip.price.shared}`, label: "Per person" },
-                ] as const).map((fact, i) => (
-                  <div
-                    key={i}
-                    className={`flex flex-row md:flex-col items-start md:items-center justify-start md:justify-center gap-2 md:gap-0 py-3 px-3 md:text-center${
-                      i === 1 || i === 3 ? " border-l border-white/25" : i === 2 ? " md:border-l md:border-white/25" : ""
-                    }`}
-                  >
-                    <fact.Icon className="h-4 w-4 text-white flex-shrink-0 mt-0.5 md:mt-0 md:mb-1.5" strokeWidth={1.5} />
-                    <div>
-                      <p className="font-serif text-white font-bold text-sm leading-tight md:mb-0.5">{fact.value}</p>
-                      <p className="font-sans text-white/75 text-[0.6rem] leading-tight">{fact.label}</p>
+                ].map((fact, i) => {
+                  const Icon = fact.Icon
+                  return (
+                    <div
+                      key={i}
+                      className={`flex flex-row md:flex-col items-start md:items-center justify-start md:justify-center gap-2 md:gap-0 py-3 px-3 md:text-center${
+                        i === 1 || i === 3 ? " border-l border-white/25" : i === 2 ? " md:border-l md:border-white/25" : ""
+                      }`}
+                    >
+                      <Icon className="h-4 w-4 text-white flex-shrink-0 mt-0.5 md:mt-0 md:mb-1.5" strokeWidth={1.5} />
+                      <div>
+                        <p className="font-serif text-white font-bold text-sm leading-tight md:mb-0.5">{fact.value}</p>
+                        <p className="font-sans text-white/75 text-[0.6rem] leading-tight">{fact.label}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </section>
@@ -274,11 +271,11 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         )}
 
         {/* ── Route map ── */}
-        {slug === "north-vietnam" && <RouteMap />}
-        {slug === "north-vietnam" && (
+        {content && <RouteMap stops={content.stops} />}
+        {content && (
           <div className="bg-[#FAF6EF] pt-4 pb-10 md:pt-5 md:pb-12 flex justify-center px-6">
             <a
-              href={BROCHURE_URL}
+              href={content.brochureUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 font-sans font-semibold text-sm px-8 py-4 rounded-full border-2 border-navy text-navy hover:bg-navy hover:text-white transition-colors duration-300"
@@ -288,8 +285,8 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
             </a>
           </div>
         )}
-        {slug === "north-vietnam" && <TripComfortSection />}
-        {slug !== "north-vietnam" && tripRoutes[slug] && (
+        {content && <TripComfortSection cards={content.comfortCards} />}
+        {!content && tripRoutes[slug] && (
           <section className="py-16 bg-[#FAF6EF] border-t border-[#E8DDD0]/50">
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
@@ -314,11 +311,19 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
           </section>
         )}
 
-        {/* ── North Vietnam pricing block ── */}
-        {slug === "north-vietnam" && <TripPricingBlock priceShared={trip.price.shared} priceSingle={trip.price.single} />}
+        {/* ── Pricing block (rich trip only) ── */}
+        {content && (
+          <TripPricingBlock
+            priceShared={trip.price.shared}
+            priceSingle={trip.price.single}
+            included={content.included}
+            notIncluded={content.notIncluded}
+            brochureUrl={content.brochureUrl}
+          />
+        )}
 
-        {/* ── What's included — hidden for north-vietnam (covered by TripPricingBlock) ── */}
-        {slug !== "north-vietnam" && <section className="py-14 md:py-24 bg-[#F0E8DA]">
+        {/* ── What's included — stub trips only ── */}
+        {!content && <section className="py-14 md:py-24 bg-[#F0E8DA]">
           <div className="mx-auto max-w-5xl px-6 lg:px-8">
             <div className="text-center mb-14">
               <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-4">What You Get</p>

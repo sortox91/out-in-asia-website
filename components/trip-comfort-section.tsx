@@ -1,46 +1,9 @@
 "use client"
 
 import Image from "next/image"
+import type { ComfortCard } from "@/lib/trips/types"
 
-const CARDS = [
-  {
-    image: "/north-vietnam/accommodation/A.Hanoi.jpg",
-    title: "Premium 4-Star Hotel",
-    description: "Elegantly located hotel in central Hanoi, with breakfast included.",
-    tag: "3 nights · Breakfast included",
-    location: "Hanoi",
-  },
-  {
-    image: "/north-vietnam/accommodation/A.Sapa.jpg",
-    title: "5-Star Mountain Resort",
-    description: "Cloud-wrapped luxury in Sapa, a perfect retreat after a day of trekking in the terraces.",
-    tag: "3 nights · Breakfast included",
-    location: "Sapa",
-  },
-  {
-    image: "/north-vietnam/accommodation/A.TamCoc.jpg",
-    title: "Premium 4-Star Hotel",
-    description: "Boutique eco-resort with a pool, nestled in Ninh Binh's stunning karst landscape.",
-    tag: "3 nights · Breakfast included",
-    location: "Tam Coc",
-  },
-  {
-    image: "/accommodation/halong-1.jpg",
-    title: "Luxury Yacht Cruise",
-    description: "Private balcony cabins on a 5-star yacht. Full board, sunset cocktails on deck.",
-    tag: "2 nights · Full board",
-    location: "Ha Long Bay",
-  },
-  {
-    image: "/north-vietnam/accommodation/A.Minivan.jpg",
-    title: "Premium Minivan",
-    description: "Enjoy relaxed journeys across Northern Vietnam in premium minivans",
-    tag: "Private transfers",
-    location: "Northern Vietnam",
-  },
-]
-
-export function TripComfortSection() {
+export function TripComfortSection({ cards }: { cards: ComfortCard[] }) {
   return (
     <section className="py-12 md:py-20" style={{ backgroundColor: "#FAF6EF", borderTop: "1px solid rgba(232,221,208,0.5)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 1.5rem" }}>
@@ -74,7 +37,7 @@ export function TripComfortSection() {
           className="flex gap-5 overflow-x-auto pb-4 -mx-6 pl-6 md:mx-0 md:pl-0 snap-x snap-mandatory [scroll-padding-left:1.5rem] md:[scroll-padding-left:0]"
           style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
-          {CARDS.map((card) => (
+          {cards.map((card) => (
             <div
               key={card.location}
               className="flex-shrink-0 snap-start w-[82vw] sm:w-[60vw] md:w-[30%]"

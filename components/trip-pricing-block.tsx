@@ -1,8 +1,5 @@
 "use client"
 
-export const BROCHURE_URL =
-  "https://drive.google.com/file/d/1FBiN1QZ_wmKvMMt8d0Q-dF3Rtm8Yqjm1/view"
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Check, X, FileText, ChevronDown, Mail } from "lucide-react"
@@ -16,38 +13,18 @@ const BedIcon = ({ single = false }: { single?: boolean }) => (
   </svg>
 )
 
-const INCLUDED = [
-  "Group guidance and assistance during the stay",
-  "9 nights with breakfast in premium 4 and 5-star hotels",
-  "2 nights on a 5-star exclusive yacht with full board",
-  "6 selected additional meals",
-  "All included activities listed in the itinerary",
-  "Premium air-conditioned minivans throughout the trip",
-  "Private airport transfer on arrival and departure",
-  "Organisation fees, taxes and local charges",
-  "Welcome gift package",
-]
-
-const NOT_INCLUDED = [
-  "International flights",
-  "Additional meals not listed in the programme",
-  "Travel insurance",
-  "Personal expenses",
-  "Extra activities not included in the programme",
-  "Additional private assistance outside the programme",
-  "Early check-in on arrival day",
-  "Late check-out on departure day",
-]
-
 const INCLUDED_PREVIEW = 3
 const EXCLUDED_PREVIEW = 3
 
 interface TripPricingBlockProps {
   priceShared: string
   priceSingle: string
+  included: string[]
+  notIncluded: string[]
+  brochureUrl: string
 }
 
-export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockProps) {
+export function TripPricingBlock({ priceShared, priceSingle, included, notIncluded, brochureUrl }: TripPricingBlockProps) {
   const [includedExpanded, setIncludedExpanded] = useState(false)
   const [excludedExpanded, setExcludedExpanded] = useState(false)
 
@@ -121,20 +98,20 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-ocean-teal mb-3">Included</p>
             <ul className="space-y-2.5">
-              {(includedExpanded ? INCLUDED : INCLUDED.slice(0, INCLUDED_PREVIEW)).map((item) => (
+              {(includedExpanded ? included : included.slice(0, INCLUDED_PREVIEW)).map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <Check className="h-3.5 w-3.5 text-ocean-teal flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                   <span className="font-sans text-white/70 text-xs leading-snug">{item}</span>
                 </li>
               ))}
             </ul>
-            {INCLUDED.length > INCLUDED_PREVIEW && (
+            {included.length > INCLUDED_PREVIEW && (
               <button
                 onClick={() => setIncludedExpanded(!includedExpanded)}
                 className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
                 style={{ color: "#1F8A8F" }}
               >
-                {includedExpanded ? "Show less" : `Show ${INCLUDED.length - INCLUDED_PREVIEW} more`}
+                {includedExpanded ? "Show less" : `Show ${included.length - INCLUDED_PREVIEW} more`}
                 <ChevronDown
                   className="h-3.5 w-3.5 transition-transform duration-200"
                   style={{ transform: includedExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -147,20 +124,20 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/30 mb-3">Not Included</p>
             <ul className="space-y-2.5">
-              {(excludedExpanded ? NOT_INCLUDED : NOT_INCLUDED.slice(0, EXCLUDED_PREVIEW)).map((item) => (
+              {(excludedExpanded ? notIncluded : notIncluded.slice(0, EXCLUDED_PREVIEW)).map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#B89870", opacity: 0.55 }} strokeWidth={2} />
                   <span className="font-sans text-white/35 text-xs leading-snug">{item}</span>
                 </li>
               ))}
             </ul>
-            {NOT_INCLUDED.length > EXCLUDED_PREVIEW && (
+            {notIncluded.length > EXCLUDED_PREVIEW && (
               <button
                 onClick={() => setExcludedExpanded(!excludedExpanded)}
                 className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
                 style={{ color: "#1F8A8F" }}
               >
-                {excludedExpanded ? "Show less" : `Show ${NOT_INCLUDED.length - EXCLUDED_PREVIEW} more`}
+                {excludedExpanded ? "Show less" : `Show ${notIncluded.length - EXCLUDED_PREVIEW} more`}
                 <ChevronDown
                   className="h-3.5 w-3.5 transition-transform duration-200"
                   style={{ transform: excludedExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -182,7 +159,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           <div>
             <p className="font-sans text-xs tracking-[0.2em] uppercase text-ocean-teal mb-3">Included</p>
             <ul className="space-y-2.5">
-              {INCLUDED.map((item) => (
+              {included.map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <Check className="h-3.5 w-3.5 text-ocean-teal flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                   <span className="font-sans text-white/70 text-xs leading-snug">{item}</span>
@@ -193,7 +170,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
           <div>
             <p className="font-sans text-xs tracking-[0.2em] uppercase text-white/30 mb-3">Not Included</p>
             <ul className="space-y-2.5">
-              {NOT_INCLUDED.map((item) => (
+              {notIncluded.map((item) => (
                 <li key={item} className="flex items-start gap-2">
                   <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#B89870", opacity: 0.55 }} strokeWidth={2} />
                   <span className="font-sans text-white/35 text-xs leading-snug">{item}</span>
@@ -217,7 +194,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
         >
           {/* MOBILE : Download Brochure plein largeur + note centrée (inchangé) */}
           <a
-            href={BROCHURE_URL}
+            href={brochureUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="md:hidden w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
@@ -240,7 +217,7 @@ export function TripPricingBlock({ priceShared, priceSingle }: TripPricingBlockP
               </p>
             </div>
             <a
-              href={BROCHURE_URL}
+              href={brochureUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-shrink-0 flex items-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
