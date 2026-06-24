@@ -1,7 +1,7 @@
 "use client"
 
 export const BROCHURE_URL =
-  "https://drive.google.com/file/d/17-Q1ewgfsz1qfnys3RtQI9GCpmwc00Nx/view"
+  "https://drive.google.com/file/d/1FBiN1QZ_wmKvMMt8d0Q-dF3Rtm8Yqjm1/view"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
