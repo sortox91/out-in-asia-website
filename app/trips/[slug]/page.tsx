@@ -60,7 +60,7 @@ const tripDetails: Record<
     ],
     notIncluded: ["International flights", "Travel insurance", "Personal expenses", "Some meals", "Optional activities"],
     groupSize: "8-12 travelers",
-    nextDates: ["December 1–12, 2026", "January 18–29, 2027"],
+    nextDates: ["1 December – 12 December 2026", "15 February – 27 February 2027"],
   },
 
   "north-vietnam": {
@@ -187,7 +187,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 imageMobile={content.coverMobile}
                 eyebrow="GROUP GAY TRIPS"
                 title={trip.title}
-                subtitle="Rice terraces, mountain villages, limestone bays and immersive local experiences"
+                subtitle={content.heroSubtitle ?? trip.subtitle}
               />
               <div className="absolute top-20 left-6 sm:left-10 lg:left-16 z-10">
                 <Link

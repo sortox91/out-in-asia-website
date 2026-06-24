@@ -3,6 +3,7 @@ import type { TripContent } from "./types"
 export const northVietnam: TripContent = {
   coverWeb: "/north-vietnam/northvietnam-cover-web.png",
   coverMobile: "/north-vietnam/northvietnam-cover-mobile.png",
+  heroSubtitle: "Rice terraces, mountain villages, limestone bays and immersive local experiences",
 
   stopsCities: "Hanoi · Sapa · Tam Coc · Ha Long",
   groupSize: "Max 12",

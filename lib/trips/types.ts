@@ -26,6 +26,7 @@ export type ComfortCard = {
 export type TripContent = {
   coverWeb: string
   coverMobile: string
+  heroSubtitle?: string
   stops: TripStop[]
   comfortCards: ComfortCard[]
   included: string[]

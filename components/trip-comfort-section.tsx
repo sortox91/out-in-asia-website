@@ -46,15 +46,17 @@ export function TripComfortSection({ cards }: { cards: ComfortCard[] }) {
               {/* Image + location badge */}
               <div style={{ position: "relative", width: "100%", paddingBottom: "60%" }}>
                 <Image src={card.image} alt={card.title} fill className="object-cover" />
-                <span style={{
-                  position: "absolute", top: 12, left: 12,
-                  backgroundColor: "#EA5A2A", color: "white",
-                  fontFamily: "var(--font-manrope), Manrope, sans-serif",
-                  fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
-                  borderRadius: "999px", padding: "0.25rem 0.75rem",
-                }}>
-                  {card.location}
-                </span>
+                {card.location && (
+                  <span style={{
+                    position: "absolute", top: 12, left: 12,
+                    backgroundColor: "#EA5A2A", color: "white",
+                    fontFamily: "var(--font-manrope), Manrope, sans-serif",
+                    fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
+                    borderRadius: "999px", padding: "0.25rem 0.75rem",
+                  }}>
+                    {card.location}
+                  </span>
+                )}
               </div>
               {/* Text */}
               <div style={{ padding: "1.1rem 1.25rem 1.4rem" }}>
