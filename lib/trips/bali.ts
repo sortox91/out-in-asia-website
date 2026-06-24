@@ -1,0 +1,145 @@
+import type { TripContent } from "./types"
+
+export const bali: TripContent = {
+  coverWeb: "/bali/bali_cover_web.png",
+  coverMobile: "/bali/bali_cover_mobile.png",
+  heroSubtitle: "Sacred temples, lush rice terraces, tropical beaches and timeless island traditions",
+
+  stopsCities: "Seminyak · Uluwatu · Ubud · Batur · Jatiluwih",
+  groupSize: "Max 12",
+  brochureUrl: "https://drive.google.com/file/d/1rTbOllXgGJYh3oHm9FAdDwJn1_UkEROQ/view",
+
+  stops: [
+    {
+      id: 1,
+      city: "Seminyak",
+      daysLabel: "Days 1–3",
+      subtitle: "Beach & Nightlife",
+      mapSvg: "/bali/maps/balimap_01.svg",
+      highlights: [],
+      gallery: [
+        { src: "/bali/gallery/seminyak/SEMINYAK-01.png", caption: "Enjoy sunset drinks at one of Bali's most iconic beach clubs" },
+        { src: "/bali/gallery/seminyak/SEMINYAK-02.png", caption: "Welcoming Balinese dinner hosted by Out in Asia" },
+        { src: "/bali/gallery/seminyak/SEMINYAK-03.png", caption: "Experience a drag queen show and Bali's gay nightlife" },
+        { src: "/bali/gallery/seminyak/SEMINYAK-04.png", caption: "Enjoy a massage experience at a premium men's spa" },
+      ],
+    },
+    {
+      id: 2,
+      city: "Uluwatu",
+      daysLabel: "Day 4",
+      subtitle: "Beach & Temples",
+      mapSvg: "/bali/maps/balimap_02.svg",
+      highlights: [],
+      gallery: [
+        { src: "/bali/gallery/uluwatu/ULUWATU-01.png", caption: "Visit Garuda Wisnu Kencana Cultural Park" },
+        { src: "/bali/gallery/uluwatu/ULUWATU-02.png", caption: "Explore the spectacular clifftop Uluwatu Temple" },
+        { src: "/bali/gallery/uluwatu/ULUWATU-03.png", caption: "Relax at Melasti Beach" },
+        { src: "/bali/gallery/uluwatu/ULUWATU-04.png", caption: "Enjoy a sunset seafood dinner in Jimbaran" },
+      ],
+    },
+    {
+      id: 3,
+      city: "Ubud",
+      daysLabel: "Days 5, 6, 8, 10, 11",
+      subtitle: "Culture & Nature",
+      mapSvg: "/bali/maps/balimap_03.svg",
+      highlights: [],
+      gallery: [
+        { src: "/bali/gallery/ubud/UBUD-01.png", caption: "Take part in a traditional Balinese water purification ceremony" },
+        { src: "/bali/gallery/ubud/UBUD-02.png", caption: "Visit Sangeh Monkey Forest" },
+        { src: "/bali/gallery/ubud/UBUD-03.png", caption: "Visit Tibumana Waterfall" },
+        { src: "/bali/gallery/ubud/UBUD-04.png", caption: "Join a Balinese cooking class experience" },
+      ],
+    },
+    {
+      id: 4,
+      city: "Batur",
+      daysLabel: "Day 7",
+      subtitle: "Volcano Sunrise",
+      mapSvg: "/bali/maps/balimap_04.svg",
+      highlights: [],
+      gallery: [
+        { src: "/bali/gallery/batur/BATUR-01.png", caption: "Sunrise trek to the top of Mount Batur (approx. 1.5h)" },
+        { src: "/bali/gallery/batur/BATUR-02.png", caption: "Or enjoy the sunrise by jeep halfway up the volcano" },
+        { src: "/bali/gallery/batur/BATUR-03.png", caption: "Enjoy panoramic views over Bali's volcanic landscapes" },
+        { src: "/bali/gallery/batur/BATUR-04.png", caption: "Stop for a traditional coffee and tea tasting experience" },
+      ],
+    },
+    {
+      id: 5,
+      city: "Jatiluwih",
+      daysLabel: "Day 9",
+      subtitle: "UNESCO Rice Terraces",
+      mapSvg: "/bali/maps/balimap_05.svg",
+      highlights: [],
+      gallery: [
+        { src: "/bali/gallery/jatiluwih/JATILUWIH-01.png", caption: "Explore Jatiluwih's UNESCO rice terraces by electric bike" },
+        { src: "/bali/gallery/jatiluwih/JATILUWIH-02.png", caption: "Explore the sacred Ulun Danu Bratan Temple" },
+        { src: "/bali/gallery/jatiluwih/JATILUWIH-03.png", caption: "Visit the hidden Yeh Hoo Waterfall" },
+        { src: "/bali/gallery/jatiluwih/JATILUWIH-04.png", caption: "Enjoy lunch in a traditional local warung" },
+      ],
+    },
+    {
+      id: 6,
+      city: "Seminyak",
+      galleryCity: "Seminyak",
+      daysLabel: "Days 12–13",
+      subtitle: "Beach & Nightlife",
+      mapSvg: "/bali/maps/balimap_06.svg",
+      highlights: [],
+      gallery: [
+        { src: "/bali/gallery/seminyak-return/SEMINYAK-21.png", caption: "Free time to relax on the beach before departure" },
+        { src: "/bali/gallery/seminyak-return/SEMINYAK-22.png", caption: "Farewell dinner hosted by Out in Asia" },
+        { src: "/bali/gallery/seminyak-return/SEMINYAK-23.png", caption: "One last night to enjoy Seminyak nightlife" },
+        { src: "/bali/gallery/seminyak-return/SEMINYAK-24.png", caption: "Free time for final shopping in Seminyak" },
+      ],
+    },
+  ],
+
+  comfortCards: [
+    {
+      image: "/bali/comfort/BALICOMFORT-01.png",
+      location: "Seminyak",
+      title: "5-Star Beachfront Hotel",
+      tag: "5 nights · Breakfast included",
+      description: "Modern beachfront hotel within walking distance of Seminyak's gay nightlife",
+    },
+    {
+      image: "/bali/comfort/BALICOMFORT-02.jpg",
+      location: "Ubud",
+      title: "5-Star Tropical Resort",
+      tag: "7 nights · Breakfast included",
+      description: "Premium hotel surrounded by nature in the heart of Ubud",
+    },
+    {
+      image: "/bali/comfort/BALICOMFORT-03.png",
+      location: "",
+      title: "Private Minivan",
+      tag: "Private transfers",
+      description: "Travel in comfortable premium minivans, making every journey relaxed and enjoyable",
+    },
+  ],
+
+  included: [
+    "Group guidance and assistance during the stay",
+    "12 nights with breakfast in exclusive 5-star hotels",
+    "5 selected additional meals",
+    "All included activities listed in the itinerary",
+    "Premium air-conditioned minivans throughout the trip",
+    "Private airport transfer on arrival and departure",
+    "Organisation fees, taxes and local charges",
+    "Welcome gift package",
+  ],
+
+  notIncluded: [
+    "International flights",
+    "Additional meals not listed in the programme",
+    "Travel insurance",
+    "Personal expenses",
+    "Extra activities not included in the programme",
+    "Additional private assistance outside the programme",
+    "Early check-in on arrival day",
+    "Late check-out on departure day",
+  ],
+}

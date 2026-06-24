@@ -139,7 +139,7 @@ const tripDetails: Record<
     ],
     notIncluded: ["International flights", "Travel insurance", "Personal expenses", "Some meals"],
     groupSize: "8-12 travelers",
-    nextDates: ["March 12–24, 2027", "May 3–14, 2027", "July 8–19, 2027", "August 4–15, 2027", "October 16–27, 2027"],
+    nextDates: ["12 March – 24 March 2027", "3 May – 15 May 2027", "8 July – 20 July 2027", "4 August – 16 August 2027", "16 October – 28 October 2027"],
   },
 };
 
