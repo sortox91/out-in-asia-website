@@ -31,7 +31,7 @@ export function TripCard({
       className="group block relative rounded-2xl overflow-hidden"
     >
       {/* Fixed-height image area */}
-      <div className="h-[220px] sm:h-[300px] md:h-[360px] relative overflow-hidden bg-ocean-teal/20">
+      <div className="h-[180px] sm:h-[260px] lg:h-[320px] relative overflow-hidden bg-ocean-teal/20">
         {/* TODO: add real photos to /public/trips/ */}
         {!imgError && (
           <Image
