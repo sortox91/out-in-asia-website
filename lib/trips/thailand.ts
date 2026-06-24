@@ -4,6 +4,7 @@ export const thailand: TripContent = {
   coverWeb: "/thailand/thailand_cover_web.png",
   coverMobile: "/thailand/thailand_cover_mobile.png",
 
+  heroSubtitle: "Golden temples, emerald jungle lakes, limestone cliffs and dreamy island beaches",
   stopsCities: "Bangkok · Khao Sok · Ao Nang",
   groupSize: "Max 12",
   brochureUrl: "https://drive.google.com/file/d/1eG4yXFKXK2SF77UEYb1lVew13JU-D_3X/view",
