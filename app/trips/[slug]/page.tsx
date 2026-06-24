@@ -119,7 +119,7 @@ const tripDetails: Record<
     ],
     notIncluded: ["International flights", "Visa fees", "Travel insurance", "Personal expenses"],
     groupSize: "6-10 travelers",
-    nextDates: ["February 16–27, 2027", "November 1–12, 2027"],
+    nextDates: ["18 January – 29 January 2027", "1 November – 12 November 2027"],
   },
 
   bali: {
