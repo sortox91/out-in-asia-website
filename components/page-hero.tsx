@@ -22,6 +22,8 @@ interface PageHeroProps {
   titleLine2Accent?: string
   /** Optional subtitle in Manrope below the title */
   subtitle?: React.ReactNode
+  /** Optional content rendered below the subtitle (e.g. departure date pills for trip pages) */
+  bottomContent?: React.ReactNode
 }
 
 /**
@@ -40,6 +42,7 @@ export function PageHero({
   titleLine2,
   titleLine2Accent,
   subtitle,
+  bottomContent,
 }: PageHeroProps) {
   const mobileImage = imageMobile ?? image
 
@@ -118,6 +121,11 @@ export function PageHero({
               <p className="font-sans text-xs md:text-sm text-white/50 leading-relaxed">
                 {subtitle}
               </p>
+            )}
+            {bottomContent && (
+              <div className="mt-5">
+                {bottomContent}
+              </div>
             )}
           </div>
         </div>

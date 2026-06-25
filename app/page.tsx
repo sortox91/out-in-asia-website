@@ -495,45 +495,46 @@ function TestimonialsSection() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div
-              className="mx-auto max-w-2xl rounded-2xl p-7 md:p-9 relative"
+              className="mx-auto max-w-2xl rounded-2xl overflow-hidden"
               style={{
                 backgroundColor: "#FFFFFF",
                 boxShadow: "0 2px 20px rgba(14,31,56,0.08)",
                 border: "1px solid rgba(14,31,56,0.06)",
               }}
             >
-              {/* Decorative opening quote */}
-              <span
-                aria-hidden
-                className="absolute top-4 left-6 font-serif leading-none select-none pointer-events-none"
-                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.12, lineHeight: 1 }}
-              >
-                &ldquo;
-              </span>
-
-              <blockquote
-                className="font-serif text-sm md:text-base italic leading-relaxed mb-5 relative z-10 pt-4"
-                style={{ color: "#0E1F38" }}
-              >
-                &ldquo;{TESTIMONIALS[current].quote}&rdquo;
-              </blockquote>
+              {/* Quote area */}
+              <div className="relative p-7 md:p-9 pb-5 md:pb-6">
+                <span
+                  aria-hidden
+                  className="absolute top-4 left-6 font-serif leading-none select-none pointer-events-none"
+                  style={{ fontSize: "4rem", color: "#EA5A2A", opacity: 0.10, lineHeight: 1 }}
+                >
+                  &ldquo;
+                </span>
+                <blockquote
+                  className="font-serif text-sm md:text-base italic leading-relaxed relative z-10 pt-3 text-left"
+                  style={{ color: "#0E1F38" }}
+                >
+                  &ldquo;{TESTIMONIALS[current].quote}&rdquo;
+                </blockquote>
+              </div>
 
               {/* Separator */}
-              <div className="border-t mb-4" style={{ borderColor: "rgba(14,31,56,0.10)" }} />
+              <div style={{ borderTop: "1px solid rgba(14,31,56,0.12)", margin: "0" }} />
 
-              {/* Photo + author — always horizontal row */}
-              <div className="flex items-center gap-3 md:gap-4">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden flex-shrink-0">
+              {/* Author row — always horizontal, flush at the bottom */}
+              <div className="flex items-center gap-4 px-7 md:px-9 py-4 md:py-5">
+                <div className="w-11 h-11 md:w-13 md:h-13 rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src={TESTIMONIALS[current].photo}
                     alt={TESTIMONIALS[current].author}
-                    width={56}
-                    height={56}
+                    width={52}
+                    height={52}
                     className="object-cover w-full h-full"
                   />
                 </div>
                 <div>
-                  <p className="font-sans font-bold text-sm" style={{ color: "#EA5A2A" }}>
+                  <p className="font-sans font-semibold text-sm" style={{ color: "#EA5A2A" }}>
                     {TESTIMONIALS[current].author}{" "}
                     <span className="font-normal" style={{ color: "#0E1F38" }}>{TESTIMONIALS[current].flag}</span>
                   </p>
@@ -571,21 +572,21 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="relative pt-14 pb-14 md:py-16 lg:py-20 overflow-hidden">
+    <section className="relative pt-20 pb-16 md:py-16 lg:py-20 overflow-hidden">
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
         <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_65%]" />
       </div>
-      {/* Mobile image — anchored to top so sky is visible in the upper zone */}
+      {/* Mobile image — object-top anchors the sky at the top of the section */}
       <div className="absolute inset-0 md:hidden">
-        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-[center_25%]" />
+        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-top" />
       </div>
       {/* Desktop overlay */}
       <div className="absolute inset-0 hidden md:block" style={{ background: "linear-gradient(to left, rgba(14,31,56,0.90) 0%, rgba(14,31,56,0.70) 30%, rgba(14,31,56,0.25) 60%, transparent 85%)" }} />
-      {/* Mobile overlay : fade haut→bas, sombre dans le ciel */}
-      <div className="absolute inset-0 md:hidden" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.72) 0%, rgba(14,31,56,0.45) 40%, rgba(14,31,56,0.05) 100%)" }} />
+      {/* Mobile overlay : dark at the top where text sits (sky zone) */}
+      <div className="absolute inset-0 md:hidden" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.78) 0%, rgba(14,31,56,0.50) 50%, rgba(14,31,56,0.08) 100%)" }} />
 
-      <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-16 flex flex-col items-center md:items-end">
+      <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-16 md:flex md:justify-end">
         <div className="w-full max-w-lg text-center md:text-right">
           <motion.h2
             initial={{ opacity: 0, y: 24 }}

@@ -188,6 +188,23 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 eyebrow="GROUP GAY TRIPS"
                 title={trip.title}
                 subtitle={content.heroSubtitle ?? trip.subtitle}
+                bottomContent={
+                  <div>
+                    <p className="font-sans text-[9px] tracking-[0.28em] uppercase text-white/45 mb-2">
+                      Departures
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 justify-center">
+                      {details.nextDates.map((date, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 bg-white/10 backdrop-blur border border-white/20 text-white text-[10px] font-sans rounded-full whitespace-nowrap"
+                        >
+                          {formatTripDate(date)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                }
               />
               <div className="absolute top-20 left-6 sm:left-10 lg:left-16 z-10">
                 <Link
@@ -197,22 +214,6 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                   <ArrowLeft className="h-4 w-4" />
                   All trips
                 </Link>
-              </div>
-              {/* Departures — overlay en bas de l'image */}
-              <div
-                className="absolute bottom-0 left-0 right-0 pt-16 pb-4 md:pb-5"
-                style={{ background: "linear-gradient(to top, rgba(14,31,56,0.60) 0%, transparent 100%)" }}
-              >
-                <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Departures</p>
-                  <div className="flex flex-col items-start gap-1.5">
-                    {details.nextDates.map((date, i) => (
-                      <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs font-sans rounded-full">
-                        {formatTripDate(date)}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
           </>
