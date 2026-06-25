@@ -205,7 +205,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
               >
                 <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
                   <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Departures</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-col items-start gap-1.5">
                     {details.nextDates.map((date, i) => (
                       <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs font-sans rounded-full">
                         {formatTripDate(date)}
@@ -319,6 +319,8 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
             included={content.included}
             notIncluded={content.notIncluded}
             brochureUrl={content.brochureUrl}
+            nextDates={details.nextDates.map(formatTripDate)}
+            tripId={slug}
           />
         )}
 

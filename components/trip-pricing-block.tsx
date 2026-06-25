@@ -22,9 +22,11 @@ interface TripPricingBlockProps {
   included: string[]
   notIncluded: string[]
   brochureUrl: string
+  nextDates: string[]
+  tripId: string
 }
 
-export function TripPricingBlock({ priceShared, priceSingle, included, notIncluded, brochureUrl }: TripPricingBlockProps) {
+export function TripPricingBlock({ priceShared, priceSingle, included, notIncluded, brochureUrl, nextDates, tripId }: TripPricingBlockProps) {
   const [includedExpanded, setIncludedExpanded] = useState(false)
   const [excludedExpanded, setExcludedExpanded] = useState(false)
 
@@ -65,7 +67,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
             <p className="font-sans text-white/45 text-[10px] uppercase tracking-[0.2em] mb-1.5">
               Shared Deluxe Room
             </p>
-            <p className="font-serif text-sunset-orange leading-none mb-1" style={{ fontSize: "clamp(1.4rem, 5vw, 2.5rem)" }}>
+            <p className="font-serif text-white leading-none mb-1" style={{ fontSize: "clamp(1.4rem, 5vw, 2.5rem)" }}>
               {priceShared}
             </p>
             <p className="font-sans text-white/30 text-[10px]">per person</p>
@@ -111,7 +113,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
                 className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
                 style={{ color: "#1F8A8F" }}
               >
-                {includedExpanded ? "Show less" : `Show ${included.length - INCLUDED_PREVIEW} more`}
+                {includedExpanded ? "Show less" : "Show more"}
                 <ChevronDown
                   className="h-3.5 w-3.5 transition-transform duration-200"
                   style={{ transform: includedExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -137,7 +139,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
                 className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
                 style={{ color: "#1F8A8F" }}
               >
-                {excludedExpanded ? "Show less" : `Show ${notIncluded.length - EXCLUDED_PREVIEW} more`}
+                {excludedExpanded ? "Show less" : "Show more"}
                 <ChevronDown
                   className="h-3.5 w-3.5 transition-transform duration-200"
                   style={{ transform: excludedExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
@@ -192,19 +194,38 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
         >
-          {/* MOBILE : Download Brochure plein largeur + note centrée (inchangé) */}
-          <a
-            href={brochureUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="md:hidden w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
-          >
-            <FileText className="h-4 w-4 flex-shrink-0" />
-            Download Brochure
-          </a>
-          <p className="md:hidden font-sans text-white/40 text-xs text-center mt-3">
-            Check day-by-day itinerary, booking conditions and full trip details
-          </p>
+          {/* MOBILE CTAs */}
+          <div className="md:hidden">
+            <a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
+            >
+              <FileText className="h-4 w-4 flex-shrink-0" />
+              Download Brochure
+            </a>
+            <p className="font-sans text-white/40 text-xs text-center mt-3 mb-4">
+              Check day-by-day itinerary, booking conditions and full trip details
+            </p>
+            {/* Dates left + Enquire Now right */}
+            <div className="flex items-center gap-3">
+              <div className="flex flex-wrap gap-1.5 flex-1 min-w-0">
+                {nextDates.map((date, i) => (
+                  <span key={i} className="px-2.5 py-1 border border-white/15 text-white/55 text-[10px] font-sans rounded-full whitespace-nowrap" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
+                    {date}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={`/contact?trip=${tripId}#reach-out`}
+                className="flex-shrink-0 flex items-center gap-1.5 py-3 px-5 border border-white/25 text-white/75 rounded-full font-sans font-semibold text-xs hover:border-white/55 hover:text-white transition-all"
+              >
+                <Mail className="h-3.5 w-3.5 flex-shrink-0" />
+                Enquire Now
+              </a>
+            </div>
+          </div>
 
           {/* DESKTOP : 2 colonnes — textes à gauche / Download à droite */}
           <div className="hidden md:flex items-center gap-6 mb-2">
@@ -227,13 +248,13 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
             </a>
           </div>
 
-          {/* Inquire — desktop only */}
+          {/* Enquire Now — desktop */}
           <a
-            href="/contact"
+            href={`/contact?trip=${tripId}#reach-out`}
             className="hidden md:flex w-full items-center justify-center gap-2 mt-1.5 py-3.5 px-8 border border-white/20 text-white/55 rounded-full font-sans font-medium text-sm hover:border-white/50 hover:text-white/80 transition-all"
           >
             <Mail className="h-4 w-4 flex-shrink-0" />
-            Inquire about this trip
+            Enquire Now
           </a>
         </motion.div>
 

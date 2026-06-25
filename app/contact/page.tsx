@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Mail,
@@ -66,6 +66,12 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const trip = params.get("trip");
+    if (trip) setSelectedTrip(trip);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
