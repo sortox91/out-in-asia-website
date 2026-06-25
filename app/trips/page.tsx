@@ -23,6 +23,13 @@ const WHAT_WE_OFFER = [
   { Icon: UtensilsCrossed, title: "Dining Experiences",        description: "Selected meals, local restaurants and authentic flavours" },
 ];
 
+const TRIP_DATES: Record<string, string[]> = {
+  thailand:        ["1 - 12 December 2026", "15 - 27 February 2027"],
+  "north-vietnam": ["2 - 13 April 2027", "3 - 14 September 2027"],
+  "south-vietnam": ["18 - 29 January 2027", "1 - 12 November 2027"],
+  bali:            ["12 - 24 March 2027", "3 - 15 May 2027", "8 - 20 July 2027", "4 - 16 August 2027", "16 - 28 October 2027"],
+}
+
 export default function TripsPage() {
   return (
     <>
@@ -58,6 +65,7 @@ export default function TripsPage() {
                     duration={trip.duration}
                     image={trip.image}
                     price={trip.price}
+                    nextDates={TRIP_DATES[trip.id] ?? []}
                   />
                 ))}
               </div>

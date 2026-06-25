@@ -13,6 +13,7 @@ interface TripCardProps {
   duration: string
   image: string
   price: { shared: string; single: string }
+  nextDates?: string[]
 }
 
 export function TripCard({
@@ -22,6 +23,7 @@ export function TripCard({
   duration,
   image,
   price,
+  nextDates = [],
 }: TripCardProps) {
   const [imgError, setImgError] = useState(false)
 
@@ -54,9 +56,20 @@ export function TripCard({
           </span>
         </div>
 
-        {/* Main overlay text — always visible */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 pb-6 md:pb-8">
-          <p className="font-sans text-xs text-white/60 uppercase tracking-[0.2em] mb-2">
+        {/* Departure dates — top right, column */}
+        {nextDates.length > 0 && (
+          <div className="absolute top-5 right-5 flex flex-col items-end gap-1">
+            {nextDates.map((date, i) => (
+              <span key={i} className="px-2 py-0.5 bg-white/10 backdrop-blur border border-white/20 text-white text-[9px] font-sans rounded-full whitespace-nowrap">
+                {date}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Main overlay text — pinned to bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 pb-4 md:pb-5">
+          <p className="font-sans text-xs text-white/60 uppercase tracking-[0.2em] mb-1.5">
             {subtitle}
           </p>
           <div className="flex items-end justify-between gap-4">
@@ -68,9 +81,9 @@ export function TripCard({
             </span>
           </div>
 
-          {/* "Discover more" — slides up from hidden on hover */}
-          <div className="mt-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-            <span className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-sunset-orange">
+          {/* "Discover more" — slides in on hover, takes no space when hidden */}
+          <div className="max-h-0 overflow-hidden group-hover:max-h-10 transition-all duration-500 ease-out">
+            <span className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-sunset-orange mt-2">
               Discover more
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
