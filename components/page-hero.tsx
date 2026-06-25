@@ -8,6 +8,8 @@ interface PageHeroProps {
   imageMobile?: string
   /** Optional object-position override for the mobile image (CSS value, e.g. "72% center") */
   mobileObjectPosition?: string
+  /** Override mobile container height/aspect classes (replaces default "h-[60vh] min-h-[380px]") */
+  mobileHeightClass?: string
   /** Small teal label above the title */
   eyebrow: string
   /** Main title — line 1 */
@@ -31,6 +33,7 @@ export function PageHero({
   image,
   imageMobile,
   mobileObjectPosition,
+  mobileHeightClass,
   eyebrow,
   title,
   titleAccent,
@@ -41,7 +44,7 @@ export function PageHero({
   const mobileImage = imageMobile ?? image
 
   return (
-    <section className="relative w-full h-[60vh] min-h-[380px] md:h-auto md:aspect-[21/9] md:min-h-[500px] md:max-h-[680px] overflow-hidden">
+    <section className={`relative w-full ${mobileHeightClass ?? "h-[60vh] min-h-[380px]"} md:h-auto md:aspect-[21/9] md:min-h-[500px] md:max-h-[680px] overflow-hidden`}>
 
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
