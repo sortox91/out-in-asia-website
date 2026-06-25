@@ -121,7 +121,7 @@ export function AboutFounders() {
                 </div>
 
                 {/* Bio panel */}
-                <div className="flex-1 flex flex-col justify-center px-5 md:px-10 py-6 md:py-12">
+                <div className="flex-1 flex flex-col justify-center px-6 md:px-12 py-6 md:py-12">
                   <h3 className="font-serif font-extrabold text-xl md:text-3xl text-white mb-4 md:mb-6">{founder.name}</h3>
                   <FounderBio bio={founder.bio} handle={founder.handle} instagram={founder.instagram} />
                 </div>

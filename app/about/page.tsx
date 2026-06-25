@@ -134,14 +134,14 @@ export default function AboutPage() {
           <section className="py-14 md:py-24 bg-navy">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
+                <div className="text-center lg:text-left">
                   <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 text-balance leading-snug">
                     Ready to Travel <span className="italic text-sunset-orange">With Us</span><span className="text-sunset-orange">?</span>
                   </h2>
                   <p className="font-sans text-base md:text-xl text-sand/80 mb-10 leading-relaxed">
                     Join Filippo and Szilard on an unforgettable journey through Southeast Asia.
                   </p>
-                  <div className="flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4">
+                  <div className="flex flex-col items-center gap-3 md:flex-row md:flex-wrap md:items-center md:gap-4 lg:justify-start">
                     <Link
                       href="/trips"
                       className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300"

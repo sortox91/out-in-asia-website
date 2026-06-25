@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ArrowRight, ChevronDown, ShieldCheck, Compass, Sparkles } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { TripCard } from "@/components/trip-card"
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -44,6 +45,13 @@ const DESTINATIONS = [
     duration: "13 days",
   },
 ]
+
+const HOME_TRIP_DATES: Record<string, string[]> = {
+  thailand:        ["1 - 12 December 2026", "15 - 27 February 2027"],
+  "north-vietnam": ["2 - 13 April 2027", "3 - 14 September 2027"],
+  "south-vietnam": ["18 - 29 January 2027", "1 - 12 November 2027"],
+  bali:            ["12 - 24 March 2027", "3 - 15 May 2027", "8 - 20 July 2027", "4 - 16 August 2027", "16 - 28 October 2027"],
+}
 
 const TESTIMONIALS = [
   {
@@ -125,10 +133,10 @@ function HeroSection() {
               All text white — "Be You" orange had <1.5:1 contrast on the warm sunset image. */}
           <h1 className="font-serif font-bold" style={{ paddingBottom: "0.2em" }}>
             {[
-              { text: "Travel Gay", italic: false },
-              { text: "Be You", italic: true },
-              { text: "Belong Together", italic: false },
-            ].map(({ text, italic }, i) => (
+              <>Travel <span className="italic text-sunset-orange">Gay</span></>,
+              <>Be <span className="italic text-sunset-orange">You</span></>,
+              <>Belong <span className="italic text-sunset-orange">Together</span></>,
+            ].map((content, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.span
                   initial={{ y: "110%" }}
@@ -138,9 +146,9 @@ function HeroSection() {
                     delay: 0.35 + i * 0.18,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={`block leading-[1.3] text-white text-[clamp(1.75rem,5vw,2.2rem)] md:text-[clamp(2.2rem,6vw,5.2rem)] ${italic ? "italic" : ""}`}
+                  className="block leading-[1.3] text-white text-[clamp(2rem,5.75vw,2.5rem)] md:text-[clamp(2.5rem,6.9vw,6rem)]"
                 >
-                  {text}
+                  {content}
                 </motion.span>
               </div>
             ))}
@@ -152,7 +160,7 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.9 }}
             className="mt-3 md:mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
           >
-            <p className="font-sans text-[10px] sm:text-sm text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
+            <p className="font-sans text-[11.5px] sm:text-base text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
               Curated luxury journeys exclusively for the LGBTQ+ community.
             </p>
             <div className="hidden md:flex flex-wrap gap-3">
@@ -260,68 +268,6 @@ function PremiumStatsSection() {
 
 // ─── Destinations ──────────────────────────────────────────────────────────────
 
-function DestinationCard({
-  dest,
-  index,
-}: {
-  dest: (typeof DESTINATIONS)[0]
-  index: number
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <Link
-        href={`/trips/${dest.id}`}
-        className="group block relative rounded-2xl overflow-hidden h-[180px] sm:h-[260px] lg:h-[320px]"
-      >
-        <Image
-          src={dest.image}
-          alt={dest.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, 50vw"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-500 group-hover:via-black/50" />
-
-        {/* Duration — top left */}
-        <div className="absolute top-5 left-5">
-          <span className="px-3 py-1.5 bg-sunset-orange text-white text-xs font-sans font-semibold rounded-full">
-            {dest.duration}
-          </span>
-        </div>
-
-        {/* Arrow hover — top right */}
-        <div className="absolute top-4 right-4 sm:top-5 sm:right-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 z-10">
-          <div className="w-10 h-10 rounded-full bg-sunset-orange flex items-center justify-center">
-            <ArrowRight className="h-5 w-5 text-white" />
-          </div>
-        </div>
-
-        {/* Text — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-          <p className="font-sans text-[10px] text-white/50 uppercase tracking-[0.22em] mb-2">
-            {dest.subtitle}
-          </p>
-          <div className="flex items-end justify-between gap-4">
-            <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
-              {dest.title}
-            </h3>
-            <p className="font-sans text-xs text-white/70 whitespace-nowrap flex-shrink-0">
-              From {dest.price.shared} /person
-            </p>
-          </div>
-          <div className="mt-4 h-px bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
-        </div>
-      </Link>
-    </motion.div>
-  )
-}
-
 function DestinationsSection() {
   return (
     <section className="py-14 md:py-24 lg:py-32 bg-[#FAF6EF]">
@@ -376,7 +322,23 @@ function DestinationsSection() {
               key={dest.id}
               className={dest.id === "north-vietnam" || dest.id === "south-vietnam" ? "hidden md:block" : ""}
             >
-              <DestinationCard dest={dest} index={i} />
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <TripCard
+                  id={dest.id}
+                  title={dest.title}
+                  subtitle={dest.subtitle}
+                  description=""
+                  duration={dest.duration}
+                  image={dest.image}
+                  price={dest.price}
+                  nextDates={HOME_TRIP_DATES[dest.id] ?? []}
+                />
+              </motion.div>
             </div>
           ))}
         </div>
@@ -417,34 +379,33 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         <span className="italic" style={{ color: "#EA5A2A" }}>Love</span>
         {" "}for Asia
       </h2>
-      {/* E — description as wide as title (no maxWidth cap), smaller on mobile */}
       <p
-        className={`font-sans leading-relaxed mb-10 ${mobile ? "text-sm" : "text-sm md:text-base"}`}
+        className={`font-sans leading-relaxed mb-8 ${mobile ? "text-[12.5px]" : "text-[12.5px] md:text-sm"}`}
         style={{ color: "rgba(250,246,239,0.78)" }}
       >
-        Between us, we have over 10 years of living across Southeast Asia.
-        Filippo spent years as a digital nomad, discovering the region&apos;s
-        hidden corners by motorbike. Szilard built a thriving premium travel
-        business serving discerning clients from Hungary. We design journeys
-        for travellers who want to experience Asia the way we do: authentically,
-        safely, and unforgettably.
+        Between us, we&apos;ve spent over 10 years living across Southeast Asia. Filippo explored
+        the region as a digital nomad, discovering hidden corners by motorbike, while Szilárd
+        built a premium travel company mainly serving Hungarian travellers across Asia.
+        Together, we&apos;ve combined our local knowledge, passion and experience to design
+        small-group adventures where you can discover the region authentically, connect with
+        like-minded travellers, and simply be yourself.
       </p>
 
-      <div className="flex gap-10 mb-10">
-        <div className="flex flex-col items-center">
-          <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
-            <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover object-center" />
+      <div className="mb-10 border-t border-white/15">
+        {[
+          { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
+          { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
+        ].map((f) => (
+          <div key={f.name} className="flex items-center gap-4 py-4 border-b border-white/15">
+            <div className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
+              <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
+            </div>
+            <div>
+              <p className="font-serif text-sm mb-0.5" style={{ color: "#FAF6EF" }}>{f.name}</p>
+              <a href={f.href} target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>{f.ig}</a>
+            </div>
           </div>
-          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
-          <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="relative w-20 h-20 rounded-full overflow-hidden mb-3">
-            <Image src="/founders/szilard-2.jpg" alt="Szilárd Daróczi" fill className="object-cover object-top" />
-          </div>
-          <p className="font-serif text-sm mb-1" style={{ color: "#FAF6EF" }}>Szilárd Daróczi</p>
-          <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
-        </div>
+        ))}
       </div>
 
       <Link
@@ -534,7 +495,7 @@ function TestimonialsSection() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div
-              className="mx-auto max-w-2xl rounded-2xl p-7 md:p-10 relative"
+              className="mx-auto max-w-2xl rounded-2xl p-7 md:p-9 relative"
               style={{
                 backgroundColor: "#FFFFFF",
                 boxShadow: "0 2px 20px rgba(14,31,56,0.08)",
@@ -545,26 +506,29 @@ function TestimonialsSection() {
               <span
                 aria-hidden
                 className="absolute top-4 left-6 font-serif leading-none select-none pointer-events-none"
-                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.15, lineHeight: 1 }}
+                style={{ fontSize: "4.5rem", color: "#EA5A2A", opacity: 0.12, lineHeight: 1 }}
               >
                 &ldquo;
               </span>
 
               <blockquote
-                className="font-serif text-base md:text-lg italic leading-relaxed mb-7 relative z-10 pt-4"
+                className="font-serif text-sm md:text-base italic leading-relaxed mb-5 relative z-10 pt-4"
                 style={{ color: "#0E1F38" }}
               >
                 &ldquo;{TESTIMONIALS[current].quote}&rdquo;
               </blockquote>
 
-              {/* Photo + author */}
-              <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
-                <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+              {/* Separator */}
+              <div className="border-t mb-4" style={{ borderColor: "rgba(14,31,56,0.10)" }} />
+
+              {/* Photo + author — always horizontal row */}
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src={TESTIMONIALS[current].photo}
                     alt={TESTIMONIALS[current].author}
-                    width={64}
-                    height={64}
+                    width={56}
+                    height={56}
                     className="object-cover w-full h-full"
                   />
                 </div>
@@ -573,7 +537,7 @@ function TestimonialsSection() {
                     {TESTIMONIALS[current].author}{" "}
                     <span className="font-normal" style={{ color: "#0E1F38" }}>{TESTIMONIALS[current].flag}</span>
                   </p>
-                  <p className="font-sans text-xs mt-1" style={{ color: "#1F8A8F" }}>
+                  <p className="font-sans text-xs mt-0.5" style={{ color: "#1F8A8F" }}>
                     {TESTIMONIALS[current].trip}
                   </p>
                 </div>
@@ -607,18 +571,18 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="relative pt-8 pb-20 md:py-16 lg:py-20 overflow-hidden">
+    <section className="relative pt-14 pb-14 md:py-16 lg:py-20 overflow-hidden">
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
         <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_65%]" />
       </div>
-      {/* Mobile image */}
+      {/* Mobile image — anchored to top so sky is visible in the upper zone */}
       <div className="absolute inset-0 md:hidden">
-        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-[center_70%]" />
+        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-[center_25%]" />
       </div>
-      {/* Desktop overlay : fade droite→gauche, miroir du hero principal */}
+      {/* Desktop overlay */}
       <div className="absolute inset-0 hidden md:block" style={{ background: "linear-gradient(to left, rgba(14,31,56,0.90) 0%, rgba(14,31,56,0.70) 30%, rgba(14,31,56,0.25) 60%, transparent 85%)" }} />
-      {/* Mobile overlay : fade haut→bas, sombre dans le ciel (zone texte) */}
+      {/* Mobile overlay : fade haut→bas, sombre dans le ciel */}
       <div className="absolute inset-0 md:hidden" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.72) 0%, rgba(14,31,56,0.45) 40%, rgba(14,31,56,0.05) 100%)" }} />
 
       <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-16 flex flex-col items-center md:items-end">
@@ -653,18 +617,6 @@ function CTASection() {
               className="inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors"
             >
               Start Planning <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/trips"
-              className="md:hidden font-sans text-sm text-white/80 underline underline-offset-4 hover:text-white transition-colors"
-            >
-              Browse All Trips
-            </Link>
-            <Link
-              href="/trips"
-              className="hidden md:inline-flex items-center gap-2 font-sans font-semibold px-8 py-4 rounded-full border-2 border-white/30 text-white hover:bg-white/10 transition-colors"
-            >
-              Browse All Trips
             </Link>
           </motion.div>
         </div>

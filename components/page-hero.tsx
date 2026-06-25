@@ -88,10 +88,10 @@ export function PageHero({
         }}
       />
 
-      {/* Text — mobile: top-anchored. Desktop: vertically centred */}
-      <div className="absolute inset-0 flex items-start pt-28 md:items-center md:pt-14">
+      {/* Text — vertically and horizontally centred */}
+      <div className="absolute inset-0 flex items-center pt-14">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="max-w-xl">
+          <div className="max-w-xl mx-auto text-center">
             <p
               className="font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-2 md:mb-4"
               style={{ color: "#1F8A8F" }}
@@ -115,7 +115,7 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-sm md:text-base text-white/70 leading-relaxed">
+              <p className="font-sans text-xs md:text-sm text-white/50 leading-relaxed">
                 {subtitle}
               </p>
             )}

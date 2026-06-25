@@ -127,7 +127,7 @@ export default function PrivateTripsPage() {
                   <p className="font-sans text-base md:text-lg leading-relaxed mb-6" style={{ color: "rgba(250,246,239,0.75)" }}>
                     Start with a one-on-one consultation with Filippo or Szilárd. We&apos;ll listen to your ideas, understand what you&apos;re looking for, and build a trip that&apos;s truly yours.
                   </p>
-                  <p className="font-sans text-base font-semibold text-sunset-orange mb-2">
+                  <p className="font-sans text-base font-semibold mb-2" style={{ color: "#1F8A8F" }}>
                     Travel Consultation — €60
                   </p>
                   <p className="font-sans text-xs mb-10" style={{ color: "rgba(250,246,239,0.45)" }}>

@@ -44,7 +44,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-3">
             THE DETAILS
           </p>
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-white mb-2">
+          <h2 className="font-serif font-bold text-white mb-2" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)" }}>
             Pricing &amp; <span className="italic text-sunset-orange">Inclusions</span>
           </h2>
           <p className="font-sans text-sm text-white/45">
@@ -124,11 +124,11 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
 
           {/* Not Included */}
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/30 mb-3">Not Included</p>
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase mb-3" style={{ color: "#EA5A2A" }}>Not Included</p>
             <ul className="space-y-2.5">
               {(excludedExpanded ? notIncluded : notIncluded.slice(0, EXCLUDED_PREVIEW)).map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#B89870", opacity: 0.55 }} strokeWidth={2} />
+                  <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#EA5A2A" }} strokeWidth={2} />
                   <span className="font-sans text-white/35 text-xs leading-snug">{item}</span>
                 </li>
               ))}
@@ -137,7 +137,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
               <button
                 onClick={() => setExcludedExpanded(!excludedExpanded)}
                 className="mt-3 flex items-center gap-1 font-sans text-xs font-semibold"
-                style={{ color: "#1F8A8F" }}
+                style={{ color: "#EA5A2A" }}
               >
                 {excludedExpanded ? "Show less" : "Show more"}
                 <ChevronDown
@@ -170,11 +170,11 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
             </ul>
           </div>
           <div>
-            <p className="font-sans text-xs tracking-[0.2em] uppercase text-white/30 mb-3">Not Included</p>
+            <p className="font-sans text-xs tracking-[0.2em] uppercase mb-3" style={{ color: "#EA5A2A" }}>Not Included</p>
             <ul className="space-y-2.5">
               {notIncluded.map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#B89870", opacity: 0.55 }} strokeWidth={2} />
+                  <X className="h-3.5 w-3.5 flex-shrink-0 mt-0.5" style={{ color: "#EA5A2A" }} strokeWidth={2} />
                   <span className="font-sans text-white/35 text-xs leading-snug">{item}</span>
                 </li>
               ))}
