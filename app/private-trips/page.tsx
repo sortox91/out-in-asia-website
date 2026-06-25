@@ -54,6 +54,7 @@ export default function PrivateTripsPage() {
 
           <PageHero
             image="/private-trips/cover-web.png"
+            mobileObjectPosition="72% center"
             eyebrow="PRIVATE TRIPS"
             title="You Dream"
             titleLine2="We"

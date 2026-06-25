@@ -21,6 +21,7 @@ export default function AboutPage() {
         <main className="overflow-x-hidden">
           <PageHero
             image="/meet-us/meetus-cover.png"
+            imageMobile="/meet-us/meetus_cover_mobile.png"
             eyebrow="OUR STORY"
             title="Two Guides"
             titleLine2="One"

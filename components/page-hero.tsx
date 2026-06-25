@@ -6,6 +6,8 @@ interface PageHeroProps {
   image: string
   /** Optional dedicated mobile image (portrait 4:5) */
   imageMobile?: string
+  /** Optional object-position override for the mobile image (CSS value, e.g. "72% center") */
+  mobileObjectPosition?: string
   /** Small teal label above the title */
   eyebrow: string
   /** Main title — line 1 */
@@ -28,6 +30,7 @@ interface PageHeroProps {
 export function PageHero({
   image,
   imageMobile,
+  mobileObjectPosition,
   eyebrow,
   title,
   titleAccent,
@@ -57,7 +60,8 @@ export function PageHero({
           src={mobileImage}
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover"
+          style={{ objectPosition: mobileObjectPosition ?? "center" }}
           priority
         />
       </div>
