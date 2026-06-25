@@ -85,14 +85,14 @@ export const southVietnam: TripContent = {
 
   comfortCards: [
     {
-      image: "/south-vietnam/comfort/SVIETNAMCOMFORT-01.png",
+      image: "/south-vietnam/comfort/SVIETNAMCOMFORT-01.jpg",
       location: "Ho Chi Minh City",
       title: "5-Star Hotel",
       tag: "4 nights · Breakfast included",
       description: "Elegant 5-star hotel in the heart of the city, including spa, swimming pool and fitness center",
     },
     {
-      image: "/south-vietnam/comfort/SVIETNAMCOMFORT-02.png",
+      image: "/south-vietnam/comfort/SVIETNAMCOMFORT-02.jpg",
       location: "Ho Tram",
       title: "5-Star Beach Resort",
       tag: "5 nights · Breakfast included",
