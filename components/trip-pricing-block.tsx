@@ -189,6 +189,11 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
         >
+          {/* Fine print — top */}
+          <p className="font-sans text-white/25 text-xs text-center mb-4">
+            Minimum 8 participants · 50% deposit to confirm booking
+          </p>
+
           {/* Brochure note row */}
           <div className="flex items-center justify-between gap-4 mb-5">
             <p className="font-sans text-white/40 text-xs leading-snug">
@@ -228,9 +233,6 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
             <Mail className="h-4 w-4 flex-shrink-0" />
             Enquire Now
           </a>
-          <p className="font-sans text-white/25 text-xs text-center mt-3">
-            Minimum 8 participants · 50% deposit to confirm booking
-          </p>
         </motion.div>
 
       </div>
