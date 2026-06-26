@@ -396,8 +396,8 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
           { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
         ].map((f) => (
-          <div key={f.name} className="flex items-center gap-4 py-4 border-b border-white/15">
-            <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+          <div key={f.name} className="flex flex-row items-center gap-3 py-4 border-b border-white/15">
+            <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
               <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
             </div>
             <div>
