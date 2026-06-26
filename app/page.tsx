@@ -135,7 +135,7 @@ function HeroSection() {
             {[
               <>Travel <span className="italic text-sunset-orange">Gay</span></>,
               <>Be <span className="italic text-sunset-orange">You</span></>,
-              <>Belong <span className="italic text-sunset-orange">Together</span></>,
+              <>Belong Together</>,
             ].map((content, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.span
@@ -397,7 +397,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
         ].map((f) => (
           <div key={f.name} className="flex items-center gap-4 py-4 border-b border-white/15">
-            <div className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
               <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
             </div>
             <div>
@@ -452,7 +452,7 @@ function FoundersSection() {
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #0E1F38 0%, rgba(14,31,56,0.55) 25%, rgba(14,31,56,0.1) 55%, transparent 75%)" }} />
         </div>
-        <div className="relative z-10 px-8 lg:px-16 py-16 lg:py-20 w-full max-w-[560px] lg:max-w-[46%]">
+        <div className="relative z-10 px-6 lg:px-10 py-16 lg:py-20 w-full max-w-[560px] lg:max-w-[46%]">
           <FoundersText />
         </div>
       </div>
@@ -572,7 +572,7 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="relative pt-20 pb-16 md:py-16 lg:py-20 overflow-hidden">
+    <section className="relative pt-20 pb-16 md:py-16 lg:py-20 overflow-hidden min-h-[500px] md:min-h-0">
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
         <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_65%]" />
