@@ -45,7 +45,7 @@ export default function TripsPage() {
             title="Shared Journeys"
             titleLine2="Real"
             titleLine2Accent="Connections"
-            subtitle="Curated gay group trips across Southeast Asia, designed with care"
+            subtitle={<>Curated <span style={{ color: "#1F8A8F" }}>gay group trips</span> across <span style={{ color: "#1F8A8F" }}>Southeast Asia</span>, designed with care</>}
           />
 
           {/* C — Destinations grid */}
