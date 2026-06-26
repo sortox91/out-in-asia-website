@@ -118,7 +118,7 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-xs text-white/40 leading-relaxed max-w-[260px] md:max-w-none">
+              <p className="font-sans text-[10.5px] md:text-sm text-white/40 leading-relaxed max-w-[260px] md:max-w-none">
                 {subtitle}
               </p>
             )}
