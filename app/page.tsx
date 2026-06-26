@@ -391,17 +391,17 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         like-minded travellers, and simply be yourself.
       </p>
 
-      <div className="mb-10 border-t border-white/15">
+      <div className="mb-10 py-4 border-t border-b border-white/15 flex flex-row items-center">
         {[
           { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
-        ].map((f) => (
-          <div key={f.name} className="flex flex-row items-center gap-3 py-4 border-b border-white/15">
-            <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
+        ].map((f, i) => (
+          <div key={f.name} className={`flex flex-row items-center gap-3 flex-1 ${i === 0 ? "border-r border-white/15 pr-4 mr-4" : ""}`}>
+            <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
               <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
             </div>
             <div>
-              <p className="font-serif text-sm mb-0.5" style={{ color: "#FAF6EF" }}>{f.name}</p>
+              <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>{f.name}</p>
               <a href={f.href} target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>{f.ig}</a>
             </div>
           </div>

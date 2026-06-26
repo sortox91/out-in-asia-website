@@ -94,7 +94,7 @@ export function PageHero({
       {/* Text — vertically and horizontally centred */}
       <div className="absolute inset-0 flex items-center pt-14">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="max-w-xl mx-auto text-center">
+          <div className="max-w-[280px] md:max-w-xl mx-auto text-left md:text-center">
             <p
               className="font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-2 md:mb-4"
               style={{ color: "#1F8A8F" }}
@@ -118,7 +118,7 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-xs md:text-sm text-white/50 leading-relaxed max-w-xs md:max-w-none mx-auto">
+              <p className="font-sans text-[10.5px] md:text-xs text-white/40 leading-relaxed max-w-[260px] md:max-w-none">
                 {subtitle}
               </p>
             )}
