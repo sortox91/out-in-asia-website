@@ -391,7 +391,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         like-minded travellers, and simply be yourself.
       </p>
 
-      <div className="mb-10 py-4 border-t border-b border-white/15 flex flex-row items-center">
+      <div className="mb-10 py-4 flex flex-row items-center">
         {[
           { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
