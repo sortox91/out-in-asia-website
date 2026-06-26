@@ -190,14 +190,14 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                 subtitle={content.heroSubtitle ?? trip.subtitle}
                 bottomContent={
                   <div>
-                    <p className="font-sans text-[9px] tracking-[0.28em] uppercase text-white/45 mb-2">
+                    <p className="font-sans text-[10px] md:text-xs tracking-[0.28em] uppercase text-white/45 mb-2">
                       Departures
                     </p>
                     <div className="flex flex-wrap gap-1.5 justify-center">
                       {details.nextDates.map((date, i) => (
                         <span
                           key={i}
-                          className="px-3 py-1 bg-white/10 backdrop-blur border border-white/20 text-white text-[10px] font-sans rounded-full whitespace-nowrap"
+                          className="px-4 py-1.5 md:px-5 md:py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs md:text-sm font-sans rounded-full whitespace-nowrap"
                         >
                           {formatTripDate(date)}
                         </span>
