@@ -59,7 +59,7 @@ export default function PrivateTripsPage() {
             title="You Dream"
             titleLine2="We"
             titleLine2Accent="Design"
-            subtitle="Bespoke journeys across Southeast Asia, shaped around your group, your pace"
+            subtitle={<>Bespoke journeys across <span style={{ color: "#1F8A8F" }}>Southeast Asia</span>, shaped around <span style={{ color: "#1F8A8F" }}>your group</span>, your pace</>}
           />
 
           {/* Trip Type Cards */}
