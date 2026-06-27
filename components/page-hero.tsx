@@ -104,7 +104,7 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-[10.5px] md:text-base text-white/55 leading-relaxed">
+              <p className="font-sans text-xs md:text-base leading-relaxed" style={{ color: "#EA5A2A" }}>
                 {subtitle}
               </p>
             )}
