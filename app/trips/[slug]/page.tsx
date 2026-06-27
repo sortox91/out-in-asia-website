@@ -205,7 +205,7 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                     {details.nextDates.map((date, i) => (
                       <span
                         key={i}
-                        className="px-4 py-1.5 md:px-5 md:py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs md:text-sm font-sans rounded-full whitespace-nowrap"
+                        className="self-start inline-flex items-center min-h-[40px] px-4 py-1 md:px-5 md:py-1.5 bg-white/10 backdrop-blur border border-white/20 text-white text-xs md:text-sm font-sans rounded-full whitespace-nowrap"
                       >
                         {formatTripDate(date)}
                       </span>
