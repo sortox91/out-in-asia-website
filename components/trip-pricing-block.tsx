@@ -211,7 +211,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           </div>
 
           {/* When we go */}
-          <p className="font-sans text-[10px] tracking-[0.28em] uppercase text-ocean-teal mt-6 mb-1.5 text-center">
+          <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mt-6 mb-3 text-center">
             WHEN WE GO
           </p>
           <p className="font-sans text-white/55 text-xs mb-3 text-center">
