@@ -77,9 +77,9 @@ export function PageHero({
       {/* Top nav gradient */}
       <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.55) 0%, rgba(14,31,56,0.15) 60%, transparent 100%)" }} />
 
-      {/* Text — vertically and horizontally centred */}
-      <div className="absolute inset-0 flex items-center pt-14">
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      {/* Text — top-anchored on mobile, vertically centred on desktop */}
+      <div className="absolute inset-0 flex items-start md:items-center pt-20 md:pt-14">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-sm md:max-w-lg text-left">
             <p
               className="font-sans text-xs md:text-sm font-semibold tracking-[0.25em] uppercase mb-2 md:mb-4"
@@ -95,7 +95,7 @@ export function PageHero({
                 )}
               </span>
               {titleLine2 && (
-                <span className="block">
+                <span className="block whitespace-nowrap">
                   {titleLine2}
                   {titleLine2Accent && (
                     <>{" "}<span className="italic text-sunset-orange">{titleLine2Accent}</span></>
@@ -104,12 +104,12 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-xs md:text-base leading-relaxed" style={{ color: "#EA5A2A" }}>
+              <p className="font-sans text-xs md:text-base leading-relaxed max-w-[220px] md:max-w-none" style={{ color: "#FAF6EF" }}>
                 {subtitle}
               </p>
             )}
             {bottomContent && (
-              <div className="mt-5">
+              <div className="mt-4 md:mt-5">
                 {bottomContent}
               </div>
             )}
