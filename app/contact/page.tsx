@@ -116,7 +116,7 @@ export default function ContactPage() {
           title="Your Next Journey"
           titleLine2="Starts"
           titleLine2Accent="Here"
-          subtitle={<>Join one of our <span style={{ color: "#1F8A8F" }}>group journeys</span>, or let us design one around <span style={{ color: "#1F8A8F" }}>your dreams</span></>}
+          subtitle="Join one of our group journeys, or let us design one around your dreams"
         />
 
         {/* Main Content */}

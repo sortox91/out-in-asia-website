@@ -80,10 +80,10 @@ export function PageHero({
       {/* Top nav gradient */}
       <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.55) 0%, rgba(14,31,56,0.15) 60%, transparent 100%)" }} />
 
-      {/* Text — upper quarter of hero, clear of header */}
-      <div className="absolute inset-0 flex items-start pt-24 md:pt-[120px]">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-sm md:max-w-lg text-left">
+      {/* Text — upper quarter top, dates pushed to bottom */}
+      <div className="absolute inset-0 flex flex-col pt-24 md:pt-[120px] pb-8 md:pb-10">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-8 flex-1 flex flex-col">
+          <div className="max-w-sm md:max-w-lg text-left flex flex-col flex-1">
             {topContent && (
               <div className="mb-4">
                 {topContent}
@@ -112,12 +112,12 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-xs md:text-base leading-relaxed max-w-[220px] md:max-w-none" style={{ color: "#FAF6EF" }}>
+              <p className="font-sans text-xs md:text-base leading-relaxed max-w-[240px] md:max-w-sm" style={{ color: "rgba(250,246,239,0.85)" }}>
                 {subtitle}
               </p>
             )}
             {bottomContent && (
-              <div className="mt-4 md:mt-5">
+              <div className="mt-auto pt-6">
                 {bottomContent}
               </div>
             )}

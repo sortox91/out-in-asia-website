@@ -26,7 +26,7 @@ export default function AboutPage() {
             title="Two Guides"
             titleLine2="One"
             titleLine2Accent="Passion"
-            subtitle={<>Guiding you through <span style={{ color: "#1F8A8F" }}>Asia</span> with experience, <span style={{ color: "#1F8A8F" }}>care</span> and passion</>}
+            subtitle="Guiding you through Asia with experience, care and passion"
           />
 
           {/* Our Mission */}
