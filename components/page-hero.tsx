@@ -72,17 +72,15 @@ export function PageHero({
         />
       </div>
 
-      {/* Base underlay */}
-      <div className="absolute inset-0" style={{ background: "rgba(14,31,56,0.30)" }} />
-      {/* Radial spotlight centred on text for readability */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 90% 70% at 50% 42%, rgba(14,31,56,0.68) 0%, rgba(14,31,56,0.15) 65%, transparent 100%)" }} />
+      {/* Left-to-right navy fade — text readability */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(14,31,56,0.92) 0%, rgba(14,31,56,0.75) 25%, rgba(14,31,56,0.25) 55%, transparent 80%)" }} />
       {/* Top nav gradient */}
       <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.55) 0%, rgba(14,31,56,0.15) 60%, transparent 100%)" }} />
 
       {/* Text — vertically and horizontally centred */}
       <div className="absolute inset-0 flex items-center pt-14">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="max-w-sm mx-auto md:max-w-2xl text-center">
+          <div className="max-w-sm md:max-w-lg text-left">
             <p
               className="font-sans text-xs md:text-sm font-semibold tracking-[0.25em] uppercase mb-2 md:mb-4"
               style={{ color: "#1F8A8F" }}
@@ -106,7 +104,7 @@ export function PageHero({
               )}
             </h1>
             {subtitle && (
-              <p className="font-sans text-[10.5px] md:text-base text-white/60 leading-relaxed">
+              <p className="font-sans text-[10.5px] md:text-base text-white/55 leading-relaxed">
                 {subtitle}
               </p>
             )}

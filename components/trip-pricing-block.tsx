@@ -203,7 +203,7 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
               href={brochureUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-shrink-0 flex items-center gap-1.5 font-sans font-semibold text-xs whitespace-nowrap"
+              className="flex-shrink-0 flex items-center gap-1.5 font-sans font-semibold text-xs whitespace-nowrap underline underline-offset-2"
               style={{ color: "#1F8A8F" }}
             >
               Download Brochure <ArrowRight className="h-3.5 w-3.5" />
@@ -211,13 +211,13 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           </div>
 
           {/* When we go */}
-          <p className="font-sans text-[10px] tracking-[0.22em] uppercase text-ocean-teal mb-1.5">
+          <p className="font-sans text-[10px] tracking-[0.28em] uppercase text-ocean-teal mt-6 mb-1.5 text-center">
             WHEN WE GO
           </p>
-          <p className="font-sans text-white/55 text-xs mb-3">
+          <p className="font-sans text-white/55 text-xs mb-3 text-center">
             Choose your departure
           </p>
-          <div className="flex flex-wrap gap-1.5 mb-5">
+          <div className="flex flex-wrap gap-1.5 mb-5 justify-center">
             {nextDates.map((date, i) => (
               <span key={i} className="px-2.5 py-1 border border-white/15 text-white/55 text-[10px] font-sans rounded-full whitespace-nowrap" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
                 {date}
