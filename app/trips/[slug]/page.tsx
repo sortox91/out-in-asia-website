@@ -181,32 +181,13 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
         {/* ── Hero ── */}
         {content ? (
           <>
-            <div className="relative">
-              <PageHero
-                image={content.coverWeb}
-                imageMobile={content.coverMobile}
-                eyebrow="GROUP GAY TRIPS"
-                title={trip.title}
-                subtitle={content.heroSubtitle ?? trip.subtitle}
-                bottomContent={
-                  <div>
-                    <p className="font-sans text-[10px] md:text-xs tracking-[0.28em] uppercase text-white/45 mb-2">
-                      Departures
-                    </p>
-                    <div className="flex flex-col gap-1.5">
-                      {details.nextDates.map((date, i) => (
-                        <span
-                          key={i}
-                          className="px-4 py-1.5 md:px-5 md:py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs md:text-sm font-sans rounded-full whitespace-nowrap"
-                        >
-                          {formatTripDate(date)}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                }
-              />
-              <div className="absolute top-20 left-6 sm:left-10 lg:left-16 z-10">
+            <PageHero
+              image={content.coverWeb}
+              imageMobile={content.coverMobile}
+              eyebrow="GROUP GAY TRIPS"
+              title={trip.title}
+              subtitle={content.heroSubtitle ?? trip.subtitle}
+              topContent={
                 <Link
                   href="/trips"
                   className="inline-flex items-center gap-2 font-sans text-white/60 hover:text-white transition-colors text-sm"
@@ -214,8 +195,25 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
                   <ArrowLeft className="h-4 w-4" />
                   All trips
                 </Link>
-              </div>
-            </div>
+              }
+              bottomContent={
+                <div>
+                  <p className="font-sans text-[10px] md:text-xs tracking-[0.28em] uppercase text-white/45 mb-2">
+                    Departures
+                  </p>
+                  <div className="flex flex-col gap-1.5">
+                    {details.nextDates.map((date, i) => (
+                      <span
+                        key={i}
+                        className="px-4 py-1.5 md:px-5 md:py-2 bg-white/10 backdrop-blur border border-white/20 text-white text-xs md:text-sm font-sans rounded-full whitespace-nowrap"
+                      >
+                        {formatTripDate(date)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              }
+            />
           </>
         ) : (
           <TripHeroParallax
