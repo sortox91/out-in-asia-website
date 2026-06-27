@@ -80,8 +80,8 @@ export function PageHero({
       {/* Top nav gradient */}
       <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.55) 0%, rgba(14,31,56,0.15) 60%, transparent 100%)" }} />
 
-      {/* Text — top-anchored, upper-third of hero */}
-      <div className="absolute inset-0 flex items-start pt-16 md:pt-[72px]">
+      {/* Text — upper quarter of hero, clear of header */}
+      <div className="absolute inset-0 flex items-start pt-24 md:pt-[120px]">
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-sm md:max-w-lg text-left">
             {topContent && (
