@@ -24,6 +24,8 @@ interface PageHeroProps {
   subtitle?: React.ReactNode
   /** Optional content rendered below the subtitle (e.g. departure date pills for trip pages) */
   bottomContent?: React.ReactNode
+  /** Optional content rendered above the eyebrow (e.g. back link on trip pages) */
+  topContent?: React.ReactNode
 }
 
 /**
@@ -43,6 +45,7 @@ export function PageHero({
   titleLine2Accent,
   subtitle,
   bottomContent,
+  topContent,
 }: PageHeroProps) {
   const mobileImage = imageMobile ?? image
 
@@ -77,10 +80,15 @@ export function PageHero({
       {/* Top nav gradient */}
       <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.55) 0%, rgba(14,31,56,0.15) 60%, transparent 100%)" }} />
 
-      {/* Text — top-anchored on mobile, vertically centred on desktop */}
-      <div className="absolute inset-0 flex items-start md:items-center pt-20 md:pt-14">
+      {/* Text — top-anchored, upper-third of hero */}
+      <div className="absolute inset-0 flex items-start pt-16 md:pt-[72px]">
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
           <div className="max-w-sm md:max-w-lg text-left">
+            {topContent && (
+              <div className="mb-4">
+                {topContent}
+              </div>
+            )}
             <p
               className="font-sans text-xs md:text-sm font-semibold tracking-[0.25em] uppercase mb-2 md:mb-4"
               style={{ color: "#1F8A8F" }}
