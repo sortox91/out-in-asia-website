@@ -158,12 +158,12 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.9 }}
-            className="mt-3 md:mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
+            className="mt-3 md:mt-8 flex flex-col gap-4 items-start"
           >
             <p className="font-sans text-[11.5px] sm:text-sm text-white/50 leading-relaxed lg:whitespace-nowrap">
               Curated luxury journeys exclusively for the LGBTQ+ community.
             </p>
-            <div className="hidden md:flex flex-wrap gap-3">
+            <div className="hidden md:flex flex-row gap-3">
               <Link
                 href="/trips"
                 className="inline-flex items-center gap-2 font-sans font-semibold px-7 py-3.5 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors text-sm"
@@ -380,7 +380,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         {" "}for Asia
       </h2>
       <p
-        className={`font-sans leading-relaxed mb-8 ${mobile ? "text-[12.5px]" : "text-[12.5px] md:text-sm"}`}
+        className={`font-sans leading-relaxed mb-8 ${mobile ? "text-[12.5px]" : "text-[12.5px] md:text-sm md:max-w-xl"}`}
         style={{ color: "rgba(250,246,239,0.78)" }}
       >
         Between us, we&apos;ve spent over 10 years living across Southeast Asia. Filippo explored
@@ -391,7 +391,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         like-minded travellers, and simply be yourself.
       </p>
 
-      <div className="mb-10 py-4 flex flex-row items-center">
+      <div className="mb-10 flex flex-row items-center">
         {[
           { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
@@ -410,7 +410,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
 
       <Link
         href="/about"
-        className="font-sans font-semibold px-7 py-3.5 rounded-full border-2 transition-all self-start text-sm inline-block"
+        className="font-sans font-semibold px-7 py-3.5 rounded-full border-2 transition-all text-sm block text-center w-full"
         style={{ borderColor: "#FAF6EF", color: "#FAF6EF" }}
         onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "#FAF6EF"; el.style.color = "#0E1F38" }}
         onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = "transparent"; el.style.color = "#FAF6EF" }}
@@ -454,7 +454,7 @@ function FoundersSection() {
         </div>
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="py-16 lg:py-20 max-w-[560px] lg:max-w-[46%]">
+            <div className="pt-10 lg:pt-12 pb-16 lg:pb-20 max-w-[560px] lg:max-w-[46%]">
               <FoundersText />
             </div>
           </div>
