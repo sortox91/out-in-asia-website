@@ -160,7 +160,7 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.9 }}
             className="mt-3 md:mt-8 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
           >
-            <p className="font-sans text-[11.5px] sm:text-base text-white/50 sm:max-w-[240px] sm:mr-4 leading-relaxed">
+            <p className="font-sans text-[11.5px] sm:text-sm text-white/50 leading-relaxed lg:whitespace-nowrap">
               Curated luxury journeys exclusively for the LGBTQ+ community.
             </p>
             <div className="hidden md:flex flex-wrap gap-3">
@@ -452,8 +452,12 @@ function FoundersSection() {
           />
           <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #0E1F38 0%, rgba(14,31,56,0.55) 25%, rgba(14,31,56,0.1) 55%, transparent 75%)" }} />
         </div>
-        <div className="relative z-10 px-6 lg:px-10 py-16 lg:py-20 w-full max-w-[560px] lg:max-w-[46%]">
-          <FoundersText />
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="py-16 lg:py-20 max-w-[560px] lg:max-w-[46%]">
+              <FoundersText />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -467,7 +471,7 @@ function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setCurrent((c) => (c + 1) % TESTIMONIALS.length), 6000)
+    const t = setInterval(() => setCurrent((c) => (c + 1) % TESTIMONIALS.length), 10000)
     return () => clearInterval(t)
   }, [])
 
@@ -512,7 +516,7 @@ function TestimonialsSection() {
                   &ldquo;
                 </span>
                 <blockquote
-                  className="font-serif text-sm md:text-base italic leading-relaxed relative z-10 pt-3 text-left"
+                  className="font-serif text-sm md:text-base italic leading-relaxed relative z-10 pt-3 text-center"
                   style={{ color: "#0E1F38" }}
                 >
                   &ldquo;{TESTIMONIALS[current].quote}&rdquo;
@@ -523,7 +527,7 @@ function TestimonialsSection() {
               <div style={{ borderTop: "1px solid rgba(14,31,56,0.12)", margin: "0" }} />
 
               {/* Author row — always horizontal, flush at the bottom */}
-              <div className="flex items-center gap-4 px-7 md:px-9 py-4 md:py-5">
+              <div className="flex items-center justify-center gap-4 px-7 md:px-9 py-4 md:py-5">
                 <div className="w-11 h-11 md:w-13 md:h-13 rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src={TESTIMONIALS[current].photo}
@@ -594,7 +598,7 @@ function CTASection() {
             viewport={{ once: true }}
             className="font-serif font-bold text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-3 md:mb-6"
           >
-            Ready To Explore<br />
+            <span className="block md:whitespace-nowrap">Ready To Explore</span>
             <span className="italic text-sunset-orange">Southeast Asia?</span>
           </motion.h2>
           <motion.p
