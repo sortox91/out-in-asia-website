@@ -392,7 +392,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
       </p>
 
       <div className={`${mobile ? "mb-10" : "mb-8"} flex items-center`}>
-        <div className="flex-1 flex justify-start items-center gap-3">
+        <div className="flex items-center gap-3 justify-end">
           <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
             <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover" style={{ objectPosition: "center" }} />
           </div>
@@ -401,8 +401,8 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
             <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
           </div>
         </div>
-        <div className="w-px h-12 bg-white/20 mx-8 flex-shrink-0" />
-        <div className="flex-1 flex justify-start items-center gap-3">
+        <div className="w-px h-12 bg-white/20 mx-6 shrink-0" />
+        <div className="flex items-center gap-3 justify-start">
           <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
             <Image src="/founders/szilard-2.jpg" alt="Szilárd Daróczi" fill className="object-cover" style={{ objectPosition: "top" }} />
           </div>
