@@ -127,7 +127,7 @@ function HeroSection() {
       {/* Title block:
           Mobile → top of section (people are in bottom of image)
           Desktop → bottom-left */}
-      <div className="absolute top-[108px] left-0 w-full px-6 sm:px-10 md:top-auto md:bottom-[18%] lg:bottom-[22%] lg:px-16">
+      <div className="absolute top-[108px] left-0 w-full px-6 sm:px-10 md:top-auto md:bottom-[22%] lg:bottom-[28%] lg:px-16">
         <div className="max-w-7xl mx-auto">
           {/* A — font-bold (700), ~20% smaller than before.
               All text white — "Be You" orange had <1.5:1 contrast on the warm sunset image. */}
@@ -146,7 +146,7 @@ function HeroSection() {
                     delay: 0.35 + i * 0.18,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="block leading-[1.3] text-white text-[clamp(2rem,5.75vw,2.5rem)] md:text-[clamp(2.5rem,6.9vw,6rem)]"
+                  className="block leading-[1.3] text-white text-[clamp(2rem,5.75vw,2.5rem)] md:text-[clamp(2.5rem,6.9vw,6rem)] lg:text-[clamp(2.125rem,5.865vw,5.1rem)]"
                 >
                   {content}
                 </motion.span>
@@ -307,7 +307,7 @@ function DestinationsSection() {
           >
             <Link
               href="/trips"
-              className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-navy hover:text-sunset-orange transition-colors group"
+              className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-navy hover:text-sunset-orange transition-colors group whitespace-nowrap"
             >
               View all trips{" "}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -363,7 +363,7 @@ function DestinationsSection() {
 function FoundersText({ mobile = false }: { mobile?: boolean }) {
   return (
     <>
-      <p className="font-sans text-xs uppercase mb-6" style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}>
+      <p className={`font-sans text-xs uppercase ${mobile ? "mb-3" : "mb-6"}`} style={{ color: "#1F8A8F", letterSpacing: "0.2em" }}>
         Meet Your Guides
       </p>
       {/* A — font-bold, E — "Gay" and "Love" in orange italic, "Shared" removed */}
@@ -380,7 +380,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         {" "}for Asia
       </h2>
       <p
-        className={`font-sans leading-relaxed mb-8 ${mobile ? "text-[12.5px]" : "text-[12.5px] md:text-sm md:max-w-xl"}`}
+        className={`font-sans leading-relaxed ${mobile ? "mb-8 text-[12.5px] [text-wrap:normal]" : "mb-6 text-[12.5px] md:text-sm md:max-w-xl"}`}
         style={{ color: "rgba(250,246,239,0.78)" }}
       >
         Between us, we&apos;ve spent over 10 years living across Southeast Asia. Filippo explored
@@ -391,12 +391,12 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         like-minded travellers, and simply be yourself.
       </p>
 
-      <div className="mb-10 flex flex-row items-center">
+      <div className={`${mobile ? "mb-10" : "mb-8"} flex flex-row items-center divide-x divide-white/15`}>
         {[
           { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
         ].map((f, i) => (
-          <div key={f.name} className={`flex flex-row items-center gap-3 flex-1 ${i === 0 ? "border-r border-white/15 pr-4 mr-4" : ""}`}>
+          <div key={f.name} className={`flex flex-row items-center gap-3 flex-1 ${i === 0 ? "pr-4" : "pl-4"}`}>
             <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
               <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
             </div>
@@ -454,7 +454,7 @@ function FoundersSection() {
         </div>
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="pt-10 lg:pt-12 pb-16 lg:pb-20 max-w-[560px] lg:max-w-[46%]">
+            <div className="pt-8 lg:pt-10 pb-12 lg:pb-14 max-w-[560px] lg:max-w-[46%]">
               <FoundersText />
             </div>
           </div>
@@ -579,11 +579,11 @@ function CTASection() {
     <section className="relative pt-20 pb-16 md:py-16 lg:py-20 overflow-hidden min-h-[500px] md:min-h-0">
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
-        <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_65%]" />
+        <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_80%]" />
       </div>
       {/* Mobile image — object-top anchors the sky at the top of the section */}
       <div className="absolute inset-0 md:hidden">
-        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-top" />
+        <Image src="/ready-to-explore/explore-mobile.png" alt="" fill className="object-cover object-[center_25%]" />
       </div>
       {/* Desktop overlay */}
       <div className="absolute inset-0 hidden md:block" style={{ background: "linear-gradient(to left, rgba(14,31,56,0.90) 0%, rgba(14,31,56,0.70) 30%, rgba(14,31,56,0.25) 60%, transparent 85%)" }} />
