@@ -380,7 +380,7 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         {" "}for Asia
       </h2>
       <p
-        className={`font-sans leading-relaxed ${mobile ? "mb-8 text-[12.5px] [text-wrap:normal]" : "mb-6 text-[12.5px] md:text-sm md:max-w-xl"}`}
+        className={`font-sans leading-relaxed ${mobile ? "mb-8 text-[12.5px] [text-wrap:normal]" : "mb-6 text-[12.5px] md:text-sm"}`}
         style={{ color: "rgba(250,246,239,0.78)" }}
       >
         Between us, we&apos;ve spent over 10 years living across Southeast Asia. Filippo explored
@@ -391,18 +391,21 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         like-minded travellers, and simply be yourself.
       </p>
 
-      <div className={`${mobile ? "mb-10" : "mb-8"} flex flex-row items-center divide-x divide-white/15`}>
+      <div className={`${mobile ? "mb-10" : "mb-8"} flex flex-row items-center gap-4`}>
         {[
           { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
           { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
         ].map((f, i) => (
-          <div key={f.name} className={`flex flex-row items-center gap-3 flex-1 ${i === 0 ? "pr-4" : "pl-4"}`}>
-            <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-              <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
-            </div>
-            <div>
-              <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>{f.name}</p>
-              <a href={f.href} target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>{f.ig}</a>
+          <div key={f.name} className="contents">
+            {i > 0 && <div className="w-px self-stretch bg-white/15 flex-shrink-0" />}
+            <div className="flex flex-row items-center gap-3 flex-1">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
+              </div>
+              <div>
+                <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>{f.name}</p>
+                <a href={f.href} target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>{f.ig}</a>
+              </div>
             </div>
           </div>
         ))}
@@ -454,7 +457,7 @@ function FoundersSection() {
         </div>
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="pt-8 lg:pt-10 pb-12 lg:pb-14 max-w-[560px] lg:max-w-[46%]">
+            <div className="pt-8 lg:pt-10 pb-12 lg:pb-14 max-w-[300px] lg:max-w-[36%]">
               <FoundersText />
             </div>
           </div>
