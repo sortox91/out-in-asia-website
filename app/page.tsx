@@ -391,24 +391,26 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
         like-minded travellers, and simply be yourself.
       </p>
 
-      <div className={`${mobile ? "mb-10" : "mb-8"} flex flex-row items-center gap-4`}>
-        {[
-          { src: "/founders/filippo.jpg", name: "Filippo Rossi", ig: "@fillorossi.91", href: "https://instagram.com/fillorossi.91", pos: "center" },
-          { src: "/founders/szilard-2.jpg", name: "Szilárd Daróczi", ig: "@szilard_utakon", href: "https://instagram.com/szilard_utakon", pos: "top" },
-        ].map((f, i) => (
-          <div key={f.name} className="contents">
-            {i > 0 && <div className="w-px self-stretch bg-white/15 flex-shrink-0" />}
-            <div className="flex flex-row items-center gap-3 flex-1">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                <Image src={f.src} alt={f.name} fill className="object-cover" style={{ objectPosition: f.pos }} />
-              </div>
-              <div>
-                <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>{f.name}</p>
-                <a href={f.href} target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>{f.ig}</a>
-              </div>
-            </div>
+      <div className={`${mobile ? "mb-10" : "mb-8"} flex flex-row items-center`}>
+        <div className="flex flex-row items-center gap-3 flex-1">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover" style={{ objectPosition: "center" }} />
           </div>
-        ))}
+          <div>
+            <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
+            <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
+          </div>
+        </div>
+        <div className="mx-4 w-px self-stretch bg-white/15 flex-shrink-0" />
+        <div className="flex flex-row items-center gap-3 flex-1">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+            <Image src="/founders/szilard-2.jpg" alt="Szilárd Daróczi" fill className="object-cover" style={{ objectPosition: "top" }} />
+          </div>
+          <div>
+            <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>Szilárd Daróczi</p>
+            <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
+          </div>
+        </div>
       </div>
 
       <Link
