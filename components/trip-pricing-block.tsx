@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Check, X, ArrowRight, ChevronDown, Mail } from "lucide-react"
+import { Check, X, ChevronDown, Mail, FileText, Download, CalendarDays } from "lucide-react"
 
 const BedIcon = ({ single = false }: { single?: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -189,43 +189,77 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
         >
-          {/* Fine print — top */}
-          <p className="font-sans text-white/25 text-xs text-center mb-4">
+          {/* Fine print */}
+          <p className="font-sans text-white/25 text-xs text-center mb-5">
             Minimum 8 participants · 50% deposit to confirm booking
           </p>
 
-          {/* Brochure note row */}
-          <div className="flex items-center justify-between gap-4 mb-5">
-            <p className="font-sans text-white/40 text-xs leading-snug">
-              Check day-by-day itinerary, booking conditions and full trip details
+          <div className="border-t border-white/10 mb-5" />
+
+          {/* Brochure — desktop: one row justify-between */}
+          <div className="hidden md:flex items-center justify-between gap-4 mb-5">
+            <div className="flex items-center gap-2.5">
+              <FileText className="h-4 w-4 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+              <span className="font-sans text-white/50 text-xs">
+                Check full details and booking conditions
+              </span>
+            </div>
+            <a
+              href={brochureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 inline-flex items-center gap-1.5 font-sans font-semibold text-xs whitespace-nowrap border rounded-full px-4 py-2 transition-colors hover:bg-ocean-teal/10"
+              style={{ color: "#1F8A8F", borderColor: "rgba(31,138,143,0.5)" }}
+            >
+              <Download className="h-3.5 w-3.5" />
+              Download Brochure
+            </a>
+          </div>
+
+          {/* Brochure — mobile: bordered box, centré */}
+          <div
+            className="md:hidden rounded-xl border p-4 mb-5 text-center"
+            style={{ borderColor: "rgba(31,138,143,0.25)", backgroundColor: "rgba(255,255,255,0.02)" }}
+          >
+            <p className="font-sans text-white/50 text-xs mb-3">
+              Check full details and booking conditions
             </p>
             <a
               href={brochureUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-shrink-0 flex items-center gap-1.5 font-sans font-semibold text-xs whitespace-nowrap underline underline-offset-2"
-              style={{ color: "#1F8A8F" }}
+              className="inline-flex items-center gap-1.5 font-sans font-semibold text-xs border rounded-full px-4 py-2 transition-colors hover:bg-ocean-teal/10"
+              style={{ color: "#1F8A8F", borderColor: "rgba(31,138,143,0.5)" }}
             >
-              Download Brochure <ArrowRight className="h-3.5 w-3.5" />
+              <Download className="h-3.5 w-3.5" />
+              Download Brochure
             </a>
           </div>
 
+          <div className="border-t border-white/10 mb-5" />
+
           {/* When we go */}
-          <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mt-6 mb-3 text-center">
+          <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-2 text-center">
             WHEN WE GO
           </p>
-          <p className="font-sans text-white/55 text-xs mb-3 text-center">
+          <p className="font-sans text-white/55 text-xs mb-4 text-center">
             Choose your departure
           </p>
-          <div className="flex flex-wrap gap-1.5 mb-5 justify-center">
+
+          {/* Date cards */}
+          <div className="flex flex-wrap gap-2 mb-6 justify-center">
             {nextDates.map((date, i) => (
-              <span key={i} className="px-2.5 py-1 border border-white/15 text-white/55 text-[10px] font-sans rounded-full whitespace-nowrap" style={{ backgroundColor: "rgba(255,255,255,0.06)" }}>
-                {date}
-              </span>
+              <div
+                key={i}
+                className="flex items-center gap-2 px-3 py-2.5 border border-white/15 rounded-xl bg-white/[0.04]"
+              >
+                <CalendarDays className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+                <span className="font-sans text-white/70 text-[10px] whitespace-nowrap">{date}</span>
+              </div>
             ))}
           </div>
 
-          {/* Dominant CTA */}
+          {/* Enquire Now */}
           <a
             href={`/contact?trip=${tripId}#reach-out`}
             className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
