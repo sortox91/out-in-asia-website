@@ -124,8 +124,8 @@ export const bali: TripContent = {
   included: [
     "Group guidance and assistance during the stay",
     "12 nights with breakfast in exclusive 5-star hotels",
-    "5 selected additional meals",
     "All included activities listed in the itinerary",
+    "5 selected additional meals",
     "Premium air-conditioned minivans throughout the trip",
     "Private airport transfer on arrival and departure",
     "Organisation fees, taxes and local charges",

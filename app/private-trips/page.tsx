@@ -135,7 +135,7 @@ export default function PrivateTripsPage() {
                   </p>
                   <div className="flex justify-center lg:justify-start">
                     <Link
-                      href="/contact#reach-out"
+                      href="/contact?trip=private-trips#reach-out"
                       className="inline-flex items-center gap-2 font-sans font-semibold tracking-wide px-8 py-4 rounded-full bg-sunset-orange text-white hover:bg-ember transition-colors duration-300"
                     >
                       Book a Consultation

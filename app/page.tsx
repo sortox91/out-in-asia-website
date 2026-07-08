@@ -161,7 +161,9 @@ function HeroSection() {
             className="mt-3 md:mt-8 flex flex-col gap-4 items-start"
           >
             <p className="font-sans text-[11.5px] sm:text-sm text-white/50 leading-relaxed lg:whitespace-nowrap">
-              Curated luxury journeys exclusively for the LGBTQ+ community.
+              Curated premium journeys exclusively{" "}
+              <span className="md:hidden"><br /></span>
+              for the LGBTQ+ community.
             </p>
             <div className="hidden md:flex flex-row gap-3">
               <Link
@@ -448,7 +450,7 @@ function FoundersSection() {
 
       {/* ── DESKTOP: image right, text left ── */}
       <div className="hidden md:flex relative overflow-hidden items-center" style={{ minHeight: "540px" }}>
-        <div className="absolute top-0 right-0 bottom-0 w-[55%]" style={{ overflow: "hidden" }}>
+        <div className="absolute top-0 right-0 bottom-0 w-[50%]" style={{ overflow: "hidden" }}>
           <Image
             src="/guides/founders-home.png"
             alt="Filippo and Szilard"
@@ -459,7 +461,7 @@ function FoundersSection() {
         </div>
         <div className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="pt-8 lg:pt-10 pb-12 lg:pb-14 max-w-[300px] lg:max-w-[36%]">
+            <div className="pt-8 lg:pt-10 pb-12 lg:pb-14 max-w-[300px] lg:max-w-[44%]">
               <FoundersText />
             </div>
           </div>
@@ -581,7 +583,7 @@ function TestimonialsSection() {
 
 function CTASection() {
   return (
-    <section className="relative pt-20 pb-16 md:py-16 lg:py-20 overflow-hidden min-h-[500px] md:min-h-0">
+    <section className="relative pt-20 pb-16 md:py-24 lg:py-28 overflow-hidden min-h-[500px] md:min-h-0">
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
         <Image src="/ready-to-explore/explore-web.png" alt="" fill className="object-cover object-[center_80%]" />

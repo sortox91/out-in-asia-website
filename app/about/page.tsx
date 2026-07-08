@@ -26,7 +26,7 @@ export default function AboutPage() {
             title="Two Guides"
             titleLine2="One"
             titleLine2Accent="Passion"
-            subtitle="Guiding you through Asia with experience, care and passion"
+            subtitle={<>Guiding you through Asia with<span className="md:hidden"><br /></span>{" "}experience, care and passion</>}
           />
 
           {/* Our Mission */}
