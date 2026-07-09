@@ -110,8 +110,8 @@ export const southVietnam: TripContent = {
   included: [
     "Group guidance and assistance during the stay",
     "9 nights with breakfast in exclusive 5-star hotels",
-    "2 nights with breakfast in 4-star hotels in Mekong Delta",
     "All included activities listed in the itinerary",
+    "2 nights with breakfast in 4-star hotels in Mekong Delta",
     "6 selected additional meals",
     "Premium air-conditioned minivans throughout the trip",
     "Private airport transfer on arrival and departure",

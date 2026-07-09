@@ -394,23 +394,23 @@ function FoundersText({ mobile = false }: { mobile?: boolean }) {
       </p>
 
       <div className={`${mobile ? "mb-10" : "mb-8"} flex items-center`}>
-        <div className="flex items-center gap-3 justify-end">
+        <div className="flex items-center gap-3">
           <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
             <Image src="/founders/filippo.jpg" alt="Filippo Rossi" fill className="object-cover" style={{ objectPosition: "center" }} />
           </div>
-          <div>
-            <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
-            <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
+          <div className="flex flex-col gap-0.5">
+            <p className="font-serif text-sm font-bold leading-none" style={{ color: "#FAF6EF" }}>Filippo Rossi</p>
+            <a href="https://instagram.com/fillorossi.91" target="_blank" rel="noopener noreferrer" className="font-sans text-xs leading-none" style={{ color: "#1F8A8F" }}>@fillorossi.91</a>
           </div>
         </div>
         <div className="w-px h-12 bg-white/20 mx-6 shrink-0" />
-        <div className="flex items-center gap-3 justify-start">
+        <div className="flex items-center gap-3">
           <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
             <Image src="/founders/szilard-2.jpg" alt="Szilárd Daróczi" fill className="object-cover" style={{ objectPosition: "top" }} />
           </div>
-          <div>
-            <p className="font-serif text-sm font-bold mb-0.5" style={{ color: "#FAF6EF" }}>Szilárd Daróczi</p>
-            <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
+          <div className="flex flex-col gap-0.5">
+            <p className="font-serif text-sm font-bold leading-none" style={{ color: "#FAF6EF" }}>Szilárd Daróczi</p>
+            <a href="https://instagram.com/szilard_utakon" target="_blank" rel="noopener noreferrer" className="font-sans text-xs leading-none" style={{ color: "#1F8A8F" }}>@szilard_utakon</a>
           </div>
         </div>
       </div>

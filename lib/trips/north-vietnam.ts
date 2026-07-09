@@ -158,8 +158,8 @@ export const northVietnam: TripContent = {
   included: [
     "Group guidance and assistance during the stay",
     "9 nights with breakfast in premium 4 and 5-star hotels",
-    "2 nights on a 5-star exclusive yacht with full board",
     "All included activities listed in the itinerary",
+    "2 nights on a 5-star exclusive yacht with full board",
     "6 selected additional meals",
     "Premium air-conditioned minivans throughout the trip",
     "Private airport transfer on arrival and departure",

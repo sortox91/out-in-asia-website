@@ -103,8 +103,8 @@ export const thailand: TripContent = {
   included: [
     "Group guidance and assistance during the stay",
     "9 nights with breakfast in premium 4 and 5-star hotels",
-    "2 nights on an exclusive floating bungalow in Khao Sok",
     "All included activities listed in the itinerary",
+    "2 nights on an exclusive floating bungalow in Khao Sok",
     "2 domestic flights",
     "5 selected additional meals",
     "Premium air-conditioned minivans throughout the trip",

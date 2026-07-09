@@ -189,34 +189,36 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
         >
-          {/* Fine print */}
-          <p className="font-sans text-white/25 text-xs text-center mb-5">
+          {/* Fine print — contraste renforcé */}
+          <p className="font-sans text-white/50 text-xs text-center mb-5">
             Minimum 8 participants · 50% deposit to confirm booking
           </p>
 
           <div className="border-t border-white/10 mb-5" />
 
-          {/* Brochure — desktop: one row justify-between */}
-          <div className="hidden md:flex items-center justify-between gap-4 mb-5">
-            <div className="flex items-center gap-2.5">
-              <FileText className="h-4 w-4 flex-shrink-0" style={{ color: "#1F8A8F" }} />
-              <span className="font-sans text-white/50 text-xs">
-                Check full details and booking conditions
-              </span>
+          {/* Brochure — desktop: cadre border-white/10 */}
+          <div className="hidden md:block rounded-xl border border-white/10 bg-white/[0.02] p-4 mb-5">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2.5">
+                <FileText className="h-4 w-4 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+                <span className="font-sans text-white/50 text-xs">
+                  Check full details and booking conditions
+                </span>
+              </div>
+              <a
+                href={brochureUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 font-sans font-semibold text-xs whitespace-nowrap border rounded-full px-4 py-2 transition-colors hover:bg-ocean-teal/10"
+                style={{ color: "#1F8A8F", borderColor: "rgba(31,138,143,0.5)" }}
+              >
+                <Download className="h-3.5 w-3.5" />
+                Download Brochure
+              </a>
             </div>
-            <a
-              href={brochureUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-shrink-0 inline-flex items-center gap-1.5 font-sans font-semibold text-xs whitespace-nowrap border rounded-full px-4 py-2 transition-colors hover:bg-ocean-teal/10"
-              style={{ color: "#1F8A8F", borderColor: "rgba(31,138,143,0.5)" }}
-            >
-              <Download className="h-3.5 w-3.5" />
-              Download Brochure
-            </a>
           </div>
 
-          {/* Brochure — mobile: bordered box, centré */}
+          {/* Brochure — mobile: cadre teal, centré */}
           <div
             className="md:hidden rounded-xl border p-4 mb-5 text-center"
             style={{ borderColor: "rgba(31,138,143,0.25)", backgroundColor: "rgba(255,255,255,0.02)" }}
@@ -238,31 +240,52 @@ export function TripPricingBlock({ priceShared, priceSingle, included, notInclud
 
           <div className="border-t border-white/10 mb-5" />
 
-          {/* When we go */}
-          <p className="font-sans text-xs tracking-[0.25em] uppercase text-ocean-teal mb-2 text-center">
+          {/* When we go — eyebrow agrandi */}
+          <p className="font-sans text-sm tracking-widest uppercase text-ocean-teal mb-2 text-center">
             WHEN WE GO
           </p>
           <p className="font-sans text-white/55 text-xs mb-4 text-center">
             Choose your departure
           </p>
 
-          {/* Date cards */}
-          <div className="flex flex-wrap gap-2 mb-6 justify-center">
+          {/* Date cards — desktop: ligne unique */}
+          <div className="hidden md:flex flex-wrap gap-2 mb-6 justify-center">
             {nextDates.map((date, i) => (
               <div
                 key={i}
-                className="flex items-center gap-2 px-3 py-2.5 border border-white/15 rounded-xl bg-white/[0.04]"
+                className="flex items-center gap-2 px-3 py-2.5 border border-white/20 rounded-xl bg-white/[0.04]"
               >
-                <CalendarDays className="h-3.5 w-3.5 flex-shrink-0" style={{ color: "#1F8A8F" }} />
+                <CalendarDays className="h-[18px] w-[18px] flex-shrink-0" style={{ color: "#1F8A8F" }} />
                 <span className="font-sans text-white/70 text-[10px] whitespace-nowrap">{date}</span>
               </div>
             ))}
           </div>
 
-          {/* Enquire Now */}
+          {/* Date cards — mobile: 2 lignes (range / mois année) */}
+          <div className="md:hidden flex flex-wrap gap-2 mb-6 justify-center">
+            {nextDates.map((date, i) => {
+              const m = date.match(/^([\d\s\-]+)(.+)$/)
+              const range = m ? m[1].trim() : date
+              const monthYear = m ? m[2].trim() : ""
+              return (
+                <div
+                  key={i}
+                  className="flex items-center gap-2.5 px-3 py-2.5 border border-white/20 rounded-xl bg-white/[0.04]"
+                >
+                  <CalendarDays className="h-[18px] w-[18px] flex-shrink-0" style={{ color: "#1F8A8F" }} />
+                  <div>
+                    <p className="font-sans text-white/70 text-[11px] font-semibold leading-none">{range}</p>
+                    <p className="font-sans text-white/45 text-[10px] leading-none mt-0.5">{monthYear}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {/* Enquire Now — max-w-lg centré */}
           <a
             href={`/contact?trip=${tripId}#reach-out`}
-            className="w-full flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
+            className="max-w-lg mx-auto flex items-center justify-center gap-2.5 py-4 px-8 bg-sunset-orange text-white rounded-full font-sans font-semibold text-sm hover:opacity-90 transition-opacity"
           >
             <Mail className="h-4 w-4 flex-shrink-0" />
             Enquire Now
