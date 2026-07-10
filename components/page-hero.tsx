@@ -50,7 +50,7 @@ export function PageHero({
   const mobileImage = imageMobile ?? image
 
   return (
-    <section className={`relative w-full ${mobileHeightClass ?? "h-[60vh] min-h-[380px]"} md:h-auto md:aspect-[21/9] md:min-h-[500px] md:max-h-[680px] overflow-hidden`}>
+    <section className={`relative w-full ${mobileHeightClass ?? "min-h-[60vh]"} md:h-auto md:aspect-[21/9] md:min-h-[500px] md:max-h-[680px] md:overflow-hidden`}>
 
       {/* Desktop image */}
       <div className="absolute inset-0 hidden md:block">
@@ -81,7 +81,7 @@ export function PageHero({
       <div className="absolute inset-x-0 top-0 h-40 pointer-events-none" style={{ background: "linear-gradient(to bottom, rgba(14,31,56,0.55) 0%, rgba(14,31,56,0.15) 60%, transparent 100%)" }} />
 
       {/* Text — upper quarter top, dates pushed to bottom */}
-      <div className="absolute inset-0 flex flex-col pt-24 md:pt-[120px] pb-8 md:pb-10">
+      <div className="relative md:absolute md:inset-0 flex flex-col pt-24 md:pt-[120px] pb-8 md:pb-10">
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-8 flex-1 flex flex-col">
           <div className="max-w-sm md:max-w-lg text-left flex flex-col flex-1">
             {topContent && (
