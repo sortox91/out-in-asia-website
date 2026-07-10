@@ -198,14 +198,14 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
               }
               bottomContent={
                 <div>
-                  <p className="font-sans text-[9px] md:text-[10px] tracking-[0.28em] uppercase text-white/45 mb-1">
+                  <p className="font-sans text-[9px] md:text-[10px] tracking-[0.28em] uppercase text-white/45 mb-0.5">
                     Departures
                   </p>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-0.5">
                     {details.nextDates.map((date, i) => (
                       <span
                         key={i}
-                        className="self-start inline-flex items-center min-h-[36px] px-3 py-0.5 md:px-4 md:py-1 bg-white/10 backdrop-blur border border-white/20 text-white text-[10px] md:text-xs font-sans rounded-full whitespace-nowrap"
+                        className="self-start inline-flex items-center min-h-[36px] px-2.5 py-0 md:px-3 md:py-0.5 bg-white/10 backdrop-blur border border-white/20 text-white text-[10px] md:text-xs font-sans rounded-full whitespace-nowrap"
                       >
                         {formatTripDate(date)}
                       </span>

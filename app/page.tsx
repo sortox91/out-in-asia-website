@@ -160,7 +160,7 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.9 }}
             className="mt-3 md:mt-8 flex flex-col gap-4 items-start"
           >
-            <p className="font-sans text-[11.5px] sm:text-sm text-white/50 leading-relaxed lg:whitespace-nowrap">
+            <p className="font-sans w-full text-[11.5px] sm:text-sm text-white/50 leading-relaxed lg:whitespace-nowrap [text-wrap:normal]">
               Curated premium journeys exclusively{" "}
               <span className="md:hidden"><br /></span>
               for the LGBTQ+ community.
